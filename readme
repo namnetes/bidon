@@ -1,34 +1,22 @@
-La gestion des profils dans Visual Studio Code offre de nombreux avantages pour optimiser votre environnement de développement, mais elle présente également quelques inconvénients potentiels, basés sur les sources et notre conversation précédente.
+Bien sûr, voici la version mise à jour avec ta phrase ajoutée dans le même ton amical :
 
-**Avantages de la gestion des profils :**
+---
 
-*   **Facilite la commutation entre différents environnements de développement** sans nécessiter d'ajustements manuels des paramètres. Vous pouvez rapidement passer d'une configuration pour un projet React à une autre pour un projet Python, par exemple.
-*   Permet de **sauvegarder et de basculer entre différents ensembles de préférences et de configurations**, incluant les paramètres, les raccourcis clavier, les extensions et les thèmes de couleurs.
-*   Offre la possibilité d'avoir des **ensembles d'extensions séparés pour différents types de projets**. Par exemple, vous pouvez avoir des extensions spécifiques pour le développement frontend (comme ESLint et Prettier) dans un profil et d'autres pour le backend (comme Ruby et Solargraph) dans un autre.
-*   Contribue à une **gestion efficace de l'espace de travail** en permettant de créer des configurations uniques pour chaque projet ou tâche, ce qui favorise l'organisation et la productivité.
-*   Permet de **personnaliser les environnements de développement** en fonction des besoins spécifiques pour le développement frontend, backend, etc..
-*   Facilite la **collaboration** au sein d'une équipe en permettant de partager des profils pour assurer une cohérence des environnements de développement. Cela est particulièrement utile pour les projets avec des exigences spécifiques.
-*   Offre une **configuration rapide et facile** de nouveaux environnements de développement grâce à l'importation de profils préconfigurés, ce qui économise du temps et des efforts.
-*   Les **profils de base (core profiles)** peuvent simplifier l'intégration de nouveaux développeurs en fournissant des configurations standardisées, assurant ainsi une cohérence et réduisant les erreurs.
-*   Utile pour le **dépannage** en permettant de tester différentes configurations sans affecter les autres profils, ce qui aide à identifier et résoudre les problèmes.
-*   Idéal pour les **démonstrations** en permettant de configurer un environnement spécifique sans perturber votre configuration habituelle.
-*   Peut être utilisé dans le domaine de l'**éducation** pour partager rapidement des configurations personnalisées avec les étudiants.
-*   Un **profil vide** est utile pour **signaler des problèmes avec VS Code** en désactivant toutes les extensions et les paramètres modifiés afin de déterminer si le problème provient d'une extension, d'un paramètre ou du cœur de VS Code.
-*   Possibilité d'**associer des profils à des dossiers et des espaces de travail spécifiques**, activant automatiquement le profil approprié lors de l'ouverture.
-*   Facilité de **partage des profils** par l'exportation et l'importation via GitHub gist ou des fichiers locaux.
-*   Possibilité d'**appliquer un paramètre ou une extension à tous les profils**.
-*   Option pour **ouvrir une nouvelle fenêtre avec un profil spécifique**.
-*   Possibilité de **synchroniser les profils entre différentes machines** à l'aide de la synchronisation des paramètres (Settings Sync), bien que les extensions ne soient pas synchronisées dans les fenêtres distantes.
-*   Possibilité de lancer VS Code avec un profil spécifique via la ligne de commande.
-*   Les **profils temporaires** sont utiles pour essayer de nouvelles configurations ou tester des extensions sans modifier les profils existants.
+Hey,  
+J’espère que tu vas bien !
 
-**Inconvénients potentiels de la gestion des profils :**
+Tu sais que je bosse sur plein de trucs autour de la modernisation du Z. Là, on lance officiellement un gros projet éditique avec du dev Java sur Z. Mais le vrai cœur du truc, c’est pas Java ni même le Z… c’est plutôt le combo Zowe + VS Code + GitHub Copilot. Franchement, avec tous les plugins IBM qui débarquent, ça devient aussi complet qu’IDz, mais en mode moderne.
 
-*   D'après notre conversation, il n'existe **pas de fonctionnalité explicite pour empêcher l'installation d'extensions en dehors du profil actif**. Un utilisateur pourrait toujours installer d'autres plugins, même si un profil spécifique est sélectionné [notre conversation history].
-*   Il n'est **pas possible d'hériter des paramètres d'un autre profil tout en en remplaçant certains** ; la seule option est de copier les paramètres, ce qui crée une copie statique sans lien dynamique.
-*   Les **paramètres spécifiques à la machine ne sont pas exportés**, ce qui peut nécessiter une reconfiguration sur d'autres ordinateurs.
-*   Les **modèles de profil nécessitent une connexion Internet** pour être téléchargés et appliqués.
-*   Les **extensions ne sont pas synchronisées vers ou depuis une fenêtre distante** (SSH, conteneur de développement, WSL).
-*   La **gestion d'un grand nombre de profils** pourrait potentiellement devenir complexe, bien que cela ne soit pas explicitement mentionné dans les sources.
+Le plugin DB2 est juste dingue. FileManager est là aussi (bon, un peu light mais ça fait le taf pour les fichiers complexes), Fault Analyzer pour les dumps, et OpenDebugger pour le debug Cobol. Et pour compiler/déployer le Java, on passe par Changeman, qui gère ça super bien. D’ailleurs, on va adapter son process pour utiliser du S3 côté USS, histoire de préparer le terrain pour sortir la LPAR de dev du sysplex prod un jour. Grosse opération, mais autant anticiper.
 
-En résumé, la gestion des profils offre de nombreux avantages pour personnaliser et organiser votre environnement de développement VS Code, en particulier lorsque vous travaillez sur plusieurs projets avec des besoins différents. Cependant, il est important de noter certaines limitations, comme l'absence de blocage de l'installation de nouvelles extensions en dehors d'un profil et l'incapacité d'hériter dynamiquement des paramètres d'autres profils.
+On va aussi filer cette solution à l’équipe BPI (tu sais, la Banque par Internet, pas la partie sensible) pour un de leurs projets.
+
+Comme toi, j’ai que deux bars 😅 et tout ça, c’est pas vraiment le cœur de métier de ma squad. Mais franchement, je suis comme un gamin chez Toys "R" Us, j’adore, et je veux vraiment que ça avance !
+
+Bref, on progresse bien.
+
+De ton côté, tu pourrais mettre à jour les IBM RSE API sur Z ? Comme t’avais dit sur le PDT, on est un peu en avance, donc autant en profiter.
+
+Ah et pendant que j’y pense : t’as sûrement encore l’agent GitLab à gérer sur SYSB, mais j’aimerais aussi qu’on aille un cran plus loin. J’aimerais tester le dev d’API Z qu’on exposerait à la fois pour le Z et l’extérieur via z/OS Connect. Genre je pourrais utiliser un accesseur de base des référentiels de l’Apiser, et appeler ça en Cobol via un simple stub z/OS Connect. Pas besoin d’enrôlement ou de trucs lourds, vu que ça reste interne au Z, entre brique ancienne et moderne.
+
+Tu me diras ce que t’en penses ?
