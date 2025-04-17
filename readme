@@ -1,9 +1,0 @@
-Voici une reformulation plus nuancée de votre texte :
-
-Concernant la question soumise à l’examen des architectes, il semble pertinent de rappeler ce qui avait été évoqué en séance. À ce jour, un programme BATCH ou TP conçu par une MOE SNI ne semble pas nécessiter d’autorisation spécifique pour l'utilisation de MQ, DB2 ou d’un fichier, à l’exception de certains droits RACF, notamment ceux relatifs aux objets Z de sa filière. Le cas de DB2 a d’ailleurs été détaillé en séance par les DBA. 
-
-Si la mise en place d’autorisations s’avérait nécessaire, il serait essentiel qu’elle s’accompagne de règles permettant de déterminer l’éligibilité d’un programme ou d’une application à un accès via z/OS Connect. À ce sujet, une policy AT-TLS a déjà été instaurée pour le batch, et l’on constate qu’à terme, tous les utilisateurs batch OPC pourraient être autorisés, aucune disposition actuelle ne semblant remettre en cause cette approche. De même, il serait attendu que les utilisateurs RACF soient également autorisés, dans la mesure où la subrogation ne semble pas envisageable. 
-
-Il convient cependant de préciser que ces considérations ne s’appliquent pas aux autorisations entre z/OS Connect et l’API Manager en ce qui concerne l’accès aux API.
-
-J’espère que cette reformulation correspond à vos attentes. Si vous souhaitez affiner certains aspects, n’hésitez pas à me le dire.
