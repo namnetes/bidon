@@ -1,6 +1,9 @@
-Reformuler le mieux possible en n' étant pas  affirmatif
+Voici une reformulation plus nuancée de votre texte :
 
+Concernant la question soumise à l’examen des architectes, il semble pertinent de rappeler ce qui avait été évoqué en séance. À ce jour, un programme BATCH ou TP conçu par une MOE SNI ne semble pas nécessiter d’autorisation spécifique pour l'utilisation de MQ, DB2 ou d’un fichier, à l’exception de certains droits RACF, notamment ceux relatifs aux objets Z de sa filière. Le cas de DB2 a d’ailleurs été détaillé en séance par les DBA. 
 
-Au sujet du point sur lequel doivent statuer les architectes je rappelle ce que je disais en séance • Aujourdhui un programme BATCH ou TP développé par une MOE SNI ne requiert aucune autorisation particulière pour consommer du MQ, du DB2 ou un fichier, en dehors de certains droits RACF comme les droits d'accès < aux objets Z > de sa filière. Le cas DB2 nous a été expliqué en séance par nos DBA Dans tous les cas s'il faut mettre en place des autorisations elles doivent s' accompagner de règles qui permettent de rendre éligible ou pas tel st I programme/application un accès à z/0s Connect, Nous avons mis en place pour le batch une policy AT-TLS et nous constatons qu'a terme tous les users batch OPC seront autorisés et qu'il n'existe à ce jour 5E 
-aucun moyen/raison ne pas procéder ainsi. En outre tous les user RACF utilisateurs devront aussi être autorisé car la subrogation n'est pas permise 
-Bien évidemment cela ne concerne pas les autorisations entre z/0S Connect et I'API Manager pour l'accès aux l'API. 
+Si la mise en place d’autorisations s’avérait nécessaire, il serait essentiel qu’elle s’accompagne de règles permettant de déterminer l’éligibilité d’un programme ou d’une application à un accès via z/OS Connect. À ce sujet, une policy AT-TLS a déjà été instaurée pour le batch, et l’on constate qu’à terme, tous les utilisateurs batch OPC pourraient être autorisés, aucune disposition actuelle ne semblant remettre en cause cette approche. De même, il serait attendu que les utilisateurs RACF soient également autorisés, dans la mesure où la subrogation ne semble pas envisageable. 
+
+Il convient cependant de préciser que ces considérations ne s’appliquent pas aux autorisations entre z/OS Connect et l’API Manager en ce qui concerne l’accès aux API.
+
+J’espère que cette reformulation correspond à vos attentes. Si vous souhaitez affiner certains aspects, n’hésitez pas à me le dire.
