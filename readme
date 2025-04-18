@@ -1,0 +1,23 @@
+Voici une version reformulée avec un vocabulaire plus simple et détendu :
+
+---
+
+**Salut,**
+
+Deux trucs à partager aujourd'hui :  
+
+1. J'ai écrit à SLM (j'imagine que tu as reçu) et au Cluster via Stéphane DORET, avec Anthony en copie pour regen et Fabrice VALLET. J'ai parlé de nos futurs déploiements en prod de Java Z pour le projet ROC et demandé leurs avis, conseils et recommandations sur la version de Java à utiliser. On bosse avec KLX sur ce gros projet, avec 2 ressources engagées pendant un an sur une solution avec VSCode, COPILOT et ZOWE. On a des développeurs Java à former et on va les familiariser avec le Z et Changeman. Ça, c’est pas un souci.
+
+2. Côté Python : on en avait déjà parlé vite fait, j'avais mentionné l’obfuscation du code Python. Maintenant que j’ai bien avancé, je voulais te partager ce qui bloquait.
+
+Le code sur Z est balancé dans le système de fichiers (MVS ou HFS peu importe) via l’outil CI/CD, qui est le seul à pouvoir écrire dessus. Après ça, le code est exécuté pour les batchs par des jobs planifiés sous OPC, avec un utilisateur dédié comme B1BATCH. En TP, c’est pareil mais sous CICS, avec un utilisateur technique.
+
+Le hic, c’est que Python, comme langage interprété, ne devrait pas avoir son code source en prod ni être modifié. Mais l’interpréteur commence direct par compiler les sources en fichiers `.pyc` dans un dossier `__pycache__`, qui doit être dans le même répertoire que le code source. Et vu que seul l’outil CI/CD peut écrire, ça bloque avec un ICH408 (pas de droits d’écriture).
+
+Finalement, ça nous a donné une bonne idée : on va compiler les sources Python avec Changeman pour produire des fichiers `.pyc` illisibles. Ce sont ces fichiers qu’on déploiera et exécutera. Simple et efficace.  
+
+Tu en penses quoi ?
+
+---
+
+J'espère que ça te convient comme reformulation ! 😊
