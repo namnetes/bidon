@@ -1,0 +1,41 @@
+Le fichier de log quotidien "Changeman" est composé de lignes de texte brut ayant chacune une longueur fixe de 133 caractères.
+Si chaque ligne représente généralement une opération, certaines opérations peuvent s'étendre sur plusieurs lignes, jusqu'à un maximum de cinq. 
+
+- Ligne principale : La première ligne d'une opération multi-lignes débute toujours à la colonne 1 et se termine à la colonne 133.  
+- Lignes suivantes : Les lignes supplémentaires qui complètent l'opération commencent systématiquement à la colonne 80 et se prolongent jusqu'à la colonne 133, soit une longueur effective de 54 caractères.
+
+Ainsi, dans le cas où une opération comporte une ligne principale suivie de cinq lignes supplémentaires, la longueur totale de cette opération est calculée comme suit :  
+133 + (54 x 5) = 133 + 270 = 403 caractères 
+
+Par conséquent, une opération multi-lignes complète mesure exactement 403 caractères.
+
+Objectif :  
+Développer un programme Python capable de reformater le fichier log "Changeman" de manière à ce que chaque opération multi-lignes soit regroupée en une seule ligne. Cela permettra de transformer chaque opération, quelle que soit sa structure initiale (mono-ligne ou multi-lignes), en une représentation unique et consolidée.
+
+def reformat_changeman_log(input_file, output_file):
+    """
+    Reformate le fichier de log "Changeman" pour regrouper les opérations multi-lignes en une seule ligne.
+
+    :param input_file: Chemin du fichier d'entrée contenant le log brut
+    :param output_file: Chemin du fichier de sortie avec le log reformatté
+    """
+    with open(input_file, 'r') as infile, open(output_file, 'w') as outfile:
+        operation = ""  # Stocke une opération complète
+        for line in infile:
+            if line.startswith(" " * 79):  # Vérifie si la ligne commence à la colonne 80
+                # Ajoute la portion entre la colonne 80 et 133 (54 caractères) à l'opération
+                operation += line[79:133].rstrip()
+            else:
+                # Écrit l'opération précédente si elle est complète
+                if operation:
+                    outfile.write(operation + "\n")
+                # Initialise une nouvelle opération avec la ligne principale
+                operation = line.rstrip()
+        # Écrit la dernière opération si elle existe
+        if operation:
+            outfile.write(operation + "\n")
+
+# Exemple d'utilisation
+input_file = "changeman_log.txt"
+output_file = "formatted_changeman_log.txt"
+reformat_changeman_log(input_file, output_file)
