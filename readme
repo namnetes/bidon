@@ -1,41 +1,19 @@
-Le fichier de log quotidien "Changeman" est composé de lignes de texte brut ayant chacune une longueur fixe de 133 caractères.
-Si chaque ligne représente généralement une opération, certaines opérations peuvent s'étendre sur plusieurs lignes, jusqu'à un maximum de cinq. 
+Bonjour François,
 
-- Ligne principale : La première ligne d'une opération multi-lignes débute toujours à la colonne 1 et se termine à la colonne 133.  
-- Lignes suivantes : Les lignes supplémentaires qui complètent l'opération commencent systématiquement à la colonne 80 et se prolongent jusqu'à la colonne 133, soit une longueur effective de 54 caractères.
+Désolé pour la réposne tardive.
 
-Ainsi, dans le cas où une opération comporte une ligne principale suivie de cinq lignes supplémentaires, la longueur totale de cette opération est calculée comme suit :  
-133 + (54 x 5) = 133 + 270 = 403 caractères 
+J'espère que tout va bien pour toi. Je tiens à te remercier sincèrement pour nos échanges, qui apportent une réelle valeur ajoutée aux travaux de modernisation que je mène.
 
-Par conséquent, une opération multi-lignes complète mesure exactement 403 caractères.
+Avant de nous engager sur une nouvelle trajectoire, je souhaite évaluer soigneusement les avantages et les inconvénients de la solution Python dont j'ai parlé précédemment. Je partage ton point de vue : comme pour les projets Java, chaque projet déployé doit inclure sa propre JVM, les deux étant indissociables. Cette configuration garantit une continuité de service durable, indépendamment de la version de Java installée par défaut sur Z, et ce, peu importe l'environnement. Ce point est d'autant plus essentiel que la version Java, par défaut, installée peut varier entre les environnements SYSB, DEV, PPROD et PROD.
 
-Objectif :  
-Développer un programme Python capable de reformater le fichier log "Changeman" de manière à ce que chaque opération multi-lignes soit regroupée en une seule ligne. Cela permettra de transformer chaque opération, quelle que soit sa structure initiale (mono-ligne ou multi-lignes), en une représentation unique et consolidée.
+De la même manière, pour Python, l'environnement "venv" doit impérativement être intégré au projet déployé afin d'assurer sa pérennité et son bon fonctionnement, quelle que soit la configuration de l'environnement.
 
-def reformat_changeman_log(input_file, output_file):
-    """
-    Reformate le fichier de log "Changeman" pour regrouper les opérations multi-lignes en une seule ligne.
+Actuellement, nous travaillons sur l'intégration d'Amazon S3 dans ChangeMan, que ce soit pour des déploiements en Java, Python ou Node.js.
 
-    :param input_file: Chemin du fichier d'entrée contenant le log brut
-    :param output_file: Chemin du fichier de sortie avec le log reformatté
-    """
-    with open(input_file, 'r') as infile, open(output_file, 'w') as outfile:
-        operation = ""  # Stocke une opération complète
-        for line in infile:
-            if line.startswith(" " * 79):  # Vérifie si la ligne commence à la colonne 80
-                # Ajoute la portion entre la colonne 80 et 133 (54 caractères) à l'opération
-                operation += line[79:133].rstrip()
-            else:
-                # Écrit l'opération précédente si elle est complète
-                if operation:
-                    outfile.write(operation + "\n")
-                # Initialise une nouvelle opération avec la ligne principale
-                operation = line.rstrip()
-        # Écrit la dernière opération si elle existe
-        if operation:
-            outfile.write(operation + "\n")
+Concernant Java, je vais interroger SLM sur le fameux disque 7 évoqué par Fabrice avec Java 21. Peut-être pourrais-tu, sans révéler de secret, me dire s'il y a des nouveautés S3 ?
 
-# Exemple d'utilisation
-input_file = "changeman_log.txt"
-output_file = "formatted_changeman_log.txt"
-reformat_changeman_log(input_file, output_file)
+Pour le projet ROC, je vais participer à la sélection des candidats et tenter d'apporter mon soutien à l'équipe, puisque le SL de la Squad vole vers de nouveaux horizons. Les développeurs seront chez KLX et auront, si besoin, le combo VSCode/ZOWE/COPILOT. Un projet BPI m'a contacté hier pour envisager le dév d'une transaction CICS simple en Java. Je vérifierai avec Sylvie si l'infra (TOR et AOR) du DEV le permet. Elle fait partie du grand cercle des intervenants CAGIP que je collocalise régulièrement dans notre espace à Villejuif. D'ailleurs, L'Isle ne coule pas près de Gradignan, donc l'aéroport et la gare SNCF sont bien opérationnels ? :)
+
+Concernant S3, je prépare très bientôt une session (30 minutes) de questions/réponses avec tous mes pairs Squad Leader. L'objectif est de démystifier certains points, car on entend parfois des informations étonnantes, voire des fake news.
+
+A bientôt
