@@ -1,9 +1,0 @@
-Voici une version reformulée et enrichie dans un langage soutenu :
-
-**Comme convenu lors de notre précédent échange, deux projets SNI, à savoir un batch et un TP, sont actuellement soumis à des tests dans l’environnement de développement de LCL. Le chapitre dédié à l’architecture nous a apporté des garanties, validant ainsi la pertinence de notre solution d’authentification via l’API Manager sans nécessiter une authentification préalable sur z/OS Connect pour un composant existant sur Z. En conséquence, nous avons décidé de renoncer à l’utilisation de PAT/TLS pour nos jobs batch planifiés sous OPC.**
-
-**À ce stade, notre priorité réside dans l’infrastructure, en particulier la haute disponibilité, que nous devons impérativement évaluer dans l’environnement dédié, lequel reflète l’image de la production que Sylvie et Ian s’emploient à préparer. De notre côté, nous nous attelons à l’écriture du batch et du TP afin d’exécuter en boucle des appels vers z/OS Connect. Il conviendrait d’inclure Nicolas dans cette démarche afin de bénéficier de son expertise et de ses outils spécifiques.**
-
-**Il est essentiel de noter qu’IP Connect s’inscrit dans le cadre d’un projet à caractère réglementaire, impliquant l’appel d’une API pour interagir avec une base de données Postgre. Vous avez, par ailleurs, exprimé le souhait d’obtenir une estimation fiable concernant la date de mise en production de la solution. Néanmoins, il convient de préciser que cette solution est d’ores et déjà fonctionnelle dans l’environnement de qualification du développement, permettant ainsi aux équipes PAY de démarrer les développements requis.**
-
-Je me tiens à votre disposition pour toute autre clarification ou ajustement souhaité.
