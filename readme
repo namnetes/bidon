@@ -1,19 +1,9 @@
-Bonjour François,
+Voici une version reformulée et enrichie dans un langage soutenu :
 
-Désolé pour la réposne tardive.
+**Comme convenu lors de notre précédent échange, deux projets SNI, à savoir un batch et un TP, sont actuellement soumis à des tests dans l’environnement de développement de LCL. Le chapitre dédié à l’architecture nous a apporté des garanties, validant ainsi la pertinence de notre solution d’authentification via l’API Manager sans nécessiter une authentification préalable sur z/OS Connect pour un composant existant sur Z. En conséquence, nous avons décidé de renoncer à l’utilisation de PAT/TLS pour nos jobs batch planifiés sous OPC.**
 
-J'espère que tout va bien pour toi. Je tiens à te remercier sincèrement pour nos échanges, qui apportent une réelle valeur ajoutée aux travaux de modernisation que je mène.
+**À ce stade, notre priorité réside dans l’infrastructure, en particulier la haute disponibilité, que nous devons impérativement évaluer dans l’environnement dédié, lequel reflète l’image de la production que Sylvie et Ian s’emploient à préparer. De notre côté, nous nous attelons à l’écriture du batch et du TP afin d’exécuter en boucle des appels vers z/OS Connect. Il conviendrait d’inclure Nicolas dans cette démarche afin de bénéficier de son expertise et de ses outils spécifiques.**
 
-Avant de nous engager sur une nouvelle trajectoire, je souhaite évaluer soigneusement les avantages et les inconvénients de la solution Python dont j'ai parlé précédemment. Je partage ton point de vue : comme pour les projets Java, chaque projet déployé doit inclure sa propre JVM, les deux étant indissociables. Cette configuration garantit une continuité de service durable, indépendamment de la version de Java installée par défaut sur Z, et ce, peu importe l'environnement. Ce point est d'autant plus essentiel que la version Java, par défaut, installée peut varier entre les environnements SYSB, DEV, PPROD et PROD.
+**Il est essentiel de noter qu’IP Connect s’inscrit dans le cadre d’un projet à caractère réglementaire, impliquant l’appel d’une API pour interagir avec une base de données Postgre. Vous avez, par ailleurs, exprimé le souhait d’obtenir une estimation fiable concernant la date de mise en production de la solution. Néanmoins, il convient de préciser que cette solution est d’ores et déjà fonctionnelle dans l’environnement de qualification du développement, permettant ainsi aux équipes PAY de démarrer les développements requis.**
 
-De la même manière, pour Python, l'environnement "venv" doit impérativement être intégré au projet déployé afin d'assurer sa pérennité et son bon fonctionnement, quelle que soit la configuration de l'environnement.
-
-Actuellement, nous travaillons sur l'intégration d'Amazon S3 dans ChangeMan, que ce soit pour des déploiements en Java, Python ou Node.js.
-
-Concernant Java, je vais interroger SLM sur le fameux disque 7 évoqué par Fabrice avec Java 21. Peut-être pourrais-tu, sans révéler de secret, me dire s'il y a des nouveautés S3 ?
-
-Pour le projet ROC, je vais participer à la sélection des candidats et tenter d'apporter mon soutien à l'équipe, puisque le SL de la Squad vole vers de nouveaux horizons. Les développeurs seront chez KLX et auront, si besoin, le combo VSCode/ZOWE/COPILOT. Un projet BPI m'a contacté hier pour envisager le dév d'une transaction CICS simple en Java. Je vérifierai avec Sylvie si l'infra (TOR et AOR) du DEV le permet. Elle fait partie du grand cercle des intervenants CAGIP que je collocalise régulièrement dans notre espace à Villejuif. D'ailleurs, L'Isle ne coule pas près de Gradignan, donc l'aéroport et la gare SNCF sont bien opérationnels ? :)
-
-Concernant S3, je prépare très bientôt une session (30 minutes) de questions/réponses avec tous mes pairs Squad Leader. L'objectif est de démystifier certains points, car on entend parfois des informations étonnantes, voire des fake news.
-
-A bientôt
+Je me tiens à votre disposition pour toute autre clarification ou ajustement souhaité.
