@@ -1,0 +1,19 @@
+Voici une reformulation améliorée, tout en conservant la blague initiale et le ton professionnel :
+
+---
+
+Pareillement, je suis ravi d’échanger avec une communauté élargie de ChangeMen, une expérience toujours enrichissante. 
+
+En parallèle, nous travaillons sur les déploiements sous USS, en lien avec les artefacts de z/OS Connect. À l’image de votre équipe, nous poursuivons avec François nos efforts de modernisation du Mainframe, couvrant un éventail allant du développement Python sous USS au Java, et bientôt, nous l'espérons, au Node.js. Nous exploitons également le combo ysCode, tzowet, et Copilot, qui prend une dimension concrète dans le cadre de notre projet bancaire actuel.
+
+Ce projet repose sur la conversion de fichiers MVS en texte brut vers le format XML. Sa complexité est maîtrisée, mais son envergure est importante : environ 400 flux avec des règles métier spécifiques, impliquant ainsi la création de 400 programmes Java. Pour chaque déploiement, nous comptons sur ChangeMan. 
+
+Cependant, un défi se présente : nous ne pouvons pas compiler ou déployer du Python dans notre environnement de développement actuel. Il s’agit donc principalement de déployer ces composants sur une machine distante, comme en production, en ciblant USS. Si nous disposons d’un disque partagé côté MVS, pour les composants modernes, nous prévoyons d’utiliser un bucket Amazon dans notre cloud privé.
+
+Enfin, si plusieurs aspects de ChangeMan sont précieux, le serveur des API REST est devenu une pierre angulaire de nos opérations. Nous avons développé une solution Python, pour le moment locale sous Windows, qui automatise à grande échelle la création et le peuplement de packages, la compilation, le promote, etc. Auparavant, nous utilisions sur Z, en Rexx, une autre brique intéressante : les services XML.
+
+Voilà l’état actuel de nos principaux travaux.
+
+---
+
+Cette version est fluide tout en mettant en lumière les points essentiels de votre message. Si des ajustements sont nécessaires, je suis là pour vous aider !
