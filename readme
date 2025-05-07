@@ -1,0 +1,152 @@
+Absolument ! Voici la traduction en français de l'article :
+Remplacer JCL par Python : Un guide pratique avec ZOAU
+Je réfléchissais à remplacer le JCL par du code Python. Je savais que c'était possible, mais je voulais comprendre comment le faire en utilisant les Z Open Automation Utilities (ZOAU version 1.1.0). Je souhaitais créer cela de manière à ce que le code puisse servir de modèle à quiconque souhaiterait effectuer lui-même les changements. Ce qui suit est le code que j'ai écrit et qui a été validé par plusieurs experts Python (par plusieurs, j'entends bien trop pour les mentionner) suivant une approche itérative qui gagne en complexité.
+JCL vs Python : Une différence culturelle
+J'ai pris un simple fichier JCL (14 cartes/lignes) et j'en ai créé l'équivalent en Python. Il s'est avéré que la version Python de la même fonctionnalité faisait près de 200 lignes ! Vous pensez probablement : "Cela démontre évidemment la simplicité du JCL par rapport à Python", mais la réponse est un peu plus complexe que cela.
+La simplicité du JCL repose sur le fait que le JCL n'est que du code que nous gérons. Le code lui-même n'est pas complexe, mais il peut être compliqué. Pensez-y, quand avez-vous créé du JCL à partir de zéro pour la dernière fois ? La plupart d'entre nous affichent un membre JCL, modifient quelques éléments et soumettent le job. Si vous faites une erreur, vous allez dans le System Display and Search Facility (SDSF) et regardez la sortie, identifiez l'erreur, retournez à l'éditeur, modifiez le code et soumettez à nouveau.
+Le code Python est basé sur un modèle totalement différent. L'examen de la sortie, l'identification de l'erreur et la modification des étapes du code JCL sont inutiles en Python car l'utilisateur ne touche jamais au code. Au lieu de cela, le code vérifie les données qui lui sont fournies et exécute les fonctions. En JCL, toute la vérification est effectuée par le programme lui-même. Bien que nous puissions simplifier notre Python pour permettre de même au programme de fournir toute la vérification, il semble plus rapide, plus simple et plus axé sur l'utilisateur d'essayer de valider l'entrée avant d'appeler le programme. Il existe de nombreux précédents pour un tel modèle. Nous le faisons tout le temps dans les modèles basés sur le web. Au lieu de remplir un formulaire web, de cliquer sur un bouton de soumission et d'attendre que le web renvoie une réponse, des vérificateurs d'entrée garantissent que ce qui est envoyé a plus de chances de fonctionner. Avec ce modèle, les utilisateurs n'ont qu'à fournir des fichiers de configuration au script (également appelé module) et des paramètres via la ligne de commande, et le code Python fait tout le reste ! Cela offre une approche beaucoup plus rationalisée à chaque exécution.
+Cette différence, combinée au fait que Python s'exécute de manière synchrone (contrairement à un environnement JES asynchrone), alimente une approche complètement différente de l'utilisation de z/OS. Ce modèle facilite l'interaction de z/OS avec d'autres systèmes dans les pipelines DevOps et les déploiements Cloud, tout en évitant d'avoir à naviguer dans plusieurs écrans pour vérifier les erreurs.
+Passer du JCL à Python : La première étape
+Les gens semblent connaître soit le JCL, soit Python, et semblent hésiter à passer de l'un à l'autre en raison des inconnues impliquées. Je suis loin d'être un expert dans les deux, alors imaginez la quantité d'appréhension que j'avais à entreprendre une telle tâche. Permettez-moi de vous guider à travers le processus que j'ai suivi lors de cette transition. Je dois admettre que de nombreuses personnes m'ont conseillé sur le style Pythonique, donc ce code Python a été validé par des experts pour le rendre de la plus haute qualité possible. En plus du SDK IBM Open Enterprise pour Python, ce code repose sur les Z Open Automation Utilities (ZOAU).
+La première étape consiste à créer du code Python qui gère l'exécution de base du JCL. Prenons un cas d'utilisation SMPE simple. Voici un exemple de JCL pour lister le contenu d'une zone dans SMPE :
+//SMPLIST JOB ,,MSGLEVEL=1,MSGCLASS=H,CLASS=A,REGION=0M,
+// NOTIFY=&SYSUID
+//*******************************************************
+//SMPLST EXEC PGM=GIMSMP
+//SMCSI DD DSN=AS4SMP.GLOBAL.CSI,DISP=SHR
+//SMPLOG DD DUMMY
+//SMPLOGA DD DUMMY
+//SMPWRK6 DD DSN=&&TEMP,
+// SPACE=(CYL,(2500,100,500)),VOL=SER=USRAT5,UNIT=3390,
+// DCB=(DSORG=PO,RECFM=FB,LRECL=80,BLKSIZE=3200),
+// DISP=(NEW,DELETE)
+//SMPCNTL DD *
+SET BDY(GLOBAL).
+LIST.
+
+Un expert SMPE afficherait ce JCL et le modifierait pour changer la zone qu'il/elle souhaite lister, et pourrait ajouter des paramètres à l'instruction LIST pour ne fournir que la sortie qu'il/elle recherche. Commençons à transformer ce JCL en Python. La première étape consiste à spécifier (importer en langage Python) les modules utilisés dans notre script Python.
+import sys
+import os
+from zoautil_py import mvscmd, datasets
+from zoautil_py_types import DDStatement, DatasetDefinition, FileDefinition
+
+Ces importations rendent des fonctionnalités disponibles à notre script. Les deux premières sont des modules Python intégrés pour connecter notre script au système. Les deux autres donnent à notre script un accès à des méthodes et des types de données spécifiques dans les utilitaires ZOAU.
+Maintenant, nous définissons les instructions de définition de données (DD) en Python. Chaque instruction DD sera définie à l'aide des fonctions ZOAU qui seront intégrées dans une liste. SMPLOG et SMPLOGA sont simples et ressembleraient à ceci :
+dd_list = []
+dd_list.append(DDStatement("SMPLOG", "DUMMY"))
+dd_list.append(DDStatement("SMPLOGA", "DUMMY"))
+
+Nous commençons par créer une liste d'instructions DD et remplissons cette liste avec des cartes DD. Nous créons des cartes DD en utilisant la méthode DDStatement de ZOAU. Ces deux instructions sont simples car elles ne se connectent réellement à rien. L'étape suivante consiste à configurer l'inventaire consolidé des logiciels (CSI). Nous utilisons les méthodes DatasetDefinition et DDStatement de ZOAU pour renvoyer la définition de notre ensemble de données CSI global. Ensuite, la connexion de cette DatasetDefinition à notre nom DD (AS4SMP.GLOBAL.CSI) crée une instruction DD pour SMPCSI.
+dd_list.append(DDStatement("SMPCSI", DatasetDefinition("AS4SMP.GLOBAL.CSI")))
+
+La carte DD suivante est un peu différente. Dans JES, nous pouvons identifier un ensemble de données temporaire et nous attendre à ce qu'il crée l'ensemble de données et le supprime une fois que nous en avons terminé. Notre programme Python va devoir gérer cela à la place. Voici quelques instructions couvrant cela :
+temp_dataset_name = Datasets.tmp_name("ASLAN")
+Datasets.create(temp_dataset_name, type="PDS",
+                primary_space="5M", secondary_space="5M", block_size=3200,
+                record_format="FB", record_length=80, volumes="USRAT5",
+                directory_blocks=10)
+dd_list.append(DDStatement("SMPWRK6",
+                            DatasetDefintion(temp_dataset_name)))
+
+La première ligne ci-dessus utilise la fonction Datasets.tmp_name de ZOAU pour créer un nom d'ensemble de données temporaire. Elle utilise le qualificatif de haut niveau de mon ID utilisateur (ASLAN). La deuxième ligne crée un ensemble de données avec temp_dataset_name créé à la ligne précédente. Enfin, la troisième ligne connecte cet ensemble de données nouvellement créé (temp_dataset_name) au nom DD SMPWK6 et l'ajoute à la liste dd.
+Maintenant, les choses se compliquent un peu. L'entrée du programme GIMSMP provient de la carte SMPCNTL. Dans le JCL, elle est en ligne. Pour faire quelque chose de similaire pour Python, nous allons créer un fichier temporaire dans l'environnement Unix Systems Services (USS) que nous pourrons supprimer ultérieurement. Nous devons nous assurer que le code est en EBCDIC car GIMSMP s'attend à des cartes d'entrée EBCDIC dans SMPCNTL.
+Nous commençons par définir le nom de fichier (input_file_name). Nous ouvrons le fichier en mode écriture en nous assurant que l'encodage des données est en EBCDIC (page de codes 1047) et écrivons deux enregistrements terminés par des caractères de nouvelle ligne. Cette partie peut être délicate et dépend de la façon dont le programme s'attend à ce que les données soient présentées. Étant donné que l'entrée attendue est du JCL, certains programmes s'attendent à des enregistrements de 80 octets (n'oubliez rien dans la colonne 72). Ce programme n'est pas aussi pointilleux, donc tout va bien.
+input_file_name = "./SMPCNTL.input"
+with open(input_file_name, mode="w", encoding="cp1047") as "file":
+    file.write("SET BDY(GLOBAL).\n")
+    file.write("LIST.\n")
+dd_list.append(DDStatement("SMPCNTL",
+                            FileDefinition(input_file_name)))
+
+Le prochain défi est une fois de plus dû au fait que nous ne nous appuyons pas sur JES pour gérer le job. Si nous voulons pouvoir voir la sortie, nous devons créer un ensemble de données pour gérer la sortie. Nous n'avons pas eu à le faire en JCL car JES s'en charge pour nous. La plupart de cela ressemble à l'ensemble de données temporaire que nous avons créé. Nous définissons un nom temporaire, créons un ensemble de données, créons une instruction DD et l'ajoutons à notre liste dd.
+output_dataset_name = Datasets.tmp_name("ASLAN")
+Datasets.create(outptut_dataset_name, type="SEQ",
+                primary_space="5M", secondary_space="5M",
+                volumes="USRAT5")
+dd_list.append(DDStatement("SMPLIST",
+                            DatasetDefintion(outptut_dataset_name)))
+
+Nous avons dû faire quelques recherches pour savoir où GIMSMP plaçait sa sortie. Ces informations peuvent être trouvées dans des exemples génériques dans SYS1.SAMPLIB ou à l'endroit où votre installation place les exemples. Bien sûr, nous ne connaissons pas ce nom de fichier, il serait donc peut-être judicieux d'indiquer à l'utilisateur où la sortie apparaîtra. Nous l'avons fait avec un printf.
+print(f"La sortie sera dans : {output_dataset_name}\n")
+
+Étant donné que GIMSMP est un programme autorisé, nous devons utiliser la fonction mvscmd.execute_authorized de ZOAU. Sinon, nous utiliserions simplement mvscmd.execute. À ce stade, nous avons défini tous les DD et devons exécuter GIMSMP, donc ensuite nous avons une commande d'exécution.
+command_return = mvscmd.execute_authorized(pgm="GIMSMP", dd_list)
+
+À ce stade, nous avons suffisamment de code pour correspondre au JCL. Cela fait 16 lignes de Python contre 14 cartes/lignes en JCL, ce qui est assez proche. Bien sûr, nous devrions traiter les informations du code retour. Les informations de retour de mvscmd.execute et mvscomd.execute_authorized se présentent sous la forme d'un objet qui doit être décompressé. Nous devons décomposer l'objet renvoyé par la commande en un dictionnaire Python. Ensuite, nous pouvons traiter les informations de l'appel. Une fois le dictionnaire créé, nous pouvons extraire le code retour et déterminer si tout a fonctionné.
+command_return_dictionary = command_return.todict()
+if command_return_dictionary["rc"] > 0:
+    sys.stderr.write(f"Code retour : {command_return_dictionary['rc']}\n")
+
+N'oubliez pas que nous devons effacer l'ensemble de données temporaire et le fichier d'entrée :
+Datasets.delete(temporary_dataset_name)
+os.remove(input_file_name)
+
+Si vous avez créé un fichier Python avec ces instructions, vous avez maintenant créé en Python ce qui se passe en JCL. Bien sûr, cela ne représente pas vraiment le changement culturel discuté précédemment, cela recrée simplement le JCL en Python. Revisitez maintenant le code en vous concentrant sur la suppression de la nécessité de modifier le code pour effectuer différentes fonctions de liste SMPE.
+Créer un exécutable smpe_list.py plus flexible
+Créons une fonction qui se concentre sur ce que fait le JCL. Cela nous permet de construire un niveau d'abstraction. Une fois abstrait, nous pouvons ajouter plus de support programmatique pour les utilisateurs. Tout d'abord, nous commençons par une routine qui effectue la fonctionnalité List :
+def smpe_list():
+    dd_list = []
+    dd_list.append(DDStatement("SMPLOG", "DUMMY"))
+    dd_list.append(DDStatement("SMPLOGA", "DUMMY"))
+    dd_list.append(DDStatement("SMPCSI",
+                                DatasetDefinition("AS4SMP.GLOBAL.CSI")))
+    temp_dataset_name = Datasets.tmp_name( "ASLAN")
+    Datasets.create(temp_dataset_name, type="PDS",
+                    primary_space="5M", secondary_space="5M",
+                    block_size=3200,record_format="FB",
+                    record_length=80, volumes="USRAT5",
+                    directory_blocks=10)
+    dd_list.append(DDStatement("SMPWRK6",
+                                DatasetDefintion(temp_dataset_name)))
+    input_file_name = "./SMPCNTL.input"
+    with open(input_file_name, mode="w",
+              encoding="cp1047") as "file":
+        file.write("SET BDY(GLOBAL).\n")
+        file.write("LIST.\n")
+    dd_list.append(DDStatement("SMPCNTL",
+                                FileDefinition(input_file_name)))
+    output_dataset_name = Datasets.tmp_name("ASLAN")
+
+    Datasets.create(outptut_dataset_name, type="SEQ",
+                    primary_space="5M", secondary_space="5M",
+                    volumes="USRAT5")
+    dd_list.append(DDStatement("SMPLIST",
+                                DatasetDefintion(outptut_dataset_name)))
+
+    print(f"La sortie sera dans : {output_dataset_name}\n")
+    command_return = mvscmd.execute_authorized(pgm="GIMSMP",
+                                               dd_list)
+    command_return_dictionary=command_return.todict()
+    if command_return_dictionary["rc"] > 0:
+        sys.stderr.write(f"Code retour {command_return_dictionary['rc']}\n")
+    Datasets.delete(temporary_dataset_name)
+    os.remove(input_file_name)
+    return command_return
+
+Avant d'aller beaucoup plus loin, essayons d'être un peu plus Pythoniques dans notre style, en commençant par un bloc try-except-finally. Cela permet un flux un peu plus direct. Si tout fonctionne correctement, nous n'avons pas à nous soucier du chemin d'erreur. En créant un bloc finally, les actions de fermeture de fichier se produisent même si le code génère une erreur. La nouvelle version ressemble à ceci :
+def smpe_list():
+    dd_list = []
+    temp_dataset = None
+    sysin_file_name = None
+    try:
+        dd_list.append(DDStatement("SMPLOG", "DUMMY"))
+        dd_list.append(DDStatement("SMPLOGA", "DUMMY"))
+        dd_list.append(DDStatement("SMPCSI",
+                                    DatasetDefinition("AS4SMP.GLOBAL.CSI")))
+        temp_dataset_name = Datasets.tmp_name("ASLAN")
+        Datasets.create(temp_dataset_name, type="PDS",
+                        primary_space="5M", secondary_space="5M",
+                        block_size=3200,record_format="FB",
+                        record_length=80, volumes="USRAT5",
+                        directory_blocks=10)
+        dd_list.append(DDStatement("SMPWRK6",
+                                    DatasetDefintion(temp_dataset_name)))
+        input_file_name = "./SMPCNTL.input"
+        with open(input_file_name, mode="w",
+                  encoding="cp1047") as "file":
+            file.write("SET BDY(GLOBAL).\n")
+            file.write("LIST.\n")
+        dd_list.append(DDStatement("SMPCNTL",
+                                    FileDefinition(input_file_name)))
+        output_dataset_name = Datasets
+
