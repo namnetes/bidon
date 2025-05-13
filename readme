@@ -1,93 +1,14 @@
-Voici une **feuille de route** détaillée suivie du **mail destiné à l’ETP avec le manager N+2 en copie**.
+Voici une reformulation enrichie et mieux structurée :
 
 ---
 
-## **Feuille de route du projet**
-### **1. Analyse et Inventaire des Données**
-📌 **Objectifs** :
-- Recenser l’ensemble des tables DB2 concernées et leurs relations.
-- Étudier la volumétrie et la croissance des données.
-- Identifier les données obsolètes ou les redondances.
-- Déterminer la criticité des informations et leur fréquence d’utilisation.
+Des Squad nous adressent régulièrement des demandes concernant des cas d’usage liés au stockage de données, toujours depuis le Z. Il apparaît que l’offre de service **S3aaS Storage** ne répond pas pleinement à leurs besoins. Parmi les problématiques rencontrées, on relève notamment :
 
-🛠 **Actions** :
-- Audit des bases DB2 existantes.
-- Documentation des structures et des interdépendances.
+- **L’archivage de données** sur des périodes plus ou moins longues, nécessitant une solution fiable et optimisée en termes de coût.
+- **Le stockage de données à forte fréquence d’accès**, qui requiert des performances élevées et une rapidité d’accès optimale.
 
-### **2. Choix de la Structure de Stockage**
-📌 **Objectif** : Maintenir la structure sous **DB2**.
-🛠 **Action** : Vérification des performances et compatibilité avec les besoins futurs.
-
-### **3. Définition d’un Nouveau Mode d’Alimentation des Données**
-📌 **Objectifs** :
-- Intégrer Mia Discovery comme **source principale**.
-- Exploiter l’API Mia Discovery via le **client Web Mia**.
-- Définir les développements spécifiques pour adapter l’alimentation.
-
-🛠 **Actions** :
-- Spécification technique des flux de données.
-- Définition des interactions entre DB2 et Mia Discovery.
-
-### **4. Planification du Projet**
-📌 **Objectifs** :
-- Fractionner les tâches en **petits objectifs atteignables**.
-- Définir des **jalons clairs** pour suivre les progrès.
-- Prioriser les activités pour maximiser l’efficacité.
-
-🛠 **Actions** :
-- Découpage des livrables en sous-tâches.
-- Création d’un planning détaillé dans Jira Agile.
-
-### **5. Suivi et Feedback**
-📌 **Objectifs** :
-- Assurer un suivi structuré avec **Jira Agile**.
-- Mettre en place un cycle de feedback continu.
-
-🛠 **Actions** :
-- **Feedback quotidien** pour suivi des blocages et avancements.
-- **Réunion hebdomadaire** pour synchronisation et réajustements.
-- **Réunion COPROJ mensuelle** (30 min) incluant Philippe.
-
-### **6. Documentation et Visibilité**
-📌 **Objectifs** :
-- Assurer une documentation progressive et accessible.
-- Utiliser **Confluence** comme outil centralisé de suivi documentaire.
-
-🛠 **Actions** :
-- Mise à jour continue des livrables sur Confluence.
-- Structuration des pages pour assurer un suivi clair.
+Face à ces besoins spécifiques, quelles seraient les solutions envisageables pour mieux répondre aux attentes des équipes ?
 
 ---
 
-## **Mail destiné à l’ETP avec le N+2 en copie**
-📩 **Objet : Lancement du projet – Migration DB2 & intégration Mia Discovery**  
-
-Bonjour [Nom de l’ETP],  
-
-Dans le cadre du projet de **migration et structuration des données DB2**, nous lançons officiellement le travail en mode projet. Voici les **principales étapes et attendus** :  
-
-🔹 **Analyse & Inventaire des données** : Recensement et sélection des tables essentielles.  
-🔹 **Définition de la structure cible** : Maintien sous **DB2** avec évaluation de la performance.  
-🔹 **Nouveau mode d’alimentation** : Intégration via **Mia Discovery** et exploitation de l’API.  
-🔹 **Planification et gestion** : Découpage des tâches, jalons et suivi via **Jira Agile**.  
-🔹 **Suivi & reporting** :  
-    - Feedback quotidien.  
-    - Réunion hebdomadaire pour suivi d’avancement.  
-    - COPROJ mensuelle avec Philippe pour consolidation des décisions.  
-🔹 **Documentation** : Mise à jour progressive et centralisée via **Confluence**.  
-
-🎯 **Prochaines actions** :  
-✅ Mise en place du **premier état des lieux** des tables DB2 et début du recensement.  
-✅ Configuration de l’espace de documentation sur **Confluence**.  
-✅ Initialisation du **suivi Jira Agile** avec les premiers jalons.  
-
-Merci de me tenir informé des avancées et des éventuels points de blocage.  
-Si besoin d’ajustements ou de clarifications, n’hésite pas à revenir vers moi.  
-
-Bien à toi,  
-[Votre Nom]  
-**Chef de Projet – Migration DB2**  
-
----
-
-Ce mail permet d’**encadrer efficacement** l’ETP tout en rassurant le manager N+2 sur la structuration du projet. Besoin d’ajuster des points ? Je suis là pour affiner ! 🚀  
+J’espère que cette reformulation correspond à tes attentes. N’hésite pas à me dire si tu souhaites des ajustements supplémentaires !
