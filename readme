@@ -1,0 +1,9 @@
+L'erreur **18N** lors d'une opération de **flush** dans Kafka peut être liée à plusieurs causes, notamment un problème de configuration, un délai d'attente dépassé ou une surcharge du producteur.
+
+Voici quelques pistes à explorer :
+- **Timeout de flush** : Si le producteur met trop de temps à vider son buffer, il peut générer une erreur. Vérifie la valeur de `offset.flush.timeout.ms` et essaie de l'augmenter[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://stackoverflow.com/questions/55521480/kafka-connect-failed-to-flush-timed-out-while-waiting-for-producer-to-flush-o?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "1").
+- **Mémoire tampon insuffisante** : Si `producer.buffer.memory` est trop faible, le producteur peut ne pas réussir à envoyer tous les messages avant le flush[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://stackoverflow.com/questions/55521480/kafka-connect-failed-to-flush-timed-out-while-waiting-for-producer-to-flush-o?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "1").
+- **Problème de connexion aux brokers** : Assure-toi que Kafka est bien accessible et que les brokers ne sont pas surchargés.
+- **Topic inexistant** : Si le topic vers lequel tu envoies les messages n'existe pas et que `auto.create.topics.enable=false`, cela peut provoquer une erreur[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://stackoverflow.com/questions/57200114/kafka-does-not-always-crash-on-failing-flush?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "2").
+
+Si tu peux partager plus de détails sur ton environnement et ta configuration, je pourrai t'aider à affiner le diagnostic ! 😊
