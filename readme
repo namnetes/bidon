@@ -1,4 +1,16 @@
 
+Bien sûr, voici une reformulation plus fluide et optimisée :
+
+Concernant les transferts, plusieurs solutions existent, notamment **IN DS File** et **FTr**. Cependant, **FP nt** n’étant pas sécurisé, nous avons opté pour le client **Iftp**, utilisé dans une émulation Linux pour nos scripts, ainsi que pour le logiciel Windows **Filezilla**.
+
+Une gestion efficace des onglets permettant d’exécuter plusieurs sessions 3270 dans une seule fenêtre constituerait une avancée significative pour l’interface. Depuis notre passage à **Windows 11**, nous utilisons son terminal natif pour nos connexions **SSH**, à la manière de **Putty**. Pouvoir ouvrir, toujours dans la même fenêtre, un **onglet terminal dédié** à une connexion **SSH** avec un **Mainframe**, tout en assurant le support de l’encodage et des glyphes appropriés, représenterait également un avantage notable.
+
+Nous sommes volontiers disposés à participer à cet échange. L'idée d'intégrer une **communauté d’utilisateurs** partageant des expériences et des connaissances sur ces sujets nous semble particulièrement pertinente.
+
+Cette version met davantage en valeur la clarté et la cohérence du message tout en gardant son essence. Est-ce que cela vous convient ?
+
+
+
 Profil LinkedIn – Synthèse de carrière
 
 
