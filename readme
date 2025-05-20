@@ -1,3 +1,19 @@
+Bien sûr, voici une reformulation optimisée :
+
+---
+
+Comme convenu, nous nous orientons vers un désengagement progressif de CARTOTECH à partir de septembre 2025, au profit de Mia Discovery, qui non seulement reprend toutes les fonctionnalités de CARTOTECH, mais les enrichit considérablement. Afin de garantir la précision de cette transition, j'ai sollicité les administrateurs de Mia pour une validation complémentaire.
+
+Toutefois, l’adoption de Mia par certains utilisateurs reste un défi, révélant une forte dépendance aux outils standards 3270. Cela dit, il est naturel de privilégier ce que l'on maîtrise. Néanmoins, ceux qui ont franchi le pas, y compris quelques irréductibles attachés au 3270 comme Richard et moi-même, reconnaissent que Mia est incomparable par rapport à notre solution historique.
+
+Concernant OUTDEVZOS, son usage cessera naturellement une fois que notre système Z sera définitivement mis au rebut, puisqu'il repose sur les outils de développement IBM IDZ et PDTools.
+
+Enfin, STI, encore utilisé temporairement avec l’ex-ATS, suivra une trajectoire similaire à celle d’OUTDEVZOS pour sa partie mainframe, notamment en ce qui concerne la pagination CICS. Quant au PING WSO2, il sera remplacé par un PING KONG et complété par un PING z/OS. Il ne s’agit donc pas d’un désengagement, mais plutôt d’une évolution vers une solution plus adaptée.
+
+---
+
+J'espère que cette reformulation correspond à vos attentes ! Besoin d'ajustements ?
+
 
 M ### Étude détaillée de la migration des fichiers VSAM vers DB2 sur IBM Mainframe
 
