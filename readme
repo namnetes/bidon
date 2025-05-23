@@ -1,43 +1,21 @@
-Sécuriser votre échange entre votre programme Python et un serveur Kafka avec SSL/TLS est une excellente idée. Voici les étapes essentielles :
+Voici une reformulation optimisée de votre texte :
 
-### 1. **Créer un certificat SSL**
-Kafka utilise des certificats pour sécuriser les connexions. Vous pouvez générer un certificat avec OpenSSL :
-```bash
-openssl req -new -newkey rsa:2048 -nodes -keyout kafka.key -out kafka.csr
-openssl x509 -req -days 365 -in kafka.csr -signkey kafka.key -out kafka.crt
-```
-Cela génère une clé privée (`kafka.key`), une demande de certificat (`kafka.csr`) et un certificat signé (`kafka.crt`).
+---
 
-### 2. **Utiliser le certificat dans le code Python**
-Dans votre programme Python, vous pouvez utiliser `kafka-python` pour établir une connexion sécurisée :
-```python
-from kafka import KafkaProducer
+**Objet : PoC IA avec APSIDE - Rétro-documentation et migration Cobol**  
 
-producer = KafkaProducer(
-    bootstrap_servers='kafka-server:9093',
-    security_protocol='SSL',
-    ssl_cafile='/path/to/ca.pem',
-    ssl_certfile='/path/to/kafka.crt',
-    ssl_keyfile='/path/to/kafka.key'
-)
+CL sollicite la société APSIDE pour la réalisation d’un PoC IA dont le premier périmètre applicatif portera sur un sous-ensemble issu du monde IBM Mainframe. L’objectif est d’évaluer comment leur solution A peut contribuer à la rétro-documentation de nos sources dans un contexte fonctionnel complet, tout en permettant une consultation individuelle de chaque source.  
 
-producer.send('test-topic', b'Hello, Kafka!')
-producer.flush()
-```
-Assurez-vous que les chemins des fichiers sont corrects.
+Par ailleurs, nous souhaitons mettre leur solution à l’épreuve afin d’analyser sa capacité à nous assister dans la gestion des différentes versions de Cobol utilisées, et ainsi faciliter la migration vers la dernière version de Cobol.  
 
-### 3. **Configurer Kafka pour reconnaître le certificat**
-Ajoutez ces lignes dans le fichier de configuration `server.properties` de Kafka :
-```
-ssl.keystore.location=/path/to/kafka.keystore.jks
-ssl.keystore.password=yourpassword
-ssl.key.password=yourpassword
-ssl.truststore.location=/path/to/kafka.truststore.jks
-ssl.truststore.password=yourpassword
-ssl.client.auth=required
-```
-Redémarrez Kafka après ces modifications.
+Dans ce cadre, certains fichiers sources Cobol devront être transmis afin d’être traités par leur infrastructure et d’alimenter leur IA.  
 
-Vous pouvez consulter [cette ressource](https://dev.to/adityakanekar/connecting-to-kafka-cluster-using-ssl-with-python-k2e) pour plus de détails sur la connexion sécurisée avec Kafka en Python.
+Vous trouverez ci-joint leur proposition de NDA.  
 
-Si vous avez besoin d'aide pour un point précis, dites-moi ! 😊
+Ce PoC est piloté par ISO, avec l’implication de nos spécialistes IA et Tech Lead, assistés par le département IA.  
+
+Cordialement,  
+
+---
+
+Cette reformulation apporte plus de clarté et de fluidité au message tout en restant fidèle à son contenu. N’hésitez pas à me dire si vous souhaitez des ajustements supplémentaires !
