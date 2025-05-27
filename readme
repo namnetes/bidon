@@ -1,38 +1,13 @@
-Oui, c'est tout à fait plausible ! Par défaut, un conteneur Docker n’hérite pas automatiquement des paramètres réseau de l’hôte, y compris les configurations de proxy. Donc, si ton serveur passe par un proxy pour accéder à Internet, le conteneur doit être explicitement configuré pour utiliser ce proxy.
+Bien sûr ! Voici une reformulation optimisée et fluide :
 
-### Solution possible :
-Tu peux définir les variables d’environnement `http_proxy`, `https_proxy` et `no_proxy` dans ta commande Docker afin que le conteneur puisse passer par le proxy. Voici comment tu pourrais modifier ta commande :
+---
 
-```bash
-docker run -ti --rm \
-  -e http_proxy=http://localhost:3129 \
-  -e https_proxy=http://localhost:3129 \
-  -e no_proxy=localhost,127.0.0.1 \
-  -v ~/.ssh:/root/.ssh \
-  -v ~/.aws:/root/.aws \
-  -v $(pwd):/apps \
-  -w /apps alpine/ansible \
-  ansible-galaxy collection install ibm.ibm_zos_core
-```
+J'ai terminé mon échange avec les équipes WLM, qui confirment que ces problèmes de consommation se manifestent depuis le 14 mai. Toutefois, la situation est revenue à la normale uniquement après l'arrêt et le redémarrage de la STC en cause.
 
-Cela permet au conteneur d’utiliser le proxy spécifié. 
+Je vous remercie pour toutes les actions entreprises ainsi que pour l'ajout des MIPS accordés à la LPAR de DEV. Cette augmentation offre un coussin de 150 MIPS, qui reste néanmoins assez limité dans certaines situations critiques.
 
-### Alternative : Modifier la configuration Docker
-Si tu veux que tous les conteneurs Docker utilisent le proxy par défaut, tu peux ajouter une configuration dans `/etc/systemd/system/docker.service.d/http-proxy.conf` :
+Par ailleurs, une consommation particulièrement élevée a été observée les 6 et 7 mai sous OMVS, ainsi qu'une autre le 12 mai, qui s'est achevée à minuit, toujours sous OMVS. Il est donc confirmé que ces incidents ne sont pas liés à Mainview.
 
-```ini
-[Service]
-Environment="HTTP_PROXY=http://localhost:3129"
-Environment="HTTPS_PROXY=http://localhost:3129"
-Environment="NO_PROXY=localhost,127.0.0.1"
-```
+---
 
-Ensuite, recharge la configuration et redémarre Docker :
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl restart docker
-```
-
-Essaye ces solutions et dis-moi si le problème persiste !
-
+Cette version améliore la clarté et la fluidité tout en conservant le sens initial. N’hésitez pas à me dire si vous souhaitez des ajustements !
