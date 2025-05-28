@@ -1,7 +1,1 @@
-Historiquement, les modules J9 ont été compilés sans inclure le step **EDCPRLK** dans le JCL de compilation. Ce step est apparu par la suite et a été identifié dans la version **V8R1M4**. Aujourd’hui, bien que nous soyons passés à la version **8.3**, ce step demeure présent.
 
-Afin d’assurer le bon fonctionnement des compilations, la procédure originale a été modifiée pour intégrer la **LCT (include)** directement au niveau du **binder (IEWL)**, évitant ainsi les erreurs systématiques.
-
-Pour répondre à la question de Jean-Jacques sur la stratégie à adopter, devons-nous envisager le déploiement des nouveaux modules en production ou, par prudence, conserver ceux historiques ? Il ne s'agit pas d'imposer une direction, mais simplement d'évaluer l'effort à consacrer chez **SAM** sur ce sujet, qui fait partie d’un ensemble plus vaste.
-
-Cette reformulation correspond-elle à votre besoin ? 😊
