@@ -1,1 +1,3 @@
 Get-ChildItem -Path Cert:\LocalMachine\Root | Where-Object {$_.NotAfter -gt (Get-Date)} | Select-Object Subject, Issuer, NotAfter
+
+Get-ChildItem -Path Cert:\LocalMachine\Root | Where-Object {$_.Subject -like "*CN=AAAA BBB CC*"} | Select-Object Subject, Issuer, NotAfter
