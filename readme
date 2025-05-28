@@ -1,13 +1,21 @@
-Bien sûr ! Voici une reformulation optimisée et fluide :
+function Invoke-Telnet {
+    param (
+        [string]$host,
+        [int]$port
+    )
 
----
-
-J'ai terminé mon échange avec les équipes WLM, qui confirment que ces problèmes de consommation se manifestent depuis le 14 mai. Toutefois, la situation est revenue à la normale uniquement après l'arrêt et le redémarrage de la STC en cause.
-
-Je vous remercie pour toutes les actions entreprises ainsi que pour l'ajout des MIPS accordés à la LPAR de DEV. Cette augmentation offre un coussin de 150 MIPS, qui reste néanmoins assez limité dans certaines situations critiques.
-
-Par ailleurs, une consommation particulièrement élevée a été observée les 6 et 7 mai sous OMVS, ainsi qu'une autre le 12 mai, qui s'est achevée à minuit, toujours sous OMVS. Il est donc confirmé que ces incidents ne sont pas liés à Mainview.
-
----
-
-Cette version améliore la clarté et la fluidité tout en conservant le sens initial. N’hésitez pas à me dire si vous souhaitez des ajustements !
+    try {
+        $tcpClient = New-Object System.Net.Sockets.TcpClient
+        $tcpClient.Connect($host, $port)
+        
+        if ($tcpClient.Connected) {
+            Write-Output "✅ Connexion réussie à $host:$port — le trafic est ouvert."
+            $tcpClient.Close()
+        } else {
+            Write-Output "❌ Échec de connexion à $host:$port — le trafic est peut-être bloqué."
+        }
+    }
+    catch {
+        Write-Output "⚠️ Erreur lors de la tentative de connexion : $_"
+    }
+}
