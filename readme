@@ -1,15 +1,7 @@
-Votre question porte sur la stratégie à adopter vis-à-vis du déploiement des modules J9 en production, et si vous devez privilégier ceux récemment compilés ou continuer avec les modules historiques. Voici quelques éléments de réflexion :
+Historiquement, les modules J9 ont été compilés sans inclure le step **EDCPRLK** dans le JCL de compilation. Ce step est apparu par la suite et a été identifié dans la version **V8R1M4**. Aujourd’hui, bien que nous soyons passés à la version **8.3**, ce step demeure présent.
 
-1. **Validation et stabilité** : Si les modules compilés avec succès ne présentent aucun problème détecté lors des tests, ils pourraient être considérés pour le déploiement. En revanche, il serait prudent de s’assurer qu’ils ont été **validés dans un environnement proche de la production** avant toute mise en service.
+Afin d’assurer le bon fonctionnement des compilations, la procédure originale a été modifiée pour intégrer la **LCT (include)** directement au niveau du **binder (IEWL)**, évitant ainsi les erreurs systématiques.
 
-2. **Impact du step `EDCPRLK`** : Comme ce step n’était pas présent à l’origine et a été introduit par la suite, il faut s’assurer qu’il n’entraîne **pas d’effet secondaire** ou de dépendance qui pourrait impacter la stabilité des modules en production.
+Pour répondre à la question de Jean-Jacques sur la stratégie à adopter, devons-nous envisager le déploiement des nouveaux modules en production ou, par prudence, conserver ceux historiques ? Il ne s'agit pas d'imposer une direction, mais simplement d'évaluer l'effort à consacrer chez **SAM** sur ce sujet, qui fait partie d’un ensemble plus vaste.
 
-3. **Gestion du risque** : Vous pourriez envisager une approche **progressive**, en testant certains modules compilés dans un environnement contrôlé avant d’envisager une adoption plus large.
-
-4. **Retour d’expérience sur V8R1M4** : Si ce step était déjà présent dans la version **V8R1M4** et qu’il n’a pas causé d’anomalies ou d’erreurs majeures, cela pourrait être un indicateur que la modification est fiable et peut être maintenue dans **la version 8.3**.
-
-5. **Effort et optimisation** : Comme vous mentionnez l’importance du dimensionnement des efforts chez SAM, la décision peut aussi être influencée par la charge de travail nécessaire pour valider et déployer les nouveaux modules.
-
-💡 Une **analyse approfondie** des différences entre les modules historiques et ceux nouvellement compilés pourrait vous aider à identifier d’éventuelles **disparités** ou **améliorations** avant de prendre une décision définitive.
-
-Si vous avez plus d’informations sur les tests effectués ou les contraintes techniques, je peux affiner l’analyse ! 😊
+Cette reformulation correspond-elle à votre besoin ? 😊
