@@ -1,3 +1,17 @@
+IBM ne suit pas un cycle de production strictement régulier pour ses nouvelles machines zSystems, mais on peut observer une tendance générale. Voici les dates d'annonce des modèles de la z12 à la z17 pour te donner une idée :
+ * IBM zEnterprise EC12 (zEC12) (souvent désignée comme la z12) : Annoncée le 28 août 2012.
+ * IBM z13: Annoncée le 14 janvier 2015.
+ * IBM z14: Annoncée le 17 juillet 2017.
+ * IBM z15: Annoncée le 12 septembre 2019.
+ * IBM z16: Annoncée le 4 avril 2022.
+ * IBM z17: Annoncée le 8 avril 2025.
+En regardant ces dates, on peut constater que la fréquence est généralement tous les 2 à 3 ans. Le passage de la z16 à la z17 suit également cette tendance avec une période de 3 ans.
+Chaque nouvelle génération apporte des améliorations significatives en termes de performance, de capacité, de sécurité et d'intégration de nouvelles technologies comme l'IA.
+
+
+
+
+
 Bien sûr ! Voici une reformulation qui intègre cette notion de confiance envers IBM :
 
 *"Comme mentionné précédemment et avec un léger retard, vous trouverez via le lien suivant notre espace Confluence, où nous avons synthétisé l’ensemble des notes de version depuis la 4.2 jusqu’à la 6.4. Par ailleurs, avec la sortie prochaine de la machine IBM Z17, comme pour toute nouvelle génération, une nouvelle version de compilateur accompagnera cette évolution. À noter que la nouvelle version, la 6.5, sera publiée le 13 juin prochain. 
