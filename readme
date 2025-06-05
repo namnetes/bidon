@@ -1,28 +1,249 @@
+Reformule tout ceci avec un vocabulaire plus simple 
 
 
-Voici un message de remerciement que vous pourriez utiliser :
 
----
+Voici un  de la présentation "mAInframe Innovation Day", en soulignant les points importants, basé sur les extraits fournis :
 
-**Objet : Remerciements pour un événement inspirant**  
+La présentation provient de l'IBM Innovation Studio à Paris, datée du 21 mai 2025, et est axée sur l'IBM Z et LinuxONE. Elle met en avant le rôle continu de ces plateformes dans l'ère du cloud hybride et de l'IA.
 
-Cher(e) [Nom du destinataire],  
+**Résumé de la présentation :**
 
-Je tiens à exprimer ma profonde gratitude pour cet événement enrichissant auquel j’ai eu le plaisir d’assister. Les présentations étaient d’une grande richesse et extrêmement intéressantes, offrant des perspectives précieuses sur l’évolution des technologies.  
+1.  **Momentum et Évolution d'IBM Z :** La présentation débute en soulignant le "momentum" d'IBM Z, avec une croissance soutenue de l'utilisation, triplant la capacité installée au cours de la dernière décennie. Elle met en évidence l'importance du mainframe dans l'écosystème mondial. Les mainframes IBM exécutent environ 70 % de toutes les transactions mondiales en valeur, tout en ne représentant que 8 % des dépenses informatiques totales. 71 % des dirigeants considèrent les applications mainframe comme centrales à leur stratégie d'entreprise. 43 des 50 plus grandes banques mondiales utilisent un mainframe IBM. L'évolution technologique d'IBM Z sur 10 ans est démontrée, montrant une augmentation significative des MIPS par cœur et des MIPS par kW du z13 (2015) au z17 (2025).
 
-La jeunesse et la diversité des intervenants témoignent de l’enthousiasme et du dynamisme qui entourent la modernisation du Mainframe et sa remarquable capacité d’adaptation face aux défis d’un monde en constante évolution.  
+2.  **L'IA sur IBM Z et LinuxONE :** Un axe majeur est l'intégration de l'IA. IBM Z et LinuxONE s'intègrent dans la stratégie d'IBM pour fournir des cas d'usage de cloud hybride et d'IA à haute valeur ajoutée. Les processeurs IBM Z intègrent des accélérateurs dédiés pour l'IA, notamment le Telum II (On-chip) et le Spyre Accelerator (Host attached, disponible à partir du 4ème trimestre 2025). Le z17 offre des capacités améliorées pour l'IA accélérée, incluant l'accélérateur Spyre et l'accélérateur d'IA intégré (Telum II), qui est amélioré par rapport au z16. Le z17 est conçu pour exécuter l'IA "là où ça compte le plus". Il peut fournir 450 milliards d'opérations d'inférences par jour avec un temps de réponse de 1ms, contre 300M sur le z16. Le z17 offre un débit d'IA 7,5 fois supérieur grâce à l'utilisation de 8 accélérateurs d'IA contre un seul sur le z16. Ces plateformes prennent en charge l'IA prédictive et l'IA générative, avec des avantages comme les inférences en temps réel, l'évolutivité de l'IA in-transaction et la protection des données. L'écosystème IA sur IBM Z est conçu pour apporter de la valeur aux métiers et de l'intelligence à l'infrastructure. Des outils comme IBM Cloud Pak for Data sur IBM Z et LinuxONE, Db2 for z/OS avec SQL Data Insights, et l'AI Toolkit for IBM Z et IBM LinuxONE qui supporte les outils open-source populaires sont mentionnés. Des cas d'usage spécifiques de l'IA sont présentés pour divers secteurs, comme l'analyse de risque, la détection de fraude, le souscription intelligente, et des assistants pour les développeurs et administrateurs. L'IA est utilisée pour simplifier et automatiser les opérations, notamment via watsonx Assistant for Z et l'intégration dans des stratégies AIOPS.
 
-Merci à tous ceux qui ont contribué à faire de cet événement une expérience si inspirante. J’espère avoir l’occasion d’échanger à nouveau très bientôt.  
+3.  **Sécurité et Résilience :** La sécurité est un principe fondamental d'IBM Z ("Security by design") . La plateforme est considérée comme la plus sécurisable, avec une sécurité intégrée à chaque couche de la stack, du matériel au logiciel. Les capacités incluent le chiffrement accéléré (amélioré depuis le z14), la protection contre les menaces quantiques ("Quantum Safe"), des modules de sécurité matériels FIPS Level 4, le chiffrement mémoire et le chiffrement des communications A-Bus. Le z16 et les générations ultérieures supportent les technologies "Quantum Safe". Le z17 spécifiquement est un système "quantum-safe", protégé par des technologies quantum-safe à travers de multiples couches de firmware. Il supporte les APIs quantum-safe basées sur les standards NIST PQC (ML-KEM, ML-DSA, SLH-DSA). Le chiffrement "Quantum Safe" vise à protéger les données et les clés contre de futures attaques quantiques, comme le "harvest now, decrypt later". Il est noté que les nouveaux algorithmes PQC ne sont pas des remplacements "drop-in" et que les signatures PQC peuvent être beaucoup plus grandes que les signatures DSA ou RSA classiques. Pour la résilience, des solutions comme IBM GDPS et IBM Z Flexible Capacity et IBM Safeguarded Copy + IBM Cybervault sont mentionnées. L'IA est également utilisée pour la sécurité, par exemple pour détecter les anomalies dans l'accès aux données (Cyber Sécurité) et pour la détection de menaces comme les malwares sur z/OS (projet z/OS anti malware).
 
-Bien cordialement,  
-[Votre Nom]  
+4.  **Conformité :** La présentation aborde les défis liés à la conformité, comme le coût élevé, la complexité, le risque et l'incertitude. Le paysage réglementaire, incluant le GDPR, PCI DSS, et la loi Sarbanes-Oxley (SOX), augmente la demande de sécurité mainframe. L'automatisation de la conformité est facilitée par le **Z Security and Compliance Center**, qui permet de générer des rapports détaillés, de planifier des scans automatiques, et de suivre la dérive de la conformité. Un défi clé est l'identification des données sensibles. IBM Sensitive Data Tagging for z/OS (SDTz) est présenté comme une solution AISecOps qui utilise l'IA (accélérateur IA Z et Watson NLP) pour scanner, découvrir, classer et étiqueter les données sensibles dans un environnement z/OS. SDTz vise à différencier les données sensibles des non-sensibles et à augmenter les opérations de sécurité z/OS. Il permet ensuite aux architectes de sécurité de définir des politiques de contrôle, de chiffrement, de suivi, de rétention et d'alerte basées sur ces étiquettes. La plateforme zSCC est présentée comme un cadre commun pour déployer et exécuter des produits de sécurité conteneurisés, simplifiant les tâches manuelles et qualifiées. La conformité DORA est également abordée, soulignant la nécessité d'identifier et cartographier les actifs critiques, de mettre en place des mécanismes de détection rapide des activités anormales, et de développer des politiques de sauvegarde.
 
----
+5.  **LinuxONE Emperor 5 :** LinuxONE Emperor 5 est présenté comme offrant une approche sophistiquée de la sécurité, de l'efficacité et de l'intégration de l'IA. Il met l'accent sur l'efficience sans compromis, la sécurité, les capacités d'IA de nouvelle génération et un écosystème innovant. Il offre des cœurs performants, des accélérateurs on-chip pour l'IA, la compression et le chiffrement. Ses atouts incluent une consolidation importante (ratio moyen 10:1 vs x86, avec un exemple de 21:1 et 15:1), ce qui conduit à une réduction significative du TCO sur 5 ans (réduction des coûts de licences et de maintenance). L'efficacité énergétique est également notable, avec une empreinte en datacenter jusqu'à 75 % plus faible et une enveloppe énergétique jusqu'à 50 % plus faible, ou une réduction de la consommation électrique de 70% dans les exemples clients et une réduction des émissions de gaz à effets de serre de 70%. La sécurité de LinuxONE est de bout en bout, s'appuyant sur IBM Hyper Protect Virtual Servers et Digital Assets Infrastructure, avec chiffrement des données et isolation des environnements clients. Il supporte également les capacités d'IA.
 
-N’hésitez pas à personnaliser ce message selon vos besoins ! 😊
+6.  **Transformation Interne d'IBM (CIO Client Zero) :** IBM utilise ses propres mainframes pour exécuter ses charges de travail les plus critiques. L'équipe CIO d'IBM a mené une transformation pour réinternaliser les opérations et quitter des datacenters. Un objectif clé était de réduire le niveau de compétence nécessaire pour gérer l'environnement Z. **IBM watsonx Assistant for Z est utilisé pour aider à réduire ce niveau de compétence et améliorer la productivité**. Des cas d'usage comme le patching des sous-systèmes Db2, l'analyse d'incidents ServiceNow et le support Q&A pour le personnel opérationnel ont été implémentés en 4 semaines environ. Cela a entraîné une réduction du temps nécessaire pour patcher les systèmes Db2 (50% -> 75%) et une diminution du temps de résolution des incidents (10% -> 30%).
 
-—------
-Voici un résumé de la présentation "mAInframe Innovation Day", en soulignant les points importants, basé sur les extraits fournis :
+**Points Importants à Retenir :**
+
+*   **Le Mainframe IBM Z reste une plateforme critique** exécutant une proportion très élevée des transactions mondiales en valeur.
+*   L'**évolution constante d'IBM Z** (jusqu'au z17 et au-delà) intègre des technologies avancées comme l'accélération matérielle pour l'IA et le chiffrement, et des capacités "Quantum Safe".
+*   **L'IA est profondément intégrée sur IBM Z et LinuxONE**, notamment via les accélérateurs Telum II et Spyre, permettant des inférences en temps réel et in-transaction. Des outils comme watsonx et l'écosystème open-source supportent ces capacités.
+*   **La sécurité est une caractéristique clé d'IBM Z ("by design")**, couvrant tous les niveaux de la pile technologique. Les avancées incluent le chiffrement généralisé, la protection "Quantum Safe" (à partir du z16), et des outils pour détecter les menaces et protéger les données.
+*   **La conformité est simplifiée et automatisée** grâce à des outils comme le Z Security and Compliance Center et l'utilisation de l'IA pour identifier et étiqueter les données sensibles (Sensitive Data Tagging for z/OS).
+*   **IBM LinuxONE Emperor 5 offre une efficacité opérationnelle et énergétique remarquable** grâce à des ratios de consolidation élevés par rapport aux plateformes x86, permettant des réductions significatives des coûts (TCO) et de l'empreinte physique et énergétique. Sa sécurité de bout en bout est également mise en avant.
+*   **IBM utilise l'IA (watsonx Assistant for Z) en interne pour simplifier la gestion de ses propres mainframes**, réduire les compétences requises et améliorer la productivité.
+*   Les principes de conception d'IBM Z ("by design") incluent la Performance, la Résilience, la Sécurité, l'Évolutivité, la Simplification et la Durabilité .
+
+------------------
+Absolument. Voici le résumé de chacune des trois présentations fournies, avec un titre pour chacune et en soulignant les points importants :
+
+**1. GenAI au service des Opérations Mainframe**
+
+Cette présentation, intitulée "GenAI is the new Ops Les agents conversationnels au service des ingénieurs système", aborde l'application de l'intelligence artificielle générative (GenAI) pour relever les défis croissants des opérations informatiques. Les défis incluent l'augmentation de la vitesse du changement, l'explosion du volume de données rendant les opérations manuelles impossibles, la complexité croissante des environnements informatiques, la nécessité de faire plus avec moins, et la perte de compétences essentielles. Le cadre AIOps (Detect, Decide, Act) est présenté comme une approche pour surveiller, analyser et réagir aux problèmes.
+
+L'accent est mis sur **IBM watsonx Assistant for Z**, une solution d'IA générative conçue pour transformer et simplifier l'interaction des ingénieurs système et des développeurs avec le mainframe, quel que soit leur niveau d'expérience. L'objectif est d'**augmenter la productivité**, de **réduire le déficit de connaissances** (courbe d'apprentissage pour les débutants), d'**accroître l'efficacité** (gagner du temps en recherche et tâches manuelles) et de **diminuer les erreurs**.
+
+Watsonx Assistant for Z fonctionne comme un assistant conversationnel IA exécutant des tâches automatisées via des "Skills". Ses caractéristiques clés incluent le fait d'être entraîné sur la documentation IBM Z (via RAG - Retrieval Augmented Generation), une automatisation intégrée, une personnalisation par métier et expérience, la fourniture d'informations précises et actualisées spécifiques au domaine du mainframe, l'adhésion au modèle de gouvernance d'IBM (ne devine pas si l'information n'est pas sûre), et l'utilisation des paramètres de sécurité z/OS existants. Il est rapide, contextuel, automatisé et sécurisé.
+
+La présentation illustre son utilisation à travers des cas concrets : un administrateur DB2 débutant cherchant des informations sur la nécessité d'un REORG après un ALTER TABLE, un jeune administrateur système résolvant un problème de lenteur sur une application IMS, et un administrateur expérimenté vérifiant la maintenance requise pour un nouveau serveur z16. L'expérience utilisateur est transformée en permettant une interaction conversationnelle pour interroger les systèmes et exécuter des tâches via des commandes ou des "skills".
+
+L'architecture technique s'appuie sur Red Hat OpenShift, Ansible Automation Controller, IBM watsonx Orchestrate, et des modèles de langage (LLMs), et peut s'intégrer à des outils Z AIOps existants comme OMEGAMON et IBM Z System Automation pour obtenir des informations opérationnelles ou exécuter des actions. Le déploiement peut se faire On-Prem sur x86 ou s390x, ou via un fournisseur Cloud (BYOL - Bring Your Own License) en exploitant les capacités x86 avec GPU.
+
+Enfin, l'utilisation interne par le DSI d'IBM (CIO Client Zero) est présentée comme un succès, intégrant watsonx Assistant for Z avec ServiceNow et Ansible pour des cas d'usage comme le diagnostic Db2 et l'analyse d'incidents, entraînant une **réduction significative du temps de patch Db2** et du **temps de résolution d'incident**.
+
+**Points importants :**
+
+*   Les **défis des opérations IT mainframe** (complexité, volume de données, déficit de compétences) nécessitent une approche AIOps et l'automatisation.
+*   **IBM watsonx Assistant for Z** est une solution clé basée sur la **GenAI** pour simplifier et automatiser les tâches sur le mainframe via une interface conversationnelle.
+*   Les **bénéfices** incluent la réduction du déficit de connaissances, l'augmentation de la productivité et l'amélioration de la qualité du travail pour les utilisateurs mainframe.
+*   L'outil est **rapide, précis, personnalisable, automatisé et sécurisé**, s'appuyant sur une connaissance spécifique du domaine IBM Z.
+*   Il **s'intègre à l'écosystème Z AIOps et à des outils modernes** (OpenShift, Ansible, watsonx Orchestrate) pour exécuter des requêtes et des actions.
+*   L'expérience de l'**utilisation interne par IBM** démontre des résultats concrets en termes d'amélioration de l'efficacité opérationnelle.
+
+**2. Détection d'Anomalies et Gestion des Événements avec IBM zAIOps**
+
+Cette présentation, intitulée "IBM zAIOps Détection d’anomalies Comment l’IA pour les Ops permet d’anticiper une situation critique", aborde les mêmes défis des opérations informatiques (vitesse du changement, volume de données, complexité, compétences perdues, silos de données) et met en avant le rôle de l'IA pour anticiper et gérer les situations critiques. L'AIOps Framework (Detect, Decide, Act) est à nouveau central. La difficulté pour les utilisateurs mainframe à trouver de l'information pertinente et la dépendance aux experts sont soulignées.
+
+La solution clé présentée est **IBM Concert for Z**. Il s'agit d'une plateforme qui **unifie les données et les flux de travail** provenant de sources disparates de l'environnement IBM Z. Son objectif est de **simplifier les opérations**, de **prioriser les événements**, et de fournir des **informations exploitables** pour maîtriser le risque et la résilience. IBM Concert for Z agrège, corrèle et contextualise les événements et les données pour aider les équipes à prendre des décisions plus rapides et plus sûres, maximisant ainsi la disponibilité et réduisant le temps d'arrêt moyen (MTTR - Mean Time To Resolution).
+
+Les capacités principales d'IBM Concert for Z sont structurées autour des trois phases de l'AIOps :
+*   **Detect** : Utilise le Machine Learning et la détection d'anomalies pour identifier les problèmes opérationnels critiques (anomalies dans les métriques OMEGAMON pour divers sous-systèmes et dans les journaux système) qui pourraient passer inaperçus. Il effectue également un **regroupement intégré des événements** pour corréler et hiérarchiser les alertes et les problèmes par niveau de risque, réduisant les faux positifs.
+*   **Decide** : Facilite le diagnostic et l'analyse des causes profondes en corrélant les anomalies. Il fournit des **conseils d'experts intégrés** pour chaque problème, soutenus par l'IA générative et l'expertise IBM Z, pour guider la résolution et faciliter l'acquisition de compétences. Un **outil de topologie graphique** visualise les connexions critiques entre les applications métier et les ressources mainframe.
+*   **Act** : Permet d'agir rapidement. Fournit des **recommandations pratiques**. L'intégration avec **watsonx Assistant for Z** permet de recueillir des informations et d'identifier les prochaines étapes. Une **console de commande intégrée** permet aux utilisateurs autorisés d'émettre directement des commandes vers MVS et NetView. L'intégration ServiceNow permet la génération de tickets en un clic.
+
+IBM Concert for Z couvre également la **gestion des risques et de la résilience**, incluant la gestion intelligente des APAR (pour éviter les pannes dues à une maintenance non appliquée), la gestion de l'intégrité des certificats, et la visualisation de l'intégrité de l'infrastructure (via l'intégration avec IBM Z Software Asset Management et IntelliMagic Vision for z/OS).
+
+En résumé, IBM Concert for Z est présenté comme l'interface unique pour les opérations mainframe, permettant de **réduire le MTTR**, de **combler le déficit de compétences** (en fournissant des informations et une assistance), et d'**éviter les risques** liés aux applications grâce à la détection proactive des anomalies et à la gestion des événements.
+
+**Points importants :**
+
+*   **IBM Concert for Z** est une plateforme **AIOps centralisée** qui unifie les données et flux de travail pour simplifier la gestion des opérations mainframe.
+*   Elle intègre les phases **Detect, Decide, Act** en fournissant la **détection d'anomalies**, la **corrélation d'événements**, l'**analyse des causes profondes** (avec guidance d'experts), et des **actions de remédiation** (y compris via console intégrée et watsonx Assistant).
+*   La plateforme offre une **vue unique et graphique** des relations entre les applications et l'infrastructure pour faciliter le diagnostic.
+*   Elle permet une **gestion proactive des risques et de la résilience**, notamment en gérant la maintenance logicielle (APARs) et les certificats.
+*   Les bénéfices clés sont la **réduction du MTTR**, la capacité à **combler le déficit de compétences** en guidant les utilisateurs, et l'**évitement des risques** majeurs en détectant les problèmes cachés.
+
+**3. Intégration du Mainframe dans le SI Hybride de Crédit Agricole**
+
+Cette présentation, intitulée "Intégration du mainframe dans le SI Hybride de Crédit Agricole", décrit la stratégie et les outils mis en œuvre par Crédit Agricole (CA-GIP) pour moderniser et intégrer leur plateforme mainframe dans un environnement de système d'information hybride. L'objectif global est d'**étendre la valeur du mainframe** et d'**optimiser ses fondations** tout en l'intégrant dans une architecture cloud hybride.
+
+Les axes stratégiques clés pour atteindre ces objectifs incluent :
+*   **Optimiser les Fondations** : Adopter les dernières technologies pour le coût/performance, sécuriser la plateforme, et simplifier les opérations grâce à l'automatisation, l'observabilité et les assistants IA.
+*   **Étendre la Valeur du Mainframe** : Libérer l'accès aux données et fonctions métiers sans déplacement, infuser l'IA dans l'entreprise (proche des transactions et pour l'excellence opérationnelle IT/modernisation), et augmenter l'agilité business.
+*   **Intégration Hybride Cloud** : Positionner de manière flexible les workloads, standardiser l'intégration avec les environnements cloud (privé, public, SaaS) via des Cloud Paks et watsonx.
+
+Les avantages recherchés sont l'harmonisation des compétences, l'accélération de la mise à disposition de nouveaux services (via DevOps et l'adoption de technologies RedHat), la facilitation de l'accès aux données mainframe sans compromis, la sécurisation des données/services critiques, et l'optimisation des coûts.
+
+La présentation détaille les **outils et cas d'usage** spécifiques mis en œuvre dans le cadre de la modernisation de CA-GIP :
+*   **z/OS Management Facility (z/OSMF)** : Interface web moderne pour la gestion de z/OS (gestion des jobs, fichiers, ressources), servant aussi de fournisseur d'API pour l'automatisation et l'intégration, et s'intégrant avec des outils comme Zowe.
+*   **RSEAPI** : Expose les fonctionnalités de z/OS Explorer via des APIs RESTful, utilisées par Zowe Explorer dans VS Code et IBM Z Open Editor pour accéder aux ressources z/OS.
+*   **Zowe** : Cadre open-source pour le développement et les opérations sur z/OS, offrant une interface web, une couche d'API sécurisée, une CLI, et une extension pour les IDE. Utilisé par CA-GIP pour le DevOps (accès aux ressources Z, plugins ChangeMan, intégration Gitlab/Github Copilot) et pour des outils de production (outil d'auto-remédiation pour les jobs).
+*   **Ansible et Execution Environment for Z** : Outil d'automatisation open-source (gestion de configuration, déploiement d'applications) utilisant une architecture agentless via SSH ou HTTPS et des playbooks YAML. CA-GIP l'utilise avec Gitlab pour interagir avec le mainframe, en s'appuyant sur les collections IBM Ansible `zos-core` et `zos-zosmf` pour gérer jobs, data sets, fichiers, commandes, logiciels et configurations.
+*   **IBM Python for z/OS & Z Open Automation Utilities (ZOAU)** : Python est utilisé pour le scripting, l'automatisation, l'intégration, et l'analyse de données sur le mainframe, tandis que ZOAU fournit des utilitaires facilitant l'interaction avec les ressources z/OS et l'intégration avec des langages modernes comme Python.
+*   **DFSMS Cloud Data Access** : Facilite l'intégration et le transfert de données entre IBM Z et les environnements de stockage cloud, utilisé par CA-GIP pour les transferts (en remplacement potentiel de CFT) et comme "puits de données".
+*   **IBM Open Enterprise SDK for Apache Kafka** : Permet de construire et gérer des applications événementielles sur IBM Z, s'intégrant avec Apache Kafka et offrant des fonctionnalités d'entreprise pour la sécurité, la haute disponibilité et la scalabilité.
+
+**Points importants :**
+
+*   Crédit Agricole adopte une **stratégie globale** pour moderniser et intégrer le mainframe dans son **SI hybride**.
+*   La modernisation vise à **optimiser les fondations** (technologie, sécurité, opérations simplifiées) et à **étendre la valeur du mainframe** (accès aux données/fonctions, infusion d'IA).
+*   Des **outils modernes et open-source** comme **z/OSMF, RSEAPI, Zowe, Ansible, Python et ZOAU** sont des éléments clés de cette transformation pour le développement, les opérations et l'automatisation.
+*   L'intégration avec les environnements cloud est facilitée par des technologies comme **DFSMS Cloud Data Access** et l'utilisation de plateformes événementielles comme **Apache Kafka** sur IBM Z.
+*   L'approche permet d'**harmoniser les compétences**, d'**accélérer la livraison de services** (DevOps), de **sécuriser les données**, et d'**optimiser les coûts**.
+
+--------------------------
+
+
+Voici un résumé des deux présentations en me basant sur les informations fournies dans les sources :
+
+### Design du z17 incluant son Accélérateur IA intégré
+
+La présentation "Deep Dive sur le design du z17 incluant son Accélérateur IA intégré" par Michel LE DUY aborde le design et les capacités techniques de l'IBM z17, notamment l'intégration de l'intelligence artificielle. L'IBM z17, prévu pour une annonce le 8 avril 2025 et une disponibilité générale le 18 juin 2025, est une solution complète conçue pour l'IA à grande échelle et l'IA en temps réel pour l'infrastructure et les transactions métier.
+
+Parmi les améliorations clés du z17 figurent l'**amélioration de la précision des prédictions d'IA en appliquant des LLM aux transactions mainframe en temps réel** et l'exploitation des données fiables grâce à une **IA générative sécurisée**. Le système est conçu pour **réaliser des économies d'énergie et de coûts** grâce à l'exécution de l'IA dans un environnement durable. Il vise également à transformer l'expérience utilisateur, accélérer le "Go to Market" et la modernisation, et renforcer l'efficacité opérationnelle et la sécurité grâce à l'automatisation optimisée par l'IA.
+
+Au cœur du z17 se trouve la **puce de processeur Telum II**, fabriquée avec la technologie Samsung 5nm. Cette puce offre une augmentation de la fréquence à 5.5GHz, une amélioration des performances de 11%, une croissance de la mémoire système maximale de 60% (jusqu'à 64 TB) et une croissance de la capacité totale du système de 12-20%. Le Telum II compte 8 cœurs par puce et une réduction de 20% de l'empreinte et de 15% de la consommation des cœurs par rapport aux générations précédentes. Chaque puce inclut également un **accélérateur d'IA intégré de 2ème génération** et une **Data Processing Unit (DPU) intégrée**.
+
+L'accélérateur d'IA de 2ème génération sur puce prend en charge les **primitives de calcul LLM** et offre une quantification et des opérations matricielles améliorées. Il fournit 8 fois plus de traitement IA sur puce disponible par cœur et atteint 24 TOPS par puce, 192 TOPS par tiroir, et 768 TOPS par système. L'IA est également accélérée par des **cartes d'accélération IBM Spyre**, disponibles à partir du 4ème trimestre 2025. Ces cartes PCIe offrent plus de 300 TOPS par carte et contiennent 32 cœurs "Gen AI-ready" par carte, avec la possibilité d'en avoir jusqu'à 48 par système.
+
+La DPU intégrée est une nouvelle fonctionnalité clé qui implémente des protocoles d'I/O complexes et réduit la latence. Elle permet une **réduction de 70% de la consommation d'énergie pour la gestion des I/O** et double la densité avec de nouvelles cartes Ficon 4 ports et des cartes réseaux convergées. La DPU prend en charge FC/FCP/zHPF, OSH (EQDIO) et OSC.
+
+La conception du cache a été améliorée avec un nouveau design sur la puce CP, incluant un cache L1 privé, un cache L2 privé de 36 MB par cœur, et l'implémentation de caches virtuels L3 et L4. Cela représente une **croissance de 40% du cache** (360 MB partagés virtuels L3 et jusqu'à 2.88 GB partagés virtuels L4).
+
+L'IBM z17 supporte jusqu'à 4 châssis standard de 19 pouces et offre différentes configurations de processeurs (Max43 à Max208). Il dispose d'une capacité mémoire allant jusqu'à 64 TB. Les fonctionnalités d'I/O incluent jusqu'à 12 tiroirs PCIe+ I/O supportant 192 adaptateurs. De nouvelles fonctionnalités d'I/O sont introduites, comme le **Network Express adapter** qui consolide les fonctions OSA et RoCE. Le **zHyperLink Express2** (FC 0351) est une autre fonctionnalité clé qui réduit considérablement la latence pour l'accès aux données des systèmes de stockage DS8000, en particulier avec les améliorations apportées au DS8000 G10 pour les tailles de transfert de lecture. L'**IBM Fibre Channel Endpoint Encryption (EDiF)** est activée pour sécuriser les données en transit sur les liens FICON et FCP. Une orientation future prévoit de rendre obligatoire IFCES pour les dispositifs FICON connectés à partir du zNext+1.
+
+Le z17 inclut des améliorations RAS (Reliability, Availability, Serviceability), bien que la fonctionnalité System Recovery Boost (SRB) Upgrade record des modèles précédents ne soit pas offerte sur le z17. Les capacités cryptographiques sont renforcées avec le **Central Processor Assist for Cryptographic Function (CPACF)** sur chaque cœur et les **Crypto Express8S**, supportant la sécurité quantique et visant la conformité FIPS140-2 Niveau 4.
+
+En matière de durabilité, l'IBM z17 Max 208 démontre une **efficacité générationnelle accrue** avec une capacité d'inférence IA 65 fois supérieure, une consommation d'énergie inférieure (-24%), un poids réduit (-25%) et moins de châssis/cordons d'alimentation qu'un z16 configuré de manière similaire. Le système dispose d'un nouveau système de refroidissement du processeur à base de propylène glycol et de filtres à poussière intégrés dans chaque tiroir. Des outils de gestion environnementale, tels que l'outil d'estimation de la puissance incluant le calcul de l'empreinte carbone et le tableau de bord environnemental HMC, sont disponibles.
+
+La gestion du système est facilitée par la **Hardware Management Appliance (HMA)** qui héberge le code HMC. L'HMC 2.17.0 supporte le z17, le z16 et le z15. Le z17 introduit la fonctionnalité de **Dual Control**, qui ajoute une couche de sécurité supplémentaire pour les tâches critiques sur le HMC en nécessitant une vérification par un approbateur. Le **Single Sign On (SSO)** est également une exigence supportant le protocole OIDC.
+
+Le z17 supporte diverses versions des systèmes d'exploitation IBM Z, notamment z/OS V3.1 et V2.5 avec PTFs (V2.4 tolérance uniquement), z/VM 7.4 et 7.3, VSEn V6.3.1, z/TPF 1.1, ainsi que plusieurs distributions Linux on IBM Z. Le support d'IBM Z Systems Software pour z/OS est détaillé, indiquant les versions supportées sur z17.
+
+### Libérer la puissance de l’IA sur le z17
+
+La présentation "Libérer la puissance de l’IA sur le z17" par Yasmine Guedjou, Mathilde Alozade et Alex Fleischer d'IBM France se concentre sur les **nouvelles capacités matérielles et les cas d’usage innovants de l’IA sur le z17**. L'objectif est de permettre l'exécution de projets IA sur IBM Z, en particulier l'inférence, tout en entraînant les modèles sur un cloud hybride. Cela vise à offrir une agilité IA sans friction et à tirer parti des frameworks populaires et des outils open-source.
+
+Le z17 apporte **plus d'accélération IA** avec son accélérateur IA sur puce de 2ème génération intégré au Telum II et les cartes accélératrices IBM Spyre. L'accélérateur sur puce améliore le traitement de l'IA par rapport au z16 et supporte les primitives de calcul LLM. Le routage intelligent au sein du tiroir permet un traitement IA à distance avec jusqu'à 8 fois plus de traitement IA disponible par cœur. Les cartes Spyre, disponibles en 4Q25, offrent 32 cœurs prêts pour l'IA générative par carte et sont utilisées pour les LLM plus importants nécessitant plus de puissance de calcul.
+
+Les approches d'IA sur z17 s'alignent sur les exigences métier :
+*   **IA Prédictive** : Disponible sur z16 et z17, axée sur l'inférence en temps réel dans chaque transaction, nécessitant vitesse, échelle, faible latence et haut débit.
+*   **IA Multi-modèles** : Disponible avec z17 (Telum II), pouvant être augmentée avec Spyre pour les LLM encodeurs complexes. Elle combine l'IA prédictive et les LLM pour une plus grande précision et des perspectives étendues en temps réel sur chaque transaction.
+*   **IA Générative (GenAI)** : Principalement supportée par le z17 avec les accélérateurs Spyre. Elle cible les LLM plus importants, la performance étant mesurée en tokens/seconde. La sécurité, la protection des données et l'efficacité énergétique sont essentielles. L'avantage sur Z réside dans son RAS (Reliability, Availability, Serviceability), sa sécurité et son efficacité énergétique.
+
+L'**écosystème IA sur IBM Z** est conçu pour les perspectives métier et l'infrastructure intelligente. Il comprend des outils pour l'infusion de l'IA en temps réel dans les transactions (IBM Cloud Pak for Data, Db2 SQL Data Insights, AI Toolkit) et pour l'amélioration de l'infrastructure intelligente (automatisation, sécurité, ITOps) avec l'IA (IBM Concert, Db2 AI, AI Framework, Snap ML, Threat Detection, watsonx Assistant/Code Assistant). Les accélérateurs matériels Telum I/II et Spyre permettent de réaliser des milliards de requêtes d'inférence par jour en temps réel.
+
+La présentation décrit trois points d'entrée pour commencer avec l'IA sur IBM Z :
+1.  **Solution clé en main** : Pour les clients sans compétences en science des données, utilisant des solutions embarquant déjà l'IA pour des cas d'usage spécifiques. Exemples incluent des solutions bancaires et de paiement embarquant l'IA ou des solutions ISV ponctuelles (lutte anti-blanchiment, gestion des risques, traitement des sinistres, gestion de l'expérience client).
+2.  **Sélectionner un modèle pré-construit** : Pour les clients sans compétences en science des données, souhaitant utiliser un modèle existant et bénéficier de l'accélération de l'inférence sur IBM Z. Le processus implique l'apport de données, la conversion/formatage du modèle (PMML, ONNX, JSON), le déploiement et le service pour l'inférence.
+3.  **Construire son propre modèle** : Pour les clients disposant de compétences en science des données et souhaitant un contrôle accru sur la création et l'entraînement des modèles. Le processus est similaire au point 2 pour le déploiement, mais inclut la phase de construction/entraînement avec des outils comme Snap ML, Cloud Pak for Data ou Machine Learning for z/OS.
+
+Plusieurs **cas d'usage innovants** sont détaillés :
+*   **Détection avancée de la fraude** : Permet de noter 100% des transactions en temps réel en co-localisant une solution multi-modèles IA sur le z17. Cela a conduit à des économies de plus de 20M$ par an en risque d'exposition à la fraude. La solution utilise le Telum II, l'AI Toolkit (Triton, Deep Learning Compiler) et des modèles comme BERT et Snap ML.
+*   **Lutte anti-blanchiment (AML)** : Introduit un filtrage AML en temps réel dans le flux des paiements instantanés, en tirant parti des données "Know Your Customer" et de la charge de travail IA co-localisée sur IBM Z. Cela réduit l'exposition au risque, les amendes potentielles, les faux positifs et les coûts d'enquête manuelle. La solution combine des modèles prédictifs, d'analyse graphique et des LLM encodeurs.
+*   **Optimisation des collatéraux** : Crée une vue centralisée et optimise l'allocation et la gestion des collatéraux. Cela utilise les capacités de watsonx pour le ML non génératif, l'optimisation, les graphes, la simulation et la GenAI. Des exemples réels montrent des économies et une capacité accrue à réaliser des transactions.
+*   **Planification des traitements par lots** : Utilise l'optimisation (avec CPLEX) pour améliorer l'utilisation des ressources mainframe (CPU) en planifiant les tâches par lots. L'optimisation va au-delà du parallélisme simple et peut réduire significativement le "makespan" (durée totale) des traitements de nuit, libérant ainsi du temps pour les transactions en ligne (OLTP).
+
+Le chemin pour démarrer avec l'IA sur IBM Z implique trois étapes : un briefing client, un atelier de découverte, et un pilote/POC. Des ressources supplémentaires sont disponibles, notamment le dépôt AI on Z Github 101, des guides pratiques et des registres de conteneurs.
+
+-----------------------------
+
+Voici les résumés des trois présentations, chacune avec un titre approprié :
+
+### Capacité à la Demande sur le Mainframe : Décryptage des Offres Micro-code et de leur Usage
+
+Cette présentation détaille la fonctionnalité de **Capacité à la Demande (CoD)** sur IBM Z, qui permet aux clients d'adapter dynamiquement leurs ressources processeur pour répondre à l'évolution des besoins métier. Le CoD aide à gérer la croissance des workloads, les montées en charge imprévues, le déploiement de nouvelles applications, les besoins de continuité d'activité et la conformité réglementaire. L'environnement informatique d'entreprise actuel est caractérisé par des pics de workload imprévisibles, des exigences accrues en capacité, le besoin de gérer la disponibilité entre les datacenters et des réglementations (comme DORA).
+
+Le CoD est structuré en trois catégories principales :
+*   **Capacité Permanente :** Permet d'ajouter des processeurs supplémentaires pour la croissance à long terme. Ces mises à niveau peuvent être faites sans installation physique si des cœurs non assignés sont disponibles, sous le contrôle d'IBM ou du client (Customer Initiated Upgrade - CIU). Elles peuvent inclure tous les types de processeurs (GPs, zIIPs, IFL) et de la mémoire.
+*   **Capacité Temporaire :** Fournit des processeurs supplémentaires sur une base limitée pour répondre à des besoins à court terme. Cela inclut trois offres :
+    *   **On/Off Capacity On Demand (OOCoD) :** Pour ajouter temporairement de la capacité ou des moteurs spécialisés pour des activités saisonnières, des fins de période, des pics prévisibles de workload ou des tests applicatifs. Tous les types de moteurs sont supportés. L'utilisation est facturée quotidiennement. La limite est configurable jusqu'à doubler la capacité détenue.
+    *   **Tailored Fit Pricing for Hardware (TFP HW) :** Offre un **couloir de capacité additionnelle** fixe au-delà de la capacité détenue par le client, en incréments de moteurs entiers par CEC. Conçu pour les **workloads critiques imprévisibles et hautement fluctuants**. La capacité est toujours activée (365/7/24). La facturation est basée sur un abonnement et sur l'usage, mesuré au-dessus de la capacité détenue par le client (modèle cloud-like). L'usage est mesuré sur les pics de 15 minutes rapportés en MSU au cours de chaque heure. **Nouveau avec le z17 : TFP HW est désormais disponible pour les zIIPs**.
+    *   **Test and Stress Test (TST) :** Un abonnement prépayé pour la capacité de Test et Développement sur des LPARs dédiées (non-production). Permet d'augmenter la capacité de test/développement 24/7/365 et de faire du Stress Testing pendant 20 jours par an ou plus. Il existe deux niveaux de capacité restreinte (Test/Development et Stress Test). L'utilisation est limitée aux LPARs de Développement et Stress Test. Les charges sont un abonnement prépayé minimum d'un an, sans frais d'utilisation supplémentaires. Cette offre supporte l'intégration continue, la modernisation d'applications, les fusions/acquisitions et les tests à l'échelle.
+*   **Capacité de Remplacement :** Utilisée pour remplacer la capacité d'un autre système, afin de gagner en flexibilité et d'assurer la résilience. Cela comprend deux offres :
+    *   **Capacity Backup (CBU) :** Permet de remplacer la capacité (moteurs standard ou spécialisés) sur un serveur de sauvegarde en cas de perte imprévue due à une urgence. La limite de capacité est définie à l'achat. Inclut une activation de 90 jours pour catastrophe réelle (renouvelable) et un test de 10 jours par an (des tests supplémentaires peuvent être achetés). La capacité est contrôlée par le client, potentiellement via GDPS.
+    *   **Flexible Capacity for Cyber Resiliency :** Permet une **flexibilité active de capacité** entre les systèmes IBM z16, z17 et LinuxONE 4 (ainsi que LinuxONE 5). Utilisée pour déplacer la capacité entre des datacenters pour une durée prolongée (jusqu'à 12 mois en Enterprise Edition) pour la reprise après sinistre, la conformité, l'évitement proactif ou la maintenance des installations. Offre plus d'options d'utilisation et de flexibilité que le CBU. Le client a le contrôle total et peut automatiser via GDPS. **Nouveau avec le z17 : Infrastructure Testing**. Cette fonctionnalité permet de valider l'infrastructure (SAN, réseau, applications connectées, GDPS, etc.) sans utiliser de workload de production en direct. Elle permet jusqu'à 4 tests par an, d'une durée maximale de 10 jours chacun (avec un minimum de 72 heures entre les tests). Il existe deux éditions : Enterprise Edition (EE) et LiTe, offrant des niveaux de flexibilité différents (nombre d'événements, durée de séjour, activation inter/intra-site). Les migrations de capacité peuvent être partielles ou totales, inter-sites ou intra-sites (EE seulement).
+
+Un arbre de décision aide à choisir l'offre de CoD appropriée en fonction du besoin (capacité additionnelle vs remplacement) et de la nature du workload (production vs non-production, prévisible vs imprévisible).
+
+### Le Stockage IBM au Service de la Cyberrésilience
+
+Cette présentation aborde la **cyberrésilience au niveau du stockage** sur IBM Z, en réponse aux menaces cybercroissantes (malwares, hacking externe/interne) et aux corruptions dues à des erreurs (bugs applicatifs, erreurs humaines). Les technologies de protection traditionnelles (réplication, FlashCopy, sauvegarde) ne sont pas suffisantes contre ces menaces.
+
+La solution clé est la fonctionnalité **Safeguarded Copy** sur les systèmes de stockage IBM DS8000.
+*   **Comment ça marche :** Lorsque des données sont modifiées sur un volume de production, l'ancien contenu des pistes est copié dans une "Backup Capacity" dédiée.
+*   **Sécurité des copies :** Le contenu stocké dans la Backup Capacity est **non-effaçable, non-modifiable et inaccessible** via les interfaces d'administration standard du DS8000. Le volume safeguardé lui-même ne peut pas être supprimé.
+*   **Accès aux copies :** Les données de la Backup Capacity ne peuvent être consultées ou accédées qu'à travers des "Recovery Volumes" spécifiques.
+*   **Gestion sécurisée (Separation of Duties) :** Pour se protéger contre les attaques internes, la gestion des Safeguarded Copies (création, expiration, effacement, restauration) ne peut PAS être faite via les interfaces d'administration du DS8000. Elle nécessite **deux utilisateurs distincts sur deux plateformes distinctes** : un administrateur DS8000 et un administrateur des outils de gestion comme IBM CSM ou GDPS-LCP (ayant le rôle approprié). La sécurité peut être renforcée par la mise en œuvre du **"Dual Control"** dans CSM ou GDPS-LCP.
+*   **Capacités :** Safeguarded Copy supporte jusqu'à 500 copies par volume. La gestion est réalisée via IBM GDPS ou IBM CSM.
+
+Les **cas d'usage** de Safeguarded Copy sont variés :
+*   **Restauration Totale ("catastrophic recovery") :** Restaurer l'intégralité d'un ou plusieurs volumes.
+*   **Restauration Chirurgicale ("surgical recovery") :** Extraire des données spécifiques à partir d'une copie et effectuer une restauration granulaire.
+*   **Validation des Données :** Analyser les données (a priori ou a posteriori) pour confirmer leur validité ou détecter une corruption. Cela peut impliquer la validation de l'infrastructure (Type 1), de la structure des données (Type 2), ou du contenu des données (Type 3). Cette validation est souvent réalisée dans un **environnement Cyber Vault**.
+*   **Analyse Médico-légale ("forensic analysis") :** Analyser une copie après la découverte d'une corruption pour localiser l'origine, la progression de l'attaque et définir un plan d'action. Cela nécessite une connaissance applicative/métier.
+*   **Externalisation sur Bande :** Réaliser une sauvegarde des copies sur un support hors ligne (bande) pour une deuxième couche de protection. Cela peut se faire via le dump des volumes de récupération vers une TS7700 (bande virtuelle). La fonction "Safeguarded tape Copy Export" avec l'option 'PROTECT' rend les cartouches visibles mais non modifiables ('Protected'). Elles deviennent 'Safeguarded' (invisibles) lorsqu'elles sont affectées à une partition cachée.
+
+La **réponse à une cyberattaque** avec Cyber Vault suit un processus typique : Backup et Validation (automatisés), puis si une corruption est trouvée, Analyse Médico-légale (manuelle), et enfin Recovery (restauration).
+
+Les **composants clés de Cyber Vault** incluent :
+*   **Automatisation :** Via GDPS Logical Corruption Protection (LCP) Manager et les services IBM Technology Expert Labs pour les solutions de validation.
+*   **Stockage :** Les DS8000 avec Safeguarded Copy.
+*   **Environnement :** Un **environnement IBM Z sécurisé et isolé** ("clean room"). Cet environnement dédié permet de redémarrer à partir d'une copie point-in-time pour la validation, l'analyse médico-légale ou la restauration (chirurgicale/catastrophique). Il comprend le matériel IBM Z, les licences logicielles (stack de production via IBM Z Cyber Vault Environment Licensing), et des outils logiciels.
+
+### IBM Threat Detection for z/OS : Simplifier la Sécurité et la Conformité par l'Automatisation
+
+Cette présentation se concentre sur la solution **IBM Threat Detection for z/OS (TDz)**, visant à simplifier la sécurité et la conformité sur IBM Z grâce à l'automatisation, notamment pour détecter les accès anormaux aux données. TDz est positionné comme un élément d'une **approche de sécurité multicouche** sur z/OS. Le coût global moyen d'une violation de données est en augmentation constante (4,88M USD en 2024), avec une part significative impliquant des "shadow data". L'utilisation intensive de l'IA et de l'automatisation en sécurité peut réduire considérablement le temps d'identification et de confinement des violations (jusqu'à 100 jours plus rapide).
+
+TDz agit comme une solution **anti-malware** en se conformant aux réglementations émergentes :
+*   **PCI DSS 4.0 :** Élargit les exigences de l'anti-virus à l'anti-malware, incluant la détection non basée sur les signatures lorsqu'elle est combinée au blocage/quarantaine. TDz aide à respecter la section 5.2.
+*   **DORA (Digital Operational Resilience Act) :** Vise à renforcer la résilience opérationnelle numérique dans le secteur financier en Europe. TDz est conçu pour identifier et alerter sur les incidents TIC anormaux, aidant à adhérer à l'Article 10 sur la détection.
+*   **NIST Cybersecurity Framework :** Inclut désormais les technologies de détection des anomalies cyber non basées sur les signatures utilisant l'IA. TDz utilise des **heuristiques** pour analyser le comportement d'un accès anormal.
+
+**Présentation de TDz :**
+*   TDz utilise une **IA légère** pour détecter les accès aux données sur z/OS jugés anormaux ou potentiellement malveillants.
+*   Il s'appuie sur un flux d'informations SMF (nouveaux sous-types 5-8 du SMF 98) facilité par zWIC au niveau de DFSMS, couvrant les lectures et écritures VSAM et non-VSAM.
+*   Les alertes sont émises via un message console et un nouvel enregistrement SMF (SMF 83 sous-type 8).
+*   TDz permet une intégration avec : GDPS/LCP pour les opérations Safeguarded Copy (fonctionnalité future), zSecure Alert pour les notifications, et zSecure SIEM Adapter pour l'envoi vers les SIEM (QRadar, Splunk, etc.).
+*   Un **tableau de bord graphique** (plugin z/OSMF) simplifie le diagnostic des anomalies.
+*   Des **listes de politiques et d'exclusion** permettent de réduire les faux positifs en définissant une baseline d'activité normale.
+
+Le **flux anti-malware z/OS** typique implique la détection par l'IA de TDz, l'émission d'une alerte, la notification du personnel de sécurité (zSecure Alert), potentiellement le confinement de l'utilisateur suspect (RACF), la prise d'un snapshot supplémentaire immédiat (Cyber Vault - futur), et la transmission de l'événement au SIEM.
+
+Une nouvelle fonctionnalité, le **confinement d'ID utilisateur RACF**, renforce la capacité de réponse. Elle étend la révocation standard. L'utilisation de la commande `ALTUSER` avec les options `CONTAIN`, `NOCONTAIN`, `NEVERCONTAIN`, `ALLOWCONTAIN` entraîne l'échec des futures demandes d'accès RACF pour cet utilisateur. Cette fonction, protégée par un nouveau profil RACF, supporte les listes d'exclusion et aide à satisfaire PCI-DSS 4.0.
+
+TDz se distingue d'autres outils de sécurité IBM Z :
+*   **TDz** alerte sur des événements potentiellement malveillants non identifiés (anomalies) avec un intervalle de 15 minutes, en utilisant l'IA et le SMF98.
+*   **zSecure** alerte en temps réel sur des événements de sécurité *identifiés* (issus de SMF, CKFREEZE, etc.).
+*   **z/OS Change Tracker (z/CT)** surveille et gère les changements dans les bibliothèques importantes.
+*   **zACS (z/OS Authorized Code Scanner)** scanne les librairies APF et surveille les ABENDs pour détecter des vulnérabilités dans le code.
+
+**En résumé,** TDz utilise l'IA pour la détection d'anomalies cyber, aide à établir une baseline d'activité client et à atténuer le risque de violation. La **feuille de route future** de TDz inclut l'ajout de la détection d'anomalies réseau, l'intégration LLM et le confinement avec RACF.
+
+Le déploiement de TDz nécessite notamment z/OS V2.5 ou ultérieur, z/OSMF, des runtimes Java et Node.js spécifiques, ainsi que DFSMS et zWIC (entitled with TDz) avec les APAR correspondants pour la génération des nouveaux enregistrements SMF.
+
+
+@@@@@@@@@@@
+
+
+Voici un  de la présentation "mAInframe Innovation Day", en soulignant les points importants, basé sur les extraits fournis :
 
 La présentation provient de l'IBM Innovation Studio à Paris, datée du 21 mai 2025, et est axée sur l'IBM Z et LinuxONE. Elle met en avant le rôle continu de ces plateformes dans l'ère du cloud hybride et de l'IA.
 
