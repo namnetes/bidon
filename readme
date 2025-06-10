@@ -1,0 +1,33 @@
+Voici une reformulation améliorée de votre texte :
+
+---
+
+Dans le cadre du projet Eee, la Squad Cccc manifeste son intérêt pour cette offre de service.
+
+### Caractéristiques principales du cas d’usage :
+
+- **Mise en œuvre de l’API REQUESTER** :  
+  - L’application Z consomme une API issue d’un environnement distribué.  
+  - Hébergement de l’API chez AAA, accessible via la Landing Zone mise en place.  
+  - L’appelant est un batch exécuté vers 18h00.  
+
+- **Informations communiquées concernant Cccc** :  
+  - Aucune limitation sur la taille de COMAREA.  
+  - Limitation à **500 TPS maximum**.  
+  - En attente des **VIPA en production pour mi-juillet**.  
+  - Environnement HP disponible : uniquement **CQ**.  
+  - Besoin d’un **Swagger (non disponible à ce stade) et d’un endpoint**.  
+
+- **Planning prévisionnel** :  
+  - Mise en production prévue pour **octobre**.  
+  - À ce jour, les **routes ne sont pas encore ouvertes**.  
+  - Question d’**authentification** à clarifier (l’APIM semble être hébergée chez AWS).  
+  - Possibilité d’une invitation à certains **points CCV**.  
+
+### Actions et demandes :
+- **@Patrick** : Merci de **convertir les documents au format PDF** et de les envoyer à **Alexis et Viruth**.  
+- **@Sylvie** : Peux-tu nous indiquer la **faisabilité** de cette mise en œuvre ?  
+
+---
+
+Cette version apporte une meilleure structure et lisibilité tout en préservant le sens du message initial. N’hésitez pas à me dire si vous souhaitez des ajustements !
