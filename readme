@@ -1,15 +1,19 @@
-Voici une reformulation plus fluide et structurée de votre texte :
+Voici un message que vous pourriez envoyer à l'exploitant CCCCC :
 
 ---
 
-Dans l'environnement SYSB, l'envoi de 10 000 enregistrements a pris 30 minutes, ce qui me semble excessif. Si nous devons envoyer 10 millions d'enregistrements, la durée de traitement risque d'être problématique.
+**Objet : Problème de performance – Analyse et actions possibles**  
 
-Après une discussion avec Heri, il m'a suggéré de ne pas effectuer un 'FLUSH' après chaque message, mais plutôt après 100 messages. J'ai donc modifié le programme Producer (IXYSPRDS) en conséquence. Cependant, cette modification a entraîné une consommation CPU de 100 %, obligeant Laurent Grisel à annuler le Job. J'ai tenté d'effectuer le FLUSH après 50 puis 20 messages, mais les résultats sont restés les mêmes.
+Bonjour [Nom du contact],  
 
-Dans l'environnement DEV, l'envoi d'un fichier contenant 41 enregistrements s'est déroulé sans problème. Ensuite, j'ai testé avec un fichier de 10 000 enregistrements, mais l'exécution était très lente. J'ai également essayé d'effectuer le FLUSH après 10 et 100 messages, obtenant les mêmes résultats qu'en SYSB. Par ailleurs, aucun FLUSH n'a retourné un code de retour 0 : tous ont retourné 18N.
+Nous avons identifié un problème de performance qui semble affecter [nom de l'application ou du service]. Étant donné que certains composants sont développés en Java et que le passage d'une application Cobol vers un programme Java est réputé très consommateur en raison du switch de TCB, il serait pertinent d'examiner le dimensionnement des ressources USS afin de s'assurer qu'elles sont correctement allouées.  
 
-Enfin, un message d'erreur apparaît fréquemment : *"IFAUSAGE can not process more than two registrations"*. Je ne sais pas à quoi cela correspond.
+Serait-il possible d'étudier cette question plus en détail ? Nous pourrions également envisager d’interpeller IBM pour obtenir leur expertise sur ce sujet, notamment en ce qui concerne les bonnes pratiques et les éventuelles optimisations à apporter.  
+
+Merci d’avance pour votre retour et votre aide.  
+Bien cordialement,  
+[Votre Nom]  
 
 ---
 
-J'espère que cette reformulation vous convient ! Besoin d'ajustements supplémentaires ?
+N'hésitez pas à personnaliser ce message selon vos besoins !
