@@ -1,0 +1,18 @@
+Reformuler au mieux
+
+En SYSB, pour envoyer 10.000 enregistrements le Job que "'ai lancé a pris 30m pour terminer, ce que je pense c'est trop, parce que
+si on veut envoyer 10.000.000 d'enregistrements, je ne sais pas combien de temps pour le faire
+
+Après avoir parlé avec Heri. Il m'a donné la suggestion de ne pas faire un 'FLUSH' après envoyer chaque message, et de peut être faire ça
+après 100 messages. !'ai changé le programme Producer (IXYSPRDS), mais avec cette paramétrisation, la consommation de CPU a grimpé
+jusqu'à 100%, e et Laurent Grisel avait besoin de canceker le Job.
+J'ai essayé de faire le FLUSH après 50, et 20 messages, mais le résultat était le même.
+
+En DEV, i'ai d'une première fois envoyé un fichier avec 41 enregistrements avec succès.
+Après ça, jai pris le fichier avec 10.000 enregistrements, mais en DEV c'est très lent.
+J'ai aussi essayé de faire le FLUSH après 10 et 100 messages, avec le même résultat qu'en SSB, et aussi avec le problème que
+aucun FLUSH avait un code retour 0, tous ont retourné 18N.
+
+Iy a aussi un message que s affiche beaucoup de fois : IFAUSAGE can not process more than two registrations. Et que je ne sais pas
+à quoi ça correspond.
+
