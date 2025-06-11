@@ -1,5 +1,1 @@
-Voici une reformulation optimisée :  
-
-J’intègre toutes ces remarques dans la description de chaque application sous **CAPIREF**, afin de **pérenniser l’information**, permettre à chacun de l’enrichir et, ainsi, assurer sa continuité en cas de questionnement futur.  
-
-Cette version apporte davantage de clarté et de fluidité. Souhaitez-vous d'autres ajustements ?
+Je prends en compte les différents avis exprimés sur ce sujet. Afin de progresser de manière structurée, il est essentiel de définir une stratégie claire, en identifiant les acteurs impliqués ainsi que les échéances à respecter. Le Bucket S3, ouvert depuis plus d’un an et disponible en production depuis l’IPL d’avril dernier, revêt une importance particulière. Les cas d’usage attendus pour la production bancaire LLL impliquent un niveau de criticité élevé, ce qui nécessite une mise en œuvre rigoureuse et coordonnée.
