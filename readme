@@ -1,10 +1,14 @@
 Voici une reformulation optimisée :
 
-**CARTOTECH : Cartographie Applicative Mainframe**  
-CARTOTECH est une application historique qui offre une cartographie technique détaillée du patrimoine applicatif Mainframe. Chaque développeur y trouve une vue précise des composants de son périmètre, incluant COBOL, JCL, fichiers, puits de données, MEP, applications OPC, ainsi que leurs interactions et interconnexions.
+**OUTDEVZOS : Outils standards IBM, également appelés PDTOOLS**  
 
-Développée avec des technologies désormais obsolètes, telles que le menu ISPF et Rexx, cette application est exclusivement compatible avec le mode 3270. Elle a depuis été remplacée par **Mia Discovery**, une solution plus moderne accessible via IDZ.
+Les outils OUTDEVZOS font partie intégrante du socle Z et incluent plusieurs utilitaires essentiels :
+- **File Manager**, permettant la manipulation de fichiers à structure simple et complexe (VSAM, bases DB2, files MQ Series).
+- **Fault Analyzer**, un gestionnaire de dumps facilitant l’analyse des anomalies.
+- **z/OS Debugger**, anciennement connu sous le nom **Debug Tool**, désormais intégré et accessible via des API à partir d’outils tels que IDZ et VSCode.
 
-CARTOTECH est intégrée à l’environnement de développement Mainframe et ne nécessite aucune habilitation spécifique. Tout utilisateur disposant d’un accès RACF valide peut consulter les ressources disponibles, dans le respect des restrictions de droits. Par exemple, un développeur du périmètre monétique, bien qu’ayant un accès RACF valide, ne pourra pas visualiser un fichier rapatrié de production appartenant au périmètre Comptabilité.
+Ces outils sont couramment utilisés par les développeurs en environnement de développement, tout en restant disponibles en production.
 
-Cette version apporte clarté et fluidité tout en conservant l’essence du message. Besoin d'autres ajustements ?
+Ils ne requièrent aucune habilitation spécifique, un accès RACF valide suffit. Toutefois, l’accès aux environnements de production est soumis à des restrictions et relève de la responsabilité des managers. Il est supervisé par les contrôles MADO, sous l’autorité des leaders de tribu.
+
+Cette version améliore la clarté et la fluidité du texte tout en conservant sa précision. Souhaitez-vous d'autres ajustements ?
