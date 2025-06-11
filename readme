@@ -1,14 +1,7 @@
-Voici une reformulation optimisée :
+Voici une reformulation intégrant cette précision :  
 
-**OUTDEVZOS : Outils standards IBM, également appelés PDTOOLS**  
+Cette infrastructure logicielle est installée sur un CICS dédié et est exclusivement accessible aux programmes associés aux transactions CICS. Aucun utilisateur, quel qu'il soit, ne peut y accéder directement, et aucune habilitation spécifique ne permet d’obtenir un accès à cette ressource.  
 
-Les outils OUTDEVZOS font partie intégrante du socle Z et incluent plusieurs utilitaires essentiels :
-- **File Manager**, permettant la manipulation de fichiers à structure simple et complexe (VSAM, bases DB2, files MQ Series).
-- **Fault Analyzer**, un gestionnaire de dumps facilitant l’analyse des anomalies.
-- **z/OS Debugger**, anciennement connu sous le nom **Debug Tool**, désormais intégré et accessible via des API à partir d’outils tels que IDZ et VSCode.
+Présente dans **tous les environnements de développement, de préproduction et de production**, elle fonctionne dans un cadre bien défini, sous l’identité d’un utilisateur RACF dédié. Ce dernier permet l’exécution des programmes et l’accès à l’ensemble des ressources CICS, y compris les bases de données, les files MQ et cette infrastructure.  
 
-Ces outils sont couramment utilisés par les développeurs en environnement de développement, tout en restant disponibles en production.
-
-Ils ne requièrent aucune habilitation spécifique, un accès RACF valide suffit. Toutefois, l’accès aux environnements de production est soumis à des restrictions et relève de la responsabilité des managers. Il est supervisé par les contrôles MADO, sous l’autorité des leaders de tribu.
-
-Cette version améliore la clarté et la fluidité du texte tout en conservant sa précision. Souhaitez-vous d'autres ajustements ?
+Cette version est plus complète et précise. Souhaitez-vous d'autres ajustements ?
