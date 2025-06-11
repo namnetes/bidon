@@ -1,7 +1,5 @@
-Voici une reformulation intégrant cette précision :  
+Voici une reformulation optimisée :  
 
-Cette infrastructure logicielle est installée sur un CICS dédié et est exclusivement accessible aux programmes associés aux transactions CICS. Aucun utilisateur, quel qu'il soit, ne peut y accéder directement, et aucune habilitation spécifique ne permet d’obtenir un accès à cette ressource.  
+Cette infrastructure logicielle fournit un cadre facilitant la gestion de la pagination (page suivante/page précédente) dans les transactions. Elle joue un rôle clé dans la **haute disponibilité**, permettant à une conversation de commencer sur un CICS, puis de se poursuivre sur un autre, et ainsi de suite, au fil des pages tournées.  
 
-Présente dans **tous les environnements de développement, de préproduction et de production**, elle fonctionne dans un cadre bien défini, sous l’identité d’un utilisateur RACF dédié. Ce dernier permet l’exécution des programmes et l’accès à l’ensemble des ressources CICS, y compris les bases de données, les files MQ et cette infrastructure.  
-
-Cette version est plus complète et précise. Souhaitez-vous d'autres ajustements ?
+Cette version améliore la clarté et la fluidité tout en conservant l’essence du message. Besoin d'autres ajustements ?
