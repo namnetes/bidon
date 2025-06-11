@@ -1,33 +1,10 @@
-Voici une reformulation améliorée de votre texte :
+Voici une reformulation optimisée :
 
----
+**CARTOTECH : Cartographie Applicative Mainframe**  
+CARTOTECH est une application historique qui offre une cartographie technique détaillée du patrimoine applicatif Mainframe. Chaque développeur y trouve une vue précise des composants de son périmètre, incluant COBOL, JCL, fichiers, puits de données, MEP, applications OPC, ainsi que leurs interactions et interconnexions.
 
-Dans le cadre du projet Eee, la Squad Cccc manifeste son intérêt pour cette offre de service.
+Développée avec des technologies désormais obsolètes, telles que le menu ISPF et Rexx, cette application est exclusivement compatible avec le mode 3270. Elle a depuis été remplacée par **Mia Discovery**, une solution plus moderne accessible via IDZ.
 
-### Caractéristiques principales du cas d’usage :
+CARTOTECH est intégrée à l’environnement de développement Mainframe et ne nécessite aucune habilitation spécifique. Tout utilisateur disposant d’un accès RACF valide peut consulter les ressources disponibles, dans le respect des restrictions de droits. Par exemple, un développeur du périmètre monétique, bien qu’ayant un accès RACF valide, ne pourra pas visualiser un fichier rapatrié de production appartenant au périmètre Comptabilité.
 
-- **Mise en œuvre de l’API REQUESTER** :  
-  - L’application Z consomme une API issue d’un environnement distribué.  
-  - Hébergement de l’API chez AAA, accessible via la Landing Zone mise en place.  
-  - L’appelant est un batch exécuté vers 18h00.  
-
-- **Informations communiquées concernant Cccc** :  
-  - Aucune limitation sur la taille de COMAREA.  
-  - Limitation à **500 TPS maximum**.  
-  - En attente des **VIPA en production pour mi-juillet**.  
-  - Environnement HP disponible : uniquement **CQ**.  
-  - Besoin d’un **Swagger (non disponible à ce stade) et d’un endpoint**.  
-
-- **Planning prévisionnel** :  
-  - Mise en production prévue pour **octobre**.  
-  - À ce jour, les **routes ne sont pas encore ouvertes**.  
-  - Question d’**authentification** à clarifier (l’APIM semble être hébergée chez AWS).  
-  - Possibilité d’une invitation à certains **points CCV**.  
-
-### Actions et demandes :
-- **@Patrick** : Merci de **convertir les documents au format PDF** et de les envoyer à **Alexis et Viruth**.  
-- **@Sylvie** : Peux-tu nous indiquer la **faisabilité** de cette mise en œuvre ?  
-
----
-
-Cette version apporte une meilleure structure et lisibilité tout en préservant le sens du message initial. N’hésitez pas à me dire si vous souhaitez des ajustements !
+Cette version apporte clarté et fluidité tout en conservant l’essence du message. Besoin d'autres ajustements ?
