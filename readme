@@ -1,5 +1,5 @@
 Voici une reformulation optimisée :  
 
-Cette infrastructure logicielle fournit un cadre facilitant la gestion de la pagination (page suivante/page précédente) dans les transactions. Elle joue un rôle clé dans la **haute disponibilité**, permettant à une conversation de commencer sur un CICS, puis de se poursuivre sur un autre, et ainsi de suite, au fil des pages tournées.  
+J’intègre toutes ces remarques dans la description de chaque application sous **CAPIREF**, afin de **pérenniser l’information**, permettre à chacun de l’enrichir et, ainsi, assurer sa continuité en cas de questionnement futur.  
 
-Cette version améliore la clarté et la fluidité tout en conservant l’essence du message. Besoin d'autres ajustements ?
+Cette version apporte davantage de clarté et de fluidité. Souhaitez-vous d'autres ajustements ?
