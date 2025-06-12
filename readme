@@ -1,1 +1,25 @@
+Bien sûr, voici une version modifiée du mail en prenant en compte ton souhait d’avoir de la visibilité sur les prochaines étapes, surtout à l’approche de la période estivale :  
+
+---
+
+**Objet : Retours sur les tests Kafka et S3 – Quelle suite envisager ?**  
+
+Bonjour [Nom du destinataire],  
+
+Je voulais faire un point avec toi sur les travaux réalisés autour de l’intégration des briques IBM du mainframe pour la lecture/écriture dans un topic Kafka via un programme Cobol ainsi que le transfert de fichiers vers un bucket S3 depuis le Z.  
+
+Tu as déjà pu expérimenter ces solutions en mode labo, et de notre côté, nous avons mené un POC sur Kafka et S3 avec nos propres cas d’usage. Nous constatons cependant des problèmes de performances sur les deux fronts. Comme ces solutions sont nouvelles pour tout le monde, il est essentiel d’avoir une visibilité sur leur viabilité ainsi que sur leur mise à disposition dans notre environnement, où la criticité est particulièrement élevée.  
+
+L’enjeu est d’assurer que ces technologies répondent aux exigences du monde bancaire, notamment pour nos applications du SIV et les processus critiques comme les cut-off. Nous devons garantir une fiabilité et une rapidité maximales pour ces traitements sensibles.  
+
+À ce stade, et en particulier à l’approche de la période estivale, il serait utile de clarifier la marche à suivre pour avancer efficacement. Peux-tu me partager ton avis sur les prochaines étapes et la mise en œuvre dans notre contexte ?  
+
+Je propose que nous échangions prochainement pour partager nos constats et envisager les actions à venir. Dis-moi quand tu serais disponible pour en discuter.  
+
+Bonne journée,  
+[Ton Nom]  
+
+---
+
+Cette version ajoute ton besoin de visibilité sur la suite des opérations. Dis-moi si tu veux encore affiner certains points !  
 
