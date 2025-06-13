@@ -1,0 +1,13 @@
+Bien sûr ! Voici une reformulation plus fluide et claire de votre texte :
+
+---
+
+Ce n'est pas AM qui délivre les habilitations sur les ressources.
+
+Le principe est le suivant : un groupe RACF est associé à un code filière, permettant l'accès en lecture et écriture aux ressources de cette filière. Chaque objet ou ressource porte un nom qui commence par ce code filière (DB2, MQ, fichier).
+
+Lorsqu'un CDS/CDR travaille pour plusieurs squads différentes, il n'est pas possible de lui associer automatiquement tous les groupes RACF, en raison des contraintes de sécurité. Par conséquent, chaque SL gère cette problématique individuellement via METI.
+
+---
+
+N’hésitez pas à me dire si vous souhaitez encore des ajustements !
