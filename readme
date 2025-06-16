@@ -1,13 +1,11 @@
-Bien sûr ! Voici une reformulation plus fluide et claire de votre texte :
+Parfait, merci pour cette précision essentielle. Voici une version mise à jour de la brève, plus fidèle au langage projet :
 
 ---
 
-Ce n'est pas AM qui délivre les habilitations sur les ressources.
+Migration Spitab : des tests de non-régression pour garantir l’iso-production
 
-Le principe est le suivant : un groupe RACF est associé à un code filière, permettant l'accès en lecture et écriture aux ressources de cette filière. Chaque objet ou ressource porte un nom qui commence par ce code filière (DB2, MQ, fichier).
-
-Lorsqu'un CDS/CDR travaille pour plusieurs squads différentes, il n'est pas possible de lui associer automatiquement tous les groupes RACF, en raison des contraintes de sécurité. Par conséquent, chaque SL gère cette problématique individuellement via METI.
+Dans le cadre de la migration de Spitab de VSAM vers DB2, une campagne de tests de non-régression est actuellement en cours sur une plateforme dédiée. Elle vise à vérifier que plusieurs centaines de modules restent strictement iso-production, assurant ainsi que la migration technique n’impacte en rien le comportement fonctionnel des programmes. Cette étape constitue un levier majeur de sécurisation avant le basculement vers la nouvelle infrastructure DB2.
 
 ---
 
-N’hésitez pas à me dire si vous souhaitez encore des ajustements !
+Souhaites-tu que j’intègre une date, un jalon à venir ou un clin d'œil plus engageant pour les lecteurs de la newsletter ? Je peux affiner selon ton public. 😊
