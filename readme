@@ -1,0 +1,5 @@
+Bien sûr ! Voici une version enrichie et restructurée, mettant en valeur le contexte de la remontée d’alerte et l’objectif de réduction de la consommation TP :
+
+> Dans le cadre d’une alerte récente liée à la consommation TP, une campagne de tests de non-régression a été engagée afin de contribuer à sa réduction. Cette campagne s’inscrit dans le projet de migration de Spitab de VSAM vers DB2 et se déroule actuellement sur une plateforme dédiée. Elle vise à garantir que plusieurs centaines de modules conservent un comportement strictement iso-production, assurant ainsi que la migration technique demeure totalement transparente du point de vue fonctionnel. Cette étape constitue un levier essentiel de sécurisation avant le basculement vers la nouvelle infrastructure DB2.
+
+Souhaitez-vous une version plus synthétique ou orientée pour diffusion externe, par exemple dans une note de communication ou un support de présentation ? Je peux ajuster facilement.
