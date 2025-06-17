@@ -1,24 +1,15 @@
-Bien sûr Magali, voici une proposition de mail claire et professionnelle que vous pouvez envoyer à votre architecte :
+Voici une proposition de brève claire et concise pour présenter votre offre de service TNR :
 
 ---
 
-Objet : Passage au standard OpenAPI 3 pour nos API
+Offre de service TNR – Tests de Non-Régression automatisés
 
-Bonjour [Nom de l’architecte],
+Notre solution TNR repose sur une infrastructure automatisée permettant d’exécuter simultanément deux versions d’un même programme : la version de production actuelle et une version modifiée en cours de validation. Les deux versions reçoivent exactement les mêmes jeux de données en entrée.
 
-J’espère que tu vas bien.
+L’analyse comparative des résultats générés permet de détecter toute divergence fonctionnelle. Ce mécanisme assure ainsi que la version modifiée est fonctionnellement équivalente à la version en production ("iso prod") avant tout déploiement.
 
-Nous souhaitons savoir s’il serait envisageable de mettre en place l’infrastructure nécessaire pour que nos API puissent adopter directement le standard OpenAPI 3.
-
-Cette question est particulièrement importante pour nous, car nos nouvelles API sont déjà conçues selon ce standard, et nous aimerions éviter toute phase de migration supplémentaire ou de réécriture à posteriori.
-
-Peux-tu nous dire si cette transition est techniquement réalisable dans l'état actuel de notre infrastructure, ou si des ajustements spécifiques seraient à prévoir ? Nous sommes évidemment disponibles pour en discuter plus en détail si besoin.
-
-Merci d’avance pour ton retour.
-
-Bien à toi,  
-Magali [ou votre prénom/nom d’équipe, selon le ton souhaité]
+Cette approche garantit un gain de temps significatif, une fiabilité accrue et une sécurisation des évolutions logicielles.
 
 ---
 
-Souhaitez-vous que je le reformule avec un ton plus formel ou plus détendu ? Ou ajouter des détails techniques spécifiques à votre stack actuelle ? Je suis là pour affiner ! 😊
+Souhaitez-vous que je l’adapte à un support spécifique (présentation, documentation, offre commerciale) ou que j’y ajoute des éléments techniques plus poussés ? Je peux aussi raccourcir encore si c’est pour un teaser ou une slide. Vous me dites ! 😊
