@@ -1,0 +1,15 @@
+Bien sûr, voici une reformulation plus fluide et structurée de ton texte, avec des enrichissements là où le sens était clair mais la formulation nécessitait d’être clarifiée :
+
+---
+
+Dans le cadre du déploiement d’une solution z/OS Connect actuellement en cours, nous utilisons aujourd’hui le standard OpenAPI 2. Avant que trop d’API ne soient développées et mises en œuvre chez SNI dans ce cadre, nous souhaiterions réaliser un PoC (Proof of Concept) pour évaluer l’adoption du standard OpenAPI 3.
+
+Il est important de noter que cette évolution pourrait entraîner un coût de licence potentiellement plus élevé — point à vérifier. Par ailleurs, il serait techniquement possible de faire fonctionner deux serveurs z/OS Connect, chacun supportant une version différente du standard OpenAPI. La principale difficulté résiderait davantage du côté du développement, notamment dans la génération d’archives .war en remplacement des actuelles archives .ara.
+
+Un autre enjeu majeur concerne la chaîne CI/CD, qui semble actuellement largement gérée manuellement par CA-GIP. L’objectif serait donc de construire ce PoC de manière collaborative entre CA-GIP et SNI, en s’appuyant sur l’expérience acquise lors de précédents PoC menés au sein du cluster.
+
+Cela inclurait des éléments d’industrialisation tels que l’hébergement sur GitLab, l’utilisation de GitLab CI/CD pour l’automatisation des pipelines, Ansible avec ses playbooks, Artifactory pour la gestion des artefacts, etc. Une question à explorer dans ce contexte est l’éventuel recours à Gradle pour la compilation.
+
+---
+
+Si tu veux, je peux aussi t’aider à décliner cette reformulation en version plus synthétique ou plus orientée “support de présentation”. Tu me dis ! 😄
