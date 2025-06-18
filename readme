@@ -1,13 +1,60 @@
-e fo
-Bonjour
-on
-Je me permets de vous solicite a propos de la partition mainframe LCL en place chez CA -PFM
-Dans le cadre des projets instant payment et remplacement tandem se repose la question d un acces 24/7 de nos partitions mainframes. Étant dotés de deux partitions (Sofinco et LCL) Ia solution serait de les mettre en
-actif/passif
-A ce jour, au niveau mainframe, nous avons 2 partitions : La partition Sofinco/Partenaire C ( isolation logique entre le monde Sofinco et le monde CA) et la partition LCL ( isolation physique des données et des
-traitements) [ Dans le cadre de l'etude du projet Instant payment , une des hypothèses envisagées par CAGIP est : ceas deux partitions travailleraient en actif/passif. Lorsgu'une maintenance est demandée pour lune, Vensemble des traitements et des données fonctionnent sur l'autre. Ces périodes de maintenance sont actuellement limitées au dimanche de 2h a 6h
-Quels sont les Impacts de cette solution par rapport à lexistant sur ces points : Disponibilité : aucun effet négatif mais au contraire augmentation de la période de disponibilité du dimanche matin Performances : les partitions seront taillées pour répondre aux mêmes exigences qu'actuellement Isolation des traitements et des données : assurée
-La question se pose par rapport à LCL avec qui, à lorigine, une isolation physique des traitements et des données avait été demandée. Au niveau aspect contractuel/ convention LCL-CAPFM , depuis le début du partenariat en 2002 il aéte convenu que "'ensemble des données LCL soit isolé des autres partenaires via une séparation des principaux fichiers de partition sur différents disques
-A LCL: Quel est votre avis sur cette hypothèse ? Serait-il envisageable de la mettre en cuvre? Nous restons à disposition pour en parler de vives voix
-Je peux organiser un point d'échange si besoin
-Cordialement
+J'essaie de comprendre
+
+En résumé :
+- **Actuellement**, il y a deux partitions mainframe distinctes :  
+  - Sofinco (avec isolation *logique*)  
+  - LLL (avec isolation *physique*)  
+
+- **Proposition envisagée** : Mettre ces deux partitions en mode *actif/passif*, c’est-à-dire :
+  - Lorsqu’une maintenance est nécessaire sur une partition, l’autre prend le relais pour assurer la continuité de service.
+  - Cela permettrait un accès 24/7, ce qui est requis pour l’instant payment.
+
+### Les impacts identifiés :
+- **Disponibilité** : amélioration, car la plage de maintenance deviendrait transparente.
+- **Performance** : maintenue, car les ressources seraient dimensionnées en conséquence.
+- **Isolation** : préservée selon les concepteurs, malgré le changement.
+
+### Le nœud de la question :
+LLL avait historiquement exigé une **isolation physique stricte** des traitements et données, mise en œuvre via une séparation des disques. Cette solution en actif/passif soulève donc un **point d'attention contractuel et technique** : la continuité de l’isolation dans un nouveau schéma partagé ou mutualisé.
+
+### La demande :
+C’est une sollicitation de l’équipe projet (probablement CAGIP ou CAPFM) pour connaître **l’avis de LLL sur cette solution**, et savoir :
+- Si elle serait **contractuellement et techniquement acceptable** ;
+- Et si elle serait **mettable en œuvre concrètement**.
+
+Ils proposent d’en discuter de vive voix et de planifier une réunion si besoin.
+
+Très bonne question, Magali. Voici une liste de questions pertinentes que LLL pourrait poser pour clarifier, cadrer et sécuriser ce projet d’évolution en actif/passif, tant sur le plan technique que contractuel :
+
+### 🔍 **Sur le plan technique**
+1. **Comment est assurée l’isolation physique des données dans un mode actif/passif ?**  
+   (Les disques, fichiers, flux... seront-ils toujours séparés ?)
+
+2. **En cas de bascule vers la partition secondaire, comment sont gérés les traitements spécifiques à LLL ?**
+
+3. **Quels sont les mécanismes de reprise d’activité en cas d’incident sur l’une des partitions ?**
+
+4. **Les tests de charge et de performance en mode actif/passif ont-ils été réalisés ou prévus ?**
+
+5. **Des journaux ou indicateurs permettront-ils à LLL de suivre la traçabilité des traitements ?**
+
+---
+
+### 📑 **Sur le plan contractuel & gouvernance**
+1. **Cette hypothèse remet-elle en question la clause d’isolation physique du contrat de 2002 ?**  
+   (Faut-il un avenant, ou bien une confirmation juridique ?)
+
+2. **Quelle gouvernance sera mise en place pour la gestion des changements et incidents liés à ce nouveau mode ?**
+
+3. **LLL conserve-t-il un droit de regard ou de veto sur l’activation du mode passif pour ses traitements ?**
+
+4. **Comment seront traitées les obligations réglementaires (ex. RGPD, traçabilité) dans ce contexte ?**
+
+---
+
+### 💬 **Et en termes de communication**
+1. **Un document de spécification technique sera-t-il partagé en amont pour validation par LLL ?**
+
+2. **Quelles sont les échéances et jalons projet côté CAGIP / CAPFM ?**
+
+Tu veux que je t’aide à rédiger un mail ou un retour oral structuré à partir de ces questions ? On peut aussi prioriser ensemble selon les plus critiques pour LLL.
