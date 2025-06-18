@@ -1,0 +1,13 @@
+e fo
+Bonjour
+on
+Je me permets de vous solicite a propos de la partition mainframe LCL en place chez CA -PFM
+Dans le cadre des projets instant payment et remplacement tandem se repose la question d un acces 24/7 de nos partitions mainframes. Étant dotés de deux partitions (Sofinco et LCL) Ia solution serait de les mettre en
+actif/passif
+A ce jour, au niveau mainframe, nous avons 2 partitions : La partition Sofinco/Partenaire C ( isolation logique entre le monde Sofinco et le monde CA) et la partition LCL ( isolation physique des données et des
+traitements) [ Dans le cadre de l'etude du projet Instant payment , une des hypothèses envisagées par CAGIP est : ceas deux partitions travailleraient en actif/passif. Lorsgu'une maintenance est demandée pour lune, Vensemble des traitements et des données fonctionnent sur l'autre. Ces périodes de maintenance sont actuellement limitées au dimanche de 2h a 6h
+Quels sont les Impacts de cette solution par rapport à lexistant sur ces points : Disponibilité : aucun effet négatif mais au contraire augmentation de la période de disponibilité du dimanche matin Performances : les partitions seront taillées pour répondre aux mêmes exigences qu'actuellement Isolation des traitements et des données : assurée
+La question se pose par rapport à LCL avec qui, à lorigine, une isolation physique des traitements et des données avait été demandée. Au niveau aspect contractuel/ convention LCL-CAPFM , depuis le début du partenariat en 2002 il aéte convenu que "'ensemble des données LCL soit isolé des autres partenaires via une séparation des principaux fichiers de partition sur différents disques
+A LCL: Quel est votre avis sur cette hypothèse ? Serait-il envisageable de la mettre en cuvre? Nous restons à disposition pour en parler de vives voix
+Je peux organiser un point d'échange si besoin
+Cordialement
