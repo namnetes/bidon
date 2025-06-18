@@ -1,22 +1,30 @@
-PVoici une proposition de message clair et structuré que tu pourrais adresser à tes collaborateurs :
+Bonjour à tous,
 
----
+Durant mes congés, Dominique assurera l'intérim. Il sera votre point de contact privilégié pour toute question ou besoin opérationnel. 
 
-Bonjour à toutes et à tous,
+Les sujets RH, comme c'est le cas lors de l'absence d'un SQL ISO (validation Batman, congés, télétravail, etc.) sont sous la responsabilité des ITL, conformément aux procédures habituelles.
 
-Je souhaitais vous informer que durant mon absence, Dominique assurera mon intérim. Il sera votre point de contact privilégié pour toute question ou besoin opérationnel.
+Dominique sera peut-être amené à vous solliciter sur différents sujets. 
 
-Les sujets RH relatifs aux managers ISO (validation Batman, congés, télétravail, etc.) restent sous la responsabilité des ITL, conformément aux procédures habituelles.
+Concernant la modernisation du Z, Jean-Jacques, Patrick et Antonio restent les principaux référents. 
 
-Dominique pourra être amené à vous solliciter sur différents sujets dans le cadre de la continuité de nos activités. Je compte sur votre collaboration habituelle pour lui faciliter la tâche.
+BS3 :
+- plusieurs d’entre vous sont déjà familiers du périmètre. Des tests de performance sont en cours avec CA-GIP (PA Dominique et Patrick)
 
-Concernant la modernisation du Z, Jean-Jacques, Patrick et Antonio restent les principaux référents. Pour S3, plusieurs d’entre vous sont déjà familiers du périmètre. Des tests de performance sont en cours avec CA-GIP, et une demande d’assistance IBM est prévue sur Kafka. Par ailleurs, une nouvelle version de Kafka devrait prochainement être mise à disposition.
+KAFKA
+- Une demande d’assistance IBM est à venir et une nouvelle version des librairies Kafka devrait prochainement être mise à disposition sur SYSB.
 
-Merci à toutes et à tous pour votre engagement et votre soutien à Dominique pendant cette période.
+ZCE
+- C'est le sujet phare du moment 
+ - Il reste à tester la chaîne de liaison en PROD avec l'API PING (qui est sous WSO2) avec Sylvie
+   - Mais il manque la possibilité d'enrollement sur WSO2 (PA Patrick)
+ - Il faut aussi tester la chaîne de liaison en PROD avec l'API GED (qui n'est pas sous WSO2) avec Sylvie
+   - Il manque l'ouverture de flux : zce -> Api GED (PA Hervé BROU)
+   - il manque le code filière de l'application TZD (PA ACE)
+   - Le batch généré par CAGIP qui met en oeuvre le programme TZD (PA ACE/CAGIP) 
+     - L'idée est d'utiliser ce batch avec le user OPC de l'application et notre programme d'appel à la GED (PA Patrick)
+     
+Il y aura aussi les DELIVERIES ISO à produire début juillet (PA Dominique / Patrick )
 
-Bien à vous,  
-Magali
+En attendant de vous retrouver à mon retour, je vous souhaite de bonnes vacances — plein de soleil (donc en Bretagne).
 
----
-
-Tu veux qu’on le rende un peu plus chaleureux, ou tu préfères rester dans ce ton professionnel ? Je peux aussi l’adapter si tu veux qu’il paraisse plus direct ou informel.
