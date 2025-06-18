@@ -1,30 +1,18 @@
-Bonjour à tous,
+Bien sûr Magali, voici une proposition de message qui transmet ton intention avec bienveillance et diplomatie :
 
-Durant mes congés, Dominique assurera l'intérim. Il sera votre point de contact privilégié pour toute question ou besoin opérationnel. 
+---
 
-Les sujets RH, comme c'est le cas lors de l'absence d'un SQL ISO (validation Batman, congés, télétravail, etc.) sont sous la responsabilité des ITL, conformément aux procédures habituelles.
+Bonjour à toutes et à tous,  
 
-Dominique sera peut-être amené à vous solliciter sur différents sujets. 
+Je voulais vous remercier pour votre implication et votre disponibilité dans le cadre des immersions "Vis ma vie ADT". Ces moments d’échange et d'observation sont précieux, et vos retours en témoignent.  
 
-Concernant la modernisation du Z, Jean-Jacques, Patrick et Antonio restent les principaux référents. 
+Afin de donner à cette démarche toute sa cohérence et d’en assurer la continuité, il me semble préférable que chacun poursuive son immersion avec les mêmes personnes que lors de la première session. Ce choix ne repose ni sur des considérations de performance, ni sur des questions de confiance – bien au contraire. Il s'agit simplement de permettre une meilleure lecture de l’évolution dans vos observations, et de préserver la richesse des échanges déjà amorcés.  
 
-BS3 :
-- plusieurs d’entre vous sont déjà familiers du périmètre. Des tests de performance sont en cours avec CA-GIP (PA Dominique et Patrick)
+Merci encore pour votre engagement, et n'hésitez pas à me faire part de vos impressions pour la suite.  
 
-KAFKA
-- Une demande d’assistance IBM est à venir et une nouvelle version des librairies Kafka devrait prochainement être mise à disposition sur SYSB.
+Très bonne continuation à toutes et à tous,  
+[Magali]
 
-ZCE
-- C'est le sujet phare du moment 
- - Il reste à tester la chaîne de liaison en PROD avec l'API PING (qui est sous WSO2) avec Sylvie
-   - Mais il manque la possibilité d'enrollement sur WSO2 (PA Patrick)
- - Il faut aussi tester la chaîne de liaison en PROD avec l'API GED (qui n'est pas sous WSO2) avec Sylvie
-   - Il manque l'ouverture de flux : zce -> Api GED (PA Hervé BROU)
-   - il manque le code filière de l'application TZD (PA ACE)
-   - Le batch généré par CAGIP qui met en oeuvre le programme TZD (PA ACE/CAGIP) 
-     - L'idée est d'utiliser ce batch avec le user OPC de l'application et notre programme d'appel à la GED (PA Patrick)
-     
-Il y aura aussi les DELIVERIES ISO à produire début juillet (PA Dominique / Patrick )
+---
 
-En attendant de vous retrouver à mon retour, je vous souhaite de bonnes vacances — plein de soleil (donc en Bretagne).
-
+Tu veux que je le rende plus chaleureux, plus formel, ou plus synthétique ? Je peux aussi y intégrer une touche d’humour légère si tu souhaites dédramatiser. À toi de me dire le ton que tu veux donner. 🙂
