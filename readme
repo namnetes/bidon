@@ -1,0 +1,37 @@
+Avec plaisir, Magali ! Voici une reformulation plus simple et détendue de ton message, sans ton managérial :
+
+---
+
+**Hello tout le monde,**
+
+Je pars en congés et pendant ce temps, c’est Dominique qui prendra le relais. La roue a tourné (et il sait où est planquée la machine à café, c’est un bon début 😄). Il sera votre contact principal pour tout ce qui touche au quotidien et aux sujets opérationnels.
+
+Pour ce qui est des demandes RH habituelles (congés, télétravail, validations...), comme d'habitude, ce sont les ITL qui s’en occupent quand aucun ISO n’est là.
+
+Dominique pourra aussi vous solliciter sur quelques sujets SAM, en parallèle des choses à gérer côté ISO et inter-Squads dans la Tribu.
+
+**Petite vue d’ensemble de ce qui est en cours** (pas tout le run, vous maîtrisez !) :
+
+- **CI/CD Java / ChangeMan** → Joao & Omar : RAS
+- **Cobol 6.5** → Dominique, Antonio, Joao : adaptation Cobol 6.4, procédure en cas de pépin sur ChangeMan, adaptation sur SYSB
+- **TNR** → Bruno & Rodrigo : RAS
+- **Deliveries ISO** → Patrick & Dominique : dispo début juillet pour Kamal (STT)
+- **BS3** → Patrick & Dominique : tests de perf en cours avec CA-GIP. Pas besoin de le mettre sur le chemin critique ROC, mais certains comptent déjà dessus, donc à suivre.
+- **Kafka** → Antonio : une assist IBM est prévue + nouvelle version des libs Kafka à venir sur SYSB. Objectif : réussir 💪
+- **ZCE** → Patrick, Jean-Jacques : gros sujet en ce moment. Plusieurs points techniques (tests liaison PROD, users OPC, etc.) + en attente du CAB du 7 juillet.
+- **ROC** → Patrick & Tiana : staffing KLX à suivre.
+- **WINCOM** → Dominique : échanges prévus avec CHANE WON IN Richard sur les évols.
+- **IA APSIDE** → Richard : Richard BONNIOL prendra le relais cet été.
+- **MIA** → Dominique : montée de version + démo Web Client à prévoir.
+- **Montées de version CHM/IDz** → Joao, Omar, Jean-Jacques : RAS
+- **Panel-K** → Jean-Jacques : désengagement en cours (accès par KARTO). Prévoir la comm’ SNI et blocage de l’outil.
+
+Voilà, c’est tout pour moi. Je vous souhaite à tous de bonnes vacances, du soleil et des galettes (évidemment, direction la Bretagne 🌞) !
+
+À bientôt,
+
+Magali
+
+---
+
+Si tu veux qu'on adapte encore le ton (plus décalé, ou au contraire plus sérieux), je suis partant ! 😄
