@@ -22,21 +22,6 @@ Before we start, let’s start by saying who we are., I will go first:
 
 My name is Alan Marchand. I lead the Mainframe Support and Assistance Squad. We help around 300 mainframe developers. They are part of 95 squads, grouped into 10 tribes.
 
-Here is what we do:
-- We manage level 1 support. That is around 1800 tickets every year, mostly about technical problems or questions specific to LCL.  
-- We train developers on ChangeMan, IDZ, and Mia Discovery, which is our tool for technical mapping.  
-- We work with our partner CA-GIP to keep the testing environments running well.  
-- We install and update all development tools, both on the mainframe and on developer computers.
-
-We also work on creating new technical services on the Z platform. For example:
-- Java and Python development  
-- Using CDA (Cloud Data Access) to connect the mainframe with Amazon S3  
-- Running Kafka with COBOL programs on Z  
-- Integrating the ELK stack into the Z environment  
-- And using z/OS Connect, which I mentioned earlier
-
-Finally, we help developers use these new tools in real banking projects. When needed, we work with them to build solutions and help start the projects.
-
 Let’s start this demo with the first topic: Python.
 
 
