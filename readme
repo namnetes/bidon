@@ -1,5 +1,11 @@
-Avec plaisir ! Voici une version enrichie de ton message :
+Voici une reformulation fluide et structurée de ton message :
 
-"Un grand merci à vous tous pour votre participation à cet échange — d’autant plus en anglais ! Merci également d’avoir pris le temps de vous préparer en amont et de vous être rendus disponibles. La restitution était vraiment de grande qualité, ça s’est senti. D’ailleurs, j’ai failli écrire ce message en anglais tant j’ai été impressionné par votre prestation ! Bravo pour votre engagement et encore merci à chacun de vous."
+"Le traitement initial de Kartos sera arrêté, dans l’objectif de se désengager des briques ASG qui ne sont plus utilisées.
 
-Tu veux que je le rende plus léger, plus formel ou plus enthousiaste encore ?
+Les tables pour lesquelles un intérêt aura été exprimé seront, dans la mesure du possible, maintenues via un nouveau processus appelé 'InfoCentre'.
+
+Il est possible que certaines tables nécessitent l'utilisation des futures API REST de MIA pour être conservées.
+
+Par ailleurs, IDz étant l'outil de développement standard, et avec l’introduction de la démarche zDevOps, l’utilisation de l’environnement 3270 ne sera plus possible. C’est également l’une des raisons qui motivent l’arrêt de Kartos, car cette solution ne pourra pas être alimentée depuis GitLab — sans compter que MIA a été initialement déployé en 2017."
+
+Souhaites-tu une version plus synthétique, plus technique, ou adaptée pour une présentation ?
