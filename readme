@@ -17,7 +17,7 @@ Today’s agenda:
 
 - A small topic related to Python in our CI/CD process with ChangeMan  
 - An overview of how we use Java, Python, and z/OS Connect in our CI/CD process with ChangeMan  
-- A short demo of how XML services are used with TSO and the 3270 interface  
+- A demo of how XML services are used with TSO and the 3270 interface  
 - And finally, a demo of a Python tool that we have built using ChangeMan’s APIs and the IBM API, to manage ChangeMan objets. 
 
  let’s start by saying who we are., I will go first:
