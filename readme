@@ -1,12 +1,81 @@
-Bien sûr ! Voici une version réorientée du message, centrée sur l’idée que l’essentiel est de trouver la bonne formule pour maintenir les échanges :
+Merci pour la clarification, Magali — c’est très clair maintenant. Tu veux reproduire dans Java ce que ChangeMan fait pour COBOL : injecter une information (comme un numéro de package) directement dans le binaire compilé, afin qu’elle soit identifiable plus tard, même sans exécuter le programme.
+
+Voici une solution adaptée à ton contexte mainframe + CI/CD ChangeMan :
 
 ---
 
-Merci pour ton retour ! Finalement, l’essentiel n’est peut-être pas tant de dresser une liste exhaustive de sujets, mais plutôt de trouver la bonne formule pour maintenir nos échanges dans la durée. Les thématiques autour de z sont multiples — bien au-delà de la seule modernisation du Mainframe — et les formats peuvent varier : il n’y a pas que les démonstrations. Un ordre du jour clair est utile, mais même un échange collaboratif, même bref, peut permettre de le faire émerger, tout en identifiant les formes que chacun souhaite donner à ces discussions.
-
-Pour ma part, je suis tout à fait partant pour continuer à échanger avec vous tous.  
-La seconde quinzaine de septembre me convient également pour planifier cela.
+🧩 Objectif
+> Insérer une chaîne comme DAY1234567 dans le binaire Java (.class ou .jar), de manière lisible par inspection, sans exécution.
 
 ---
 
-Souhaites-tu que je l’adapte à un style plus professionnel, plus direct, ou plus convivial ?
+✅ Solution recommandée : Génération automatique d’une classe contenant le tag
+
+🔧 Étapes :
+
+1. Créer une classe dédiée au tag :
+   `java
+   public class BuildMetadata {
+       public static final String PACKAGE_ID = "DAY1234567";
+   }
+   `
+
+2. Automatiser la génération de cette classe dans le pipeline CI/CD :
+   - Lors du build, ChangeMan peut injecter dynamiquement le numéro de package dans le fichier source Java.
+   - Exemple : un script shell ou JCL qui génère BuildMetadata.java avec le bon tag.
+
+3. Compiler cette classe avec le reste du projet.
+   - Le champ PACKAGE_ID sera visible dans le .class compilé.
+   - Tu pourras retrouver "DAY1234567" dans le binaire via un simple strings ou inspection hexadécimale.
+
+---
+
+🧪 Exemple d’inspection
+
+Une fois compilé, tu peux faire :
+
+`bash
+strings BuildMetadata.class | grep DAY
+`
+
+Et tu verras :
+
+`
+DAY1234567
+`
+
+---
+
+🧰 Alternative : Injection dans un fichier .properties embarqué
+
+Si ChangeMan peut manipuler des fichiers texte, tu peux injecter le tag dans un fichier comme :
+
+`
+src/main/resources/build.properties
+`
+
+Contenu :
+`
+package.id=DAY1234567
+`
+
+Ce fichier sera inclus dans le JAR, et tu pourras le retrouver avec :
+
+`bash
+strings myapp.jar | grep DAY
+`
+
+---
+
+🛡️ Avantages de cette approche
+
+| Méthode                     | Visible dans binaire | Facile à automatiser | Lisible sans exécution |
+|----------------------------|----------------------|----------------------|-------------------------|
+| Classe Java avec constante | ✅                    | ✅                    | ✅                       |
+| Fichier .properties      | ✅                    | ✅                    | ✅                       |
+| Annotation Java            | ✅ (dans bytecode)    | ⚠️                    | ⚠️                       |
+| Propriété -D à l'exécution | ❌                    | ✅                    | ❌                       |
+
+---
+
+Souhaites-tu que je t’aide à écrire un script ou un template pour générer automatiquement cette classe ou ce fichier dans ton pipeline ChangeMan ?
