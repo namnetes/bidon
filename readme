@@ -1,0 +1,28 @@
+Voici une reformulation claire, structurée et fluide de ton texte :
+
+---
+
+Chaque environnement — TU, IL, CQ, KLIF — dispose de sa propre instance CTG (CICS Transaction Gateway), toutes hébergées sur une seule et même machine Mainframe de développement nommée GGGG. Chaque instance CTG écoute sur un port spécifique :
+- TU : port 2009
+- IL : port 2006
+- CQ : port 2008
+- KLIF : port 2007
+
+🔁 Structure des environnements  
+Chaque environnement est constitué d’un nombre variable de couloirs d’adressage, chacun identifié par un groupe CICS ID. Par exemple :
+- En TU :
+  - STDA est associé au groupe ID ZZUPL1
+  - STDB (ex-JADE) est associé à ZZUPL2
+  - Technique est associé à ZZUPL9
+  - Référentiel A est associé à ZZUPL5
+  - Référentiel E est associé à ZZUPL6
+
+📋 Table de correspondance  
+Une table système, gérée par CCC, établit la correspondance entre les groupes ID et les APPLID CICS (identifiants d’application) pour chaque environnement.
+
+⚙️ Traitement par l’exit DFHXCURM  
+L’exit DFHXCURM est responsable, entre autres, de la gestion de cette correspondance entre les groupes ID et les APPLID CICS.
+
+---
+
+Souhaites-tu que je le reformule dans un style plus technique, plus synthétique, ou même en anglais ?
