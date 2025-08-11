@@ -1,0 +1,100 @@
+Bien sûr ! Voici une documentation claire et complète pour intégrer Cygwin dans Windows Terminal sous Windows 11.
+
+---
+
+📘 Documentation : Intégration de Cygwin dans Windows Terminal
+
+🧭 Objectif
+Permettre l’accès à l’environnement Unix-like de Cygwin directement depuis Windows Terminal, avec une configuration personnalisée et fluide.
+
+---
+
+🛠️ Prérequis
+
+- ✅ Windows 11
+- ✅ Windows Terminal installé (via Microsoft Store)
+- ✅ Cygwin installé (par défaut dans C:\cygwin64 ou C:\cygwin)
+
+---
+
+🧩 Étapes d’intégration
+
+1. 📍 Identifier le chemin vers Bash de Cygwin
+
+Par défaut :
+`plaintext
+C:\cygwin64\bin\bash.exe
+`
+> Si tu as installé Cygwin dans un autre répertoire, adapte ce chemin.
+
+---
+
+2. 🖥️ Ouvrir les paramètres de Windows Terminal
+
+1. Lance Windows Terminal.
+2. Clique sur la flèche ▼ à côté d’un onglet.
+3. Sélectionne Paramètres.
+4. Dans la section Profiles > Ajouter un nouveau profil, clique sur + Ajouter un nouveau profil.
+5. Choisis Personnalisé.
+
+---
+
+3. 🧾 Exemple de configuration JSON
+
+Si tu préfères modifier directement le fichier settings.json, ajoute ce bloc dans "profiles" → "list" :
+
+`json
+{
+  "guid": "{c1234567-89ab-cdef-0123-456789abcdef}",
+  "name": "Cygwin",
+  "commandline": "C:\\cygwin64\\bin\\bash.exe -l",
+  "icon": "C:\\cygwin64\\Cygwin.ico",
+  "startingDirectory": "C:\\Users\\VotreNomUtilisateur",
+  "hidden": false
+}
+`
+
+🔍 Explication des champs
+
+| Champ              | Description                                                                 |
+|--------------------|-----------------------------------------------------------------------------|
+| guid             | Identifiant unique du profil (peut être généré aléatoirement).              |
+| name             | Nom affiché dans le menu du terminal.                                       |
+| commandline      | Chemin vers le shell Bash de Cygwin.                                        |
+| icon             | Icône personnalisée (facultatif).                                           |
+| startingDirectory| Répertoire de démarrage (peut être ~ ou un chemin Windows).               |
+| hidden           | Si true, le profil est masqué.                                            |
+
+---
+
+🎨 Personnalisation (facultatif)
+
+Tu peux ajouter des options comme :
+
+`json
+"fontFace": "Cascadia Code",
+"fontSize": 12,
+"colorScheme": "Campbell"
+`
+
+---
+
+✅ Vérification
+
+1. Redémarre Windows Terminal.
+2. Clique sur la flèche ▼ pour voir le profil Cygwin.
+3. Lance-le : tu devrais voir ton shell Bash Cygwin s’ouvrir dans un onglet.
+
+---
+
+🧰 Astuces supplémentaires
+
+- Pour générer un GUID : utilise PowerShell  
+  `powershell
+  [guid]::NewGuid()
+  `
+- Pour éviter les conversions de fin de ligne Windows/Unix, monte les répertoires en mode binaire dans Cygwin.
+
+---
+
+Souhaites-tu que je transforme cette documentation en PDF ou en page web ?
