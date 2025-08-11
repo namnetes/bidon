@@ -1,100 +1,124 @@
-Bien sûr ! Voici une documentation claire et complète pour intégrer Cygwin dans Windows Terminal sous Windows 11.
+Voici une documentation complète pour intégrer Cygwin dans Visual Studio Code (VSCode) afin de développer efficacement en Bash sous Windows 11.
 
 ---
 
-📘 Documentation : Intégration de Cygwin dans Windows Terminal
+📘 Documentation : Développement Bash avec Cygwin dans VSCode
 
 🧭 Objectif
-Permettre l’accès à l’environnement Unix-like de Cygwin directement depuis Windows Terminal, avec une configuration personnalisée et fluide.
+Configurer Visual Studio Code pour utiliser Cygwin comme environnement Bash, permettant l’écriture, l’exécution et le débogage de scripts shell dans un cadre moderne et productif.
 
 ---
 
 🛠️ Prérequis
 
 - ✅ Windows 11
-- ✅ Windows Terminal installé (via Microsoft Store)
-- ✅ Cygwin installé (par défaut dans C:\cygwin64 ou C:\cygwin)
+- ✅ Visual Studio Code installé
+- ✅ Cygwin installé avec le shell Bash (bash) et les outils de base (coreutils, grep, sed, etc.)
+- ✅ Extension ShellCheck installée dans VSCode (pour la vérification des scripts Bash)
 
 ---
 
 🧩 Étapes d’intégration
 
-1. 📍 Identifier le chemin vers Bash de Cygwin
+1. 📍 Ajouter Cygwin au PATH de Windows
 
-Par défaut :
+Ajoute le chemin vers les binaires Cygwin dans les variables d’environnement :
+
 `plaintext
-C:\cygwin64\bin\bash.exe
+C:\cygwin64\bin
 `
-> Si tu as installé Cygwin dans un autre répertoire, adapte ce chemin.
+
+Cela permet à VSCode d’exécuter les commandes Bash via Cygwin.
 
 ---
 
-2. 🖥️ Ouvrir les paramètres de Windows Terminal
+2. 🖥️ Configurer le terminal intégré pour utiliser Bash (Cygwin)
 
-1. Lance Windows Terminal.
-2. Clique sur la flèche ▼ à côté d’un onglet.
-3. Sélectionne Paramètres.
-4. Dans la section Profiles > Ajouter un nouveau profil, clique sur + Ajouter un nouveau profil.
-5. Choisis Personnalisé.
+Dans settings.json de VSCode :
+
+`json
+"terminal.integrated.profiles.windows": {
+  "Cygwin Bash": {
+    "path": "C:\\cygwin64\\bin\\bash.exe",
+    "args": ["-l"]
+  }
+},
+"terminal.integrated.defaultProfile.windows": "Cygwin Bash"
+`
+
+> 🔧 Adapte le chemin si Cygwin est installé ailleurs.
 
 ---
 
-3. 🧾 Exemple de configuration JSON
+3. 🧪 Créer et exécuter un script Bash
 
-Si tu préfères modifier directement le fichier settings.json, ajoute ce bloc dans "profiles" → "list" :
+Exemple de script : hello.sh
+
+`bash
+
+!/bin/bash
+echo "Bonjour depuis Cygwin Bash dans VSCode !"
+`
+
+Exécution dans le terminal intégré
+
+1. Ouvre le terminal (Ctrl + ).
+2. Tape :
+   `bash
+   bash hello.sh
+   `
+
+---
+
+4. 🧠 Ajouter ShellCheck pour l’analyse statique
+
+- Installe l’extension ShellCheck depuis le Marketplace VSCode.
+- Elle signale les erreurs de syntaxe, les mauvaises pratiques et les suggestions d’amélioration.
+
+---
+
+5. 🧰 Astuces pour un environnement Bash productif
+
+- Utilise des snippets personnalisés pour accélérer l’écriture de scripts.
+- Active la coloration syntaxique pour .sh, .bash, .zsh.
+- Configure des tâches VSCode pour exécuter automatiquement des scripts :
+
+Exemple de tasks.json
 
 `json
 {
-  "guid": "{c1234567-89ab-cdef-0123-456789abcdef}",
-  "name": "Cygwin",
-  "commandline": "C:\\cygwin64\\bin\\bash.exe -l",
-  "icon": "C:\\cygwin64\\Cygwin.ico",
-  "startingDirectory": "C:\\Users\\VotreNomUtilisateur",
-  "hidden": false
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Exécuter script Bash",
+      "type": "shell",
+      "command": "bash",
+      "args": ["${file}"],
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
 }
-`
-
-🔍 Explication des champs
-
-| Champ              | Description                                                                 |
-|--------------------|-----------------------------------------------------------------------------|
-| guid             | Identifiant unique du profil (peut être généré aléatoirement).              |
-| name             | Nom affiché dans le menu du terminal.                                       |
-| commandline      | Chemin vers le shell Bash de Cygwin.                                        |
-| icon             | Icône personnalisée (facultatif).                                           |
-| startingDirectory| Répertoire de démarrage (peut être ~ ou un chemin Windows).               |
-| hidden           | Si true, le profil est masqué.                                            |
-
----
-
-🎨 Personnalisation (facultatif)
-
-Tu peux ajouter des options comme :
-
-`json
-"fontFace": "Cascadia Code",
-"fontSize": 12,
-"colorScheme": "Campbell"
 `
 
 ---
 
 ✅ Vérification
 
-1. Redémarre Windows Terminal.
-2. Clique sur la flèche ▼ pour voir le profil Cygwin.
-3. Lance-le : tu devrais voir ton shell Bash Cygwin s’ouvrir dans un onglet.
+1. Crée un fichier .sh dans VSCode.
+2. Ouvre le terminal intégré → vérifie que c’est bien Cygwin Bash.
+3. Exécute ton script → observe la sortie.
+4. ShellCheck signale les erreurs éventuelles.
 
 ---
 
-🧰 Astuces supplémentaires
+🔗 Ressources utiles
 
-- Pour générer un GUID : utilise PowerShell  
-  `powershell
-  [guid]::NewGuid()
-  `
-- Pour éviter les conversions de fin de ligne Windows/Unix, monte les répertoires en mode binaire dans Cygwin.
+- Introduction à Bash : Scripts et commandes de base
+- Maîtriser le shell Bash – FUN MOOC
+- Débuter avec les scripts Bash – IT-Connect
+- ShellCheck sur GitHub
 
 ---
 
-Souhaites-tu que je transforme cette documentation en PDF ou en page web ?
+Souhaites-tu que je t’aide à créer un projet Bash complet dans VSCode avec des exemples de scripts et de tâches automatisées ?
