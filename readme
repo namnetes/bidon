@@ -1,0 +1,90 @@
+Parfait ! C'est une excellente pratique de séparer les fonctions de ton .bashrc. Cela rend le fichier plus lisible et plus organisé.
+Voici le contenu détaillé du fichier bash_functions.sh avec des commentaires explicatifs.
+Contenu du fichier bash_functions.sh
+#!/bin/bash
+#
+# Ce fichier contient des fonctions shell personnalisées.
+# Il est conçu pour être "sourcé" par le fichier .bashrc de l'utilisateur.
+#
+# Exemple d'utilisation dans .bashrc :
+#
+# if [ -f ~/.bash_functions.sh ]; then
+#     source ~/.bash_functions.sh
+# fi
+
+# Fonction pour exécuter un playbook Ansible dans un conteneur Docker.
+# Cela simplifie la commande 'docker run ...' longue et complexe.
+# Elle est conçue pour être lancée depuis le répertoire du projet Ansible.
+#
+# Syntaxe : ansible_play [nom_du_playbook.yml] [options_ansible]
+#
+# Exemple : ansible_play mon_premier_playbook.yml --syntax-check
+# Exemple : ansible_play mon_deuxieme_playbook.yml -v
+#
+ansible_play() {
+    # Vérifie si le nom du playbook est fourni comme argument.
+    if [ "$#" -eq 0 ]; then
+        echo "Erreur : Nom du playbook manquant."
+        echo "Utilisation : ansible_play [nom_du_playbook.yml] [options]"
+        return 1
+    fi
+
+    # La commande principale pour lancer le conteneur Docker.
+    docker run \
+        --rm \
+        -v "$(pwd)":/ansible_project \
+        alpine/ansible \
+        ansible-playbook \
+        -i /ansible_project/inventaire \
+        "/ansible_project/$1" \
+        "${@:2}"
+}
+
+# Explication détaillée des options de la commande 'docker run' ci-dessus :
+#
+# - `docker run` : Commande de base pour créer et démarrer un conteneur.
+#
+# - `--rm` : Supprime le conteneur automatiquement après son exécution.
+#   Ceci est pratique pour les tâches ponctuelles et évite d'accumuler des
+#   conteneurs inutiles sur le système.
+#
+# - `-v "$(pwd)":/ansible_project` : Crée un "volume bind mount".
+#   - `$(pwd)` : Récupère le chemin du répertoire de travail actuel sur
+#     la machine hôte (là où tu es quand tu lances la commande).
+#     Par exemple, `/home/marchand_a/alm-ansible`.
+#   - `:/ansible_project` : Ce répertoire de l'hôte est monté dans le
+#     conteneur à l'emplacement `/ansible_project`.
+#     Cela permet au conteneur d'accéder à tes fichiers (playbook, inventaire)
+#     depuis l'hôte.
+#
+# - `alpine/ansible` : Le nom de l'image Docker à utiliser.
+#   C'est l'environnement qui contient Ansible et Python.
+#
+# - `ansible-playbook` : La commande Ansible à exécuter à l'intérieur
+#   du conteneur.
+#
+# - `-i /ansible_project/inventaire` : L'option `-i` spécifie le fichier
+#   d'inventaire. Le chemin `/ansible_project/inventaire` est utilisé car
+#   c'est là que le fichier `inventaire` a été monté via l'option `-v`.
+#
+# - `"/ansible_project/$1"` : C'est le premier argument passé à notre
+#   fonction, qui est le nom de ton playbook. `$1` est une variable shell
+#   qui représente le premier argument. Le chemin complet est spécifié
+#   pour que le conteneur trouve le fichier.
+#
+# - `"${@:2}"` : C'est une syntaxe shell qui représente tous les arguments
+#   restants (à partir du deuxième). Cela permet de passer des options
+#   supplémentaires à `ansible-playbook` (comme `--syntax-check`).
+
+Comment l'utiliser
+ * Crée un fichier nommé .bash_functions.sh dans ton répertoire ~/ (ton répertoire personnel) et copie-colle le code ci-dessus dedans.
+ * Modifie ton fichier .bashrc pour qu'il inclue ce nouveau fichier. Ouvre .bashrc et ajoute ces lignes à la fin :
+   # Source les fonctions shell personnalisées.
+if [ -f ~/.bash_functions.sh ]; then
+    source ~/.bash_functions.sh
+fi
+
+ * Applique les changements ou relance ton terminal.
+   source ~/.bashrc
+
+Maintenant, tu pourras utiliser la fonction ansible_play pour lancer tes playbooks avec une syntaxe simplifiée et bien plus lisible.
