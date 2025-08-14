@@ -1,225 +1,73 @@
-Super projet, Magali ! Voici un tutoriel complet et accessible pour mettre en place un environnement de développement moderne sur Ubuntu 18.04, en utilisant Docker pour contourner les limitations de ton système. On va tout couvrir, étape par étape 🛠️🐧🐍
+Voici un compte rendu structuré de votre réunion sur le projet de modernisation des garanties :
 
 ---
 
-# 🧰 Tutoriel : Environnement de développement Python/Ansible avec Docker sur Ubuntu 18.04
-
-## 🗺️ Objectif
-Créer un environnement de développement moderne, isolé dans des conteneurs Docker, pour travailler avec Python, Ansible, Git, et Visual Studio Code, tout en synchronisant les sources avec GitLab.
-
----
-
-## 1️⃣ Pré-requis : Mise à jour du système
-
-Ubuntu 18.04 est en fin de vie, donc certaines versions de logiciels peuvent être obsolètes. On commence par mettre à jour ce qui est possible :
-
-```bash
-sudo apt update && sudo apt upgrade -y
-```
-
-Ensuite, installe quelques outils de base :
-
-```bash
-sudo apt install -y curl wget gnupg lsb-release software-properties-common
-```
+📝 Compte Rendu de Réunion
+Projet : Modernisation des Garanties  
+Squad : PGP - Tribut Crédit  
+Date : [à compléter]  
+Participants : [à compléter]
 
 ---
 
-## 2️⃣ Installation des outils de base
-
-### 🐙 Git
-
-```bash
-sudo apt install -y git
-git config --global user.name "TonNom"
-git config --global user.email "ton.email@example.com"
-```
-
-### 🐳 Docker
-
-Ubuntu 18.04 ne fournit pas la dernière version de Docker. On installe depuis le dépôt officiel :
-
-```bash
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) stable"
-
-sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io
-```
-
-Ajoute ton utilisateur au groupe `docker` pour éviter d’utiliser `sudo` à chaque fois :
-
-```bash
-sudo usermod -aG docker $USER
-newgrp docker
-```
-
-Teste :
-
-```bash
-docker run hello-world
-```
-
-### 🧠 VS Code
-
-La version via `apt` est souvent ancienne. Pour une version plus récente :
-
-```bash
-wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo apt update
-sudo apt install -y code
-```
+🎯 Objectif du Projet
+Moderniser l’architecture actuelle des garanties en migrant d’un système basé sur VSAM et CICS vers une solution ouverte, reposant sur une base PostgreSQL et un backend Java, tout en conservant les traitements BATCH COBOL existants.
 
 ---
 
-## 3️⃣ Création du projet local
-
-Crée un dossier pour ton projet :
-
-```bash
-mkdir -p ~/dev/mon-projet
-cd ~/dev/mon-projet
-git init
-```
+🧩 Architecture Actuelle
+- Stockage des données : Fichier VSAM
+- Traitement nocturne : BATCH COBOL interagissant avec le VSAM
+- Frontend : Framework F6 (ancien)
+- Backend : Java exposé via CICS
 
 ---
 
-## 4️⃣ 🔧 Dockerfile pour Python + Ansible
-
-Crée un fichier `Dockerfile` :
-
-```Dockerfile
-# Dockerfile
-FROM python:3.11-slim
-
-# Installer Ansible
-RUN pip install --no-cache-dir ansible
-
-# Créer un utilisateur non-root
-RUN useradd -ms /bin/bash devuser
-USER devuser
-WORKDIR /home/devuser/app
-
-# Copier les sources (optionnel si montés plus tard)
-# COPY . .
-
-CMD ["bash"]
-```
+🔄 Objectifs de Modernisation
+- Supprimer la dépendance au Framework F6 et à CICS
+- Développer une solution ouverte en Java
+- Migrer les données vers une base PostgreSQL
+- Assurer la compatibilité avec les BATCH COBOL existants
 
 ---
 
-## 5️⃣ 🏗️ Construction et exécution du conteneur
+❓ Questions Clés à Résoudre
+1. Réplication VSAM → PostgreSQL  
+   - Comment synchroniser les données du fichier VSAM vers PostgreSQL sans impacter les BATCH COBOL ?
+   - Solutions envisagées : ETL, CDC (Change Data Capture), outils de réplication spécifiques à z/OS
 
-Dans le dossier du projet :
+2. PostgreSQL → VSAM (retour des données)  
+   - Comment réinjecter les données modifiées dans PostgreSQL vers le fichier VSAM pour que les BATCH COBOL puissent les traiter ?
 
-```bash
-docker build -t dev-python-ansible .
-```
+3. Contrainte de taille VSAM  
+   - Risque d’atteinte de la taille maximale du fichier VSAM
+   - Nécessité d’audit et de monitoring de la volumétrie
 
-Lance le conteneur en montant ton dossier local :
+4. Interopérabilité via z/OS Connect  
+   - Est-il possible d’exposer le fichier VSAM sous forme d’API REST via z/OS Connect pour permettre une interaction directe depuis le backend Java ?
 
-```bash
-docker run -it --rm \
-  -v ~/dev/mon-projet:/home/devuser/app \
-  --name dev-env \
-  dev-python-ansible
-```
+5. Charge opérationnelle  
+   - Environ 3000 opérations par jour à prendre en compte dans la conception de la solution
 
-Tu es maintenant dans un shell isolé avec Python et Ansible 🎉
-
----
-
-## 6️⃣ 🧪 Tests de fonctionnement
-
-### ✅ Python
-
-```bash
-python --version
-python -c "print('Hello from Python!')"
-```
-
-### ✅ Ansible
-
-```bash
-ansible --version
-ansible localhost -m ping --connection=local
-```
+6. Évaluation de la solution RDRS de Rocket Software  
+   - Est-ce que RDRS peut répondre aux besoins de réplication et d’interopérabilité ?
+   - Proposition : Lancer un PoC ou pilote pour évaluer la solution
 
 ---
 
-## 7️⃣ 🔗 Synchronisation avec GitLab
-
-### Étapes :
-
-1. Crée un dépôt sur GitLab.
-2. Récupère l’URL du dépôt (ex : `git@gitlab.com:utilisateur/mon-projet.git`)
-3. Ajoute le dépôt distant :
-
-```bash
-git remote add origin git@gitlab.com:utilisateur/mon-projet.git
-```
-
-4. Ajoute tes fichiers et pousse :
-
-```bash
-git add .
-git commit -m "Initial commit"
-git push -u origin master
-```
-
-💡 Astuce : utilise une clé SSH pour éviter de taper ton mot de passe à chaque fois. Génère-la avec :
-
-```bash
-ssh-keygen -t ed25519 -C "ton.email@example.com"
-cat ~/.ssh/id_ed25519.pub
-```
-
-Ajoute la clé publique dans GitLab (Paramètres > SSH Keys).
+⚠️ Points de Vigilance
+- Mapping complexe : Le passage d’un fichier VSAM unique à une base PostgreSQL nécessitera un travail important de modélisation et de transformation des données.
+- Maintien de la cohérence des données entre les deux systèmes pendant la phase de transition.
 
 ---
 
-## 8️⃣ 🧼 Conseils de maintenance sur Ubuntu 18.04
-
-- Utilise Docker pour encapsuler les outils récents.
-- Mets à jour Docker et VS Code via leurs dépôts officiels.
-- Pour Python, utilise des images Docker officielles (`python:3.11`, etc.).
-- Pour Ansible, installe via `pip` dans le conteneur.
-- Garde tes sources hors du conteneur pour faciliter la synchronisation et l’édition.
-- Utilise des volumes Docker pour persister les données.
+✅ Prochaines Étapes
+- Étudier les capacités de z/OS Connect pour exposer VSAM en API
+- Lancer un PoC avec RDRS pour tester la réplication bidirectionnelle
+- Cartographier les données VSAM et concevoir le modèle relationnel PostgreSQL
+- Définir une stratégie de synchronisation et de monitoring
+- Identifier les impacts sur les BATCH COBOL et valider leur non-modification
 
 ---
 
-## 🧠 Bonus : VS Code + Docker
-
-Installe l’extension **Remote - Containers** dans VS Code pour éditer directement les fichiers dans le conteneur :
-
-1. Ouvre VS Code
-2. Installe l’extension "Remote - Containers"
-3. Crée un fichier `.devcontainer/devcontainer.json` :
-
-```json
-{
-  "name": "Python Ansible Dev",
-  "build": {
-    "dockerfile": "../Dockerfile"
-  },
-  "workspaceFolder": "/home/devuser/app",
-  "mounts": [
-    "source=${localWorkspaceFolder},target=/home/devuser/app,type=bind"
-  ]
-}
-```
-
-4. Ouvre le dossier dans VS Code et choisis "Reopen in Container"
-
----
-
-## 🏁 Conclusion
-
-Tu as maintenant un environnement moderne, isolé, et maintenable pour développer en Python et Ansible, même sur une vieille Ubuntu 18.04. Grâce à Docker, tu contournes les limitations du système tout en gardant une intégration fluide avec GitLab et VS Code.
-
-Si tu veux aller plus loin, je peux t’aider à ajouter des tests automatisés, des rôles Ansible, ou même du CI/CD avec GitLab. Tu veux qu’on explore ça ensuite ?
+Souhaitez-vous que je vous aide à rédiger une version PowerPoint ou un document de synthèse pour diffusion ?
