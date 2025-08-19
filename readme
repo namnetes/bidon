@@ -1,0 +1,15 @@
+Voici une reformulation plus fluide et structurée de ton texte, tout en conservant le fond de ton message :
+
+---
+
+🛠️ État des lieux et perspectives d'évolution
+
+La cartographie du paramétrage de Changeman, actuellement réalisée de manière partielle et optionnelle, mériterait d’être approfondie et formalisée. Une solution logicielle capable d’intégrer dynamiquement de nouvelles fonctionnalités selon les besoins serait une approche pertinente pour répondre aux enjeux d’adaptabilité.
+
+🐍 Évolution technologique et alternatives à Rexx
+
+Rexx n’est plus l’unique langage incontournable dans notre environnement. Grâce à l’émergence des technologies open source, de nombreuses alternatives sont désormais envisageables. L’intégration d’API, l’utilisation d’Ansible et de ses playbooks ouvrent la voie à une automatisation plus souple et moderne. Ces outils issus du monde open, que nous n’avons pas encore exploités, permettent notamment d’exécuter des JCL, du Python et bien d’autres langages sur z/OS via OMEGAMON ou des solutions similaires.
+
+---
+
+Souhaites-tu que je le reformule dans un style plus technique, plus synthétique, ou adapté à une présentation orale ou écrite spécifique ?
