@@ -1,84 +1,12 @@
-Bien sûr Magali 😊 ! Plongeons dans le monde d’Ansible et des playbooks, avec une attention particulière à ton environnement Docker.
-
----
-
-## 🧠 Qu’est-ce qu’un playbook Ansible ?
-
-Un **playbook Ansible** est un fichier écrit en **YAML** qui décrit une ou plusieurs **tâches d’automatisation** à exécuter sur des machines distantes. C’est le cœur d’Ansible : au lieu de taper des commandes manuellement, tu écris un scénario que Ansible va suivre pour configurer, déployer ou gérer des systèmes.
-
-### 🎯 À quoi ça sert ?
-Un playbook sert à :
-- **Automatiser** des tâches répétitives (installation de logiciels, configuration de services…)
-- **Déployer** des applications ou des environnements
-- **Gérer** des configurations de manière cohérente et reproductible
-- **Orchestrer** plusieurs machines en parallèle
-
----
-
-## 🐣 Tutoriel débutant : Playbook "Hello World"
-
-Imaginons que tu exécutes Ansible dans un **conteneur Docker**. Voici comment créer un playbook simple qui affiche "Hello World" sur une machine distante (ou locale si tu utilises `localhost`).
-
-### 📁 Étape 1 : Préparer ton environnement Docker
-
-Si tu n’as pas encore d’image Docker avec Ansible, tu peux en créer une rapidement :
-
-```Dockerfile
-FROM python:3.10-slim
-RUN pip install ansible
-WORKDIR /ansible
-```
-
-Puis tu construis et lances ton conteneur :
-
-```bash
-docker build -t ansible-env .
-docker run -it --name ansible-container ansible-env bash
-```
-
----
-
-### 📄 Étape 2 : Créer le playbook `hello.yml`
-
-Dans ton conteneur, crée un fichier `hello.yml` :
-
-```yaml
----
-- name: Playbook Hello World
-  hosts: localhost
-  gather_facts: false
-
-  tasks:
-    - name: Afficher Hello World
-      ansible.builtin.debug:
-        msg: "Hello World depuis Ansible dans Docker !"
-```
-
-### 🧪 Étape 3 : Exécuter le playbook
-
-Toujours dans ton conteneur :
-
-```bash
-ansible-playbook hello.yml
-```
-
-Tu verras une sortie comme :
-
-```
-TASK [Afficher Hello World] ***
-ok: [localhost] => {
-    "msg": "Hello World depuis Ansible dans Docker !"
-}
-```
-
----
-
-## 🛠️ Astuce Docker + Ansible
-
-Si tu veux exécuter Ansible sur ta machine hôte depuis le conteneur, tu peux :
-- Monter ton fichier d’inventaire avec `-v`
-- Utiliser SSH pour te connecter à ta machine hôte ou à une VM distante
-
----
-
-Tu veux aller plus loin ? Je peux t’aider à créer un playbook qui installe Nginx, configure un utilisateur, ou même déploie une app web. Tu choisis le niveau d’ambition 😄
+Compte Rendu de la Réunion
+Contexte et Problématique
+L'objectif de cette réunion était d'évaluer la faisabilité de créer un environnement de test dédié pour les campagnes "B+8". Actuellement, ces tests sont joués directement en production, ce qui expose le système à des risques significatifs.
+Solutions Écartées
+ * Environnement de Pré-production : Cette option a été écartée pour deux raisons principales. Premièrement, l'environnement de pré-production est mutualisé, ce qui le rend non privatisable pour des campagnes de tests spécifiques. Deuxièmement, les données utilisées dans cet environnement ne sont pas "vieillies" ; elles sont une simple copie d'une journée de production spécifique, ce qui ne correspond pas aux besoins des tests B+8 qui nécessitent des données évolutives sur plusieurs jours.
+Pistes à Explorer
+Il a été convenu d'étudier la mise en place d'un environnement de développement dédié, à l'image des environnements existants tels que TU, IL ou CQ.
+L'étude sera menée par l'équipe SNSS. Les points suivants doivent être approfondis pour cette étude :
+ * Ressources Mainframe : L'environnement de test devra supporter des traitements batch. Il faudra également considérer la mise à disposition de ressources pour l'écosystème DB2 et potentiellement MQ.
+ * Environnement Teradata : Il est également impératif d'évaluer la facilité et les modalités de la mise à disposition d'un environnement Teradata pour les besoins des tests.
+Prochaines Étapes
+L'équipe SNSS est chargée de mener l'étude de faisabilité sur la création de cet environnement de développement dédié, en se concentrant sur les ressources Mainframe et Teradata. L'équipe CCC sera consultée ultérieurement, au moment opportun. Une prochaine réunion sera planifiée pour présenter les conclusions de cette étude et proposer des solutions concrètes.
