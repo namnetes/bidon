@@ -1,5 +1,7 @@
-Nos machines virtuelles Ubuntu 18.04, datant de 2018, commencent à accuser leur âge. Pour éviter les complications liées à l’environnement système, il est recommandé d’utiliser une image Docker pour exécuter Ansible.
 
-🔧 Dans ce tutoriel, nous opterons pour l’image quay.io/ansible/ansible-runner, plutôt que celle disponible sur Docker Hub (alpine/ansible). Cette approche nous permettra de lancer Ansible dans un environnement isolé et maîtrisé.
-
-🚀 Nous allons donc créer un conteneur basé sur cette image afin d’exécuter, sans prétention, notre toute première commande Ansible.
+Option	Signification
+docker run	Lance un nouveau conteneur Docker.
+--rm	Supprime automatiquement le conteneur une fois la commande terminée.
+-it	Combine deux options : -i (mode interactif) et -t (allocation d’un pseudo-terminal). Utile pour les commandes qui attendent une sortie lisible.
+quay.io/ansible/ansible-runner	Nom complet de l’image Docker à utiliser. Elle contient Ansible préinstallé.
+ansible --version	La commande exécutée à l’intérieur du conteneur. Elle affiche la version d’Ansible.
