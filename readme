@@ -1,7 +1,12 @@
-
-Option	Signification
-docker run	Lance un nouveau conteneur Docker.
---rm	Supprime automatiquement le conteneur une fois la commande terminée.
--it	Combine deux options : -i (mode interactif) et -t (allocation d’un pseudo-terminal). Utile pour les commandes qui attendent une sortie lisible.
-quay.io/ansible/ansible-runner	Nom complet de l’image Docker à utiliser. Elle contient Ansible préinstallé.
-ansible --version	La commande exécutée à l’intérieur du conteneur. Elle affiche la version d’Ansible.
+Sortie de la commande docker run --rm -it quay.io/ansible/ansible-runner ansible --version
+La sortie de cette commande fournit des informations détaillées sur la version et la configuration d'Ansible exécutée à l'intérieur d'un conteneur Docker.
+Décryptage de la sortie
+ * ansible [core 2.12.5.post0]: Cela indique la version principale d'Ansible. Le numéro 2.12.5.post0 spécifie la version exacte du noyau (core) d'Ansible qui est utilisée.
+ * config file = None: Cela signifie qu'aucun fichier de configuration global ansible.cfg n'a été trouvé ou spécifié. Ansible peut toujours fonctionner sans ce fichier, en utilisant ses valeurs par défaut.
+ * configured module search path = ['/home/runner/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']: C'est le chemin où Ansible recherche les modules personnalisés ou installés. Les modules sont des unités de code qu'Ansible exécute sur les machines cibles. La sortie montre que les modules sont recherchés à deux emplacements : le répertoire personnel de l'utilisateur runner et un répertoire système.
+ * ansible python module location = /usr/local/lib/python3.8/site-packages/ansible: C'est l'emplacement sur le système de fichiers du conteneur où les bibliothèques Python d'Ansible sont installées. Cela confirme qu'Ansible est géré comme un module Python.
+ * ansible collection location = /home/runner/.ansible/collections:/usr/share/ansible/collections: Les collections sont le nouveau format standard pour empaqueter et distribuer les rôles, les modules et les plugins Ansible. Cette ligne indique les répertoires où Ansible recherche les collections.
+ * executable location = /usr/local/bin/ansible: C'est l'emplacement de l'exécutable binaire de la commande ansible dans le conteneur.
+ * python version = 3.8.12 (default, Sep 21 2021, 00:10:52) [GCC 8.5.0 20210514 (Red Hat 8.5.0-3)]: Cette information est cruciale. Elle montre que le conteneur utilise Python 3.8.12 pour exécuter Ansible. La date de compilation et la version du compilateur GCC sont également affichées.
+ * jinja version = 2.10.3: Jinja2 est le moteur de template utilisé par Ansible pour gérer les variables et les fichiers de templates. Cette ligne montre la version de Jinja2 installée.
+ * libyaml = True: Cela confirme que la bibliothèque libyaml est disponible, ce qui permet à Ansible de traiter les fichiers YAML plus rapidement.
