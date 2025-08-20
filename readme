@@ -1,12 +1,84 @@
-Sortie de la commande docker run --rm -it quay.io/ansible/ansible-runner ansible --version
-La sortie de cette commande fournit des informations détaillées sur la version et la configuration d'Ansible exécutée à l'intérieur d'un conteneur Docker.
-Décryptage de la sortie
- * ansible [core 2.12.5.post0]: Cela indique la version principale d'Ansible. Le numéro 2.12.5.post0 spécifie la version exacte du noyau (core) d'Ansible qui est utilisée.
- * config file = None: Cela signifie qu'aucun fichier de configuration global ansible.cfg n'a été trouvé ou spécifié. Ansible peut toujours fonctionner sans ce fichier, en utilisant ses valeurs par défaut.
- * configured module search path = ['/home/runner/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']: C'est le chemin où Ansible recherche les modules personnalisés ou installés. Les modules sont des unités de code qu'Ansible exécute sur les machines cibles. La sortie montre que les modules sont recherchés à deux emplacements : le répertoire personnel de l'utilisateur runner et un répertoire système.
- * ansible python module location = /usr/local/lib/python3.8/site-packages/ansible: C'est l'emplacement sur le système de fichiers du conteneur où les bibliothèques Python d'Ansible sont installées. Cela confirme qu'Ansible est géré comme un module Python.
- * ansible collection location = /home/runner/.ansible/collections:/usr/share/ansible/collections: Les collections sont le nouveau format standard pour empaqueter et distribuer les rôles, les modules et les plugins Ansible. Cette ligne indique les répertoires où Ansible recherche les collections.
- * executable location = /usr/local/bin/ansible: C'est l'emplacement de l'exécutable binaire de la commande ansible dans le conteneur.
- * python version = 3.8.12 (default, Sep 21 2021, 00:10:52) [GCC 8.5.0 20210514 (Red Hat 8.5.0-3)]: Cette information est cruciale. Elle montre que le conteneur utilise Python 3.8.12 pour exécuter Ansible. La date de compilation et la version du compilateur GCC sont également affichées.
- * jinja version = 2.10.3: Jinja2 est le moteur de template utilisé par Ansible pour gérer les variables et les fichiers de templates. Cette ligne montre la version de Jinja2 installée.
- * libyaml = True: Cela confirme que la bibliothèque libyaml est disponible, ce qui permet à Ansible de traiter les fichiers YAML plus rapidement.
+Bien sûr Magali 😊 ! Plongeons dans le monde d’Ansible et des playbooks, avec une attention particulière à ton environnement Docker.
+
+---
+
+## 🧠 Qu’est-ce qu’un playbook Ansible ?
+
+Un **playbook Ansible** est un fichier écrit en **YAML** qui décrit une ou plusieurs **tâches d’automatisation** à exécuter sur des machines distantes. C’est le cœur d’Ansible : au lieu de taper des commandes manuellement, tu écris un scénario que Ansible va suivre pour configurer, déployer ou gérer des systèmes.
+
+### 🎯 À quoi ça sert ?
+Un playbook sert à :
+- **Automatiser** des tâches répétitives (installation de logiciels, configuration de services…)
+- **Déployer** des applications ou des environnements
+- **Gérer** des configurations de manière cohérente et reproductible
+- **Orchestrer** plusieurs machines en parallèle
+
+---
+
+## 🐣 Tutoriel débutant : Playbook "Hello World"
+
+Imaginons que tu exécutes Ansible dans un **conteneur Docker**. Voici comment créer un playbook simple qui affiche "Hello World" sur une machine distante (ou locale si tu utilises `localhost`).
+
+### 📁 Étape 1 : Préparer ton environnement Docker
+
+Si tu n’as pas encore d’image Docker avec Ansible, tu peux en créer une rapidement :
+
+```Dockerfile
+FROM python:3.10-slim
+RUN pip install ansible
+WORKDIR /ansible
+```
+
+Puis tu construis et lances ton conteneur :
+
+```bash
+docker build -t ansible-env .
+docker run -it --name ansible-container ansible-env bash
+```
+
+---
+
+### 📄 Étape 2 : Créer le playbook `hello.yml`
+
+Dans ton conteneur, crée un fichier `hello.yml` :
+
+```yaml
+---
+- name: Playbook Hello World
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Afficher Hello World
+      ansible.builtin.debug:
+        msg: "Hello World depuis Ansible dans Docker !"
+```
+
+### 🧪 Étape 3 : Exécuter le playbook
+
+Toujours dans ton conteneur :
+
+```bash
+ansible-playbook hello.yml
+```
+
+Tu verras une sortie comme :
+
+```
+TASK [Afficher Hello World] ***
+ok: [localhost] => {
+    "msg": "Hello World depuis Ansible dans Docker !"
+}
+```
+
+---
+
+## 🛠️ Astuce Docker + Ansible
+
+Si tu veux exécuter Ansible sur ta machine hôte depuis le conteneur, tu peux :
+- Monter ton fichier d’inventaire avec `-v`
+- Utiliser SSH pour te connecter à ta machine hôte ou à une VM distante
+
+---
+
+Tu veux aller plus loin ? Je peux t’aider à créer un playbook qui installe Nginx, configure un utilisateur, ou même déploie une app web. Tu choisis le niveau d’ambition 😄
