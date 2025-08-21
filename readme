@@ -1,26 +1,44 @@
-Bien sûr ! Voici une proposition de mail claire, professionnelle et engageante pour informer les Squad Leaders :
+Voici une reformulation structurée et fluide de ton ordre du jour, avec un ton professionnel et clair, tout en conservant l’intention de chaque point :
 
 ---
 
-**Objet : Invitation à des ateliers Mia Discovery – vers une nouvelle dynamique avec zDevOps**
+🗓️ Ordre du jour – Réunion de suivi sur l’usage du stockage S3
 
-Bonjour à toutes et à tous,
+1. 📌 État des lieux des projets
+- Recensement des projets identifiés souhaitant utiliser le stockage S3
+- Identification des projets ayant abandonné S3 au profit de CFT : lesquels et pourquoi
 
-Comme vous le savez, l’arrivée de **zDevOps** marque une étape importante dans l’évolution de nos pratiques. Dans ce contexte, **Panel-K est en cours de remise en question**, pour ne pas dire en voie d’abandon, ce qui nous amène à repenser nos outils et nos approches.
+2. 🐞 Problèmes et bugs rencontrés
+- Liste des incidents ou limitations déclarés par les projets utilisateurs
+- Bugs identifiés et escaladés : vers vos équipes ou vers IBM pour demande de correctif
+- Point de situation sur les bugs en cours de traitement
 
-Afin de vous accompagner dans cette transition et vous permettre de découvrir les opportunités offertes par **Mia Discovery**, nous proposons **des ateliers sur demande** d’une durée d’**1h à 1h30**. Ces sessions seront l’occasion de :
+3. 📚 Cas d’usage impactés
+- Sommes-nous en mesure de cartographier les cas d’usage concernés par ces bugs ?
+- Objectif : constituer une liste de "well-known bugs" à partager avec les équipes
 
-- Explorer les fonctionnalités clés de Mia Discovery  
-- Comprendre comment cet outil peut s’intégrer dans vos routines d’équipe  
-- Partager vos besoins et cas d’usage pour construire ensemble une adoption pertinente
+4. 🔄 Fonctionnalités rétrofitées : quelle stratégie à la rentrée ?
+- Quelle posture adopter vis-à-vis des fonctionnalités S3 réintégrées ou en cours de stabilisation
 
-📅 **Ces ateliers sont organisés à la demande**, selon vos disponibilités et celles de vos équipes. N’hésitez pas à nous faire part de votre intérêt en répondant à ce mail ou en contactant directement [Nom du contact / équipe].
+5. 🧩 Cas d’usage SSS
+- Retour d’expérience : utilisation de S3 pour les déploiements z/USS (z à z)
+- Peut-on formaliser les cas d’usage S3 validés et les communiquer aux équipes MOE ?
 
-Votre rôle de Squad Leader est essentiel dans cette phase de transformation, et nous comptons sur votre engagement pour faire de cette transition une réussite collective.
+6. 🚀 Vision stratégique et perspectives
+- Quelle trajectoire pour l’offre S3 dans les mois à venir ?
+  - Selfcare
+  - Notifications
+  - Déclenchements OPC via API REST (impact de la disparition de la console DWC)
+  - Mise en œuvre d’un use case complet entre LCL et un partenaire du groupe (même data center, même z)
 
-À très bientôt,  
-**[Votre prénom / Équipe organisatrice]**
+7. 🌐 Infrastructure et architecture
+- Point sur l’éventuelle carte réseau dédiée S3 : faisabilité, intérêt, retour d’expérience
+- Possibilité d’un S3 embarqué sur z pour éviter les échanges inter-machines : état des lieux
+
+8. 📅 Synthèse et planification
+- Quels sujets retenir comme prioritaires ?
+- Quel calendrier envisager pour les prochaines étapes ?
 
 ---
 
-Souhaitez-vous que je le reformule dans un ton plus informel ou plus technique ?
+Souhaites-tu que je t’aide à rédiger l’email d’invitation ou le support de présentation pour cette réunion ?
