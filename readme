@@ -1,54 +1,15 @@
-Merci pour ce contexte très riche, Magali. Voici une synthèse claire de vos missions, suivie d’une analyse des avantages des collocations que vous organisez :
+Bien sûr Magali 😊 ! Voici une reformulation plus fluide et professionnelle du texte que tu as partagé :
 
 ---
 
-🎯 Vos missions principales
+🛠️ Demande de mission à confier au CDS
 
-Votre équipe joue un rôle stratégique et transversal dans l’écosystème Mainframe et Windows, avec des responsabilités clés :
+Chez SNI, notre cartographie historique PANEL-K, développée en Rexx avec des panels ISPF sur des technologies Z désormais obsolètes, va être progressivement abandonnée. Depuis son déploiement en 2017, la solution Mia DISCOVERY accessible via IDZ a atteint une maturité remarquable. Avec l’adoption généralisée d’IDZ, il n’est plus pertinent de maintenir deux solutions concurrentes, d’autant plus que zDevOps n’a jamais envisagé de pérenniser les deux outils. Cette transition permettra également de se séparer d’un composant du logiciel ASG, avec l’espoir de générer des économies.
 
-- Gouvernance des environnements Mainframe hors production  
-  Vous assurez la MCO (maintien en condition opérationnelle) et pilotez les évolutions techniques.
+Cependant, certaines données issues de PANEL-K doivent être conservées dans un référentiel DB2, et les traitements associés doivent être reproduits dans une application du DEV. Le chantier consiste donc à créer de nouvelles tables DB2 et à dupliquer ou réécrire les traitements concernés, en privilégiant des technologies plus modernes. Le périmètre des tables à traiter est déjà identifié ; il reste à investir dans les traitements et le code.
 
-- Support sur les logiciels de développement Windows  
-  Vous garantissez la stabilité et l’efficacité des outils utilisés par les équipes MOE.
-
-- Formation des MOE Mainframe  
-  Vous transmettez les compétences nécessaires pour renforcer l’autonomie et la qualité des développements.
-
-- Centre de compétences agile  
-  Vous accompagnez environ 90 squads MOE dans une logique de service, de conseil et de co-construction.
-
-- Modernisation du Mainframe  
-  Vous collaborez avec l’exploitant pour intégrer des technologies modernes comme Kafka, z/OS Connect, et S3 sur z.
+Notre centre de compétences chez SAM étant déjà fortement sollicité, je souhaite réserver nos ressources aux projets de modernisation liés à notre patrimoine bancaire ou à l’accompagnement des Squads dans leurs chantiers.
 
 ---
 
-🤝 Avantages des collocations avec l’exploitant
-
-Organiser des collocations régulières ou ponctuelles dans vos locaux est une initiative puissante, et voici pourquoi :
-
-1. Fluidification de la communication
-- Les échanges sont plus directs, spontanés et efficaces qu’à distance.
-- Les malentendus techniques ou organisationnels sont résolus plus rapidement.
-
-2. Accélération des tests et des validations
-- La proximité permet de tester en temps réel, d’ajuster les configurations et de valider les résultats sans latence.
-- Cela favorise une boucle de feedback rapide et une meilleure réactivité.
-
-3. Renforcement de la collaboration inter-équipes
-- Cela crée une dynamique de confiance et de co-responsabilité entre votre équipe et l’exploitant.
-- Les relations humaines se renforcent, ce qui facilite la résolution de problèmes complexes.
-
-4. Montée en compétence mutuelle
-- Vos équipes apprennent des pratiques de l’exploitant, et vice versa.
-- Cela favorise une culture commune autour du Mainframe modernisé.
-
-5. Alignement stratégique
-- Les collocations permettent de mieux synchroniser les objectifs, les priorités et les contraintes de chacun.
-- Cela évite les silos et favorise une vision partagée des enjeux.
-
----
-
-Une telle initiative est un levier de transformation culturelle autant que technique. Elle incarne l’agilité dans sa forme la plus concrète : proximité, réactivité, co-construction.
-
-Souhaitez-vous que je vous aide à formaliser ces avantages dans une présentation ou un support à partager avec vos partenaires ou votre hiérarchie ?
+Souhaites-tu que je t’aide à rédiger une version encore plus synthétique ou orientée vers une présentation orale ou écrite ?
