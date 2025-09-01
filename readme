@@ -1,0 +1,83 @@
+Voici un compte rendu détaillé destiné à la direction, faisant état de la situation actuelle de l'utilisation de S3, des blocages rencontrés et des évolutions envisagées.
+
+---
+
+**Compte Rendu à la Direction : Point de Situation sur l'Utilisation de S3**
+
+**Date :** [Date de rédaction]
+
+**Objet :** État des lieux, défis et perspectives d'évolution pour l'intégration et l'optimisation de S3.
+
+**1. Contexte et Situation Actuelle**
+L'objectif de cette discussion était de recenser les projets utilisant ou souhaitant utiliser S3, d'identifier les difficultés rencontrées et d'évaluer les solutions potentielles. Il apparaît que l'utilisation de S3 est grandissante, mais qu'elle se heurte à des limitations importantes, notamment lorsque le mainframe est partie prenante.
+
+Actuellement, les cas d'usage de S3 incluent :
+*   **SAM** : Utilisation pour la livraison de composants USS (jars, Python, Java, configuration, fichiers texte) entre les environnements de développement, de test (6Q6R) et de production, sans problème de conversion.
+*   **ROCK** : Concerne le transfert de fichiers volumineux (50 Go, réduits à 5,5 Go après compression).
+*   **Transferts intra-Z** : Échanges de fichiers entre la production et le développement pour alimenter les environnements de développement, ce qui pourrait à terme remplacer les transferts via CFT. Échanges avec des entités du groupe (data center), potentiellement de nombreux fichiers.
+*   **Flux de données** : L'équipe Data souhaitait envoyer des flux à l'application "structure" côté mainframe. Après discussion, il a été décidé de passer par S3 en mode asynchrone, car le fichier n'était pas nécessaire immédiatement.
+*   **Projet Facture** : Implique un nombre variable de fichiers arrivant dans la journée. Une solution de robot est en développement pour agréger les fichiers quotidiens en un seul, qui sera ensuite récupéré à heure fixe via GDK utile.
+*   **Projet Calos (onboarding)** : Fournit des fichiers via S3, en remplacement d'un système sur Clean 100. Une contrainte est l'exigence d'un fichier vide si aucune donnée n'est disponible, pour éviter le plantage du GDK utile.
+*   **Paiements instantanés (Lisa Zénon)** : Utilise MFT Control-M pour scanner S3 et détecter l'arrivée de fichiers, sans transfert de données direct. Cette approche est considérée comme acceptable du point de vue de la sécurité pour l'instant.
+
+**2. Difficultés et Blocages Actuels**
+
+Les principales difficultés identifiées sont les suivantes :
+*   **Sécurité et Processus d'Accès** : L'octroi de droits et l'obtention de "buckets" S3 sont perçus comme longs, complexes et manquant de contrôle. La nomenclature des buckets n'est pas rigoureusement appliquée. Il y a un souhait d'assimilation plus simple des buckets, comme un stockage natif.
+*   **Performances de l'Offre S3 Actuelle** : L'offre S3 existante, bien que fonctionnelle, ne répond pas à tous les besoins.
+    *   **Upload de gros fichiers** : Le transfert de fichiers volumineux (4-5 Go, ou 15 Go zippés à 5,5 Go) via GDK utile en upload est lent et inconstant (ex: 40 minutes pour un fichier zippé, ou deux fichiers sur quatre passant en 41 minutes contre 9 minutes pour les deux autres simultanément).
+    *   **Download** : Les performances en download sont meilleures, généralement en dessous de 10 minutes.
+*   **Manque de Capacités Événementielles (Triggers)** :
+    *   **Mainframe** : Il est impossible de déclencher un traitement sur le mainframe dès qu'un fichier est déposé sur S3. Cela constitue le "nerf de la guerre" et bloque de nombreux sujets.
+    *   **SNS (Single Notification Services)** : Une solution pour l'événementiel, via SNS côté AWS, permettrait de déclencher un script ou un JCL à la réception d'un fichier. Cette fonctionnalité est en cours de poussée auprès de l'équipe "socle native" qui, étonnamment, la considère comme une priorité basse (300).
+    *   **MFT Control-M** : N'est pas homologué pour les applications de SRE (Sécurité des Ressources d'Exploitation).
+    *   **Workarounds complexes** : Des contournements sont mis en place, comme l'utilisation d'un job de "file watcher" Control-M surveillant le bucket, qui enverrait un fichier vide par CFT pour signaler l'arrivée d'un fichier au mainframe. Cela est jugé très complexe et "tordu".
+    *   **API REST TWS** : Une piste consisterait à utiliser les API REST TWC pour déclencher directement un événement TWS depuis le monde Open, mais l'accès à la console TWC pose problème.
+    *   **Nomenclature des triggers** : Les déclencheurs devraient permettre de forcer le nom de fichier attendu par le mainframe, comme le fait CFT avec des fonctionnalités de "fame".
+*   **Bug de Conversion UTF8** : Un bug de conversion UTF8 est toujours en cours de correction. Sa livraison dépend de l'installation d'un correctif, potentiellement lié au disque système, ce qui pourrait retarder sa mise en production (les IPL de production sont généralement le jeudi soir, avec Lim 5 en dernier, qui est une partition de batch).
+*   **Licence PKIP pour la Compression** : La licence PKIP, nécessaire pour la compression (utilisée avec GDK utile), n'est disponible que sur une des trois partitions (Lim 5). Cela contraint le routage des batchs vers cette partition spécifique.
+*   **Manque de Clarté Managériale** : La direction (Frédéric Guidier) semble avoir une vision erronée ou incomplète de la situation, pensant que "tout roule" avec S3, ce qui freine l'investissement dans des solutions plus adaptées.
+
+**3. Évolutions et Solutions Envisageables**
+
+Plusieurs pistes d'évolution et de solutions sont à l'étude ou en cours de développement :
+*   **Nouvelle Offre S3 Kajip** : Une nouvelle offre S3, promettant d'être beaucoup plus performante, est en cours de déploiement par Kajip.
+*   **Montée de Version ZOS32** : De nombreuses améliorations et déblocages (dont la compression de fichiers) sont attendus avec la montée de version vers ZOS32. Le téléchargement est prévu pour octobre, mais le déploiement sur l'ensemble des clients prend généralement deux ans.
+*   **SNS (Single Notification Services) côté AWS** : Permettrait de gérer l'événementiel S3 en déclenchant des traitements (scripts, JCL) dès la réception d'un fichier. Cette solution est fortement poussée.
+*   **S3 Intra-Z (Stockage Propriétaire IBM)** :
+    *   Il serait possible d'installer un serveur S3 sur une partition Z (USS ou Z Linux) pour maintenir les transferts au sein de la machine, évitant ainsi le passage par TCPIP et utilisant un stockage propriétaire IBM.
+    *   Cela offrirait des performances inégalées pour les échanges intra-Z, avec la possibilité de créer des "providers" dédiés.
+    *   Les cas d'usage principaux seraient les échanges avec les entités du groupe (le data center étant la même machine) et les transferts de la production vers le développement.
+*   **MFT (Managed File Transfer) via Control-M** :
+    *   Solution équivalente à SFTP par Control-M, avec des jobs pré-paramétrés permettant de stocker les clés d'accès S3 dans des profils de connexion.
+    *   Permet le déplacement et la copie de fichiers entre S3, ou de S3 vers Clean 100, avec des mécanismes de re-tentative et de reporting, offrant une traçabilité sur 7 jours.
+    *   Cependant, elle n'est pas homologuée pour les applications de SRE.
+*   **API REST TWC pour les Déclencheurs** : L'utilisation des API REST TWC est envisagée pour permettre aux applications Open de déclencher directement des événements TWS sur le Z, simplifiant ainsi la communication et évitant les contournements complexes via CFT.
+*   **Automatisation des Demandes S3** : Un portail de demande de ressources S3 est souhaité, similaire au workflow ZMF pour le Z, afin de simplifier et d'accélérer la création de buckets.
+*   **Outil d'Aide à la Décision** : La création d'un "arbre de décision" ou d'un chemin de réflexion est proposée pour aider les équipes (squads) à choisir la solution la plus adaptée (S3 ou CFT) en fonction de leurs besoins (événementiel, nombre variable de fichiers, etc.).
+
+**4. Comparaison S3 vs. CFT ( Rappel )**
+
+Il est crucial de rappeler les avantages de CFT, qui explique sa longévité et sa robustesse :
+*   **Déclencheur intégré** : Permet au traitement mainframe de se dérouler automatiquement dès l'arrivée du fichier, même en cas de retard du producteur.
+*   **Robustesse** : Gestion native de la reprise sur erreur, des rebonds, et un alerting intégré (un transfert planté génère un ticket).
+*   **Facilité de mise en œuvre** : Bien que des difficultés de transcodage puissent survenir, le processus est rodé depuis des années et facile à mettre en place.
+*   **Chaîne de bout en bout** : Avec un déclencheur, la chaîne se déroule automatiquement sans intervention manuelle.
+
+À l'inverse, l'utilisation de S3 sans déclencheur implique :
+*   **Gestion manuelle** : Nécessité de gérer manuellement les blocages de la chaîne en cas de retard ou de problème sur les fichiers.
+*   **Manque d'instantanéité** : Pas adapté pour la consommation de données "fraîches".
+*   **Complexité des contournements** : Comme illustré par le cas Calos, où des étapes de "recovery" OPC et des flags sont ajoutés pour simuler une résilience et un alerting, ce qui complexifie les jobs et crée des tickets en cas d'absence de fichier.
+
+**5. Recommandations et Prochaines Étapes**
+
+1.  **Communication Stratégique** : Il est impératif de partager une vision claire et détaillée des capacités et limitations de S3 avec la direction (Frédéric Guidier), en s'appuyant sur ce compte rendu. Une communication transparente est essentielle pour aligner les décisions d'investissement avec les besoins opérationnels réels des squads.
+2.  **Priorisation de l'Événementiel** : Pousser activement l'équipe "socle native" à prioriser le déploiement de SNS pour l'événementiel S3, en incluant les besoins de normalisation des triggers pour le mainframe.
+3.  **Analyse des Solutions d'Infrastructure** : Évaluer l'opportunité de l'offre S3 intra-Z pour les échanges internes, compte tenu des gains de performance potentiels.
+4.  **Développement d'Outils d'Aide** : Accélérer la création de l'arbre de décision pour l'utilisation de S3 vs. CFT, afin d'aiguiller les squads dès la phase de conception et éviter les retours en arrière coûteux en temps.
+5.  **Suivi des Correctifs** : Assurer un suivi rigoureux du bug UTF8 et de la montée de version ZOS32, en tenant compte des contraintes de déploiement.
+6.  **Simplification des Processus** : Travailler à l'amélioration du processus d'octroi des buckets et à l'implémentation d'une solution d'automatisation des demandes, pour réduire la friction et encourager l'adoption.
+
+---
+
+Cet échange a permis de mettre en lumière des problématiques complexes et de rappeler que si S3 offre de nouvelles opportunités, il ne remplace pas systématiquement les solutions existantes sans une adaptation significative et des investissements ciblés.
