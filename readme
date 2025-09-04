@@ -1,0 +1,69 @@
+Fantastique \! C'est la confirmation que nous attendions. 🚀
+
+Avec SSH, ton compte utilisateur et Python 3 déjà en place sur la machine distante, toutes les pièces du puzzle sont là. Tu n'as pas besoin de te soucier des étapes de configuration, ce qui te permet de passer directement à la pratique d'Ansible.
+
+Tu peux maintenant t'attaquer à la création et à l'exécution de ton premier **playbook**. L'objectif est de s'assurer que tu peux bien interagir avec ta machine distante.
+
+-----
+
+### Création du premier playbook
+
+Un playbook est un fichier au format **YAML** qui décrit les tâches à automatiser. Il se compose de plusieurs éléments :
+
+1.  **Hôtes cibles :** Où le playbook doit-il s'exécuter ?
+2.  **Tâches :** Que doit-il faire ?
+
+Pour ce premier essai, nous allons créer un playbook simple qui va créer un répertoire `ansible-test` dans le dossier de ton utilisateur sur la machine distante.
+
+Crée un fichier nommé `premier_playbook.yml` dans ton dossier de travail (`/ansible` dans ton conteneur) avec le contenu suivant :
+
+```yaml
+---
+- name: Créer un répertoire de test Ansible
+  hosts: all
+  tasks:
+    - name: Vérifier la connexion avec le module ping
+      ansible.builtin.ping:
+
+    - name: Créer le répertoire ansible-test
+      ansible.builtin.file:
+        path: /home/{{ ansible_user }}/ansible-test
+        state: directory
+        mode: '0755'
+```
+
+  * `name`: Donne un titre à ton playbook et à chaque tâche.
+  * `hosts: all`: Cible toutes les machines définies dans ton inventaire.
+  * `tasks`: La liste des actions qu'Ansible doit effectuer.
+  * `ansible.builtin.ping`: Le module `ping` vérifie simplement que la connexion fonctionne. C'est un excellent moyen de s'assurer que tout est prêt.
+  * `ansible.builtin.file`: Ce module est très puissant. `state: directory` lui demande de s'assurer que le répertoire `path` existe.
+  * `{{ ansible_user }}`: C'est une variable magique d'Ansible qui contient le nom de l'utilisateur avec lequel tu te connectes (ici, ton compte). L'utiliser rend ton playbook plus générique.
+
+-----
+
+### Création du fichier d'inventaire
+
+Ansible a besoin de savoir à quelles machines il doit se connecter. Tu dois donc créer un fichier d'inventaire. C'est un fichier texte où tu listes tes hôtes.
+
+Crée un fichier nommé `hosts` dans le même dossier que ton playbook (`/ansible`) avec le contenu suivant :
+
+```ini
+[remote_host]
+votre_machine_distante ansible_host=adresse_ip ansible_user=votre_nom_utilisateur ansible_private_key_file=/ansible/id_rsa
+```
+
+Remplace `votre_machine_distante` par le nom de ton choix, `adresse_ip` par l'adresse IP de ta machine, `votre_nom_utilisateur` par ton nom d'utilisateur et `id_rsa` par le nom de la clé que tu as générée.
+
+-----
+
+### Lancement du playbook
+
+Maintenant que tout est en place, tu peux lancer le playbook depuis ton conteneur Ansible avec la commande `ansible-playbook`.
+
+```bash
+ansible-playbook -i /ansible/hosts /ansible/premier_playbook.yml
+```
+
+L'option `-i` indique à Ansible quel fichier d'inventaire utiliser.
+
+Que se passe-t-il lorsque tu lances la commande ?
