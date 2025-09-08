@@ -1,3 +1,12 @@
+Of course! Here's your comment translated into English with a professional and supportive tone:
+
+> 💡 Brilliant idea!  
+> Introducing a parameter similar to STATEOD in zOSconnect would greatly improve the consistency of SMF123 record logging, especially by preventing cross-day overlaps. It’s a smart and elegant solution—particularly valuable in production environments where log accuracy is essential. Definitely worth supporting!
+
+Let me know if you'd like a version that's more technical, more concise, or tailored for a specific audience.
+
+
+
 Ces documents concernent la **documentation IBM Dependency Based Build (DBB) V3.0.1**, un outil conçu pour la **création d'applications z/OS traditionnelles** utilisant des langages comme COBOL et PL/I. Ils offrent des **instructions détaillées sur l'installation, la configuration, la maintenance et l'utilisation de DBB**, y compris des informations sur les **API Java, les scripts Groovy et le nouveau framework zBuilder**. Les sources abordent également la **gestion des dépendances de compilation, le stockage des métadonnées de compilation dans Db2 ou sur le système de fichiers z/OS UNIX**, et la manière dont DBB interagit avec d'autres outils comme Git et Jenkins. Enfin, elles couvrent des sujets tels que la **sécurité des informations personnelles (GDPR)**, la journalisation, les messages d'erreur et le support IBM, ainsi que l'utilisation de **démons partagés pour optimiser les performances**.
 
 IBM Dependency Based Build (DBB) est un produit conçu pour la construction d'applications z/OS traditionnelles, développées dans des langages de programmation tels que **COBOL, PL/I et Assembleur**, et ce, dans le cadre d'un pipeline DevOps moderne.
