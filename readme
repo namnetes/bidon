@@ -1,3 +1,219 @@
+Voici un billet de blog détaillé présentant les nouveautés majeures apportées par **IBM z/OS 3.2** et le **mainframe IBM z17**, des innovations qui transforment le rôle du mainframe dans l'ère de l'IA et du cloud hybride.
+
+---
+
+### **IBM z/OS 3.2 et le z17 : Le Mainframe à l'Ère de l'IA et du Cloud Hybride**
+
+Le mainframe IBM, pilier des infrastructures critiques mondiales, franchit une étape décisive avec les versions **z/OS 3.2** et le nouveau matériel **IBM z17**. Ces avancées ne sont pas de simples mises à jour, mais une refonte stratégique qui propulse le mainframe au cœur de l'intelligence artificielle, du développement cloud-native et de l'intégration hybride. Loin d'être un système legacy, l'IBM Z se positionne comme un moteur d'innovation, alliant sa robustesse légendaire aux exigences des technologies modernes.
+
+#### Sommaire
+
+1.  **IBM z17 : Le Cœur de l'Innovation Mainframe**
+    *   Architecture et Accélérateurs IA
+2.  **L'Intelligence Artificielle au Centre de z/OS 3.2**
+    *   Un Framework IA Élargi
+    *   Optimisation du Workload Manager (WLM) par l'IA
+    *   Développement IA/ML Natif sur Mainframe
+    *   Détection de Fraude en Temps Réel avec CICS et l'IA
+3.  **Python : Le Nouveau Langage de Prédilection sur z/OS 3.2**
+    *   Support Natif et SDK Officiel
+    *   Modules Python Spécifiques à z/OS
+    *   Interopérabilité et Accès aux Ressources Mainframe
+    *   Exécution sur zIIP et Écosystème Python Enrichi
+4.  **Bases de Données NoSQL (MongoDB) et Accès Cloud Hybride via EzNoSQL**
+    *   Installation de MongoDB sur Linux on Z via zCX
+    *   Interaction en Temps Réel avec des Clusters MongoDB Externes
+    *   Les APIs EzNoSQL pour l'Hybridation Cloud
+5.  **Évolutions COBOL et Impact sur les Performances**
+    *   Compatibilité et Points de Vigilance COBOL
+    *   Améliorations de Performance pour les Workloads COBOL
+6.  **La Conteneurisation avec z/OS Container Extensions (zCX)**
+    *   Exécution Native et Sécurité
+    *   Modernisation et Orchestration
+7.  **Sécurité Renforcée et Cyber-Résilience**
+8.  **Simplification de l'Administration et de l'Expérience Utilisateur**
+9.  **Conclusion**
+10. **Sources (Liens)**
+
+---
+
+#### 1. IBM z17 : Le Cœur de l'Innovation Mainframe
+
+L'**IBM z17** constitue la base matérielle de ces innovations, offrant une **architecture fortement résiliente** avec des composants redondants, de la mémoire protégée et des mécanismes d'auto-récupération, assurant une disponibilité matérielle supérieure aux plateformes x86 standard.
+
+*   **Architecture et Accélérateurs IA**
+    La principale avancée du z17 est l'intégration des **accélérateurs IA Telum II** et le support futur du **Spyre AI Accelerator** (prévu pour TFQ4 2025). Ces processeurs embarquent des capacités d'inférence ML locales pour les workloads mainframe, directement sur les données sensibles, sans extraction. Le Telum II, avec une fréquence plus élevée et une capacité d'inférence accrue, permet l'exécution simultanée de modèles traditionnels et génératifs. Ces optimisations matérielles contribuent à accélérer des traitements comme le chiffrement, le déchiffrement et les processus d'inférence IA.
+
+#### 2. L'Intelligence Artificielle au Centre de z/OS 3.2
+
+z/OS 3.2 intègre l'IA de manière beaucoup plus poussée que z/OS 3.1, en tirant pleinement parti des nouvelles architectures matérielles.
+
+*   **Un Framework IA Élargi**
+    Le **Framework IA a été actualisé** pour permettre l'inférence en temps réel et la gestion du cycle de vie de l'IA directement sur la plateforme, sans nécessiter l'extraction des données sensibles. Alors que z/OS 3.1 offrait un framework comprenant EzNoSQL, MLz Core, AI Base et AI Control Interface, principalement pour l'optimisation prédictive, z/OS 3.2 enrichit cette pile avec la prise en charge d'APIs NoSQL pour Python (en plus de Java, COBOL, C) et une orchestration intégrée pour l'IA générative (NLP, automatisation décisionnelle). Les frameworks IA sont désormais optimisés pour zDNN et open source, couvrant la modélisation, le déploiement et la supervision en temps réel, avec des capacités de formation continue et de ré-entraînement automatique.
+
+*   **Optimisation du Workload Manager (WLM) par l'IA**
+    Le **Workload Manager (WLM) infusé à l'IA est étendu** dans z/OS 3.2. Il est désormais capable de prévoir les pics de charge et de redistribuer automatiquement les ressources CPU et mémoire, optimisant ainsi la performance des applications même sous forte sollicitation. Il propose également une visualisation et une simulation de charge.
+
+*   **Développement IA/ML Natif sur Mainframe**
+    Grâce à de nouveaux frameworks open-source et aux bibliothèques zDNN, il devient possible de **concevoir, entraîner et inférer des modèles IA** (traditionnels et génératifs) en Python directement sur le mainframe, évitant ainsi les transferts de données coûteux et complexes. Le **Python AI Toolkit pour IBM z/OS** donne accès à des bibliothèques IA/ML optimisées pour IBM Z (TensorFlow, SnapML), conformes aux exigences de sécurité et de confidentialité des entreprises. Le mainframe se transforme ainsi en un véritable moteur de données et de science des données in situ.
+
+*   **Détection de Fraude en Temps Réel avec CICS et l'IA**
+    Une capacité majeure de z/OS 3.2 sur z17 est la possibilité de développer des **transactions CICS s'appuyant directement sur l'IA intégrée pour la détection de fraude en temps réel**. Grâce au processeur Telum II, les modèles IA peuvent être invoqués depuis les applications CICS, effectuant des inférences (classification, scoring) dans le flux même de la transaction (paiements, prêts, opérations sensibles) sans externaliser les données ni augmenter la latence. Des frameworks comme Machine Learning for z/OS, TensorFlow et Open ONNX, ainsi que des modèles pré-entraînés, peuvent être appelés depuis du code COBOL, Java ou Python intégré aux transactions CICS, offrant des temps de réponse de l'ordre de la milliseconde pour des centaines de milliers de transactions par seconde. Cela permet une détection de fraude sur **100% des transactions** pour une sécurité maximale et une réduction des pertes.
+
+#### 3. Python : Le Nouveau Langage de Prédilection sur z/OS 3.2
+
+z/OS 3.2 apporte des ajouts Python stratégiques, élevant la plateforme au niveau d'un environnement cloud-native et IA moderne pour les développeurs mainframe.
+
+*   **Support Natif et SDK Officiel**
+    L'**IBM Open Enterprise SDK for Python est intégré et mis à jour**, permettant de développer, compiler et interpréter Python de manière native sur le mainframe avec une pleine compatibilité z/OS. Il active les API, modules et plugins pour moderniser les applications critiques traditionnellement basées sur COBOL, Java et C.
+
+*   **Modules Python Spécifiques à z/OS**
+    Le SDK inclut de nouveaux modules optimisés pour z/OS :
+    *   **pyzfile** : Accès et gestion avancée des datasets z/OS (séquentiels, partitionnés) directement en Python.
+    *   **pyracf** : Module pour les opérations de sécurité, permettant des requêtes et modifications d'objets RACF via des scripts Python, idéal pour l'automatisation de la sécurité.
+    *   **pyzos** : Expose des interfaces z/OS spécifiques (gestion des JES, des fichiers, de la mémoire) pour piloter et monitorer le système via Python.
+
+*   **Interopérabilité et Accès aux Ressources Mainframe**
+    Des **codecs spécifiques sont inclus pour l'interopérabilité avec les encodages mainframe (EBCDIC, UTF)**, facilitant la manipulation des fichiers et flux entre les mondes EBCDIC natif et Unicode de Python. Le driver **IBM_DB Python** permet un accès natif aux données de Db2 for z/OS via ODBC, avec des améliorations continues pour les dernières versions de Db2. Pour CICS, **z/OS Connect** expose les transactions comme des APIs REST/JSON, consommables par Python. Des modules Python, souvent avec Ansible, sont également utilisés pour l'automatisation CI/CD et la gestion des tâches CICS.
+
+*   **Exécution sur zIIP et Écosystème Python Enrichi**
+    Les applications Python peuvent désormais s'exécuter sur les **processeurs spécialisés zIIP**, réduisant les coûts, améliorant les performances et libérant des ressources CPU classiques. De plus, l'accès direct au **Python Package Index (PyPI)** ouvre des milliers de modules et frameworks open source aux développeurs z/OS, accélérant la modernisation et l'innovation.
+
+#### 4. Bases de Données NoSQL (MongoDB) et Accès Cloud Hybride via EzNoSQL
+
+z/OS 3.2 renforce l'intégration avec les bases de données NoSQL, les positionnant comme un élément clé des architectures hybrides.
+
+*   **Installation de MongoDB sur Linux on Z via zCX**
+    Il est tout à fait possible d'installer et d'exécuter des bases NoSQL comme **MongoDB sur mainframe** en utilisant des environnements Linux via **z/OS Container Extensions (zCX)**. MongoDB Enterprise supporte officiellement Linux sur IBM Z (par exemple Red Hat Enterprise Linux pour IBM Z ou Ubuntu pour IBM Z), permettant une exploitation native, rapide et sécurisée. zCX permet de prendre une image Docker standard de MongoDB (compatible s390x) et de la faire fonctionner sur IBM z17, bénéficiant de la résilience et de la sécurité du mainframe. L'installation se fait via les gestionnaires de paquets (yum ou apt) après avoir ajouté les référentiels officiels adaptés à l'architecture s390x.
+
+*   **Interaction en Temps Réel avec des Clusters MongoDB Externes**
+    MongoDB sur IBM Z peut interagir en temps réel avec des clusters MongoDB externes grâce à des outils comme **Cluster-to-Cluster Sync**. Cet utilitaire, `mongosync`, établit une synchronisation bidirectionnelle continue des données entre clusters distincts, qu'ils soient sur IBM Z, en cloud ou sur site. Cette fonctionnalité est essentielle pour les migrations de données, les cycles de développement, les clusters analytiques et la conformité.
+
+*   **Les APIs EzNoSQL pour l'Hybridation Cloud**
+    Les **nouvelles APIs EzNoSQL de z/OS 3.2** sont un facilitateur majeur. Elles permettent aux applications Python (et COBOL, C, Java) de créer, lire et manipuler des bases NoSQL JSON directement sur z/OS, et surtout de dialoguer et de synchroniser les données avec des bases NoSQL installées hors z/OS dans des environnements cloud ou open source via des **APIs REST standardisées**. Cela favorise la continuité des applications en mode cloud hybride et **évite les transferts massifs de données sensibles**, tout en réduisant la latence et les risques associés. Ces APIs sont optimisées pour exploiter l'**accélération IA matérielle du Telum II**, permettant des traitements ML/IA temps réel directement au cœur du système principal.
+
+#### 5. Évolutions COBOL et Impact sur les Performances
+
+COBOL, un langage toujours central sur le mainframe, bénéficie d'évolutions significatives.
+
+*   **Compatibilité et Points de Vigilance COBOL**
+    Enterprise COBOL 6, intégré à z/OS 3.2, maintient une **forte compatibilité ascendante** avec les versions antérieures d'IBM COBOL, permettant aux modules compilés avec différentes versions de fonctionner ensemble sans recompilation obligatoire. Les appels statiques et dynamiques entre programmes COBOL 5 ou 6 restent supportés. Des améliorations sont apportées aux instructions READ, UNSTRING, DISPLAY et à la gestion des types numériques. Cependant, une **interopérabilité limitée** est à prévoir avec les très anciens COBOL OS/VS et VS COBOL II, nécessitant potentiellement une recompilation. Des tests approfondis sont recommandés pour les cas limites.
+
+*   **Améliorations de Performance pour les Workloads COBOL**
+    Les applications COBOL existantes voient leurs performances améliorées grâce à plusieurs facteurs:
+    *   L'**IA-infused WLM** prédit les pics de charge et réalloue les ressources CPU/mémoire de manière dynamique.
+    *   Les **optimisations matérielles du z17 et Telum II** accélèrent les traitements de chiffrement et l'inférence IA.
+    *   Une **meilleure interopérabilité Java/COBOL** permet d'utiliser des bibliothèques modernes sans sacrifier la performance.
+    *   L'**automatisation des opérations système** libère des ressources pour les applications COBOL.
+    *   Le **support amélioré des conteneurs zCX** permet d'exécuter des composants modernes appelés par COBOL avec de meilleures performances.
+    *   L'intégration d'**OpenTelemetry** offre une meilleure visibilité des performances, facilitant l'optimisation.
+
+#### 6. La Conteneurisation avec z/OS Container Extensions (zCX)
+
+zCX est un pont puissant entre le monde mainframe et les technologies cloud natives.
+
+*   **Exécution Native et Sécurité**
+    zCX permet d'**exécuter des applications Linux basées sur Docker nativement** au sein d'un environnement z/OS, sans nécessiter de serveur Linux séparé. Les conteneurs tournent directement dans une partition logique z/OS, coexistant avec les workloads natifs. Ils bénéficient de l'**isolation et de la sécurité garanties par z/OS**, y compris la résilience, la haute disponibilité et la sécurité réseau intégrée.
+
+*   **Modernisation et Orchestration**
+    zCX facilite la **modernisation des applications mainframe** en permettant le déploiement d'outils open source, de services web, de microservices ou d'environnements Linux pour développer des APIs et des services d'IA. L'intégration avec Kubernetes est possible pour gérer le cycle de vie, la mise à l'échelle et la performance des conteneurs via z/OS Communications Server et zCPA. Des exemples d'utilisation incluent l'exécution de serveurs REST API (NGINX pour IMS/DB2), l'hébergement de serveurs CI/CD (Jenkins) ou de moteurs de scoring IA.
+
+#### 7. Sécurité Renforcée et Cyber-Résilience
+
+z/OS 3.2 met un accent particulier sur le renforcement de la sécurité et la cyber-résilience.
+
+*   **Authentification avancée**, **cryptographie post-quantique** compatible NIST, RACF userid containment et **Threat Detection intégré** sont désormais des fonctionnalités clés.
+*   Le système offre un **chiffrement de bout en bout et l'isolation des workloads critiques**.
+*   La sécurité réseau est renforcée avec des capacités de **détection proactive et d'analyse comportementale**. IBM Threat Detection for z/OS s'appuie sur l'IA pour analyser les comportements suspects et renforcer la défense face aux fraudes et cybermenaces.
+
+#### 8. Simplification de l'Administration et de l'Expérience Utilisateur
+
+IBM z/OS 3.2 vise à simplifier l'administration et l'adoption par de nouveaux talents.
+
+*   L'**automatisation est accrue** grâce aux APIs REST pour la gestion (parmlib, mises à jour), et la documentation ainsi que la customisation sont simplifiées.
+*   Le **z/OSMF Storage Management Plugin** offre une gestion graphique moderne du stockage SMS et CDS.
+*   Une **interface utilisateur revue** (UX modernisée) est proposée pour les nouveaux talents mainframe.
+*   La **tarification flexible Tailored Fit Pricing** est modernisée.
+
+#### 9. Conclusion
+
+Les versions **IBM z/OS 3.2 et IBM z17** représentent une avancée majeure pour le mainframe. Elles offrent une infrastructure matérielle et logicielle de très haut niveau, assurant une haute disponibilité, des performances et une résilience supérieures. En intégrant nativement l'IA, en adoptant Python comme langage de première classe, en facilitant l'accès aux bases NoSQL et en renforçant la conteneurisation via zCX, IBM transforme le mainframe en une **plateforme moderne, sécurisée et performante, capable de gérer des workloads hybrides complexes et de soutenir l'innovation en IA et en analytique à l'échelle de l'entreprise**. Le mainframe est plus que jamais pertinent pour l'ère numérique, offrant une synergie inégalée entre les systèmes d'enregistrement historiques et les exigences des applications cloud-natives et intelligentes.
+
+---
+
+#### 10. Sources (Liens)
+
+*   https://www.ibm.com/docs/fr/mfci/7.6.2?topic=systems-configuring-highly-available
+*   https://welovedevs.com/fr/articles/mongodb-atlas/
+*   https://www.mongodb.com/fr-fr/products/tools/cluster-to-cluster-sync
+*   https://learn.microsoft.com/fr-fr/azure/architecture/reference-architectures/zos/refactor-zos-coupling-facility
+*   https://poweribmi.fr/2020/06/30/comparatif-des-solutions-de-disponibilite-sur-ibm-i/
+*   https://www.ibm.com/docs/fr/db2-for-zos/13.0.0?topic=zos-python
+*   https://www.ibm.com/docs/fr/db2/11.1.0?topic=framework-setting-up-python-environment
+*   https://learn.microsoft.com/fr-fr/host-integration-server/core/configuring-db2-for-z-os
+*   https://stackoverflow.com/questions/78876248/connect-to-db2-for-zos-using-python-client-ibm-db
+*   https://www.lemagit.fr/conseil/IBM-z-OS%C2%A0Connect-aident-les-mainframes-a-mieux-communiquer-avec-les-apps
+*   https://github.com/ansible-collections/ibm_zos_cics/issues/3
+*   https://croz.net/unleashing-power-and-efficiency-z-os/
+*   https://www.techzine.eu/news/infrastructure/109868/ibm-gives-z-os-a-major-ai-upgrade-with-version%C2%A03%C2%A01/
+*   https://www.ibm.com/docs/en/zos/3.1.0?topic=summary-changes-made-in-zos-31
+*   https://www.share.org/Events/Past-Events/Proceedings/Proceeding-Details/31343-whats-new-in-zos-31-the-big-easy-edition
+*   https://www.ibm.com/docs/en/zos/3.1.0?topic=guide-what-is-new-in-zos-31
+*   https://www.lemondeinformatique.fr/actualites/lire-ibm-mise-sur-l-ia-et-le-cloud-hybride-avec-sa-prochaine-mise-a-jour-z-os-31%C2%A091283.html
+*   http://www.hostnoc.com/ibm-unveils-z-os-3%C2%A02/
+*   https://www.itcandor.com/ibm-z-os-3%C2%A02/
+*   https://www.dbta.com/Editorial/News-Flashes/Updates-to-IBM-z-OS%C2%A032%C2%A0Unlock-the-Value-of-IBM-z17%C2%A0170683.aspx
+*   https://www.ibm.com/new/announcements/ibm-z-os-3%C2%A02-unlocks-the-value-of-ibm-z17
+*   https://hyperframeresearch.com/2025/07/24/z-os-3%C2%A02-is-mainframe-ai-the-enterprise-game-changer/
+*   https://www.admin-magazine.com/News/IBM%C2%A0Z%C2%A0Announces-z-OS%C2%A03.2
+*   https://www.linkedin.com/pulse/detailed-decoded-from-preview-ibm-zos-32-plans-unlock-anshul-agrawal-9wnuf
+*   https://www.ibm.com/docs/en/explorer-for-zos/3.2.0?topic=explorer-whats-new-in-version-32
+*   https://www.ibm.com/docs/fr/explorer-for-zos/3.2.0?topic=explorer-whats-new-in-version-32
+*   https://www.ibm.com/docs/fr/explorer-for-zos/3.3?topic=guide-migrate-from-version-31-version-32
+*   https://www.macro4.com/blog/how-the-new-capabilities-in-z-os-3%C2%A02-will-advance-the-ibm-z-ecosystem/
+*   https://blog.share.org/Article/ai-at-the-heart-of-ibm-zos-31-to-simplify-and-optimize
+*   https://www.ibm.com/support/z-content-solutions/eznosql/
+*   https://www.mongodb.com/company/newsroom/press-releases/mongodb-announces-support-for-ibm-z-systems-mainframe-solutions
+*   https://www.linux.com/news/running-mongodb-and-other-open-source-apps-mainframe/
+*   https://techstrong.it/featured/ibms-new-mainframe-os-improves-cloud-and-ai-features/
+*   https://www.mongodb.com/resources/products/compatibilities/mongodb-and-ibm-zsystems
+*   https://www.mongodb.com/fr-fr/products/tools/cluster-to-cluster-sync
+*   https://kinsta.com/fr/blog/sharding-mongodb/
+*   https://www.ibm.com/docs/fr/cobol-zos/6.4.0?topic=answers-compatibility
+*   https://docs.aws.amazon.com/fr_fr/m2/latest/userguide/ba-release-notes.html
+*   https://www.troyes-obs.fr/technologie/416202/ibm-z-os-3%C2%A02-democratise-lintelligence-artificielle-en-entreprise-une-integration-native-qui-simplifie-ladoption-des-modeles-ia/
+*   https://www.linformaticien.com/935-serveurs/58309-une-nouvelle-version-de-z-0s.html
+*   https://fr.linkedin.com/pulse/ibm-z17-et-zos-32-une-nouvelle-génération-de-mainframe-ventre-daqre
+*   https://www.lemondeinformatique.fr/actualites/lire-ibm-simplifie-l-usage-de-l-ia-avec%C2%A0z-os-32%C2%A097503.html
+*   https://www.ibm.com/fr-fr/products/open-enterprise-python-zos
+*   https://www.lemondeinformatique.fr/actualites/lire-ibm-greffe-un-peu-plus-d-ia-a-ses-mainframes-z-et-a-cloud-pak%C2%A091686.html
+*   https://www.youstable.com/fr/blog/installer-mongodb-sur-linux/
+*   https://www.youstable.com/fr/blog/setup-mongodb-on-linux-server/
+*   https://www.netbraintech.com/fr/docs/ie80/help/installing-mongodb-with-auto-script.htm
+*   https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-red-hat/
+*   https://www.ibm.com/docs/fr/product-master/12.0.0?topic=tasks-installing-mongodb
+*   https://www.hostwinds.fr/tutorials/how-to-install-mongodb-on-linux
+*   https://elnion.com/2025/07/24/unlocking-the-mainframes-next-leap-ibms-z-os-3%C2%A02-poised-to-redefine-hybrid-cloud-and-ai-integration/
+*   https://www.ibm.com/docs/en/wml-for-zos/enterprise/3.2.0?topic=enterprise-whats-new-in-ml-zos
+*   https://www.celent.com/insights/mitigating-fraud-in-the-ai-age-supporting-transaction-fraud-detection-at-scale-on-ibm-z17
+*   https://www.itforbusiness.fr/z17-lambition-renouvelee-dibm-pour-le-mainframe-a-lere-de-lia-90285
+*   https://www.channelnews.fr/z17-ibm-annonce-un-mainframe-pense-pour-lia-144522
+*   https://www.decideo.fr/IBM-z17-le-premier-mainframe-entierement-concu-pour-l-ere-de-l-IA_a14211.html
+*   https://www.lemagit.fr/actualites/366622978/Avec-le-Z17%C2%A0IBM-colle-lIA-aux-transactions-bancaires
+*   https://github.com/IBM/ai-on-z-fraud-detection
+*   https://cognitiveclass.ai/courses/ibm-z-os-container-extensions
+*   https://www.linkedin.com/pulse/unlocking-modern-workloads-zos-deep-dive-zcx-anshul-agrawal-lvpwf
+*   https://onlinescientificresearch.com/articles/containerization-on-zos-running-applications-with-zos-container-extensions-zcx.pdf
+*   https://www.ibm.com/fr-fr/products/zos-communications-server
+*   https://www.ibm.com/support/z-content-solutions/container-extensions/
+*   https://ibm-zcouncil.com/wp-content/uploads/2020/12/Intro-to-zOS%C2%A0Container-Extensions-SoCal.pdf
+*   https://www.ionos.fr/digitalguide/serveur/configuration/mongodb-docker-container/
+*   https://www.scandevelopers.com/2019/12/30/utiliser-mongodb-a-partir-dune-image-docker.html
+
+
+
+-----------------------
+
 Dans le cadre de mon apprentissage d’Ansible, je travaille sur une machine Ubuntu 24.04 sur laquelle j’ai installé tous les outils nécessaires pour créer et gérer des machines virtuelles via KVM.
 
 
@@ -1519,4 +1735,5 @@ Canvas
 Apprentissage guidé
 
 Vérifiez les réponses de Gemini, car il peut se tromper, y compris sur des personnes. Votre confidentialité et GeminiS'ouvre dans une nouvelle fenêtre
+
 
