@@ -1,3 +1,282 @@
+Ces documents concernent la **documentation IBM Dependency Based Build (DBB) V3.0.1**, un outil conçu pour la **création d'applications z/OS traditionnelles** utilisant des langages comme COBOL et PL/I. Ils offrent des **instructions détaillées sur l'installation, la configuration, la maintenance et l'utilisation de DBB**, y compris des informations sur les **API Java, les scripts Groovy et le nouveau framework zBuilder**. Les sources abordent également la **gestion des dépendances de compilation, le stockage des métadonnées de compilation dans Db2 ou sur le système de fichiers z/OS UNIX**, et la manière dont DBB interagit avec d'autres outils comme Git et Jenkins. Enfin, elles couvrent des sujets tels que la **sécurité des informations personnelles (GDPR)**, la journalisation, les messages d'erreur et le support IBM, ainsi que l'utilisation de **démons partagés pour optimiser les performances**.
+
+IBM Dependency Based Build (DBB) est un produit conçu pour la construction d'applications z/OS traditionnelles, développées dans des langages de programmation tels que **COBOL, PL/I et Assembleur**, et ce, dans le cadre d'un pipeline DevOps moderne.
+
+Voici les principales fonctions et utilisations de DBB :
+
+*   **Automatisation moderne** : DBB offre une capacité d'automatisation basée sur des langages de script modernes, utilisable sur z/OS. Il permet notamment d'exécuter Apache Groovy sur z/OS, ce qui permet aux ingénieurs moins familiers avec la plateforme d'automatiser des tâches de manière plus intuitive.
+*   **Compilation et édition de liens** : La tâche première et principale de DBB est la compilation et l'édition de liens de programmes. Pour ce faire, DBB fournit des **scanneurs de dépendances** pour le code source et les modules de chargement, analysant ainsi les relations entre les fichiers source et binaires.
+*   **Exécution de commandes z/OS** : Dans le cadre des scripts Groovy, DBB permet d'exécuter des commandes MVS, TSO ou ISPF.
+*   **Gestion des métadonnées de construction** : DBB utilise des API de connexion à la base de données IBM Db2 pour stocker les informations de dépendance et les rapports de construction. Le magasin de métadonnées peut être configuré avec Db2 pour z/OS ou Db2 LUW, ou temporairement sur le système de fichiers z/OS Unix pour le prototypage.
+*   **Indépendant des outils** : DBB est un produit autonome qui ne nécessite pas de gestionnaire de code source ou d'outil d'automatisation de pipeline spécifique.
+*   **Composants principaux** :
+    *   **Kit de ressources (toolkit) z/OS** : Fournit des API Java et Groovy pour les activités de construction sur z/OS.
+    *   **Interface de ligne de commande (CLI)** : Permet aux utilisateurs de rechercher, lire et supprimer les données de construction stockées dans la base de données Db2.
+*   **zBuilder** : Un framework de construction intégré basé sur la configuration pour les applications z/OS, où la configuration est définie dans des fichiers YAML. Son implémentation repose sur des tâches Java qui invoquent les API DBB existantes. DBB 3.0.1 a introduit de nouvelles fonctionnalités zBuilder, y compris le support du démon partagé et des variables de configuration de langage supplémentaires.
+*   **Cas d'utilisation supplémentaires** : DBB peut être utilisé pour automatiser les tests dans un pipeline CI/CD et d'autres tâches d'administration système qui impliqueraient normalement du JCL.
+*   **Démons DBB** : Il améliore les performances et la sécurité, notamment par l'utilisation d'un démon partagé (qui a remplacé le "Build Manager" et est recommandé par rapport au démon personnel déprécié).
+*   **Support SMF (System Management Facility)** : DBB a la capacité d'écrire des enregistrements SMF lors de l'exécution de scripts utilisant ses fonctionnalités, ce qui peut être utile pour la facturation, l'analyse et la planification. Les enregistrements SMF spécifiques à DBB ont un type 122 et un sous-type 2 et incluent des informations telles que le nom du produit, la version, la date et l'ID utilisateur.
+*   **Gestion des données personnelles (GDPR)** : DBB collecte un minimum d'informations personnelles, telles que l'identifiant utilisateur du créateur et du dernier éditeur d'un objet de construction, et fournit des commandes SQL pour modifier ces informations afin de se conformer au GDPR.
+
+En résumé, IBM Dependency Based Build vise à moderniser le processus de construction des applications z/OS, en offrant une flexibilité accrue grâce à la scriptabilité et à une gestion sophistiquée des dépendances et des métadonnées.
+
+
+Oui, **IBM Dependency Based Build (DBB) utilise un référentiel IBM Db2** pour stocker ses métadonnées.
+
+Voici les détails concernant l'utilisation de Db2 par DBB :
+
+*   **Stockage des métadonnées** : La fonction principale de DBB pour l'utilisation de Db2 est le stockage des informations de dépendance et des rapports de construction. Le référentiel de base de données IBM Db2 est utilisé pour enregistrer les rapports de construction (par exemple, les détails des compilations réussies ou échouées) et les relations entre les programmes (par exemple, le programme source A intègre le copybook COBOL B).
+*   **Environnement de production** : En production, DBB est configuré pour stocker les métadonnées de construction dans une base de données Db2. Pour les activités non-production, telles que le prototypage ou les preuves de concept, les métadonnées peuvent être stockées temporairement sur le système de fichiers z/OS Unix, mais il est fortement recommandé de passer à une base de données Db2 prise en charge pour la production afin d'éviter les problèmes de performance ou d'espace disque avec les grandes applications.
+*   **Bases de données prises en charge** : DBB prend en charge les bases de données **IBM Db2 for z/OS** et **IBM Db2 for Linux, Unix, and Windows (LUW)**. Les clients DBB ont droit à une licence pour IBM Db2 for LUW.
+*   **Accès sécurisé** : Les identifiants de connexion aux sources de données configurées peuvent être masqués. L'accès aux données de la base de données Db2 peut être contrôlé via des identifiants utilisateur Db2 et en accordant des autorisations aux tables de la base de données. Le référentiel de la base de données n'est pas lisible directement sur disque et n'est accessible qu'avec des identifiants autorisés. Les données en mouvement entre le kit d'outils DBB et le magasin de données Db2 peuvent être chiffrées si DBB est correctement configuré pour la production.
+*   **Informations personnelles** : Dans un environnement de production, les métadonnées de construction stockées dans une base de données Db2 peuvent être chiffrées et incluent l'identifiant utilisateur du propriétaire de la construction. Les enregistrements de la base de données DBB incluent des champs d'identifiant utilisateur qui distinguent la propriété des données, le partage entre utilisateurs et l'enregistrement du dernier utilisateur à modifier les données (créateur, propriétaire actuel et dernier modificateur). Ces informations sont stockées pour la conformité au RGPD.
+*   **Configuration** : La configuration de Db2 en tant que base de données de métadonnées implique la création d'un groupe de stockage et d'une base de données Db2, ainsi que l'octroi d'autorisations aux utilisateurs pour accéder à ces tables.
+*   **API et CLI** : Les API de connexion à la base de données IBM Db2 sont utilisées pour stocker les informations de dépendance et les rapports de construction. DBB fournit des API de kit d'outils (toolkit APIs) pour accéder et modifier les métadonnées de construction stockées dans les bases de données Db2. L'interface de ligne de commande (CLI) de DBB permet d'accéder en lecture et en suppression aux métadonnées de construction, et peut être configurée pour utiliser une connexion Db2.
+
+
+Oui, il est tout à fait possible de consulter le référentiel IBM Db2 utilisé par IBM Dependency Based Build (DBB) pour identifier les compilations réalisées, ainsi que d'autres informations relatives aux constructions.
+
+Voici comment cela fonctionne et les outils disponibles :
+
+1.  **Référentiel de métadonnées Db2** :
+    *   DBB utilise une base de données IBM Db2 (pour z/OS ou LUW) pour stocker les métadonnées de construction, y compris les informations de dépendance et les rapports de construction.
+    *   Ces métadonnées incluent le statut de la construction (par exemple, succès, échec), les rapports de construction (au format JSON et HTML), les pièces jointes (comme les fichiers journaux) et des propriétés personnalisées.
+    *   Dans un environnement de production, il est **fortement recommandé** d'utiliser Db2 comme magasin de métadonnées, bien que le système de fichiers z/OS Unix puisse être utilisé pour le prototypage.
+
+2.  **Accès aux informations de compilation** :
+    *   Les **résultats de construction (Build Results)** sont les objets centraux pour identifier les compilations. Un résultat de construction capture l'état (NOUVEAU, EN COURS, TERMINÉ, ABANDONNÉ) et le statut (PROPRE, ERREUR, AVERTISSEMENT) d'une construction.
+    *   Chaque commande exécutée lors de la construction (par exemple, une commande de compilation MVSExec) crée un enregistrement spécifique dans le **rapport de construction (Build Report)**, qui est une partie du résultat de construction. L'**ExecuteRecord** est le type d'enregistrement créé par des commandes comme MVSExec, ISPFExec, TSOExec, et JCLExec, et il contient des détails sur le programme exécuté, les options, le code de retour, les fichiers source et de sortie, et les fichiers journaux. C'est là que les détails des compilations sont enregistrés.
+
+3.  **Méthodes de consultation du référentiel** :
+
+    *   **Interface de ligne de commande (CLI) DBB** :
+        *   DBB fournit une interface de ligne de commande pour accéder de manière simple aux métadonnées de construction. La CLI permet un accès en lecture et suppression, mais pas en création ou modification pour éviter d'impacter le processus de construction incrémentielle.
+        *   Vous pouvez l'utiliser pour **lister les résultats de construction** d'un groupe spécifique avec la commande : `dbb list results <groupName>`.
+        *   Pour **afficher les détails d'un résultat de construction** spécifique, y compris les rapports, utilisez : `dbb view result <groupName> <resultName>`.
+        *   Les options de configuration pour la connexion à Db2 (type, utilisateur, mot de passe, fichier de mot de passe, URL, fichier de configuration Db2) peuvent être spécifiées lors des appels CLI ou configurées pour une session.
+
+    *   **API du kit d'outils DBB (Java/Groovy)** :
+        *   Les API MetadataStore permettent de créer une instance MetadataStore pour se connecter à l'implémentation du magasin de métadonnées (Db2 ou système de fichiers z/OS UNIX).
+        *   Vous pouvez utiliser les méthodes de la classe `MetadataStore` pour **récupérer les résultats de construction** (`getBuildResult(group, label)`) et **effectuer des requêtes** (`getBuildResults(queryParms)` ou `getLastBuildResult(group, state, status)`).
+        *   Les paramètres de requête permettent de filtrer les résultats par groupe, libellé, propriétés, état ou statut, et de les trier.
+        *   Une fois le `BuildResult` récupéré, vous pouvez accéder à son rapport de construction JSON ou HTML. Le rapport JSON peut ensuite être analysé pour extraire les `ExecuteRecords` qui détaillent chaque étape de compilation.
+
+4.  **Informations personnelles et sécurité** :
+    *   Dans un environnement de production, les métadonnées stockées dans Db2 peuvent être chiffrées.
+    *   DBB stocke des informations minimales telles que l'identifiant utilisateur du créateur et du dernier éditeur d'un objet de construction pour la conformité au RGPD (GDPR). Des commandes SQL sont fournies pour modifier ces informations si nécessaire.
+
+En résumé, oui, vous pouvez consulter le référentiel Db2 de DBB pour identifier les compilations réalisées, soit via la ligne de commande pour une consultation rapide, soit via les API Java/Groovy pour des analyses plus approfondies des rapports de construction.
+
+
+
+Pour consulter les compilations réalisées dans le référentiel Db2 d'IBM Dependency Based Build (DBB), vous devriez interroger la table **`BUILD_RESULT`** qui stocke les métadonnées de chaque processus de construction.
+
+Le schéma par défaut pour les tables DBB est **`DBBZ`**.
+
+Voici une requête SQL pour lister les résultats de construction (build results) qui sont à l'état "terminé" (COMPLETE) :
+
+```sql
+SELECT
+    C_GROUP,           -- Nom du groupe de construction
+    C_LABEL,           -- Libellé unique du résultat de construction
+    C_CREATED,         -- Date de création du résultat de construction
+    C_CREATED_BY,      -- ID utilisateur du créateur
+    C_LAST_UPDATED,    -- Date de dernière modification
+    C_LAST_UPDATED_BY, -- ID utilisateur du dernier modificateur
+    C_STATE,           -- État de la construction (par exemple, 2 pour TERMINÉ)
+    C_STATUS           -- Statut de la construction (par exemple, 0 pour CLEAN, 1 pour ERROR, 2 pour WARNING)
+FROM
+    DBBZ.BUILD_RESULT
+WHERE
+    C_STATE = 2;       -- Filtrer pour les constructions à l'état "COMPLETE"
+```
+
+**Explications des colonnes et valeurs importantes :**
+
+*   **`C_GROUP`** : Représente l'ID du groupe de construction, qui correspond généralement au nom du projet ou de l'application.
+*   **`C_LABEL`** : Est un nom unique pour une instance de construction spécifique au sein d'un groupe, souvent généré avec un horodatage (par exemple, `build-20240925.101100.011`).
+*   **`C_STATE`** : Indique l'état actuel du processus de construction.
+    *   `0` : NEW (Nouveau)
+    *   `1` : PROCESSING (En cours)
+    *   **`2`** : **COMPLETE** (Terminé) - C'est la valeur à utiliser pour identifier les compilations *réalisées*.
+    *   `3` : ABANDONED (Abandonné)
+*   **`C_STATUS`** : Indique le succès ou l'échec de la construction.
+    *   `0` : CLEAN (Propre, sans erreur ni avertissement)
+    *   `1` : ERROR (Erreur)
+    *   `2` : WARNING (Avertissement)
+
+Si vous souhaitez affiner votre recherche pour n'afficher que les compilations terminées **avec succès**, vous pouvez ajouter la condition `AND C_STATUS = 0` à la requête `WHERE C_STATE = 2 AND C_STATUS = 0;`.
+
+**Pour obtenir les détails granulaires des étapes de compilation (compilateur utilisé, codes de retour spécifiques des étapes) :**
+
+La table `BUILD_RESULT` contient des informations de synthèse. Les détails de chaque commande exécutée (y compris les compilations via `MVSExec`, `TSOExec`, etc.) sont stockés dans le **rapport de construction (Build Report)**, qui est une partie du résultat de construction. Ce rapport est généralement enregistré sous forme de fichiers **JSON** et/ou **HTML** attachés au résultat de construction et stockés sous forme de BLOBs (Binary Large Objects) dans des tables comme `ARTIFACT_CONTENT` et `BR_REPORT_DATA_MAPPING`.
+
+Interroger et analyser directement ces BLOBs via SQL n'est pas le moyen le plus efficace ni le plus recommandé pour les utilisateurs finaux. À la place, DBB fournit des outils spécifiques pour cela :
+
+1.  **Interface de ligne de commande (CLI) DBB** : Vous pouvez utiliser la commande `dbb view result <groupName> <resultName>` pour afficher les détails d'un résultat de construction spécifique, y compris son rapport. Le rapport affiché inclura les informations de chaque étape d'exécution (`ExecuteRecord`), telles que le programme exécuté (le compilateur), les paramètres et le code de retour.
+    *   Exemple de commande CLI : `$ dbb view result MortgageApplication-main build-20240925.101100.011`.
+2.  **API Java/Groovy DBB** : Les développeurs peuvent utiliser les API du toolkit DBB pour se connecter au `MetadataStore`, récupérer un objet `BuildResult` et ensuite accéder à son rapport de construction (JSON) pour le parser et extraire les `ExecuteRecords` qui contiennent les détails des compilations. Cela permet une analyse programmatique plus poussée des données.
+
+En résumé, l'interrogation de la table `DBBZ.BUILD_RESULT` vous permettra d'identifier les constructions terminées (par leurs `C_GROUP` et `C_LABEL`). Pour les détails de chaque étape de compilation, il est préférable d'utiliser la CLI ou les API DBB pour extraire et analyser les rapports de construction JSON/HTML associés.
+
+
+
+Oui, vous pouvez obtenir ces informations en interrogeant directement la table `BUILD_RESULT` dans votre base de données Db2, en utilisant les colonnes `C_STATE` (état de la construction) et `C_STATUS` (statut de la construction). Le schéma par défaut pour les tables DBB est **`DBBZ`**.
+
+Voici les requêtes SQL que vous pouvez utiliser :
+
+1.  **Compter le nombre total de compilations lancées :**
+    Une "compilation lancée" fait référence à toute construction qui a été initiée et enregistrée dans le référentiel DBB. Chaque entrée dans la table `BUILD_RESULT` correspond à un résultat de construction créé.
+
+    ```sql
+    SELECT COUNT(*)
+    FROM DBBZ.BUILD_RESULT;
+    ```
+
+    *   **Explication :** Cette requête compte simplement toutes les lignes de la table `BUILD_RESULT`. Si une entrée existe, cela signifie qu'un processus de construction a été créé ou "lancé".
+    *   **Remarque :** Les états de construction incluent `NEW` (0), `PROCESSING` (1), `COMPLETE` (2) et `ABANDONED` (3). Si par "lancées" vous entendez spécifiquement les constructions qui ont commencé leur traitement (donc pas à l'état `NEW`), vous pouvez modifier la condition comme suit :
+        ```sql
+        SELECT COUNT(*)
+        FROM DBBZ.BUILD_RESULT
+        WHERE C_STATE != 0; -- Exclut les constructions à l'état NEW
+        ```
+
+2.  **Compter le nombre de compilations lancées et réussies sans erreur :**
+    Pour être considérée comme "réussie sans erreur", une compilation doit être à l'état `COMPLETE` (terminée) et avoir le statut `CLEAN` (sans erreur ni avertissement).
+
+    ```sql
+    SELECT COUNT(*)
+    FROM DBBZ.BUILD_RESULT
+    WHERE C_STATE = 2      -- État : COMPLETE (Terminé)
+    AND C_STATUS = 0;    -- Statut : CLEAN (Propre, sans erreur ni avertissement)
+    ```
+
+    *   **Explication :** Cette requête filtre les résultats pour n'inclure que les enregistrements où la construction est terminée (`C_STATE = 2`) et où elle s'est terminée sans aucun problème (`C_STATUS = 0`).
+
+**Informations supplémentaires sur les valeurs des colonnes :**
+
+*   **`C_STATE` (État de la construction) :**
+    *   `0` : NEW (Nouvelle)
+    *   `1` : PROCESSING (En cours)
+    *   `2` : **COMPLETE** (Terminée)
+    *   `3` : ABANDONED (Abandonnée)
+
+*   **`C_STATUS` (Statut de la construction) :**
+    *   `0` : **CLEAN** (Propre, sans erreur ni avertissement)
+    *   `1` : ERROR (Erreur)
+    *   `2` : WARNING (Avertissement)
+
+Ces requêtes vous fourniront des agrégats sur les constructions. Pour obtenir des détails plus granulaires sur chaque étape de compilation (comme le compilateur spécifique utilisé, les codes de retour de chaque étape, etc.), il est recommandé d'utiliser l'**interface de ligne de commande (CLI)** de DBB (`dbb view result <groupName> <resultName>`) ou les **API Java/Groovy** de DBB pour analyser les rapports de construction (fichiers JSON ou HTML) qui sont stockés sous forme de BLOBs dans la base de données Db2.
+
+
+
+IBM Dependency Based Build (DBB) utilise une base de données Db2 comme référentiel pour stocker un large éventail de métadonnées de construction. Ces métadonnées sont essentielles pour le suivi des dépendances, la journalisation des résultats de construction et l'analyse d'impact.
+
+Voici une description des principales tables identifiées et de leur utilité :
+
+*   **`BUILD_RESULT`**:
+    *   **Stocke les métadonnées de chaque processus de construction réalisé**.
+    *   Contient des informations telles que l'**état** (par exemple, `NEW`, `PROCESSING`, `COMPLETE`, `ABANDONED`) et le **statut** (par exemple, `CLEAN`, `ERROR`, `WARNING`) de la construction.
+    *   Enregistre l'ID unique de la construction, le groupe de construction, le libellé de l'instance de construction, les dates de création et de dernière modification, ainsi que les **ID utilisateur du créateur (`C_CREATED_BY`) et du dernier modificateur (`C_LAST_UPDATED_BY`)** pour la conformité au GDPR.
+    *   Permet également de stocker des **propriétés définies par l'utilisateur** sous forme de paires clé-valeur.
+
+*   **`COLLECTION`**:
+    *   Un **objet de base de données agissant comme un conteneur pour les fichiers logiques**.
+    *   Utilisé pour stocker les informations de dépendance collectées par les scanners (`DependencyScanner`, `ZUnitConfigScanner`) pour l'analyse d'impact et la résolution des dépendances.
+    *   Comme `BUILD_RESULT`, il capture les ID utilisateur du créateur et du dernier modificateur à des fins de GDPR.
+
+*   **`PERMISSIONS`**:
+    *   Stocke les **informations de propriété (`P_OWNER`)** des objets DBB (build map, collection, build result).
+    *   Définit le propriétaire, l'équipe (groupe RACF), et les droits d'accès (lecture/écriture).
+
+*   **`DBB_ROLE_MAPPING`**:
+    *   Table de mappage qui **associe un ou plusieurs groupes RACF à un rôle DBB** (DBBADMNS, DBBUSERS, DBBGUEST).
+    *   Les autorisations sur cette table sont gérées pour assurer l'intégrité du mappage (accès `SELECT` pour les utilisateurs, `DELETE, INSERT, SELECT, UPDATE` pour les administrateurs).
+
+*   **`LOGICAL_FILE`**:
+    *   Contient les **informations de dépendance d'un fichier source scanné** par les scanners DBB.
+    *   Le résultat d'un scan est un `LogicalFile` qui inclut le nom logique du programme (`lname`), la catégorie, le chemin relatif du fichier source, et la langue.
+
+*   **`LOGICAL_DEPENDENCY`**:
+    *   Stocke les **relations de dépendance logique** entre les fichiers.
+
+*   **`A_CONTENT_MAPPING`**:
+    *   Table de mappage des artefacts et de leur contenu.
+
+*   **`ARTIFACT`**:
+    *   Table stockant les informations générales sur les artefacts de construction.
+
+*   **`ARTIFACT_CONTENT`**:
+    *   Contient le **contenu réel des pièces jointes** (telles que les logs de construction ou le rapport de construction).
+
+*   **`BR_ATTACHMENT_MAPPING`**:
+    *   Mappe les résultats de construction (`BUILD_RESULT`) à leurs pièces jointes.
+
+*   **`BR_PROP_MAPPING`**:
+    *   Mappe les propriétés des résultats de construction aux résultats de construction eux-mêmes.
+
+*   **`BR_REPORT_DATA_MAPPING`**:
+    *   Stocke le **rapport de construction et les données brutes du rapport**, souvent au format JSON ou HTML.
+
+*   **`BR_REPORT_MAPPING`**:
+    *   Mappe les rapports de construction aux résultats de construction.
+
+*   **`BUILD_RESULT_PROPERTY`**:
+    *   Contient les **propriétés additionnelles définies par l'utilisateur** pour un `BUILD_RESULT`.
+
+*   **`COL_LF_MAPPING`**:
+    *   Mappe les collections (`COLLECTION`) aux fichiers logiques (`LOGICAL_FILE`).
+
+*   **`DBB_SEQ_TABLE`**:
+    *   Table utilisée par le magasin de métadonnées pour lire les **numéros de séquence**.
+
+*   **`DBB_TABLE_VERSIONS`**:
+    *   Contient les **numéros de version de chaque table primaire** de la base de données DBB, essentielle pour les processus de migration de base de données.
+
+*   **`LD_CATEGORIES`**:
+    *   Table liée aux catégories de dépendances logiques.
+
+*   **`LD_LIBRARIES`**:
+    *   Table liée aux bibliothèques de dépendances logiques.
+
+*   **`LF_DEP_MAPPING`**:
+    *   Table de mappage des fichiers logiques aux dépendances.
+
+*   **`LF_LANGUAGES`**:
+    *   Table de mappage des fichiers logiques aux langues de programmation.
+
+*   **`BUILD_MAP`** (non listé dans les commandes `GRANT` directes, mais mentionné comme un objet stocké dans la base de données DBB):
+    *   Utilisé pour **enregistrer les relations entre les fichiers sources et leurs sorties**.
+    *   Comprend le nom du fichier de construction (`buildFile`), le groupe, la référence au résultat de construction (`result`), une description, ainsi que des listes d'`INPUT` (dépendances logiques) et d'`OUTPUT` (artefacts générés avec leur type de déploiement).
+    
+    
+Selon les informations contenues dans les sources, IBM Dependency Based Build (DBB) est conçu pour fonctionner avec des langages de script basés sur Java.
+
+Plus précisément :
+*   DBB offre la capacité d'exécuter **Apache Groovy sur z/OS**.
+*   Les API de DBB sont écrites en Java et peuvent être appelées par des applications Java ainsi que par des **langages de script basés sur Java**, tels que **Groovy, JRuby et Jython**.
+*   Tous les exemples de script de construction dans la documentation utilisent Groovy comme langage de script.
+
+Les sources fournies ne mentionnent pas de compatibilité directe avec Python. Par conséquent, sur la base de ces documents, DBB n'est pas explicitement compatible avec Python.
+
+
+
+Le produit IBM Dependency Based Build (DBB) est conçu pour fonctionner avec différentes origines de fichiers source sur z/OS, bien que l'approche moderne privilégie un certain flux de travail.
+
+Voici les options de stockage des fichiers source compatibles avec DBB :
+
+*   **z/OS UNIX System Services (USS) / zFS (z/OS File System)** :
+    *   C'est un emplacement central dans le pipeline DevOps moderne. Les fichiers source sont couramment stockés sur un SCM distribué comme Git, puis **clonés ou extraits vers un répertoire local sur zFS** avant le processus de construction. Les exemples de référentiels GitHub de DBB sont d'ailleurs conçus pour être clonés sur un système z/OS Unix.
+    *   Les tâches de construction, telles que les étapes de compilation de COBOL, PL/I, et Assembleur, copient généralement les fichiers source de leur emplacement HFS (qui est une désignation du système de fichiers UNIX de z/OS) vers les **Partitioned Data Sets (PDS)** MVS pour la compilation. Le tutoriel "Hello World" montre explicitement la création d'un fichier `.cbl` sur zFS, puis sa copie vers un PDS pour la compilation.
+    *   Les variables de configuration de DBB, comme `sourceDirs` dans la tâche `Start`, définissent des **répertoires source sur z/OS UNIX**. La tâche `FileAnalysis` et `FullAnalysis` travaillent également avec des chemins de fichiers sur z/OS UNIX.
+
+*   **MVS (Partitioned Data Sets - PDS)** :
+    *   Bien que le flux moderne implique souvent de déplacer les sources de Git vers zFS, puis vers les PDS, les compilateurs traditionnels z/OS (COBOL, PL/I, Assembleur) **nécessitent généralement que les fichiers source résident dans des PDS** pour la compilation effective.
+    *   L'outil de migration de DBB peut copier le code source directement depuis des **PDS vers un référentiel Git local sur zFS**. Cela implique que les PDS peuvent être l'emplacement initial du code source qui sera ensuite intégré dans un processus de construction plus moderne via Git et zFS.
+
+En résumé, le code source à compiler par DBB **peut être stocké sur la partie USS du z (zFS/HFS)**, et de là, il est généralement copié vers les **Partitioned Data Sets (PDS) sur la partie MVS du z** pour l'étape de compilation elle-même. La pratique courante dans un pipeline DevOps moderne est de gérer ces sources dans Git, de les cloner sur zFS, puis de les copier dynamiquement vers des PDS pour la compilation.
+
+----------------------------------------
 
 Dans le cadre de mon apprentissage d’Ansible, je travaille sur une machine Ubuntu 24.04 sur laquelle j’ai installé tous les outils nécessaires pour créer et gérer des machines virtuelles via KVM.
 
@@ -1520,6 +1799,7 @@ Canvas
 Apprentissage guidé
 
 Vérifiez les réponses de Gemini, car il peut se tromper, y compris sur des personnes. Votre confidentialité et GeminiS'ouvre dans une nouvelle fenêtre
+
 
 
 
