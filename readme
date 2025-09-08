@@ -1,3 +1,43 @@
+
+Bonne question, Magali ! En DB2, un champ de type TIMESTAMP est un type donné structuré, pas une chaîne de caractères. Donc, par défaut, tu ne peux pas utiliser LIKE directement sur un TIMESTAMP comme tu le ferais sur un VARCHAR.
+
+Mais il y a des moyens de contourner ça 👇
+
+🛠️ Solutions possibles
+
+- Conversion en chaîne :  
+  Tu peux convertir le TIMESTAMP en VARCHAR avec VARCHARFORMAT ou TOCHAR, selon la version de DB2 :
+
+  `sql
+  WHERE VARCHARFORMAT(macolonne_timestamp, 'YYYY-MM-DD') LIKE '2025-09-08%'
+  `
+
+  Cela te permet de faire un LIKE sur la date, ou même sur l'heure si tu veux.
+
+- Utilisation de DATE() ou TIME() :  
+  Si tu veux filtrer par jour ou heure, tu peux extraire la partie qui t’intéresse :
+
+  `sql
+  WHERE DATE(macolonnetimestamp) = '2025-09-08'
+  `
+
+  ou
+
+  `sql
+  WHERE TIME(macolonnetimestamp) BETWEEN '08:00:00' AND '12:00:00'
+  `
+
+- Plage de dates :  
+  Pour éviter les conversions, tu peux aussi faire :
+
+  `sql
+  WHERE macolonnetimestamp BETWEEN '2025-09-08 00:00:00' AND '2025-09-08 23:59:59'
+  `
+
+Tu veux qu’on regarde ensemble une requête spécifique que tu essaies de faire ?
+
+
+
 Of course! Here's your comment translated into English with a professional and supportive tone:
 
 > 💡 Brilliant idea!  
