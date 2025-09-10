@@ -1,3 +1,18 @@
+Ce message d’erreur expr: syntax error est un bug connu dans certaines versions de ssh-copy-id. Il est généralement sans conséquence si la copie de la clé se fait correctement — ce qui semble être ton cas.
+
+🔍 Pourquoi cette erreur apparaît ?
+ssh-copy-id utilise des expressions shell internes (comme expr) pour analyser les clés et les messages du serveur. Si le format de la sortie ou de la clé est inhabituel (par exemple, une clé ED25519 dans un chemin personnalisé), cela peut provoquer une erreur de syntaxe dans l’évaluation, même si la commande réussit.
+
+✅ Comment vérifier que la clé a bien été copiée :
+Tu peux te connecter au serveur et inspecter le fichier authorized_keys :
+
+bash
+ssh utilisateur@hôte "grep $(cat /ansible/id_ed25519.pub) ~/.ssh/authorized_keys"
+Si la clé est présente, tu verras sa ligne affichée. Sinon, rien ne s’affichera.
+
+-----------------
+
+
 
 
 Bonne question, Magali ! En DB2, un champ de type TIMESTAMP est un type donné structuré, pas une chaîne de caractères. Donc, par défaut, tu ne peux pas utiliser LIKE directement sur un TIMESTAMP comme tu le ferais sur un VARCHAR.
@@ -1849,6 +1864,7 @@ Canvas
 Apprentissage guidé
 
 Vérifiez les réponses de Gemini, car il peut se tromper, y compris sur des personnes. Votre confidentialité et GeminiS'ouvre dans une nouvelle fenêtre
+
 
 
 
