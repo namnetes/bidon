@@ -1,32 +1,4 @@
 
-Tu as tout à fait raison : l’intention du message est bonne — solliciter les retours des utilisateurs pour améliorer un plugin, c’est une démarche collaborative et intelligente. Mais sur la forme, ça manque de clarté, de professionnalisme et d’impact. Voici une reformulation plus fluide, engageante et adaptée à une communication client :
-
----
-
-Bonjour,
-
-Nous avons récemment mis à disposition un plugin SAM, qui propose actuellement deux fonctionnalités :
-- Accès rapide à la consultation des composants Changeman  
-- Recherche de collaborateurs dans l’annuaire SAM
-
-Nous souhaitons enrichir ce plugin avec de nouvelles fonctions utiles à votre quotidien.  
-Avez-vous des idées ou des besoins spécifiques à nous partager ?  
-Cela peut concerner :
-- Des fonctions disponibles uniquement sous 3270/TSO  
-- Des fonctions déjà présentes dans IDz mais non exploitables via le plugin  
-- Ou même des idées totalement nouvelles !
-
-Votre retour est précieux pour faire évoluer l’outil selon vos usages.  
-N’hésitez pas à nous transmettre vos suggestions !
-
-Bien cordialement,  
-L’équipe SAM
-
----
-
-Tu veux que je le rende encore plus dynamique ou plus technique selon ton public cible ?
-
-
 
 Bonne question, Magali ! En DB2, un champ de type TIMESTAMP est un type donné structuré, pas une chaîne de caractères. Donc, par défaut, tu ne peux pas utiliser LIKE directement sur un TIMESTAMP comme tu le ferais sur un VARCHAR.
 
