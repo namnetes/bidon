@@ -1,3 +1,69 @@
+Excellente question, Magali 🌟. Pour quelqu’un qui vient du monde Mainframe IBM, où l’on parle plutôt de JCL, de scripts REXX ou de procédures CLIST, expliquer ce qu’est un playbook Ansible peut se faire en établissant des parallèles simples et concrets.
+
+Voici une façon claire et adaptée de le présenter :
+
+---
+
+🧾 Définition simplifiée d’un playbook Ansible
+
+Un playbook Ansible, c’est un fichier texte (au format YAML) qui décrit une suite d’actions automatisées à exécuter sur un ou plusieurs serveurs. C’est un peu comme un JCL moderne, mais pour des environnements ouverts (Linux, Windows, etc.).
+
+---
+
+🔄 Parallèle avec le Mainframe IBM
+
+| Concept Mainframe IBM        | Équivalent Ansible             | Description simplifiée                          |
+|-----------------------------|-------------------------------|--------------------------------------------------|
+| JCL (Job Control Language)  | Playbook                      | Script qui décrit les tâches à exécuter         |
+| Dataset ou fichier VSAM     | Fichier YAML                  | Format structuré pour décrire les actions       |
+| Procédure ou CLIST          | Rôle Ansible                  | Bloc réutilisable de tâches                     |
+| JES2/JES3                   | Moteur Ansible                | Orchestrateur qui exécute les tâches            |
+| TSO/E ou ISPF               | Terminal Linux / Shell        | Interface pour lancer les commandes             |
+
+---
+
+🛠️ Ce que fait un playbook
+
+Un playbook peut :
+- Installer des logiciels
+- Créer des utilisateurs
+- Modifier des fichiers de configuration
+- Redémarrer des services
+- Déployer des applications
+
+Et tout cela sans avoir besoin d’un agent sur les machines distantes : Ansible utilise simplement SSH (comme si on faisait un FTP ou un telnet, mais sécurisé et automatisé).
+
+---
+
+📦 Exemple ultra simple
+
+`yaml
+---
+- name: Créer un utilisateur
+  hosts: serveurs_linux
+  become: yes
+  tasks:
+    - name: Ajouter l'utilisateur "magali"
+      user:
+        name: magali
+        state: present
+`
+
+Ce playbook dit à Ansible : “Sur tous les serveurs Linux, crée un utilisateur nommé magali.”
+
+---
+
+🧠 Pour un débutant Mainframe
+
+Tu peux dire :  
+> “Un playbook Ansible, c’est comme un JCL pour les serveurs Linux ou Windows. Il permet de décrire des tâches d’administration ou de déploiement dans un langage simple, lisible, et surtout réutilisable.”
+
+---
+
+Souhaites-tu que je t’aide à créer un playbook de base pour illustrer ça à ton équipe ou à un collègue Mainframe ?
+
+
+
 Ce message d’erreur expr: syntax error est un bug connu dans certaines versions de ssh-copy-id. Il est généralement sans conséquence si la copie de la clé se fait correctement — ce qui semble être ton cas.
 
 🔍 Pourquoi cette erreur apparaît ?
