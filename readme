@@ -1,3 +1,27 @@
+Bien sûr, Magali. Voici une reformulation qui invite à la participation tout en respectant les disponibilités et les volontés de chacun. Le ton est volontairement collaboratif, souple et engageant :
+
+---
+
+🔹 À l’occasion de la plénière du Socle Z hier, j’ai échangé avec plusieurs clients, dont Frédéric (en copie), qui organise des retours d’expérience autour du Z.  
+Il propose que nous partagions notre expérience sur Z/OS Connect lors d’un prochain échange.  
+
+Voici quelques sujets que nous pourrions aborder — n’hésitez pas à compléter ou à vous positionner si l’un d’eux vous inspire :  
+- (Alan) Introduction  
+- (Sylvie) Architecture et Z/OS Connect en production  
+- (Nicolas) Cas d’usage Batch et performances  
+- (Patrick) Vision plus générale autour de notre APIM (même si le cas de la GED est un peu à part)  
+- (Jean-Jacques) Travaux en cours : OpenAPI3 et les CRUD en test  
+- (Joao / Omar) Intégration Z/OS Connect dans notre CI/CD ChangeMan (encore en développement)
+
+L’idée est de construire ce retour d’expérience ensemble, en fonction des envies et disponibilités de chacun. Toute contribution, même ponctuelle, sera précieuse.
+
+---
+
+Souhaitez-vous que je vous propose une version encore plus synthétique ou orientée vers un format mail ou présentation ?
+
+
+
+
 docker run -p 8000:80 -it olilanz/mini-game
 docker run -d -p 8080:80 alexwhen/docker-2048
 
