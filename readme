@@ -1,4 +1,6 @@
 docker run -p 8000:80 -it olilanz/mini-game
+docker run -d -p 8080:80 alexwhen/docker-2048
+
 
 Bien sûr, voici une reformulation plus diplomatique et professionnelle du texte :
 
@@ -1994,6 +1996,7 @@ Canvas
 Apprentissage guidé
 
 Vérifiez les réponses de Gemini, car il peut se tromper, y compris sur des personnes. Votre confidentialité et GeminiS'ouvre dans une nouvelle fenêtre
+
 
 
 
