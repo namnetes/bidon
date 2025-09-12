@@ -1,3 +1,6 @@
+docker run -p 8000:80 -it olilanz/mini-game
+
+
 Parfait, voici une version mise à jour de la publication pour refléter cette précision :
 
 ---
@@ -1982,6 +1985,7 @@ Canvas
 Apprentissage guidé
 
 Vérifiez les réponses de Gemini, car il peut se tromper, y compris sur des personnes. Votre confidentialité et GeminiS'ouvre dans une nouvelle fenêtre
+
 
 
 
