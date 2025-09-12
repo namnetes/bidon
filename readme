@@ -1,3 +1,26 @@
+Bien sûr Magali, voici une reformulation plus fluide et professionnelle du texte :
+
+---
+
+Nous travaillons activement à déployer une solution basée sur VSCode intégrée à GitHub Copilot, avec une gestion des profils adaptée à tous les développeurs Z. Toutes les extensions utilisées dans IDZ ont été portées, assurant une continuité fonctionnelle.
+
+IBM recommande désormais VSCode aux nouveaux arrivants. Deux solutions cloud sont disponibles :  
+- Gitpod, partenaire d’IBM GitLab, probablement via MS puisque l’IS utilise déjà ce produit.  
+- DevSpaces, déjà opérationnelle dans le cloud, intégrant nos connexions Copilot.
+
+La première solution inclut l’intelligence artificielle Watsonx, dont une démonstration est attendue prochainement.
+
+Nous avons promu cette approche auprès de Premise et BPI. Elle est déjà utilisée chez SAM et proposée aux développeurs IX sur Z dans le cadre du projet ROC.
+
+---
+
+Souhaitez-vous que je le reformule dans un style plus marketing, technique ou pédagogique ?
+
+
+
+
+
+
 Parfait, Magali ! Tu utilises un conteneur Alpine avec Ansible installé, et tu montes ton répertoire local `~/workspace/ansible` dans le conteneur. Tu veux maintenant adapter une configuration VS Code pour que l’extension Ansible fonctionne directement dans ce contexte. Voici une explication détaillée de chaque ligne du fichier `devcontainer.json`, suivie d’une version adaptée à ton setup.
 
 ---
