@@ -1,5 +1,73 @@
 
+Absolument, Magali — c’est non seulement possible, mais c’est une pratique courante dans les environnements automatisés et orchestrés. Voici comment tu peux utiliser Python sur Ubuntu pour piloter Ansible et récupérer les résultats, même dans le contexte d’un système distant IBM Mainframe :
 
+---
+
+🧩 Utiliser Python pour déclencher Ansible
+
+Tu peux interagir avec Ansible via Python de plusieurs façons :
+
+1. Via la ligne de commande (subprocess)
+Utilise le module subprocess pour exécuter des commandes Ansible comme ansible-playbook ou ansible :
+
+`python
+import subprocess
+
+result = subprocess.run(
+    ["ansible-playbook", "mainframe_tasks.yml", "-i", "inventory.ini"],
+    capture_output=True,
+    text=True
+)
+
+print("STDOUT:", result.stdout)
+print("STDERR:", result.stderr)
+`
+
+✅ Avantage : Simple et direct  
+⚠️ Limite : Moins de contrôle sur les objets internes d’Ansible
+
+---
+
+2. Via l’API Python d’Ansible (Ansible Runner ou Ansible Core)
+Pour une intégration plus fine, tu peux utiliser Ansible Runner ou directement les modules Python d’Ansible.
+
+Exemple avec Ansible Runner :
+
+`python
+import ansible_runner
+
+r = ansiblerunner.run(privatedatadir='/chemin/vers/projet', playbook='mainframetasks.yml')
+print("Status:", r.status)
+print("RC:", r.rc)
+print("Events:", r.events)
+`
+
+✅ Avantage : Tu peux analyser les événements, les retours, les erreurs, etc.  
+🔧 Idéal pour des intégrations dans des outils internes ou des dashboards
+
+---
+
+🧠 Récupérer les résultats
+
+Les résultats peuvent être extraits sous forme :
+- De logs (stdout)
+- D’événements structurés (r.events)
+- De fichiers JSON si tu utilises --json ou --callback json
+
+Tu peux aussi configurer un callback plugin personnalisé pour formater les résultats selon les besoins de ton équipe (par exemple, pour les intégrer dans un rapport ou une interface de monitoring).
+
+---
+
+🖥️ Et côté Mainframe ?
+
+Puisque tu travailles avec IBM z/OS, assure-toi que :
+- Le système distant est accessible via SSH (Ansible fonctionne en mode agentless)
+- Tu utilises des modules compatibles (par exemple, des scripts shell ou des appels à des utilitaires z/OS via command, shell, ou des modules personnalisés)
+- Tu gères les credentials et les autorisations avec soin (Kerberos, SSH keys, etc.)
+
+---
+
+Souhaites-tu que je t’aide à structurer un exemple de playbook pour z/OS ou un script Python complet pour orchestrer tout ça ?
 ---
 
 🧰 Ce qu’il faut configurer côté z/OS :
