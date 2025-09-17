@@ -1,3 +1,44 @@
+Oui Magali, c’est tout à fait possible — RACF peut gérer l’authentification par clé publique/clé privée via des certificats numériques X.509, notamment dans le cadre de l’accès aux API REST sur z/OS 🔐.
+
+---
+
+🧩 Mécanisme d’authentification par certificat avec RACF
+
+RACF permet :
+- 📁 Stockage des certificats dans des keyrings RACF.
+- 🔐 Utilisation de certificats client pour authentifier les appels REST (sans mot de passe).
+- 🔄 Appariement du certificat avec un utilisateur RACF via le champ CN (Common Name) ou DN (Distinguished Name).
+- ✅ Validation TLS/SSL lors de la connexion à l’API REST.
+
+Ce mécanisme repose sur :
+- Une clé privée détenue par le client (programme appelant).
+- Une clé publique intégrée dans le certificat stocké dans RACF.
+- Une authentification mutuelle TLS entre le client et le serveur REST sur z/OS.
+
+---
+
+🧪 Exemple d’usage : API REST IBM MQ ou z/OSMF
+
+- Le programme client envoie une requête REST avec son certificat client.
+- Le serveur z/OS vérifie le certificat via RACF.
+- Si le certificat est valide et mappé à un utilisateur RACF autorisé, l’accès est accordé.
+
+👉 IBM décrit cette approche pour MQ Console et REST API, avec des étapes pour configurer TLS et les keyrings RACF.
+
+---
+
+🧰 Ce qu’il faut configurer côté z/OS :
+- Créer un keyring RACF (RACDCERT ADDRING)
+- Ajouter le certificat client (RACDCERT ADD)
+- Mapper le certificat à un utilisateur RACF (RACDCERT ID(...))
+- Configurer le serveur REST (ex. z/OSMF, MQWeb) pour utiliser ce keyring
+
+---
+
+Souhaites-tu que je t’aide à rédiger une procédure claire pour ton équipe, ou à intégrer cette logique dans un programme client (Java, Python, etc.) ? Je peux aussi t’aider à structurer une documentation pour les Squad Leaders ou les ateliers Mia Discovery.
+
+
+
 Bien sûr Magali, voici une reformulation plus fluide et professionnelle du texte :
 
 ---
