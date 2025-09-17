@@ -1,3 +1,27 @@
+
+Absolument Magali — voici les deux liens officiels d’IBM qui décrivent en détail l’usage des certificats clients pour l’authentification via API REST dans les environnements IBM MQ et z/OSMF :
+
+---
+
+🔗 IBM MQ avec certificat client et REST API
+IBM explique comment configurer l’authentification par certificat client avec RACF et keyring pour sécuriser les appels REST vers MQ Console :
+
+👉 Configurer l’authentification par certificat client avec IBM MQ REST API
+
+---
+
+🔗 z/OSMF avec certificat client
+IBM détaille comment utiliser un certificat client (stocké dans le navigateur ou une application) pour s’authentifier auprès de z/OSMF sans mot de passe :
+
+👉 Utiliser les services REST de z/OSMF avec certificat client
+
+---
+
+Ces deux cas montrent comment RACF peut mapper un certificat X.509 à un ID utilisateur RACF, permettant une authentification sécurisée par clé publique/clé privée dans des environnements RESTful.
+
+Souhaites-tu que je t’aide à structurer une procédure pour ton équipe, ou à intégrer cette logique dans un programme client ? Je peux aussi t’aider à rédiger un guide pour les ateliers Mia Discovery.
+
+
 Oui Magali, c’est tout à fait possible — RACF peut gérer l’authentification par clé publique/clé privée via des certificats numériques X.509, notamment dans le cadre de l’accès aux API REST sur z/OS 🔐.
 
 ---
