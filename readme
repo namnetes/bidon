@@ -1,4 +1,65 @@
+Voici une proposition structurée pour une feuille de route 2026 claire, stratégique et diplomatique, qui valorise les activités de votre équipe tout en posant les jalons nécessaires pour la modernisation et l’optimisation budgétaire :
 
+---
+
+🧭 Feuille de route 2026 – Équipe Support & Assistance IBM Mainframe
+
+🎯 Contexte et périmètre
+Notre équipe joue un rôle transversal dans l’écosystème Mainframe, en accompagnement d’une communauté de 300 développeurs. Nos missions couvrent :
+
+- La gouvernance des environnements hors production
+- Le maintien en condition opérationnelle (MCO) et le pilotage des évolutions techniques
+- Le support sur les logiciels de détection Windows
+- La gestion des habilitations et la surveillance des ressources Z
+- Le transfert de compétences pour renforcer l’autonomie des équipes Z.SNI
+- L’accompagnement de 90 Squads dans une logique de service, de conseil et de co-construction
+
+---
+
+🚀 Objectifs stratégiques 2026
+
+1. Accélérer la modernisation du Mainframe
+Nous devons consacrer davantage de moyens humains et techniques à la modernisation de l’environnement Mainframe, en intégrant pleinement les technologies émergentes telles que :
+
+- Kafka pour la gestion des flux en temps réel
+- z/OS Connect pour l’ouverture des services Mainframe via des API REST
+- S3 sur z pour le stockage objet compatible cloud
+
+Ces leviers sont essentiels pour garantir la pérennité de notre infrastructure tout en répondant aux exigences croissantes d’agilité et d’interopérabilité.
+
+2. Réduction du budget de fonctionnement de 50%
+Pour atteindre cet objectif ambitieux, nous devons activer plusieurs leviers :
+
+- Rationalisation des environnements hors production : suppression des doublons, mutualisation des ressources
+- Automatisation des tâches récurrentes : exploitation des outils DevOps et scripts de supervision
+- Optimisation des licences et des outils tiers
+- Renforcement de l’autonomie des Squads via des formations ciblées et des supports pédagogiques
+
+Ces actions permettront de réduire les coûts tout en maintenant un haut niveau de service.
+
+3. Transition vers le mode RUN pour zDevOps
+Le passage en mode RUN du projet zDevOps début 2026 marque une étape clé. Il est impératif que notre équipe se mette en ordre de marche pour :
+
+- Assurer la gestion opérationnelle du produit
+- Définir les rôles et responsabilités dans le cadre du RUN
+- Mettre en place une gouvernance produit claire et efficace
+- Capitaliser sur les retours d’expérience du mode projet pour fluidifier les processus
+
+---
+
+🤝 Gouvernance et leadership
+
+Dans cette phase de transformation, il est essentiel de rappeler que la gouvernance de l’équipe repose sur une direction unique, garantissant cohérence, clarté des décisions et alignement stratégique. Cette structure permet d’éviter les ambiguïtés et de fluidifier les arbitrages, tout en favorisant une dynamique collective.
+
+---
+
+📌 Conclusion
+
+2026 sera une année de consolidation et d’innovation. En renforçant nos moyens pour la modernisation, en activant les leviers d’optimisation budgétaire, et en structurant notre approche RUN pour zDevOps, nous nous donnons les moyens de réussir une transition durable et efficiente.
+
+---
+
+Souhaitez-vous que je vous aide à décliner cette feuille de route en version PowerPoint, note de cadrage ou support de présentation pour les parties prenantes ?
 
 Bien sûr Magali, voici une proposition de message simple, claire et respectueuse que tu pourrais adresser à ton manager :
 
