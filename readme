@@ -29,3 +29,9 @@ Détection d’abus des systèmes de récompenses
    - Grâce à watsonx Code Assistant for Z, les développeurs peuvent générer du code, moderniser les applications existantes, et bénéficier d’une aide à la compréhension et à la transformation des systèmes legacy.
 
 A cette liste je m'interroge sur comment l'IA pourrait venir compléter les outils des équipes qui enquêtes lorsqu'une fraude leur a été communiquée
+
+
+• ALNSCORE (Intégration COBOL) : Ce programme simplifie l'intégration de l'IA pour les applications CICS COBOL, leur permettant d'invoquer des modèles ONNX déployés sur z/OS via des commandes CICS standard. Il est optimisé pour exploiter l'accélérateur intégré.
+• SQL Data Insights pour Db2 z/OS : Permet d'intégrer des fonctions d'IA dans SQL pour découvrir des modèles et des informations cachées dans les données Db2 sans nécessiter de compétences en science des données.
+• watsonx pour IBM Z :
+    ◦ watsonx Code Assistant for IBM Z (WCA4Z) : Accélère la modernisation des applications mainframe en utilisant l'IA Générative pour la génération et la transformation du code
