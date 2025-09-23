@@ -1,1 +1,31 @@
+Cas d’usage de l’IA sur Z
 
+- Les traitements transactionnels critiques, notamment dans les services financiers/bancaires
+- L’optimisation des opérations IT, avec un fort accent sur la modernisation et l’automatisation
+
+Services Financiers/Bancaires
+
+Détection de fraude  
+   - Analyse en temps réel des transactions par carte et des paiements pour identifier les comportements frauduleux.  
+
+Lutte contre le blanchiment d’argent (AML - Anti-Money Laundering)  
+   - Intégration de filtres AML en temps réel dans les flux de paiements instantanés pour se conformer aux exigences réglementaires.  
+   - Les premiers tests ont révélé une réduction des faux positifs jusqu’à 72 % et une amélioration de la détection des transactions illicites jusqu’à 600 % par rapport aux standards du secteur.
+
+Compensation et règlement  
+   - Prédiction des transactions à risque avant leur règlement, permettant d’anticiper les pertes et de réduire les coûts liés à la conformité.
+
+Évaluation du risque de défaut de découvert  
+   - Calcul dynamique du risque de dépassement de limite, permettant des ajustements intelligents et personnalisés pour limiter l’exposition au risque.
+
+Attribution de prêts et systèmes d’adjudication  
+   - Accélération du processus d’approbation des prêts aux particuliers, avec une réduction de la latence par un facteur supérieur à 1000 et une diminution significative du risque pour les prêteurs.
+
+Détection d’abus des systèmes de récompenses  
+   - Identification des comportements frauduleux chez les utilisateurs exploitant indûment les programmes de fidélité ou de récompense.
+
+### B. IA Générative et Assistance : Automatisation par les LLMs
+
+   - Grâce à watsonx Code Assistant for Z, les développeurs peuvent générer du code, moderniser les applications existantes, et bénéficier d’une aide à la compréhension et à la transformation des systèmes legacy.
+
+A cette liste je m'interroge sur comment l'IA pourrait venir compléter les outils des équipes qui enquêtes lorsqu'une fraude leur a été communiquée
