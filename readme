@@ -1,20 +1,145 @@
-Voici une reformulation plus polie et fluide de votre message :
+## 1. L'Intelligence Artificielle (IA) : De Gros Espoirs Financiers
+
+Le rapport indique que l'IA et l'IA générative sont désormais considérées comme des technologies clés dans l'environnement mainframe, avec des attentes financières très élevées.
+
+### Les Chiffres Impressionnants (sur 3 ans)
+*   **Économies totales attendues :** Les entreprises interrogées s'attendent à économiser collectivement **12,7 milliards de dollars** grâce à l’IA sur le mainframe.
+*   **Revenus supplémentaires attendus :** Elles prévoient également de gagner **19,5 milliards de dollars** de revenus en plus.
+*   **Investissement par entreprise :** En moyenne, chaque entreprise prévoit d'investir 15,9 millions de dollars dans l'IA pour le mainframe, en attendant en retour 44,6 millions de dollars de nouveaux revenus.
+
+### L'Utilisation de l'IA (Adoption et Cas d'Usage)
+L'adoption de l'IA est en **accélération**.
+
+*   **Taux d'adoption :** Près de neuf entreprises sur dix (**88 %**) prévoient d'utiliser ou utilisent déjà des outils d’IA générative sur leurs mainframes.
+*   **Secteur financier :** Les banques et services financiers adoptent largement l'IA sur le mainframe, avec un taux de **87 %**.
+*   **À quoi sert l'IA ?** Les trois utilisations principales de l'IA dans le mainframe sont :
+    1.  **Optimiser les performances** et bien gérer les ressources systèmes (33 %).
+    2.  **Améliorer la détection des fraudes** (29 %).
+    3.  Améliorer les tests et les analyses de sécurité (26 %).
 
 ---
 
-Bonjour Monsieur,
+## 2. La Modernisation : Intérêt et Bénéfices
 
-Je vous remercie sincèrement pour l’intérêt que vous portez à notre activité ainsi que pour la confiance que vous témoignez à mon égard.
+Le processus de modernisation des mainframes est complexe et urgent, mais il est devenu plus **rentable**.
 
-Mon périmètre couvre en effet le support et l’assistance, au sens large, d’une communauté d’environ 300 développeurs mainframe. Dans le cadre de la modernisation de cette plateforme, notre champ de compétences s’élargit progressivement : l’usage de Python sur z/OS, Git, Jenkins, entre autres, fait désormais partie intégrante de notre quotidien. Cela dit, nous restons pleinement engagés dans la préservation et la valorisation des fondations solides qui font la force du mainframe, tout en assurant la maintenance d’un existant particulièrement riche.
+### Gros Bénéifces (ROI)
+Les projets de modernisation génèrent de très bons retours sur investissement (ROI).
 
-Si une collaboration devait se concrétiser, elle passerait naturellement par nos IT leaders, qui pilotent notamment le capacitaire de ma squad, intégrée à une tribu aux besoins variés.
+*   **Augmentation du ROI :** Le retour sur investissement a presque **doublé** par rapport à l'année précédente.
+*   **Exemples de ROI :** Il atteint **288 %** pour la modernisation effectuée directement sur le mainframe et jusqu'à **362 %** pour le transfert d'applications vers d’autres plateformes.
+*   **Coûts en baisse :** Le coût moyen des projets de modernisation sur le mainframe est passé de 9,1 millions de dollars à **7,2 millions de dollars**.
 
-Je me permets de vous orienter vers Sandrine et Tiana, qui pourront être vos interlocutrices privilégiées dans ce cadre.
+### Pourquoi Moderniser ?
+Les entreprises citent plusieurs raisons importantes pour moderniser leurs systèmes :
 
-Bien cordialement,  
-Magali
+*   **Sur le mainframe :** Améliorer la **sécurité et la résilience** (la résistance aux problèmes) (33 %).
+*   **Avec le Cloud :** Rendre les données plus facilement accessibles (34 %) et faire des économies de coûts (24 %).
+*   **Pour l'environnement :** Près d'un quart des entreprises (24 %) cite la **durabilité** (l'impact environnemental) comme une raison de déplacer les applications moins critiques hors du mainframe.
+
+### L'Importance du Mainframe
+Malgré la modernisation, le mainframe reste la « colonne vertébrale » des systèmes IT.
+
+*   **Utilisation stable/croissante :** La majorité des répondants (**56 %**) ont augmenté leur utilisation de la plateforme l'année dernière.
+*   **Garantie de sécurité :** 32 % des entreprises citent la sécurité comme la principale raison de garder une application sur le mainframe.
 
 ---
 
-Souhaitez-vous que je reformule également pour un ton plus chaleureux ou plus institutionnel selon le destinataire ?
+## 3. Les Problèmes et les Lois (Défis)
+
+La modernisation se heurte à des problèmes de personnel qualifié et aux exigences légales.
+
+### Le Manque de Compétences
+Le manque de personnel qualifié est le problème le plus critique.
+
+*   **Difficultés de recrutement :** **70 %** des entreprises ont eu du mal à trouver les bonnes compétences.
+*   **Domaines critiques :** Le manque de compétences est le plus fort dans les domaines suivants :
+    *   **IA** (42 %).
+    *   Le **Cloud** (37 %).
+    *   L’**intégration de systèmes** (33 %).
+*   **Compétences les plus rares :** Les compétences en **sécurité du mainframe** sont les plus difficiles à trouver (45 %).
+*   **Solutions :** Les entreprises font appel à des prestataires externes (**74 %**) pour les aider. Elles forment aussi leurs équipes existantes (44 %) ou utilisent l'IA pour compléter les connaissances humaines (35 %).
+
+### La Sécurité et la Conformité (Les Lois)
+Les lois et les règles de sécurité ont une influence très forte.
+
+*   **L'influence des lois :** **94 %** des entreprises déclarent que les exigences de conformité réglementaire (comme la loi DORA sur la résilience opérationnelle) influencent fortement leurs décisions de modernisation.
+*   **Sécurité comme obstacle :** Les **protocoles de sécurité très stricts** qui limitent l’accès aux données du mainframe sont l'obstacle le plus cité (47 %) pour la mise en œuvre de nouvelles technologies.
+
+### Le Problème de la Visibilité (Observabilité)
+Dans les systèmes informatiques hybrides (qui mélangent mainframe et cloud), il est difficile d'avoir une vision claire de tout.
+
+*   **Difficulté à tout voir :** **77 %** des répondants ont du mal à obtenir une visibilité totale de leurs systèmes hybrides.
+*   **Tableau de bord unique :** **92 %** des entreprises jugent essentiel d’avoir un tableau de bord unique pour surveiller leur environnement hybride et les données du mainframe. La priorité est de suivre la sécurité et la conformité aux lois (47 %).
+
+Oui, la source que vous avez fournie (les notes sur "IA, Mainframe et Modernisation") **résume très bien** le rapport principal de Kyndryl ("Thought Leadership State of the Mainframe 2025").
+
+Elle couvre les trois grands thèmes du rapport : l'IA, les bénéfices de la modernisation (ROI) et les défis (compétences, lois).
+
+Pour que cette synthèse soit encore plus complète et reflète l'esprit du rapport, je peux y ajouter quelques éléments clés, toujours avec un **vocabulaire simple**, concernant l'agilité et l'évolution du mainframe.
+
+---
+
+## Compléments à la Synthèse : Agilité et Mainframe
+
+### 1. La Stratégie de Modernisation est très Agile
+
+Le rapport insiste beaucoup sur le fait que la modernisation n'est pas un plan fixe, mais une stratégie **très flexible** qui change souvent.
+
+*   **Changement fréquent :** **Quatre entreprises sur cinq (80 %)** ont modifié leur stratégie de modernisation au cours de l'année passée. Cela montre que les entreprises s'adaptent rapidement aux événements extérieurs (lois, économie, technologie).
+*   **Approche Phased :** Elles ne font plus de changements massifs d’un coup ("big bang"), mais procèdent par **petites étapes gérables** pour pouvoir corriger le tir si besoin.
+
+### 2. Le Rôle du Mainframe dans le Monde Hybride
+
+Le rapport note un **paradoxe** : le mainframe est moins important stratégiquement, mais il est de plus en plus utilisé pour les tâches critiques.
+
+*   **Usage en hausse, perception en baisse :** Bien que l’importance stratégique du mainframe ait **diminué de 11 %** cette année, **56 %** des entreprises ont augmenté leur utilisation de cette plateforme.
+*   **Environnement Hybride :** Le modèle informatique dominant est l'**hybride** (mélange de mainframe et de cloud). **99 %** des entreprises fonctionnent dans cet environnement. Le but est d’utiliser la meilleure plateforme pour chaque tâche, en équilibrant la flexibilité du cloud et la puissance/sécurité du mainframe.
+*   **Technologies pour le futur :** Les entreprises prévoient d’utiliser de nouvelles technologies **directement sur le mainframe**, comme les **grands modèles de langage (LLM)** (83 % des entreprises) et l’**IA agentique** (78 % des entreprises), pour développer et gérer les applications.
+
+### 3. Les Lois et la Visibilité (Ajout de détails simples)
+
+Le poids des lois et la difficulté à "tout voir" sont des obstacles majeurs :
+
+*   **Lois très influentes :** **94 %** des répondants déclarent que la conformité réglementaire (lois) influence **fortement** leur décision de moderniser leurs mainframes. Des lois comme **DORA** (sur la résilience opérationnelle) sont citées.
+*   **Difficulté à avoir une vue d'ensemble :** Il est très difficile d'avoir une visibilité totale (**observabilité**) sur les systèmes hybrides complexes. **77 %** des répondants rencontrent des difficultés à suivre toutes les informations (y compris celles du mainframe).
+*   **Solution :** Pour pallier ce problème, **92 %** des entreprises jugent **essentiel** d'avoir un tableau de bord unique pour surveiller la sécurité et la conformité aux règles (47 %) sur l'ensemble de leur environnement hybride.
+
+
+------------
+
+Pour l'opération de que je suis donc vue de mon siège :
+
+La modernisation est un levier essentiel pour rendre la plateforme (qui inclut les systèmes IBM Z) plus attractive et pour favoriser son accessibilité, selon les informations contenues dans le rapport.
+Voici comment cette affirmation est étayée par les sources :
+1. La Modernisation Rend la Plateforme Plus Attractive (Maintien de la Valeur)
+La modernisation du mainframe ne vise pas à abandonner la plateforme, mais à renforcer ses atouts historiques tout en l'adaptant aux exigences modernes. Cela la rend plus attractive.
+• Sécurité et Résilience Améliorées : L'une des trois principales motivations pour moderniser sur le mainframe est l'amélioration de la sécurité et de la résilience (citée par 33 % des répondants). Le mainframe est déjà apprécié pour sa résilience, sa puissance, sa fiabilité et sa sécurité inégalées, et la modernisation consolide ces points forts.
+• Intégration de l'IA : L'intégration de technologies de pointe comme l'IA (30 % des motivations pour moderniser sur le mainframe) et l’IA générative rend la plateforme plus pertinente et prometteuse. Ces technologies génèrent des attentes financières très élevées, rendant le mainframe beaucoup plus intéressant stratégiquement.
+• Agilité et Flexibilité : La modernisation permet d'augmenter la flexibilité (citée par 23 % des répondants), ce qui est crucial dans l'environnement dynamique actuel. L’adoption de pratiques modernes comme DevSecOps rend également la plateforme plus agile et comparable aux environnements cloud.
+• Pérennité : La modernisation permet de pérenniser l'infrastructure en la rendant résiliente, sécurisée et conforme.
+2. La Modernisation est une Clé pour Favoriser l'Accessibilité
+La modernisation favorise l'accessibilité de la plateforme mainframe principalement en l'intégrant aux environnements informatiques modernes (Cloud et hybride) et en utilisant de nouvelles interfaces.
+• Intégration au Cloud (Accessibilité des Données) : La voie stratégique d'intégration au cloud est essentielle pour l'accessibilité. La principale raison de choisir cette voie est l'accessibilité des données (citée par 34 % des répondants). Cela signifie que la modernisation permet de connecter les applications et les données du mainframe aux systèmes distribués pour améliorer l’interopérabilité et l’accès aux données.
+• Modèle Hybride : La modernisation hybride est le modèle prédominant, utilisé par 99 % des entreprises. Dans ce modèle, le mainframe est modernisé et intégré aux autres systèmes. Le rapport mentionne l'importance d'introduire des API (Interfaces de Programmation d'Application) et des pratiques DevOps pour donner au mainframe une agilité semblable à celle du cloud sans avoir à le quitter.
+• Nouveaux Talents et Compétences : La modernisation s'oriente vers des compétences plus courantes (Cloud, IA, sécurité), et moins sur les langages de programmation historiques. Les entreprises investissent dans la formation à la cybersécurité et la conformité (43 %), l'IA et l'analytique (39 %), et les certifications cloud (35 %). Ces efforts facilitent l'intégration des nouvelles technologies et des nouveaux talents, rendant la plateforme plus accessible aux professionnels ayant des compétences variées.
+• Observabilité Unifiée : Pour gérer cette complexité hybride, 92 % des entreprises jugent important de disposer d’un tableau de bord unifié pour surveiller leur environnement, y compris les données du mainframe. Ce tableau de bord permet d'acquérir une meilleure visibilité d'ensemble et d'assurer une stabilité opérationnelle, ce qui rend l'exploitation et la surveillance du mainframe plus accessibles et moins isolées.
+
+Cette modernisation du mainframe doit devenir une réalité concrète et doit apporter des bénéfices mesurables aux clients et à LCL il y a donc la nécessité de déployer des moyens spécifiques pour la rendre opérationnelle.
+
+
+--------------------------*************************
+
+Il y a aussi des choses assez paeadoxale ou antonimique.
+
+Tout le monde reconait la diffculté de recruter des profils jeune pour le Mainframe mais dans le même tout le monde reconait que cette technologie n'est aps enseigné durant les divers cycles scolaire et qu'il n'y a pas de formation. il n'y a donc pas le choix que de recourir à la prestation qui elle investit sur des orifle qui dervont apprnedre sur le tas. dans le même temps nous mettons au sein de nos entreprise des regeles draconniene pour limiter à 2 ans det demi le temps maximum d'une prestation et nous parlons alors de la criticité de l'expertise indispensable sur certain pans de notre si sur de la prestation. Cette meme prestation que nous ne souhaiton spas vraimen tembaucher sauf si elle à moins de 30 ans   
+
+
+Ce qui peut être enrichi ou précisé
+Pourquoi cette réticence à embaucher ? Il serait utile d’explorer les raisons : coût salarial, rigidité RH, volonté de garder une flexibilité, ou simplement des biais générationnels.
+
+Le rôle des entreprises dans la formation Les entreprises pourraient créer des parcours internes, des bootcamps, ou des partenariats avec des écoles pour réintroduire le Mainframe dans les cursus. Cela permettrait de sortir du cercle vicieux.
+
+La valeur des profils expérimentés, même au-delà de 30 ans L’expertise Mainframe ne s’acquiert pas en deux ans. Il faut valoriser les profils seniors, qu’ils soient prestataires ou internes, et leur offrir des perspectives.
+
+La gouvernance RH et technique Ce paradoxe révèle un manque de coordination entre les politiques RH (durée de prestation, critères d’embauche) et les besoins techniques (continuité, expertise, criticité). Il faudrait aligner ces deux mondes.
