@@ -1,1 +1,76 @@
+/* REXX - HLL Exit pour l'Application DASO (Génération de Nom) */
+/*********************************************************************/
+/* CET EXIT DOIT ÊTRE CONFIGURÉ SUR UN POINT PRE-STAGE (e.g., BULD0004) */
+/* La variable 'component' est modifiable.                            */
+/*********************************************************************/
 
+Parse Arg .
+
+/* Variables de contexte  */
+COMP_NAME   = component        /* Nom du composant */
+ZMF_PACKAGE = packageName      /* Nom du package */
+DB2_SSID    = db2Subsystem     /* ID du sous-système DB2 cible */
+
+/* Constantes de nommage */
+PREFIXE_REQUIS = 'SO'
+LONGUEUR_SUFFIXE = 6
+LONGUEUR_TOTALE  = 8
+
+/*********************************************************************/
+/* LOGIQUE DE GÉNÉRATION                                             */
+/*********************************************************************/
+
+/* Appel de la routine externe Db2 pour obtenir le prochain ID --- */
+
+/* CREATE SEQUENCE SEQ_DASO_COMPONENTS
+    AS BIGINT
+    START WITH 1
+    INCREMENT BY 1
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    NO CYCLE
+    CACHE 100;
+*/
+
+NEXT_SEQ = DB2_GET_NEXT_SEQUENCE(DB2_SSID, 'DASO_SEQUENCE')
+
+If Length(NEXT_SEQ) > LONGUEUR_SUFFIXE Then Do
+  proceed = 'NO'
+  messageText = 'CMN9001E: Séquence Db2 dépasse la longueur requise.'
+  Return
+End
+
+/* Formatage du suffixe (remplissage par zéros) */
+SUFFIX = Right(NEXT_SEQ, LONGUEUR_SUFFIXE, '0')
+
+/* Construction du nouveau nom unique --- */
+NEW_COMP_NAME = PREFIXE_REQUIS || SUFFIX
+
+/* Mise à jour des variables de l'Exit */
+component = NEW_COMP_NAME       /* Ceci modifie le nom du composant [6] */
+COMP_NAME = NEW_COMP_NAME
+dataChanged = 'YES'             /* IMPORTANT : Notifier ZMF du changement [6] */
+
+messageText = 'Nouveau composant généré: ' || COMP_NAME
+
+Return
+
+/*********************************************************************/
+/* Conversion d’un BIGINT en hexadécimal affichable                  */
+/*********************************************************************/
+numeric digits 20  /* Assure une précision suffisante */
+
+say 'numseq'
+
+return d2x(numseq)
+
+
+/*********************************************************************/
+/* Fonctions Db2 Wrapper (Doivent être implémentées séparément)      */
+/*********************************************************************/
+
+DB2_GET_NEXT_SEQUENCE: Procedure
+
+DSNREXX -> Voir Bruno qui maitrise  
+
+Return value  /* Exemple de séquence retournée = '000123' */
