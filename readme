@@ -1,25 +1,44 @@
-Bien sûr Magali, voici une proposition de script fluide, positif et authentique pour une courte vidéo, qui répond aux trois questions posées sur le *travail en proximité*. Le ton est chaleureux, professionnel et valorisant — à ton image :
+Veuillez trouver ci-dessous les informations concernant l'utilisation de `chcp` et l'encodage recommandé pour l'écriture des scripts shell (`sh` ou `tcsh`), basées sur les sources fournies (dans le contexte de z/OS UNIX).
 
----
+### Rôle de la commande `chcp`
 
-🎥 **Script vidéo – Travail en proximité**
+La commande `chcp` est utilisée pour **définir, réinitialiser ou interroger la conversion de page de code ASCII/EBCDIC** actuellement en vigueur pour le terminal de contrôle.
 
-> *"Pour moi, le travail en proximité, c’est avant tout une dynamique de partenariat. Avec mon homologue chez l’exploitant information, nous avons mis en place des colocalisations tous les quinze jours dans nos locaux. Ce sont des ingénieurs système Mainframe qui viennent échanger directement avec notre équipe d’administrateurs système, qui elle, accompagne au quotidien près de 300 développeurs.  
->  
-> Même à distance, on travaille ensemble en continu. Et c’est justement ça, la proximité : pas juste une question de géographie, mais une volonté partagée d’agir ensemble, de se comprendre, et de construire des solutions durables.  
->  
-> Les avantages ? Ils sont nombreux. On gagne en fluidité, en réactivité, et surtout en confiance. On ne parle pas ici d’un prestataire, mais d’un vrai partenaire.  
->  
-> Une anecdote ? Ce qui me marque, c’est que 98% de nos actions se passent bien. Et pourtant, ce sont souvent les 2% qui font du bruit. Le vrai enjeu, c’est de mettre en lumière ces 98% de réussite, sans nier les difficultés. Parce qu’on est humains, et que l’essentiel, c’est d’être prêts à faire face, à ajuster, à apprendre.  
->  
-> Le travail en proximité, c’est ça : une posture active, bienveillante, et tournée vers la réussite collective."*
+*   **Interrogation :** L'option `-q` de `chcp` permet d'interroger les pages de code ASCII et EBCDIC actuelles utilisées pour ce terminal, et les résultats sont écrits sur la sortie standard.
+    *   Par défaut (si la conversion n'a pas été modifiée), la page de code ASCII par défaut est **ISO8859-1**, et la page de code EBCDIC par défaut est **IBM-1047**.
+*   **Conversion Terminal/Shell :** Lorsque vous utilisez des interfaces comme `rlogin` ou `telnet` pour accéder au shell, les données que vous entrez sont converties par défaut de l'ASCII (**ISO8859-1**) vers l'EBCDIC (**IBM-1047**) avant que le shell ne les traite. La commande `chcp` permet de modifier ces pages de code pour la session en cours.
+*   **Restriction OMVS :** Il ne faut **pas utiliser `chcp` si vous êtes connecté via la commande TSO/E `OMVS`**. Les scripts shell peuvent vérifier la variable d'environnement `_BPX_TERMPATH` (qui vaut `"OMVS"` dans ce cas) pour contourner l'exécution de `chcp` si l'utilisateur est connecté via `OMVS`.
 
----
+### Encodage Recommandé pour les Scripts Shell
 
-Souhaites-tu que je reformule ce texte pour un format encore plus court, ou que je t’aide à le découper en séquences pour faciliter l’enregistrement ? Je peux aussi t’aider à créer un support visuel ou une slide d’accompagnement si tu veux le présenter en réunion.
+La question de savoir si un script doit être écrit en ASCII ou en EBCDIC dépend entièrement de l'environnement d'exécution (*locale*).
 
+La **règle fondamentale est que la page de code dans laquelle un script shell est encodé doit correspondre à la page de code du *locale* dans lequel il est exécuté**.
 
+#### 1. Le Locale Détermine l'Encodage
 
+*   Si un script est utilisé par plusieurs utilisateurs opérant dans différents *locales* (qui utilisent des pages de code différentes), **plusieurs copies du script shell** sont nécessaires, une pour chaque page de code de *locale* différente.
+*   Si vous devez convertir un script shell d'une page de code à une autre (par exemple, pour le partager entre *locales* non compatibles IBM-1047), vous pouvez utiliser la commande `iconv`.
+*   Par défaut, **le shell z/OS UNIX et ses utilitaires sont configurés comme des programmes EBCDIC**.
+
+#### 2. Cas du `Locale` EBCDIC par défaut
+
+*   Le *locale* par défaut pour le shell et les utilitaires est `C`.
+*   Le système z/OS UNIX fonctionne par défaut dans le *locale* POSIX (également connu sous le nom de *locale* C) en utilisant la page de code **IBM-1047 (EBCDIC Latin-1)**.
+*   Par conséquent, si le script doit s'exécuter dans le *locale* EBCDIC par défaut (IBM-1047), il doit être encodé en **IBM-1047**.
+
+#### 3. Restrictions de Conversion Automatique (SBCS)
+
+Si les scripts shell sont **étiquetés (*tagged*)** et que la **conversion automatique est activée** (`AUTOCVT(ON)`), le *locale* doit indiquer une **page de code SBCS (Single-Byte Character Set)**, et le script lui-même doit être encodé en SBCS.
+
+#### 4. Utilisation de l'ASCII (ISO8859-1)
+
+Il est possible d'utiliser des scripts ou fichiers source **encodés en ASCII (ISO8859-1)**, mais ils doivent être correctement étiquetés (*tagged*) pour permettre la conversion automatique par le système.
+
+*   Si vous copiez des fichiers à distance depuis une plateforme ASCII vers z/OS, la commande `sftp` convertit généralement chaque fichier d'ASCII à EBCDIC lors de la copie, rendant l'étiquetage inutile dans ce cas.
+*   Les programmes C peuvent être compilés en ASCII (ce qui les rend compatibles avec les *locales* ASCII), mais le shell lui-même reste EBCDIC.
+
+En conclusion, dans l'environnement z/OS UNIX, l'**encodage EBCDIC (IBM-1047)** est l'encodage par défaut utilisé par le shell et est l'encodage le plus compatible avec l'environnement système de base. Cependant, le critère déterminant est que **l'encodage du script doit correspondre au *locale* défini pour la session où il est exécuté**.
 
 
 
@@ -113,6 +132,7 @@ find . -maxdepth 1 -type f -name "*_CHK.cbl" | while read cobol_file; do
 done
 
 echo "Compilation de masse terminée. Les listings sont prêts pour l'analyse."
+
 
 
 
