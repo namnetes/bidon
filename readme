@@ -1,11 +1,21 @@
-Oui, exactement : dans Db2 for z/OS, lorsqu’on exécute une requête comme :
+#!/bin/bash
+# Script de compilation (utilisant cob2)
 
-sql
-SELECT NEXT VALUE FOR DASO_SEQUENCE FROM SYSIBM.SYSDUMMY1;
-…la séquence est immédiatement incrémentée au moment de l’exécution. Cela signifie que :
+echo "Compilation des programmes CHECKER..."
 
-La valeur est réservée dès que l’ordre SQL est passé.
+# Boucler sur tous les nouveaux fichiers .cbl
+find . -maxdepth 1 -type f -name "*_CHK.cbl" | while read cobol_file; do
+    echo "  -> Compilation de $cobol_file..."
+    
+    # Commande cob2 pour générer le listing sans module objet
+    # Assurez-vous d'ajouter ici le chemin de recherche si nécessaire (-qSYSLIB)
+    cob2 -qLIST -qNOOBJECT "$cobol_file" > "${cobol_file%.cbl}.lst" 2>&1
+    
+    if [ $? -eq 0 ]; then
+        echo "     [SUCCÈS]"
+    else
+        echo "     [ERREUR] - Vérifiez le fichier de listing ${cobol_file%.cbl}.lst"
+    fi
+done
 
-Même si tu ne l’utilises pas ensuite (par exemple, en cas d’échec d’insertion), elle est consommée.
-
-Il n’y a pas de rollback automatique sur les séquences, car elles sont conçues pour être monotones et non réutilisables.
+echo "Compilation de masse terminée. Les listings sont prêts pour l'analyse."
