@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Script de compilation (utilisant cob2)
 
 echo "Compilation des programmes CHECKER..."
@@ -19,3 +19,4 @@ find . -maxdepth 1 -type f -name "*_CHK.cbl" | while read cobol_file; do
 done
 
 echo "Compilation de masse terminée. Les listings sont prêts pour l'analyse."
+
