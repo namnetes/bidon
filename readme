@@ -1,3 +1,38 @@
+Bien sûr Magali, voici une proposition de script fluide, positif et authentique pour une courte vidéo, qui répond aux trois questions posées sur le *travail en proximité*. Le ton est chaleureux, professionnel et valorisant — à ton image :
+
+---
+
+🎥 **Script vidéo – Travail en proximité**
+
+> *"Pour moi, le travail en proximité, c’est avant tout une dynamique de partenariat. Avec mon homologue chez l’exploitant information, nous avons mis en place des colocalisations tous les quinze jours dans nos locaux. Ce sont des ingénieurs système Mainframe qui viennent échanger directement avec notre équipe d’administrateurs système, qui elle, accompagne au quotidien près de 300 développeurs.  
+>  
+> Même à distance, on travaille ensemble en continu. Et c’est justement ça, la proximité : pas juste une question de géographie, mais une volonté partagée d’agir ensemble, de se comprendre, et de construire des solutions durables.  
+>  
+> Les avantages ? Ils sont nombreux. On gagne en fluidité, en réactivité, et surtout en confiance. On ne parle pas ici d’un prestataire, mais d’un vrai partenaire.  
+>  
+> Une anecdote ? Ce qui me marque, c’est que 98% de nos actions se passent bien. Et pourtant, ce sont souvent les 2% qui font du bruit. Le vrai enjeu, c’est de mettre en lumière ces 98% de réussite, sans nier les difficultés. Parce qu’on est humains, et que l’essentiel, c’est d’être prêts à faire face, à ajuster, à apprendre.  
+>  
+> Le travail en proximité, c’est ça : une posture active, bienveillante, et tournée vers la réussite collective."*
+
+---
+
+Souhaites-tu que je reformule ce texte pour un format encore plus court, ou que je t’aide à le découper en séquences pour faciliter l’enregistrement ? Je peux aussi t’aider à créer un support visuel ou une slide d’accompagnement si tu veux le présenter en réunion.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #!/bin/bash
 
 # --- PARAMÈTRES ---
@@ -78,5 +113,6 @@ find . -maxdepth 1 -type f -name "*_CHK.cbl" | while read cobol_file; do
 done
 
 echo "Compilation de masse terminée. Les listings sont prêts pour l'analyse."
+
 
 
