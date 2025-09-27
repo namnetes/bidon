@@ -1,3 +1,62 @@
+#!/bin/bash
+
+# --- PARAMÈTRES ---
+# Définir l'extension des fichiers COPY (par exemple, .cpy, .cbl, ou rien si le nom est juste le membre)
+COPY_EXTENSION="" 
+# Si vos fichiers COPY sont nommés "MONCOPY.cpy", utilisez : COPY_EXTENSION=".cpy"
+
+# Le répertoire contenant les fichiers COPY (le répertoire courant dans cet exemple)
+COPY_DIR="." 
+
+# --- SCRIPT D'AUTOMATISATION ---
+
+echo "Démarrage de la création des programmes COBOL CHECKER..."
+
+# 1. Parcourir tous les fichiers dans le répertoire des COPY.
+# On utilise find pour une meilleure robustesse, mais ls fonctionne aussi.
+# Ajustez le critère si vos fichiers ont une extension spécifique (ex: *.cpy)
+find "$COPY_DIR" -maxdepth 1 -type f -name "*$COPY_EXTENSION" | while read copy_path; do
+    
+    # Extraire le nom du fichier (sans le chemin)
+    copy_filename=$(basename "$copy_path")
+    
+    # Supprimer l'extension éventuelle pour obtenir le nom du membre pur pour l'instruction COPY
+    if [ -n "$COPY_EXTENSION" ]; then
+        copy_member_name="${copy_filename%$COPY_EXTENSION}"
+    else
+        copy_member_name="$copy_filename"
+    fi
+    
+    # Définir le nom du nouveau programme COBOL (.cbl)
+    # Le nom du programme COBOL est le nom du fichier COPY (sans extension) suivi de _CHK (pour Checker)
+    cobol_program_name="${copy_member_name}_CHK"
+    cobol_file="${cobol_program_name}.cbl"
+    
+    # Vérification pour éviter d'écraser des fichiers existants (optionnel)
+    if [ -f "$cobol_file" ]; then
+        echo "  [INFO] Le fichier $cobol_file existe déjà. Suppression..."
+        rm "$cobol_file"
+    fi
+
+    # 2. Créer le contenu du fichier COBOL
+    cat > "$cobol_file" << EOL
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. ${cobol_program_name}.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+           COPY $copy_member_name.
+       PROCEDURE DIVISION.
+           STOP RUN.
+EOL
+
+    echo "  [OK] Création de $cobol_file pour la COPY $copy_member_name"
+done
+
+echo "Processus terminé."
+
+
+
+
 #!/usr/bin/env bash
 # Script de compilation (utilisant cob2)
 
@@ -19,4 +78,5 @@ find . -maxdepth 1 -type f -name "*_CHK.cbl" | while read cobol_file; do
 done
 
 echo "Compilation de masse terminée. Les listings sont prêts pour l'analyse."
+
 
