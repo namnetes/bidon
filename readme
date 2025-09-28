@@ -1,5 +1,48 @@
-Voici un modèle d'e-mail que vous pouvez envoyer à votre exploitant. Il est formulé de manière professionnelle, explique clairement le besoin (simuler la rétention z/OS) et demande la mise en place d'un test.
+La mécanique permettant la **suppression automatique des fichiers après une période de rétention définie** sur Amazon S3 s'appelle la **Gestion du Cycle de Vie (S3 Lifecycle)**.
 
+Vous mettez en œuvre cette mécanique en créant une **règle de cycle de vie** sur votre compartiment (bucket) S3, en définissant l'action d'**Expiration** (suppression).
+
+---
+
+## 1. Principe de la Gestion du Cycle de Vie S3
+
+La Gestion du Cycle de Vie S3 vous permet de définir des **règles** pour automatiser des actions sur vos objets (fichiers) en fonction de leur âge ou de leur ancienneté.
+
+Pour la suppression automatique, vous utilisez l'action d'**Expiration**.
+
+---
+
+## 2. Mise en Œuvre de l'Expiration
+
+L'implémentation se fait généralement via la **console AWS**, l'**AWS CLI**, ou un **SDK AWS**.
+
+### A. Création d'une Règle d'Expiration
+
+1.  **Accédez à votre compartiment S3** dans la console AWS.
+2.  Allez dans l'onglet **Gestion** (Management).
+3.  Cliquez sur **Créer une règle de cycle de vie** (Create lifecycle rule).
+
+### B. Configuration de la Règle de Suppression
+
+Vous devez définir les paramètres suivants pour la règle d'expiration :
+
+| Paramètre | Description |
+| :--- | :--- |
+| **Nom de la règle** | Un nom descriptif pour votre règle (par exemple, `Suppression-apres-30-jours`). |
+| **Portée de la règle** | Définissez à quels objets la règle doit s'appliquer : |
+| | - **Appliquer à tous les objets du compartiment** (Applicable à tous les fichiers). |
+| | - **Limiter la portée de cette règle en utilisant un ou plusieurs filtres** (Permet de cibler des fichiers avec un **préfixe** spécifique – l'équivalent d'un « dossier » – ou des **balises**). |
+| **Actions de règle de cycle de vie** | Cochez l'option : **Expirer les versions actuelles d'objets** (Expire current versions of objects). |
+| **Jours après la création de l'objet** | Saisissez le **nombre de jours** après lesquels vous souhaitez que les objets soient automatiquement supprimés (par exemple, **30** pour une rétention de 30 jours). |
+
+### C. Cas Particulier : Gestion des Versions (Versioning)
+
+Si la gestion des versions (Versioning) est activée sur votre compartiment S3, vous devrez ajouter une action d'expiration supplémentaire pour les versions non actuelles des objets :
+
+* Cochez l'option : **Supprimer définitivement les versions anciennes d'objets** (Permanently delete noncurrent versions of objects).
+* Spécifiez le **nombre de jours après que les objets sont devenus anciens** (non actuels) avant leur suppression définitive.
+
+Amazon S3 exécute ensuite cette règle quotidiennement (une fois par jour) pour identifier et marquer les objets éligibles à la suppression. Vous ne serez plus facturé pour les objets marqués pour suppression.
 ---
 
 **Objet : Demande de Test : Implémentation des Règles de Rétention (Cycle de Vie) S3 pour l'Alignement z/OS**
@@ -183,3 +226,4 @@ if __name__ == "__main__":
     except ValueError as e:
         # Si une erreur survient, on l’affiche
         print(f"Erreur : {e}")
+
