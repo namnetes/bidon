@@ -59,3 +59,127 @@ Cordialement,
 
 [Votre Nom]
 [Votre Fonction]
+
+-------------
+
+Ecris un programme Python sur la base de ces spécificiations focntionnelles : Spécification de la chaîne de date dans les fichiers Chaque fichier contient une chaîne de caractères représentant une date, encodée selon le format suivant : - Préfixe fixe : La lettre majuscule 'D' indique le début de la chaîne. - Jour du mois : Deux chiffres (DD) représentant le jour, de 01 à 31. - Mois : Un seul caractère (M) représentant le mois : - Chiffres de 1 à 9 pour les mois de janvier à septembre. - Lettres : 'J' pour octobre 'K' pour novembre 'L' pour décembre Année : Un seul chiffre (Y) correspondant au dernier chiffre de l’année (ex. : '5' pour 2025).
+
+# On importe deux modules standards :
+# - 're' pour utiliser les expressions régulières (utile pour vérifier le format d'une chaîne de texte)
+# - 'datetime' pour obtenir la date du jour et manipuler les dates
+import re
+from datetime import datetime
+
+# 📅 Dictionnaire qui associe chaque code de mois à son nom en français
+# Les chiffres de 1 à 9 représentent janvier à septembre
+# Les lettres J, K, L représentent octobre, novembre, décembre
+MONTH_MAP = {
+    '1': 'janvier',
+    '2': 'février',
+    '3': 'mars',
+    '4': 'avril',
+    '5': 'mai',
+    '6': 'juin',
+    '7': 'juillet',
+    '8': 'août',
+    '9': 'septembre',
+    'J': 'octobre',
+    'K': 'novembre',
+    'L': 'décembre'
+}
+
+# 🔁 Fonction pour encoder la date du jour dans le format personnalisé
+def encode_today():
+    """
+    Cette fonction transforme la date du jour en une chaîne au format : DDDMY
+    Exemple : 28 septembre 2025 → D28L5
+    """
+    # On récupère la date actuelle
+    today = datetime.now()
+
+    # On extrait le jour, le mois et l'année
+    day = today.day
+    month = today.month
+    year = today.year
+
+    # On convertit le mois en code selon les règles :
+    # - 1 à 9 → chiffres
+    # - 10 → J, 11 → K, 12 → L
+    if 1 <= month <= 9:
+        month_code = str(month)
+    elif month == 10:
+        month_code = 'J'
+    elif month == 11:
+        month_code = 'K'
+    elif month == 12:
+        month_code = 'L'
+    else:
+        raise ValueError("Mois invalide")
+
+    # On prend le dernier chiffre de l'année (ex : 2025 → '5')
+    year_digit = str(year % 10)
+
+    # On assemble la chaîne finale avec le préfixe 'D'
+    return f"D{day:02d}{month_code}{year_digit}"
+
+# 🔍 Fonction pour décoder une chaîne de date au format personnalisé
+def decode_date_string(date_str):
+    """
+    Cette fonction prend une chaîne comme 'D15K5' et la transforme en date lisible : '15 novembre 2025'
+
+    Paramètre :
+        date_str (str) : chaîne à décoder
+
+    Retour :
+        str : date lisible en français
+    """
+
+    # Expression régulière pour vérifier le format :
+    # - Commence par 'D'
+    # - Deux chiffres pour le jour
+    # - Un caractère pour le mois (1-9 ou J/K/L)
+    # - Un chiffre pour l'année
+    pattern = r'^D(\d{2})([1-9JKL])(\d)$'
+
+    # On vérifie si la chaîne correspond au format
+    match = re.match(pattern, date_str)
+
+    # Si le format est incorrect, on lève une erreur
+    if not match:
+        raise ValueError("Format de date invalide")
+
+    # Si le format est bon, on extrait les trois parties
+    day, month_code, year_digit = match.groups()
+
+    # On convertit le jour en entier et on vérifie qu’il est entre 1 et 31
+    day_int = int(day)
+    if not (1 <= day_int <= 31):
+        raise ValueError("Jour invalide")
+
+    # On récupère le nom du mois à partir du dictionnaire
+    month_name = MONTH_MAP.get(month_code)
+    if not month_name:
+        raise ValueError("Code mois invalide")
+
+    # On reconstruit l’année complète :
+    # Exemple : si on est en 2025 et que le chiffre est '5', on suppose que c’est 2025
+    current_year = datetime.now().year
+    decade = current_year - (current_year % 10)
+    year = decade + int(year_digit)
+
+    # On retourne la date sous forme lisible
+    return f"{day_int} {month_name} {year}"
+
+# 🎬 Programme principal : test avec la date du jour
+if __name__ == "__main__":
+    # On encode la date du jour
+    encoded_today = encode_today()
+    print(f"Chaîne encodée aujourd’hui : {encoded_today}")
+
+    # On essaie de décoder cette chaîne
+    try:
+        decoded_today = decode_date_string(encoded_today)
+        print(f"Date décodée : {decoded_today}")
+    except ValueError as e:
+        # Si une erreur survient, on l’affiche
+        print(f"Erreur : {e}")
