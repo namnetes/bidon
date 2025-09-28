@@ -1,3 +1,102 @@
+Je vous fournis ci-dessous les liens vers la documentation AWS (Amazon Web Services) pour les solutions que nous avons évoquées :
+
+---
+
+## 1. Suppression Automatique des Fichiers (Gestion du Cycle de Vie S3)
+
+La fonctionnalité permettant de définir une rétention et de supprimer automatiquement les fichiers (objets) après une période donnée est la **Gestion du Cycle de Vie S3**.
+
+* **Documentation générale sur l'expiration des objets :**
+    [Objets en cours d'expiration - Amazon Simple Storage Service (AWS)](https://docs.aws.amazon.com/fr_fr/AmazonS3/latest/userguide/lifecycle-expire-general-considerations.html)
+
+* **Documentation sur la gestion du cycle de vie des objets (création de règles) :**
+    [Gestion du cycle de vie des objets - Amazon Simple Storage Service (AWS)](https://docs.aws.amazon.com/fr_fr/AmazonS3/latest/userguide/object-lifecycle-mgmt.html)
+
+---
+
+## 2. Dissociation de Noms de Fichiers (Renommage via Lambda)
+
+Comme le renommage direct n'existe pas dans S3 (il s'agit d'une opération de copie suivie d'une suppression de l'original), cette logique est implémentée via **AWS Lambda** ou **AWS Transfer Family Workflows**.
+
+* **Implémentation du renommage (Copie + Suppression) avec Lambda (Stack Overflow) :**
+    Ce lien explique pourquoi le renommage dans S3 est effectué par une opération de copie suivie d'une suppression, et comment cela peut être automatisé par une fonction Lambda.
+    [How to rename the file in S3 bucket through Lambda Function - Stack Overflow](https://stackoverflow.com/questions/54131253/how-to-rename-the-file-in-s3-bucket-through-lambda-function)
+
+* **Utilisation des flux de travail (Workflows) AWS Transfer Family (Solution avancée) :**
+    Si vos transferts utilisent SFTP/FTP (proche de CFT), cette solution permet d'intégrer une étape personnalisée (Custom step) via Lambda pour renommer ou transformer le fichier juste après le téléversement.
+    [Utilisation des étapes de traitement de fichiers personnalisées - AWS Transfer Family](https://docs.aws.amazon.com/transfer/latest/userguide/custom-step-details.html)
+
+---
+
+## 3. Tutoriel Vidéo (Exemple Pratique)
+
+Pour une démonstration visuelle de la première solution, voici un tutoriel sur la gestion du cycle de vie : [AWS S3 Lifecycle Rule | Guide - How to delete file from S3 after X days - tutorial](https://www.youtube.com/watch?v=U9bhFf3q6YI).
+http://googleusercontent.com/youtube_content/0
+
+
+C'est une excellente question, car la **dissociation des noms de fichiers** est cruciale dans les systèmes d'échange de fichiers pour des raisons de normalisation, de sécurité ou de gestion des versions.
+
+Dans Amazon S3, le nom du fichier est l'**Object Key** (la clé de l'objet). Il n'existe pas de fonctionnalité S3 native et directe pour qu'un objet ait deux noms simultanément.
+
+Cependant, vous pouvez implémenter cette mécanique de dissociation en utilisant une **approche par automatisation événementielle** avec un autre service AWS, ce qui est la méthode standard pour ajouter une logique de traitement à S3.
+
+La solution la plus courante consiste à utiliser **Amazon S3** en combinaison avec **AWS Lambda** et une base de données de métadonnées.
+
+---
+
+## Mise en Œuvre avec S3 et AWS Lambda
+
+Pour dissocier le nom du fichier entre l'émetteur et le récepteur, vous devez introduire une **étape de traduction et de renommage** dans le flux d'envoi.
+
+### Étape 1 : Définition de la logique de nommage
+
+Vous devez décider de la manière dont les noms de fichiers seront gérés :
+
+* **Nom de l'émetteur (Source)** : Le nom initial du fichier, par exemple `Rapport_Ventes_Juillet.pdf`.
+* **Nom du récepteur (Cible)** : Le nom interne ou le nom que le récepteur verra, par exemple `clientA/rapport-ID456.pdf`.
+
+### Étape 2 : Le Processus de Transfert et de Renommage
+
+Voici le flux de travail recommandé :
+
+#### 1. Upload initial (Nom Émetteur)
+
+L'émetteur charge le fichier sur un **dossier de réception temporaire** (un préfixe S3) dans votre bucket, en utilisant le nom de fichier souhaité (e.g., `inbox/Rapport_Ventes_Juillet.pdf`).
+
+#### 2. Déclenchement de l'événement (Notification S3)
+
+Dès que l'objet est créé, S3 émet un événement. Vous configurez le bucket pour envoyer cette notification à une fonction **AWS Lambda**.
+
+#### 3. Fonction AWS Lambda (La mécanique de traduction)
+
+La fonction Lambda se déclenche et exécute la logique de dissociation :
+
+a.  **Détermination du nouveau nom :** Elle applique votre logique métier (par exemple, ajouter un ID de transaction, un préfixe, ou normaliser la casse) pour générer le **Nom du Récepteur** (`clientA/rapport-ID456.pdf`).
+b.  **Copie de l'objet :** Elle utilise l'API S3 `CopyObject` pour copier le fichier de l'emplacement source (`inbox/Rapport_Ventes_Juillet.pdf`) vers l'emplacement cible avec le nouveau nom (`destination/clientA/rapport-ID456.pdf`).
+c.  **Suppression de l'objet initial :** Une fois la copie réussie, elle supprime l'objet initial (`inbox/Rapport_Ventes_Juillet.pdf`).
+
+#### 4. Accès du Récepteur (Nom Récepteur)
+
+Le récepteur accède au fichier dans le dossier de destination en utilisant le nouveau nom : `s3://mon-bucket/destination/clientA/rapport-ID456.pdf`.
+
+---
+
+## 3. Alternative : Utilisation d'AWS Transfer Family
+
+Si votre "émetteur" et votre "récepteur" utilisent des **protocoles de transfert de fichiers** standard (SFTP, FTPS, FTP ou AS2) et non l'API S3 directement, la meilleure solution est d'utiliser **AWS Transfer Family**.
+
+AWS Transfer Family vous permet de définir un **workflow de transfert** qui peut automatiquement appeler une fonction **AWS Lambda** ou un service tel que **AWS Step Functions** après un téléversement réussi. Ce workflow gère la dissociation du nom de fichier de la même manière que décrite ci-dessus, mais le point d'entrée pour les utilisateurs est un serveur SFTP/FTP géré par AWS, ce qui est plus proche de l'environnement CFT.
+
+---
+
+| Mécanisme CFT | Équivalent Amazon S3 |
+| :--- | :--- |
+| **Mécanique de Dissociation** | **AWS Lambda** (exécution d'un script de renommage/copie). |
+| **Fichier stocké** | **Object Key** (la clé de l'objet dans S3). |
+| **Point d'entrée de transfert** | **AWS Transfer Family** (pour SFTP/FTP) ou **API S3** (pour upload direct). |
+
+
+
 La mécanique permettant la **suppression automatique des fichiers après une période de rétention définie** sur Amazon S3 s'appelle la **Gestion du Cycle de Vie (S3 Lifecycle)**.
 
 Vous mettez en œuvre cette mécanique en créant une **règle de cycle de vie** sur votre compartiment (bucket) S3, en définissant l'action d'**Expiration** (suppression).
@@ -226,4 +325,5 @@ if __name__ == "__main__":
     except ValueError as e:
         # Si une erreur survient, on l’affiche
         print(f"Erreur : {e}")
+
 
