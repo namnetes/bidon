@@ -1,3 +1,50 @@
+
+
+Voici une reformulation claire, structurée et plus fluide du contenu du slide « Modernisation du mainframe » de LCL DODS, avec un ton professionnel et accessible :
+
+---
+
+🖥️ LCL DODS — Modernisation du Mainframe
+
+Type de projet : Travaux planifiés pour 2023  
+Budget alloué : 400 K€  
+
+✅ Réalisations 2023
+- Mise en place du socle OCS, incluant le déploiement en production du premier projet « taux zéro » (base ACE)  
+- Proof of Concept (PoC) Kafka avec échange via DAI  
+- PoC de sortie vers Amazon S3  
+
+🔄 Objectifs 2024
+- Intégration des outils standards (MQCI, OCS) pour connecter les APIs de l’écosystème DODS  
+- Déploiement des connecteurs standards : Kafka, S3  
+- PoCs de sortie vers :
+  - Amazon S3  
+  - Kafka  
+  - MQCI  
+  - RCU de BEI  
+  - RCU de DODS (dont un via MQCI)  
+
+🚀 Feuille de route & ambitions
+- Accélérer la modernisation du mainframe  
+- Implémenter les APIs et technologies cibles pour une architecture plus ouverte et évolutive  
+
+Contributeurs clés : CAGIP, DBA, D2I, SOFAM
+
+---
+
+Souhaites-tu une version orientée décideurs, technique, ou pédagogique pour ton équipe ? Je peux aussi t’aider à en faire une slide visuelle ou un support de présentation.
+
+
+
+
+
+
+
+
+
+
+
+
 Bien sûr Magali, voici une explication détaillée du message et des pistes concrètes pour y répondre efficacement 👇
 
 ---
