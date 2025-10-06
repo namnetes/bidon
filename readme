@@ -65,3 +65,34 @@ Si la LPAR en IPL est celle qui détient le rôle actif de Distributeur primaire
  * Redémarrage : Lorsque la LPAR termine son IPL et que sa pile TCP/IP redémarre, elle peut reprendre le rôle de distributeur primaire (si elle est configurée comme PREFERRED) ou reprendre son rôle de secours (BACKUP), sans perturber le routage déjà en cours.
 Conclusion : Le Sysplex Distributor est un mécanisme de haute disponibilité. L'IPL d'une LPAR ne cause pas d'indisponibilité du Distributeur lui-même (le service de distribution perdure), mais il entraîne la perte définitive des connexions actives sur la LPAR qui s'arrête. Le but est de garantir que le service global reste accessible et que le travail puisse continuer sur les LPAR restantes.
 
+
+_________
+
+
+
+Oui, le Sysplex Distributor est par nature un composant réseau mutualisé (partagé) dans l'environnement z/OS Parallel Sysplex.
+Il est au cœur de la stratégie d'IBM pour la mutualisation des ressources réseau et applicatives à travers plusieurs LPAR.
+1. Principe de la Mutualisation par le Sysplex Distributor
+Le terme "mutualisé" décrit parfaitement son rôle pour les raisons suivantes :
+A. Mutualisation de l'Adresse IP (DVIPA)
+Le Sysplex Distributor repose sur le concept de Distributed Dynamic VIPA (DDVIPA).
+ * Une seule adresse IP (le DDVIPA) et un seul port sont utilisés par le client pour accéder à un service.
+ * Cette adresse unique est mutualisée car elle est censée représenter plusieurs instances de serveurs d'applications s'exécutant sur différentes LPAR au sein du Sysplex.
+B. Mutualisation de la Charge de Travail (Workload Balancing)
+Le rôle principal du Sysplex Distributor est de distribuer (mutualiser) la charge de travail entrante (les connexions TCP/IP) parmi les différentes LPAR cibles disponibles.
+ * Il utilise les informations de performance en temps réel fournies par le Workload Manager (WLM) pour choisir la LPAR la moins chargée.
+ * Ceci permet d'utiliser la capacité combinée (mutualisée) de plusieurs LPAR pour un seul service, améliorant à la fois la performance et l'évolutivité.
+C. Mutualisation de la Haute Disponibilité (HA)
+Le Sysplex Distributor assure la continuité du service en cas de défaillance ou d'IPL (comme vu précédemment) d'une LPAR :
+ * Le DDVIPA est géré par une LPAR distributrice primaire et une ou plusieurs LPAR de secours (backup/hot standby).
+ * En cas d'arrêt de la LPAR distributrice primaire, le rôle bascule automatiquement et de manière transparente vers une LPAR de secours. Cette capacité de basculement (takeover) est une forme de mutualisation de la fonction de routage pour garantir la résilience.
+2. Distinction avec le Partage de Port
+Il est important de noter que le Sysplex Distributor est souvent utilisé en combinaison avec le Partage de Port (Port Sharing), mais ce sont des concepts distincts :
+| Caractéristique | Sysplex Distributor | Partage de Port (SHAREPORT) |
+|---|---|---|
+| Niveau de Mutualisation | Inter-LPAR (à travers le Sysplex) | Intra-LPAR (au sein d'une seule pile TCP/IP) |
+| Objectif | Répartition de la charge et HA sur plusieurs systèmes (LPARs) | Répartition de la charge sur plusieurs espaces d'adressage (applications) dans la même LPAR |
+En résumé, le Sysplex Distributor permet aux clients de voir le Sysplex entier comme un point d'accès réseau unique et mutualisé pour l'application.
+L'une des technologies clés utilisées pour cette mutualisation est le Dynamic VIPA, comme on peut le voir dans Sysplex in a Nutshell.
+
+Les vues de vidéos YouTube seront stockées dans votre historique YouTube, et vos données seront stockées et utilisées par YouTube conformément à ses  Conditions d'utilisation
