@@ -48,3 +48,20 @@ En conclusion, le Sysplex Distributor utilise les fonctionnalités du Dynamic VI
 L'extrait Sysplex in a Nutshell est pertinent car il explique comment le Sysplex Distributor gère les scénarios de basculement de plan (planned takeover), ce qui est similaire au processus géré lors d'un IPL non-disruptif.
 
 Les vues de vidéos YouTube seront stockées dans votre historique YouTube, et vos données seront stockées et utilisées par YouTube conformément à ses  Conditions d'utilisation
+
+___________
+
+
+En général, la philosophie du Sysplex Distributor (qui utilise les DVIPA) est de garantir que l'IPL (qu'il soit planifié ou non) d'une LPAR dans le Sysplex se fasse avec une indisponibilité minimale, voire nulle, pour le service global.
+L'indisponibilité, si elle existe, est de courte durée et ne concerne que les éléments spécifiques à la LPAR en IPL.
+1. IPL d'une LPAR Cible (Target LPAR)
+Si la LPAR en IPL est simplement une des nombreuses cibles desservies (par exemple, une LPAR avec des régions CICS Application-Owning Region - AOR) :
+ * Nouvelles Connexions : Il n'y a aucune indisponibilité du Sysplex Distributor. Le distributeur (qui est une autre LPAR) supprime immédiatement la LPAR en IPL de son pool de distribution. Les nouvelles requêtes sont redirigées vers les LPAR saines.
+ * Connexions Existantes : Le seul impact est la perte immédiate de toutes les sessions TCP/IP actives sur cette LPAR. Le client verra sa connexion interrompue, mais une nouvelle tentative de connexion sera acheminée vers une LPAR disponible.
+2. IPL de la LPAR Distributrice (Distributor LPAR)
+Si la LPAR en IPL est celle qui détient le rôle actif de Distributeur primaire (c'est-à-dire qui possède le DVIPA distribué) :
+ * Basculement DVIPA : Le basculement du DVIPA distribué vers la LPAR de secours (Backup Distributor ou Hot Standby) est quasi instantané (généralement mesuré en quelques secondes) grâce aux communications internes du Sysplex (XCF).
+ * Indisponibilité : Il peut y avoir une micro-interruption le temps que le réseau converge et que la LPAR de secours reprenne la responsabilité de l'adresse DVIPA. Cependant, la conception vise à rendre ce basculement non-disruptif pour les sessions existantes, si la configuration est optimale. Les clients peuvent juste observer quelques retransmissions TCP sans perte de la session (selon la configuration et le type de basculement).
+ * Redémarrage : Lorsque la LPAR termine son IPL et que sa pile TCP/IP redémarre, elle peut reprendre le rôle de distributeur primaire (si elle est configurée comme PREFERRED) ou reprendre son rôle de secours (BACKUP), sans perturber le routage déjà en cours.
+Conclusion : Le Sysplex Distributor est un mécanisme de haute disponibilité. L'IPL d'une LPAR ne cause pas d'indisponibilité du Distributeur lui-même (le service de distribution perdure), mais il entraîne la perte définitive des connexions actives sur la LPAR qui s'arrête. Le but est de garantir que le service global reste accessible et que le travail puisse continuer sur les LPAR restantes.
+
