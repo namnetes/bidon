@@ -16,3 +16,35 @@ Ses fonctions clés, y compris la distribution de la charge, fournissent :
  * Image Système Unique (Single System Image) : Permet de voir et de gérer l'ensemble des régions CICS comme une seule entité logique.
  * Gestion de la Charge de Travail (WLM) : Le composant qui effectue la distribution et le routage dynamique des transactions vers la région CICS la plus appropriée et la moins sollicitée du CICSplex.
  * Haute Disponibilité : Assure que si une région CICS tombe en panne, les nouvelles requêtes sont automatiquement acheminées vers les régions saines.
+
+_________
+
+
+L'IPL (Initial Program Load) d'une LPAR (Logical Partition) dans un Sysplex est un événement que le Sysplex Distributor est spécifiquement conçu pour gérer, afin de garantir la haute disponibilité et le routage continu des connexions réseau (TCP/IP).
+Voici comment l'IPL affecte et est affecté par le Sysplex Distributor.
+1. Impact de l'IPL d'une LPAR sur le Sysplex Distributor
+Lorsqu'une LPAR (cible ou distributrice) est arrêtée pour un IPL, le Sysplex Distributor réagit de manière dynamique pour maintenir le service :
+1.1. LPAR Cible (Target LPAR) en Arrêt
+Si une LPAR cible (Target LPAR), qui exécute des applications desservies par le Sysplex Distributor, est arrêtée :
+ * Notification Immédiate : Les piles TCP/IP des autres LPAR sont notifiées de l'arrêt via les mécanismes de communication du Sysplex (XCF).
+ * Mise à Jour du Routage : La pile TCP/IP faisant office de Distributor (qui détient l'adresse Distributed Dynamic VIPA - DVIPA) retire immédiatement cette LPAR de la liste des destinations disponibles pour le port concerné.
+ * Continuité du Service : Les nouvelles connexions entrantes continuent d'être distribuées aux LPAR restantes saines, assurant la continuité du service sans interruption visible pour le client (si d'autres LPAR cibles sont disponibles).
+ * Connexions Existantes : Toutes les connexions existantes sur la LPAR arrêtée sont perdues. Les clients devront se reconnecter, mais la nouvelle tentative sera acheminée vers une LPAR disponible.
+1.2. LPAR Distributrice (Distributor LPAR) en Arrêt
+Si la LPAR qui est le Distributor primaire (celle qui détient l'adresse DVIPA active et route le trafic) est arrêtée :
+ * Basculement Automatique (Takeover) : Le rôle de Distributor bascule automatiquement et de manière non-disruptive vers une LPAR de secours (Backup Distributor ou Hot Standby) désignée dans la configuration DVIPA.
+ * Reprise du Routage : La LPAR de secours prend possession de l'adresse DVIPA et assume le rôle de routage des nouvelles connexions.
+ * Haute Disponibilité : Ce mécanisme est crucial pour la haute disponibilité. Il permet d'effectuer un IPL de la LPAR distributrice sans interrompre l'accès au service.
+2. Effet de l'IPL d'une LPAR sur le Sysplex Distributor
+Lorsqu'une LPAR effectue un IPL et redémarre :
+ * Initialisation : Pendant l'IPL de z/OS, les services système critiques comme les services de clustering Sysplex (XCF) et la pile TCP/IP sont démarrés.
+ * Enregistrement : Lorsque la pile TCP/IP de la LPAR redémarre, elle s'enregistre auprès des services Sysplex et signale sa présence et son état de santé (Workload Manager - WLM) aux autres LPAR du Sysplex, y compris la LPAR distributrice.
+ * Réintégration comme Cible : Si la LPAR redémarrée est une LPAR cible (target) des DVIPA distribués :
+   * Le Sysplex Distributor est informé que les applications sur cette LPAR sont à nouveau disponibles (par exemple, CICS a redémarré ses listeners).
+   * Le Sysplex Distributor réintègre la LPAR dans son pool de distribution. Les nouvelles connexions seront alors routées vers cette LPAR, en fonction de sa capacité CPU signalée par WLM.
+ * Reprise du Rôle de Distributeur (si nécessaire) : Si la LPAR redémarrée était le Distributor primaire :
+   * Selon la configuration DVIPA (par exemple, le paramètre MOVE ou le rang), le DVIPA peut être redistribué à la LPAR qui vient de terminer son IPL. La LPAR secondaire reprendra alors son rôle de secours. Ce basculement est également conçu pour être non-disruptif pour les connexions existantes.
+En conclusion, le Sysplex Distributor utilise les fonctionnalités du Dynamic VIPA (DVIPA) et du Workload Manager (WLM) pour rendre l'IPL d'une LPAR transparente ou du moins minimiser son impact sur l'accessibilité du service, en déplaçant dynamiquement la charge de travail et, si nécessaire, le rôle de distribution lui-même.
+L'extrait Sysplex in a Nutshell est pertinent car il explique comment le Sysplex Distributor gère les scénarios de basculement de plan (planned takeover), ce qui est similaire au processus géré lors d'un IPL non-disruptif.
+
+Les vues de vidéos YouTube seront stockées dans votre historique YouTube, et vos données seront stockées et utilisées par YouTube conformément à ses  Conditions d'utilisation
