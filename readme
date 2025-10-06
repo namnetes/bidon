@@ -1,0 +1,18 @@
+Le terme "CICSplex distributor" fait généralement référence à la fonction de gestion de la charge de travail (Workload Management - WLM) au sein d'un environnement CICSPlex sous z/OS, en collaboration avec d'autres composants de distribution comme le Sysplex Distributor de z/OS. Il ne s'agit pas d'un produit logiciel distinct appelé "CICSplex distributor".
+En résumé, il s'agit du mécanisme permettant de distribuer efficacement les transactions CICS sur un ensemble de régions CICS interconnectées (un CICSplex) pour optimiser les performances et garantir la haute disponibilité.
+1. Composants de Distribution de Charge de Travail
+La gestion de la charge de travail pour les applications CICS dans un environnement z/OS Sysplex est réalisée à plusieurs niveaux, impliquant plusieurs composants :
+A. Sysplex Distributor (Composant z/OS)
+Le Sysplex Distributor est une fonction du réseau TCP/IP de z/OS. Son rôle est de distribuer les requêtes réseau entrantes (par exemple, les requêtes HTTP) vers un groupe de piles TCP/IP et de régions CICS (régions de routage, ou TOR - Terminal-Owning Region) au sein du z/OS Sysplex.
+ * Objectif : Équilibrer le trafic IP initial sur plusieurs systèmes z/OS et piles TCP/IP, augmentant ainsi l'efficacité du Sysplex et la haute disponibilité (en permettant la défaillance d'une pile ou d'une région sans interruption).
+B. Gestion de Charge de Travail CICSPlex SM (WLM)
+Le véritable "distributeur" au niveau de CICS est le composant Workload Management (WLM) du CICSPlex System Manager (CICSPlex SM).
+ * Objectif : Une fois qu'une transaction est arrivée dans une région CICS de routage (TOR), le CICSPlex SM WLM prend le relais pour déterminer vers quelle région CICS d'application (AOR - Application-Owning Region) envoyer la transaction pour son exécution.
+ * Granularité : Il offre le contrôle le plus fin (le plus granulaire) sur l'exécution de la charge de travail à l'intérieur de CICS.
+ * Sélection : Le CICSPlex SM sélectionne la région la plus efficace, en se basant sur des critères prédéterminés et l'état de la charge de travail en temps réel (comme la capacité des régions), afin que le travail s'exécute le plus efficacement possible.
+2. Le Rôle du CICSPlex SM
+Le CICSPlex System Manager (CICSPlex SM) est l'outil d'administration système de CICS Transaction Server for z/OS qui permet de gérer plusieurs systèmes CICS (le CICSplex) à partir d'un point de contrôle unique.
+Ses fonctions clés, y compris la distribution de la charge, fournissent :
+ * Image Système Unique (Single System Image) : Permet de voir et de gérer l'ensemble des régions CICS comme une seule entité logique.
+ * Gestion de la Charge de Travail (WLM) : Le composant qui effectue la distribution et le routage dynamique des transactions vers la région CICS la plus appropriée et la moins sollicitée du CICSplex.
+ * Haute Disponibilité : Assure que si une région CICS tombe en panne, les nouvelles requêtes sont automatiquement acheminées vers les régions saines.
