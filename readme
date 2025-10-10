@@ -1,1 +1,17 @@
-Les constats partagés ici sont issus de tests réalisés dans des environnements non productifs. Il est donc possible que ces comportements ne se vérifient que dans le cadre des environnements de développement ou de qualification. Si tel est le cas, il n’y aurait pas lieu de s’alarmer. Cela dit, par souci de rigueur et de prévention, je préfère les remonter dès maintenant afin qu’ils puissent être vérifiés et, le cas échéant, écartés ou corrigés avant le pilote de production.
+Voici une reformulation claire, structurée et politiquement correcte de ton message :
+
+---
+
+📌 **Respect des règles du référentiel d’entreprise**
+
+Certains usages observés semblent s’écarter des règles établies par le référentiel d’entreprise et les standards outillage. En particulier, la convention de nommage des composants mérite d’être rappelée :
+
+- La **paternité applicative** d’un composant est définie par ses **deux premiers caractères**, qui doivent impérativement correspondre à l’espace applicatif auquel il appartient.
+- Cette racine est suivie de **quatre caractères alphanumériques libres**, permettant d’identifier le composant.
+- Enfin, le nom se termine obligatoirement par la **constante “P”**, indiquant qu’il s’agit d’un programme.
+
+🔍 Toute dérogation à cette structure peut entraîner des ambiguïtés dans le classement, le suivi et le déploiement des composants, notamment lorsqu’ils sont utilisés en dehors de leur périmètre applicatif d’origine.
+
+---
+
+Souhaites-tu que je t’aide à intégrer cette reformulation dans ta documentation ou à la décliner en fiche de bonnes pratiques pour ton équipe ?
