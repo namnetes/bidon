@@ -1,10 +1,10 @@
-Merci Magali, voici une version fusionnée et fluide de ton message et de l’exemple pédagogique, pensée pour une publication sur Confluence ou un message d’alerte à ton équipe. Elle conserve ton ton diplomatique, ton souci de clarté, et ton intention pédagogique :
+Voici une reformulation claire, diplomatique et accessible de ton message, qui met en lumière les risques identifiés tout en valorisant ta démarche constructive :
 
 ---
 
 🔍 **Constat important dans le cadre du passage projet → produit**
 
-Depuis hier, dans le cadre du transfert de connaissances initié avec Romain sur les pipelines CI/CD GitLab, j’ai commencé à documenter nos pratiques sur Confluence à destination de la communauté. Cette contribution s’inscrit dans une phase critique : le passage du mode projet au mode produit, que mon équipe devra assurer en run quotidien.
+Dans le cadre du transfert de connaissances initié hier avec Romain sur les pipelines CI/CD GitLab, j’ai commencé à documenter nos pratiques sur Confluence à destination de la communauté. Cette contribution s’inscrit dans la phase critique de transition vers le mode produit, que mon équipe devra assurer en run quotidien. Je débute sur GitLab, donc merci par avance pour votre patience et votre bienveillance.
 
 🎯 **Objectif initial : tester et documenter des cas d’usage**
 
@@ -18,17 +18,17 @@ Ce décalage pourrait poser problème vis-à-vis :
 - des recommandations IG LCL,
 - des exigences BCE (CRC 2024), qui insistent sur la capacité des banques à reconstruire rapidement leur SI en cas de cyberattaque.
 
-🧩 **Illustration concrète : le risque d’écrasement silencieux**
+🧩 **Exemple concret : composant ALAN**
 
-Prenons un exemple simple : un programme comptable nommé **ALCOMPTA**, utilisé depuis des années, n’a pas été modifié depuis 2015. Si un développeur, travaillant sur un autre périmètre (ex. ISO/SAM), crée un nouveau programme **ALCOMPTA** avec une logique différente, et que ce programme est déployé en production, il écrasera silencieusement le programme comptable d’origine.
+Dans le cadre de mes tests, j’ai introduit un composant nommé “ALAN” dans les référentiels SRC et SRT. Ce nom ne respecte pas les règles d’unicité attendues, notamment celles liées aux deux premiers caractères qui définissent la paternité applicative (ex. : AL pour la comptabilité, Y1 pour ISO/SAM).
 
-En cas d’incident, les équipes métier consulteront leur référentiel de sources, verront que leur programme n’a pas été modifié depuis 10 ans, et chercheront l’erreur ailleurs… alors que le vrai problème est qu’un autre programme du même nom a été introduit il y a 6 mois dans un autre référentiel.
-
-Ce type de situation peut résulter d’une erreur humaine, d’un manque de contrôle… ou dans le pire des cas, d’une action volontaire mais discrète. Même si le programme ne plante pas, il peut perturber les traitements sensibles comme ceux de la comptabilité ou de la monétique.
+Ce type d’écart pourrait entraîner des confusions graves :
+- Si un composant portant le même nom qu’un programme monétique ou comptable est créé dans un périmètre non lié, les responsables métier pourraient croire à tort qu’il s’agit d’un ancien programme inchangé depuis 10 ans.
+- En cas d’incident, la traçabilité serait compromise, surtout si le composant source a été supprimé sans mise à jour en production.
 
 📌 **Risque structurel : une seule bibliothèque d’exécutables**
 
-La production repose sur une seule bibliothèque d’exécutables (loadlib), alors qu’en amont, plusieurs sources de même nom peuvent coexister et être déployées. À ce stade, rien ne semble empêcher ce type de collision, ce qui renforce le besoin de clarification et de sécurisation.
+La situation est d’autant plus sensible que la production repose sur une seule bibliothèque d’exécutables (loadlib), alors qu’en amont, plusieurs sources de même nom peuvent coexister et être déployées. À ce stade, rien ne semble empêcher ce type de déploiement, ce qui renforce le besoin de clarification.
 
 🛠️ **Limite technique actuelle**
 
@@ -36,25 +36,36 @@ Je ne peux pas être totalement conclusif pour l’instant, car la version IDZ u
 
 📚 **Conclusion**
 
-Le composant “ALAN” que j’ai introduit était initialement un test personnel dans le cadre de mon apprentissage GitLab. Ce n’est qu’après coup que j’ai pris conscience des implications possibles. Je partage ces constats en toute transparence, dans une logique d’amélioration continue et de sécurisation du passage en production.
+Le composant “ALAN” était initialement un test personnel dans le cadre de mon apprentissage GitLab. Ce n’est qu’après coup que j’ai pris conscience des implications possibles. Je partage ces constats en toute transparence, dans une logique d’amélioration continue et de sécurisation du passage en production.
+
+----------------------------------------------------
+
+Merci pour la précision, Magali 🙏. Voici une reformulation pédagogique et illustrée, pensée pour être comprise facilement par un néophyte, tout en conservant la gravité du risque :
 
 ---
 
-Souhaites-tu que je t’aide à décliner ce contenu en version email, fiche d’alerte, ou support de sensibilisation pour les équipes techniques et métier ?
+🔄 **Exemple simple pour comprendre un risque de nommage en production**
 
+Imaginons qu’un programme comptable s’appelle **ALCOMPTA**. Il est utilisé depuis des années pour gérer les écritures comptables, et n’a pas été modifié depuis 2015.
 
+Un jour, un développeur travaillant sur un tout autre périmètre (par exemple ISO/SAM) crée un nouveau programme **ALCOMPTA**, avec le même nom, mais une logique complètement différente. Ce programme est déployé en production, sans que personne ne réalise qu’il écrase l’ancien programme comptable.
 
+📉 **Conséquence : confusion et perte de temps**
 
+Quelques semaines plus tard, un incident survient dans les traitements comptables. Les équipes métier vont naturellement consulter **leur** référentiel de sources, et verront que **leur** programme ALCOMPTA n’a pas été modifié depuis 10 ans. Elles chercheront donc l’erreur ailleurs : dans les données, les flux, les paramètres…
 
+Mais en réalité, le problème est que **le programme ALCOMPTA a été remplacé il y a 6 mois par un autre programme du même nom**, provenant d’un autre périmètre, avec une logique différente.
 
-Bien sûr Magali, voici une formulation politiquement correcte et nuancée à ajouter en conclusion :
+🔐 **Pourquoi c’est dangereux**
+
+Ce type de situation peut être causé par une erreur humaine, un manque de contrôle… ou dans le pire des cas, par une action volontaire mais discrète. Quelqu’un pourrait très bien tester son programme pour qu’il ne plante pas, tout en sachant qu’il perturbera les traitements comptables.
+
+📌 **Ce qu’il faut retenir**
+
+- En production, **un seul nom de programme doit correspondre à une seule logique métier**.
+- Si plusieurs sources avec le même nom coexistent dans différents référentiels, le risque d’écrasement silencieux est réel.
+- En cas d’incident, la traçabilité devient très difficile, et les équipes peuvent chercher longtemps dans la mauvaise direction.
 
 ---
 
-🧭 **À noter**
-
-Les constats partagés ici sont issus de tests réalisés dans des environnements non productifs. Il est donc possible que ces comportements ne se vérifient que dans le cadre des environnements de développement ou de qualification. Si tel est le cas, il n’y aurait pas lieu de s’alarmer. Cela dit, par souci de rigueur et de prévention, je préfère les remonter dès maintenant afin qu’ils puissent être vérifiés et, le cas échéant, écartés ou corrigés avant le pilote de production.
-
----
-
-Souhaites-tu que je t’aide à intégrer cette conclusion dans une version email ou à la reformuler pour un comité technique ?
+Souhaites-tu que je transforme cette illustration en fiche d’alerte ou en support de sensibilisation pour ton équipe ? Je peux aussi t’aider à rédiger une recommandation technique ou organisationnelle pour éviter ce type de collision.
