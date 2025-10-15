@@ -1,3 +1,108 @@
+Choisir l'encodage correct pour les fichiers dans l'environnement z/OS UNIX System Services (USS) est crucial en raison de la nature EBCDIC de la plateforme.
+
+Le choix dépend de l'utilisation prévue du fichier (données, script, source de programme) et des besoins de portabilité ou d'interopérabilité avec le reste de MVS.
+
+Voici les recommandations d'encodage basées sur les sources pour les différents types de fichiers que vous avez mentionnés :
+
+### 1. Recommandations Générales (Plateforme EBCDIC)
+
+L'environnement z/OS est intrinsèquement une **plateforme EBCDIC**. Le *shell* z/OS et les utilitaires sont configurés comme des programmes EBCDIC, attendant que les caractères soient codés dans le jeu de caractères EBCDIC.
+
+Le *codeset* EBCDIC par défaut le plus souvent utilisé dans l'environnement USS/Shell est **IBM-1047** (Latin 1/Open Systems Interconnection code page 01047).
+
+Le *codeset* ASCII le plus courant pour la conversion ou la portabilité est **ISO8859-1**.
+
+L'environnement prend également en charge le **Jeu de caractères double-octet (DBCS)**, notamment le *codeset* **IBM-939** pour le DBCS.
+
+---
+
+### 2. Encodage des Fichiers de Données
+
+Le choix de l'encodage dépend de l'origine et de la destination des données.
+
+| Type de Données/Fichier | Encodage Recommandé | Justification / Détails |
+| :--- | :--- | :--- |
+| **Fichiers de données texte internes USS** | **IBM-1047** | C'est l'encodage EBCDIC par défaut du *shell* et des utilitaires USS. L'interopérabilité avec d'autres composants non-UNIX de MVS peut être améliorée si le *locale* du *shell* est compatible avec le *codeset* MVS. |
+| **Fichiers de données texte pour portabilité/échange** | **ASCII (ISO8859-1)** ou **UTF-8** | Ces fichiers sont souvent nécessaires lors du portage d'applications ou de la réception de données de systèmes externes. Utilisez le *tagging* (`chtag -tc ISO8859-1` ou `chtag -tc UTF-8`) pour indiquer l'encodage réel. |
+| **Fichiers de données binaires** | Aucun encodage texte / **Binaire** | Les fichiers binaires doivent être marqués comme `binary` (`chtag -b`). Lorsque vous copiez des données binaires entre MVS et UNIX, utilisez l'option `BINARY` avec les commandes OCOPY/OGET/OPUT/OGETX/OPUTX, car elles ne tiennent pas compte des caractères de fin de ligne ou des caractéristiques DBCS. |
+| **Fichiers de données DBCS/Multioctet** | **IBM-939** | C'est le *codeset* DBCS pris en charge par le *shell*. Si les données DBCS sont dans un autre *codeset* (comme IBM-932), elles doivent être converties en IBM-939 à l'aide de l'utilitaire `iconv`. |
+
+---
+
+### 3. Encodage des Scripts (Shell et Python)
+
+#### A. Scripts Shell (`sh`, `tcsh`)
+
+Le *codeset* dans lequel un *script shell* est encodé **doit correspondre au *codeset* du *locale* dans lequel il est exécuté**.
+
+*   **Choix recommandé : IBM-1047**
+    *   Le *locale* par défaut du *shell* et des utilitaires est **C**, qui utilise le *codeset* **IBM-1047**.
+    *   Si le script est destiné à être utilisé par plusieurs utilisateurs ayant des *locales* différents (non-IBM-1047), il est nécessaire d'avoir **plusieurs copies du script** (une par *codeset* de *locale*). Vous pouvez utiliser la commande `iconv` pour convertir un *script shell* d'un *codeset* à un autre.
+    *   Si les *scripts shell* sont *tagués* et que la conversion automatique est désactivée, l'encodage du script doit correspondre au *codeset* du *locale* d'exécution.
+    *   Si les *scripts shell* sont *tagués* et que la conversion automatique est activée, le *locale* doit indiquer un *codeset* **SBCS** (Single-Byte Character Set) et le script doit être SBCS.
+
+#### B. Scripts Python
+
+**Tous les textes gérés par l'interpréteur Python sont représentés en UTF-8**. Cependant, les fichiers sources eux-mêmes peuvent être en EBCDIC ou en ASCII.
+
+*   **Choix recommandé pour le fichier source:**
+    1.  **EBCDIC (IBM-1047)** : Supporté nativement, mais nécessite un *tag* correct.
+    2.  **ASCII (ISO8859-1)** : Supporté, mais doit être *tagué* correctement.
+    3.  **UTF-8 (CCSID 13497)** : Bien que l'interpréteur utilise l'UTF-8 en interne, les fichiers sources peuvent être encodés en UTF-8 et devraient être *tagués* (souvent avec ISO8859-1 si l'on se réfère aux exemples de tagging fournis dans les sources pour les fichiers UTF-8).
+
+*   **Recommandation cruciale : Taguer les fichiers sources**
+    Il est fortement recommandé de **taguer tous les fichiers sources Python avec leur encodage correct** en utilisant l'utilitaire `chtag`. Par défaut, un fichier non *tagué* ou un nouveau fichier sera traité comme EBCDIC.
+    *   Exemple EBCDIC : `chtag -tc IBM-1047 script.py`.
+    *   Exemple UTF-8 : `chtag -tc ISO8859-1 script.py` (comme illustré dans les exemples où ISO8859-1 est utilisé pour taguer les fichiers sources UTF-8).
+
+---
+
+### 4. Encodage des Sources Compilables (C/C++, Java)
+
+#### A. Sources C/C++ (Compilation avec `c89`, `cc`, `c++`, `gcc`/`xlc`)
+
+Les programmes C/C++ sur z/OS peuvent être compilés soit comme des programmes EBCDIC, soit, grâce aux extensions Enhanced ASCII, comme des programmes ASCII.
+
+*   **Choix recommandé : EBCDIC (IBM-1047)**
+    *   La plateforme est EBCDIC, et les utilitaires du *shell* sont EBCDIC. L'encodage par défaut EBCDIC pour un *thread* C/C++ est **IBM-1047**.
+    *   Les sources C/C++ peuvent être dans des *data sets* MVS (qui sont typiquement EBCDIC) ou des fichiers USS.
+*   **Alternative pour la portabilité (Compilation ASCII) : ISO8859-1 (CCSID 819)**
+    *   Les programmes C peuvent être **compilés comme ASCII**.
+    *   Si vous portez une application ou si vous souhaitez que le programme utilise l'ASCII, vous pouvez utiliser le **compilateur ASCII** pour changer le *codeset* du programme à **819 (ISO8859-1 ASCII)**.
+    *   Lors du portage d'applications XPG 4.2 écrites en ASCII, il est possible de compiler en ASCII et de *taguer* les fichiers texte comme ASCII, permettant à USS d'effectuer la conversion automatique lorsque nécessaire.
+
+#### B. Sources Java
+
+Les sources ne mentionnent pas spécifiquement Java, mais Java fait partie des applications portées ou développées. Étant donné que Java utilise généralement Unicode (et souvent UTF-8) pour les sources et les chaînes internes, il serait logique d'utiliser un encodage Unicode ou ASCII pour la source, avec un *tag* approprié, comme pour les applications portées.
+
+*   **Recommandation implicite : UTF-8 ou ASCII**
+    *   Si la source est stockée dans USS, l'utilisation de **UTF-8** ou **ISO8859-1** est typique pour les plateformes multiplateformes (similaire aux scripts Python).
+    *   Le fichier source doit être **correctement *tagué*** pour que les outils (comme le compilateur Java, non explicitement couvert ici mais fonctionnant sur z/OS) puissent lire l'encodage correct. Les services Unicode sont disponibles pour gérer la conversion si nécessaire.
+
+----------------------
+La référence sur laquelle s'appuyer pour déterminer le niveau de compatibilité de z/OS UNIX System Services (USS) est l'ensemble des normes **POSIX** et **X/Open**.
+
+Voici les détails concernant la référence et la nature de cet environnement :
+
+### Références de Compatibilité
+
+z/OS UNIX System Services est conçu pour se conformer aux normes ouvertes établies pour les environnements de type UNIX. Les normes clés sont :
+
+1.  **Portable Operating System Interface (POSIX)** : L'API et l'interface shell de z/OS UNIX System Services sont basées sur les normes ouvertes du projet **IEEE Portable Operating System Interface (POSIX)**.
+2.  **X/Open Portability Guide Issue 4 (XPG4)** : z/OS UNIX System Services fournit une interface compatible avec la norme **XPG4 UNIX 1995 conformance**.
+
+De nombreux utilitaires et commandes du shell z/OS sont évalués pour leur compatibilité avec les normes **POSIX.2** et **X/Open Portability Guide** (XPG). Par exemple, la commande `getconf` peut fournir la valeur `POSIX2_VERSION`, qui spécifie la version de POSIX.2 respectée dans cette version.
+
+### Nature de z/OS UNIX System Services
+
+z/OS UNIX System Services (USS) est un composant du système d'exploitation **z/OS**. Il fournit une interface à normes ouvertes au système d'exploitation z/OS.
+
+*   **Est-ce un UNIX ?** L'environnement fourni par z/OS UNIX System Services est un environnement qui respecte les normes **UNIX**. Le terme "UNIX" est une marque déposée de **The Open Group**. Les shells et utilitaires fournis (InterOpen Shell and Utilities) fournissent les fonctions **POSIX.2 (Shell and Utilities)** à z/OS UNIX System Services.
+*   **Compatibilité avec les systèmes traditionnels :** L'environnement comprend des utilitaires qui sont pris en charge pour la **compatibilité avec les systèmes UNIX plus anciens** (y compris les systèmes **UNIX System V** et **Berkeley Software Distribution (BSD)**, bien que non explicitement nommés comme des distributions complètes). Par exemple, le compilateur `cc` est pris en charge pour la compatibilité avec les systèmes UNIX plus anciens, mais la commande `c89` est recommandée car elle est considérée comme la norme pour les applications UNIX portables définie par POSIX.2.
+*   **Est-ce un Linux ?** Les sources décrivent USS comme un environnement qui se conforme aux normes POSIX et XPG4 dans le cadre de z/OS. Il n'est pas qualifié de "Linux".
+
+En résumé, z/OS UNIX System Services fournit un environnement de type **UNIX** hautement conforme aux normes **POSIX** et **XPG4**, fonctionnant comme une couche intégrée au système d'exploitation **z/OS**.
+----------------------
 Pour tester l'existence d'un *data set* MVS (MVS data set) dans un *script shell* z/OS, vous devez exécuter une commande ou un utilitaire qui tente d'accéder au *data set* MVS et vérifier ensuite le statut de sortie (exit status) de cette commande.ss
 
 Étant donné que les *data sets* MVS ne sont pas des fichiers de système de fichiers z/OS UNIX standards, les opérateurs de test de fichiers traditionnels du shell (comme `test -f pathname` ou `[[ -e pathname ]]`) ne sont pas applicables directement pour vérifier l'existence de *data sets* MVS.
@@ -87,3 +192,4 @@ fi
 ```
 
 **Note sur `[[...]]` :** La syntaxe double crochet `[[ test_expr ]]` est également supportée dans le shell z/OS et permet de tester des expressions. Cependant, elle fonctionne sur le statut de sortie de l'expression interne, qui est défini par la commande `test` ou par des opérateurs internes au shell, mais elle est surtout pertinente pour les fichiers UNIX ou les comparaisons de chaînes/nombres. Pour interagir avec le système MVS, il est souvent plus simple d'utiliser `tso`/`tsocmd` et de vérifier la valeur de `$?`.
+
