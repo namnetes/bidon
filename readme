@@ -1,0 +1,89 @@
+Pour tester l'existence d'un *data set* MVS (MVS data set) dans un *script shell* z/OS, vous devez exécuter une commande ou un utilitaire qui tente d'accéder au *data set* MVS et vérifier ensuite le statut de sortie (exit status) de cette commande.ss
+
+Étant donné que les *data sets* MVS ne sont pas des fichiers de système de fichiers z/OS UNIX standards, les opérateurs de test de fichiers traditionnels du shell (comme `test -f pathname` ou `[[ -e pathname ]]`) ne sont pas applicables directement pour vérifier l'existence de *data sets* MVS.
+
+Voici la démarche et les méthodes basées sur les sources :
+
+### 1. Utilisation d'une commande TSO/E (`tso` ou `tsocmd`)
+
+La méthode la plus courante consiste à exécuter une commande TSO/E depuis le *script shell*, car les commandes TSO/E sont conçues pour interagir avec les *data sets* MVS.
+
+Vous pouvez utiliser la commande `tso` ou `tsocmd` pour exécuter une commande TSO/E qui tente de vérifier si le *data set* est catalogué. Le statut de sortie de la commande TSO/E sera renvoyé comme statut de sortie du shell (`$?`).
+
+#### Syntaxe pour exécuter une commande TSO/E et vérifier le statut :
+
+```sh
+# Définir le nom du data set MVS. 
+# Les noms de data sets MVS doivent être précédés de double barres (//)
+# et les noms pleinement qualifiés doivent être mis entre guillemets simples ('), 
+# eux-mêmes échappés ou placés entre guillemets doubles du shell.
+DSN_MVS="//'VOTRE.DATASET.MVS.NAME'"
+
+# Exemple : Exécuter la commande TSO/E LISTCAT (non explicitement documentée 
+# dans les extraits, mais utilisée pour vérifier l'existence dans l'environnement MVS)
+# et rediriger la sortie vers /dev/null
+tso "LISTCAT ENTRY('$DSN_MVS') " > /dev/null 2>&1
+
+# Capturer le statut de sortie de la commande tso
+RC=$?
+
+if [ $RC -eq 0 ]; then
+    echo "Le data set MVS existe."
+else
+    echo "Le data set MVS n'existe pas ou l'accès a échoué."
+fi
+```
+
+**Points importants concernant les noms de *data sets* MVS dans le shell :**
+1.  Pour distinguer un *data set* MVS d'un fichier z/OS UNIX, **il faut le précéder de deux barres obliques (//)**.
+2.  Un nom de *data set* pleinement qualifié doit être entouré de **guillemets simples** (comme on le ferait sous TSO). Pour éviter que ces guillemets simples ne soient interprétés par le shell, il faut placer l'ensemble entre **guillemets doubles** ou échapper les guillemets simples/parenthèses.
+
+### 2. Utilisation d'un utilitaire shell supportant les *data sets* MVS
+
+Plusieurs utilitaires shell sont capables de lire directement les *data sets* MVS, tels que `md5`, `sha1`, `sha256`, `sha384`, `sha512`, ou `mv`. Si vous tentez d'exécuter un tel utilitaire sur un *data set* inexistant, il devrait échouer et retourner un statut de sortie non nul.
+
+Par exemple, en utilisant la commande `sha256`, qui prend en charge la lecture de *data sets* séquentiels MVS ou de membres PDS/PDSE :
+
+```sh
+# Nom du data set MVS pleinement qualifié, correctement échappé
+DSN_MVS="//'USERID.MY.DATASET'"
+
+# Tenter d'exécuter sha256 sur le data set. Rediriger la sortie standard et d'erreur.
+sha256 "$DSN_MVS" > /dev/null 2>&1
+
+# Vérifier le statut de sortie
+RC=$?
+
+# Un statut de 0 indique généralement une exécution réussie (donc que le fichier existe et a pu être ouvert).
+# Un statut de 1 peut indiquer une incapacité à ouvrir le fichier (Inability to open a file), 
+# ce qui se produit s'il n'existe pas ou est inaccessible.
+if [ $RC -eq 0 ]; then
+    echo "Le data set MVS existe et est accessible."
+else
+    echo "Le data set MVS n'existe pas ou une erreur d'accès s'est produite (RC=$RC)."
+fi
+```
+
+### 3. Utilisation de la structure conditionnelle `if`
+
+Quelle que soit la commande utilisée pour tester l'existence, vous pouvez intégrer la vérification du statut de sortie (`$?`) dans une structure conditionnelle `if`. Le statut de sortie d'une commande est considéré comme **vrai** (true) si sa valeur est **0** (succès) et **faux** (false) si elle est **non nulle**.
+
+Vous pouvez utiliser la syntaxe `if command; then ... fi` ou la syntaxe `if [ expression ]; then ... fi`. Si vous utilisez la commande `test` (ou `[ ]`), l'expression renvoie un statut (0 pour vrai, 1 pour faux).
+
+Exemple de structure `if` dans un script shell, utilisant la vérification du statut après l'exécution d'une commande TSO/E :
+
+```sh
+# Exécute la commande TSO/E (elle renvoie 0 si elle réussit, non-zéro si elle échoue)
+tso "ALLOCATE F(TESTDD) DSN('VOTRE.DATASET.MVS.NAME') SHR" > /dev/null 2>&1
+
+if [ $? -eq 0 ]; then
+    # Statut de 0 : Succès de l'allocation (le data set existe)
+    echo "Le data set est présent."
+    tso "FREE F(TESTDD)"
+elif [ $? -ne 0 ]; then
+    # Statut non nul : Échec de l'allocation (le data set n'existe pas ou autre erreur)
+    echo "Le data set est absent ou erreur d'accès."
+fi
+```
+
+**Note sur `[[...]]` :** La syntaxe double crochet `[[ test_expr ]]` est également supportée dans le shell z/OS et permet de tester des expressions. Cependant, elle fonctionne sur le statut de sortie de l'expression interne, qui est défini par la commande `test` ou par des opérateurs internes au shell, mais elle est surtout pertinente pour les fichiers UNIX ou les comparaisons de chaînes/nombres. Pour interagir avec le système MVS, il est souvent plus simple d'utiliser `tso`/`tsocmd` et de vérifier la valeur de `$?`.
