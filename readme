@@ -1,4 +1,31 @@
 
+Voici une reformulation fluide, structurée et diplomatique du message original, tout en conservant les nuances techniques et les hypothèses :
+
+---
+
+Bonjour Nicolas,
+
+Merci encore pour ton analyse, elle m’est très utile.
+
+Je suis bien consciente que les transferts évoqués datent un peu, mais je vais faire actualiser les constats pour clarifier la situation.
+
+Concernant la transcodification, je confirme que nous utilisons bien UTF-8 vers EBCDIC LATIN pour notre système cible. Sur z/OS, j’utilise PZIP, qui prend en charge les formats GZIP, BZIP et ZIP — ce qui est conforme à l’exemple BZIP mentionné.
+
+Le fichier ENTFILE semble poser problème : il est d’abord converti depuis LATIN-1 (IBM-141 ?) vers ASCII LATIN (?), puis intégré dans une table CHARACTER TIRELIA de C-GIP avant d’être transféré en UTF-8. Je soupçonne que c’est là que les choses se compliquent. Je vais tester un transfert direct depuis une source en LATIN-1, sans conversion intermédiaire, pour confirmer que le fichier d’origine est bien encodé en LATIN-1.
+
+Je vais également faire un essai avec l’utilitaire EBCDICVM, qui propose une palette d’encodages plus large — ce genre de test réserve parfois des surprises.
+
+Les caractères problématiques sont souvent les mêmes : à, é, è, ù.
+
+Nos flux fonctionnent avec les outils cp et iconv, mais je constate qu’ils ne sont pas toujours 100 % fiables, notamment sur les datasets du canal MVS Historique ou côté USS. Cela m’étonne.
+
+---
+
+Souhaites-tu que je reformule aussi pour un public non technique ou que je prépare une version pour ton équipe ?
+
+
+
+
 
 --------------
 Choisir l'encodage correct pour les fichiers dans l'environnement z/OS UNIX System Services (USS) est crucial en raison de la nature EBCDIC de la plateforme.
