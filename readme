@@ -1,3 +1,78 @@
+C'est avec plaisir que je vous fournis un exemple complet de script Bash exécuté sous z/OS UNIX System Services (USS) pour lancer un programme COBOL résidant dans une bibliothèque de chargement MVS traditionnelle.
+
+Comme discuté précédemment, l'outil clé pour réaliser cette opération est la commande `tso`, qui permet d'exécuter des commandes TSO/E depuis l'environnement shell USS.
+
+### Exemple de Script Bash (USS)
+
+Ce script utilise la commande `tso call` pour exécuter un module de chargement MVS.
+
+```bash
+#!/bin/bash
+
+# =============================================================
+# VARIABLES DE CONFIGURATION (à adapter)
+# =============================================================
+
+# Le préfixe des bibliothèques Language Environment (LE)
+# Remplacer 'CEE' par le préfixe LE correct de votre installation si nécessaire.
+LE_PREFIX="CEE" 
+
+# Le nom de la bibliothèque de chargement MVS historique (DSNAME) 
+# qui contient votre programme COBOL.
+MVS_LOADLIB="VOTRE.LIBRAIRIE.LOAD.MVS"
+
+# Le nom du module de chargement COBOL à exécuter (membre).
+COBOL_PROGRAM="MONCOBOL"
+
+# Arguments optionnels à passer au programme (laisser vide si non nécessaire)
+# Dans l'environnement MVS, les arguments sont souvent passés comme une chaîne.
+PROGRAM_ARGS="'ARGUMENT1 ARGUMENT2'"
+
+# =============================================================
+# 1. Configuration de l'environnement d'exécution (STEPLIB)
+# =============================================================
+
+# Pour s'assurer que l'environnement Language Environment (LE) 
+# et les bibliothèques d'application (MVS_LOADLIB) sont trouvées.
+# Nous ajoutons les bibliothèques LE SCEERUN et SCEERUN2, nécessaires 
+# pour l'exécution des programmes COBOL sous z/OS.
+
+export STEPLIB=${MVS_LOADLIB}:${LE_PREFIX}.SCEERUN:${LE_PREFIX}.SCEERUN2
+
+echo "STEPLIB configurée pour la recherche MVS."
+
+# =============================================================
+# 2. Exécution du programme MVS via la commande tso
+# =============================================================
+
+# La syntaxe utilise la commande TSO "CALL" : call 'dsn(member)' 'parameters'
+# L'utilitaire 'tso' exécutable depuis le shell UNIX est utilisé pour 
+# démarrer l'exécution d'un programme MVS.
+
+echo "Lancement du programme COBOL ${COBOL_PROGRAM}..."
+
+tso "CALL '${MVS_LOADLIB}(${COBOL_PROGRAM})' ${PROGRAM_ARGS}"
+
+# Vérification du code retour du dernier programme (le programme COBOL)
+RC=$?
+
+echo "Exécution terminée. Code retour du TSO CALL : $RC"
+
+# Fin du script
+exit $RC
+```
+
+### Détails du Script
+
+1.  **`export STEPLIB`**: Lorsque vous exécutez un programme MVS (ici `MONCOBOL`) depuis le shell USS via `tso`, vous devez garantir que l'environnement MVS sous-jacent peut localiser :
+    *   Les bibliothèques d'exécution de Language Environment (LE), comme `SCEERUN` et `SCEERUN2`.
+    *   Le module de chargement de l'application lui-même (`MVS_LOADLIB`) s'il ne se trouve pas dans les bibliothèques système par défaut (LNKLST).
+    *   La variable d'environnement `STEPLIB` dans l'environnement shell UNIX est utilisée pour définir le `STEPLIB` (chemin de recherche des modules de chargement) pour le processus TSO lancé.
+
+2.  **`tso "CALL '...'" `**: C'est la commande qui effectue la transition conceptuelle de l'environnement USS (shell) vers l'environnement MVS (exécution de programme). Le format requis pour exécuter un programme MVS catalogué depuis le shell est `tso "call 'my.loadlib(myprog)'"`.
+
+3.  **`PROGRAM_ARGS`**: Si votre programme COBOL utilise la clause `USING` dans sa `PROCEDURE DIVISION` pour recevoir des paramètres, ces arguments doivent être passés sous la forme d'une chaîne entre guillemets simples (qui sont ensuite englobés par les guillemets doubles de la commande `tso`) dans la syntaxe `CALL`.
+
 
 --------------
 Choisir l'encodage correct pour les fichiers dans l'environnement z/OS UNIX System Services (USS) est crucial en raison de la nature EBCDIC de la plateforme.
@@ -194,5 +269,6 @@ fi
 ```
 
 **Note sur `[[...]]` :** La syntaxe double crochet `[[ test_expr ]]` est également supportée dans le shell z/OS et permet de tester des expressions. Cependant, elle fonctionne sur le statut de sortie de l'expression interne, qui est défini par la commande `test` ou par des opérateurs internes au shell, mais elle est surtout pertinente pour les fichiers UNIX ou les comparaisons de chaînes/nombres. Pour interagir avec le système MVS, il est souvent plus simple d'utiliser `tso`/`tsocmd` et de vérifier la valeur de `$?`.
+
 
 
