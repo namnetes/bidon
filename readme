@@ -1,90 +1,4 @@
-1. La Problématique et le Besoin
-La réunion aborde la problématique des modalités d’exécution des traitements batch en recette. La situation actuelle est jugée insuffisante pour répondre aux exigences croissantes.
-Problèmes identifiés :
-• Opérations manuelles : La préparation et le lancement des traitements batch sont manuels.
-• Manque de standardisation : Il y a une hétérogénéité des normes de nommage pour les JCL et les fichiers.
-• Faible automatisation : Le niveau d’intégration et d’automatisation est faible.
-• Inadaptation : Le processus actuel n'est pas adapté à la fréquence élevée des recettes de bout en bout ni aux besoins des projets réglementaires ou des évolutions majeures.
-
-Le besoin exprimé (Objectif COMETE 2025) :
-• Augmenter l'automatisation et l'intégration de l'environnement CQ-QUAL actuel.
-• Permettre l'exécution automatique ou facile des briques logicielles essentielles du SI Paiement afin de faciliter les homologations Paiement.
-• Assurer une interconnexion fluide avec l'environnement ADT-DREF pour éviter les procédures manuelles et les ruptures de charge (comme l'injection JIRA).
-• Passer d'une logique de "stock fossilisé" à une logique de "stock vivant", se rapprochant de la logique de production tout en conservant la souplesse de l'environnement de recette.
-
-2. Environnements et Limites
-Plusieurs environnements sont mentionnés, chacun ayant un usage et des limites spécifiques :
-Environnement
-Intérêt/Usage
-Limites
-CQ QUAL (Qualifieur DB2)
-Recette, usage très répandu, intégré au TP
-Quasi pas automatisé à date, faible niveau d'automatisation, instabilité.
-KLIF KLIF
-Utilisé par la compta
-Pas automatisé à la connaissance.
-ADT DREF
-Socle métier de référence, job planifié sur OPC (partition de DEV)
-Non spécifié, mais doit être interconnecté de façon fluide avec CQ-QUAL.
-PREPROD PROD
-Job planifié sur OPC (partition PPR*)
-Très lourd à mettre en place.
-
-Voici une reformulation plus claire et plus simple de vos remarques, avec des phrases courtes et un vocabulaire accessible :
-
----
-
-### 🔧 Environnements et qualifiers
-
-- **CQ** est un environnement de développement, comme **TU**, **IL** ou **KLIF**, tous configurés dans le système LCL.
-- **QUAL** est un qualifier DB2, tout comme **TEST**, **PROD** et bien d'autres.
-- **DREF** est aussi un qualifier DB2. Il donne accès aux tables des référentiels. Ces tables sont visibles depuis **TU**, **CQ** et **ADT**.
-
----
-
-### 🧪 Plateforme ADT
-
-- **ADT** est une plateforme de test. Elle sert à exécuter le **NAB**, un peu comme une journée BATCH, mais sur un périmètre plus réduit.
-- ADT fonctionne dans l’environnement de développement.
-
----
-
-### ⚙️ Automatisation et outils
-
-- La phrase *"Augmenter l'automatisation et l'intégration de l'environnement CQ-QUAL actuel"* peut être améliorée. Elle n’est pas très claire.
-- **ISO/SAM** peut choisir l’outil d’automatisation.
-- L’environnement dépend de l’endroit où les développeurs ont promu leurs composants.
-- Les référentiels sont accessibles depuis **TU** et **CQ**, donc pas de souci à ce niveau.
-
----
-
-### 🛠️ Outils d’automatisation (TWS/OPC)
-
-- L’automatisation des jobs est faite avec **TWS/OPC**.
-- Il existe **deux instances** de cet outil dans l’environnement de développement :
-  - **OP8A** : réservée à **ADT**, ne peut pas être utilisée pour d’autres recettes.
-  - **OP9D** : peut être utilisée pour d’autres besoins. On peut aussi demander une **nouvelle instance** si besoin.
-
----
-
-### 🔐 Sécurité et fichiers
-
-- L’automatisation doit respecter des **règles de sécurité**.
-- La **nomenclature des fichiers** ne pose pas de problème si le **premier alias** respecte les règles **RACF**.
-- Par exemple, les alias **ADQ** ou **ADC** peuvent être autorisés dans OPC, quel que soit le nom du user batch (ex. : **B1ADQ**, **E5ADC**, **A1ADC**).
-- Les droits en lecture/écriture (**rw**) sont donnés au user batch dont le nom suit la règle : **Code_Appli_Alias**.
-
----
-
-Souhaitez-vous que je reformule aussi la phrase sur l’automatisation CQ-QUAL de manière plus claire et précise ?
-l'automatisation impose des règles de sécurité
-ADT qui s'appuie sur une instance TWS/OPC nommée OP8A qui lui est réservé et ne peut être utilisé pour cette recette
-Il existe une autre instance TWS/OPC nommée OP9D pouvant être utilisée mais il esr aussi possible d'en faire installer une nouvelle
-La nomenclature des fichiers n'est pas un problème dès lors que le premier Alias respectent des règles RACF. Par exemple ADQ ou ADC peuvent autorisé à l'instance OPC quelque soit les user BATCH qui prend en charge l'execution des batch B1ADQ ou E5ADC ou A1ADC. lautorisation en rw/ des fichier est donnée au user batch dont le nom suit la règle Code_Appli_Alias
----
-
-Souhaitez-vous que je vous aide à adapter ce message pour un envoi par e-mail, via un formulaire de contact, ou même pour un appel téléphonique ?
-
+-------------------------------------------------------------------------
 
 C'est avec plaisir que je vous fournis un exemple complet de script Bash exécuté sous z/OS UNIX System Services (USS) pour lancer un programme COBOL résidant dans une bibliothèque de chargement MVS traditionnelle.
 
@@ -357,6 +271,7 @@ fi
 ```
 
 **Note sur `[[...]]` :** La syntaxe double crochet `[[ test_expr ]]` est également supportée dans le shell z/OS et permet de tester des expressions. Cependant, elle fonctionne sur le statut de sortie de l'expression interne, qui est défini par la commande `test` ou par des opérateurs internes au shell, mais elle est surtout pertinente pour les fichiers UNIX ou les comparaisons de chaînes/nombres. Pour interagir avec le système MVS, il est souvent plus simple d'utiliser `tso`/`tsocmd` et de vérifier la valeur de `$?`.
+
 
 
 
