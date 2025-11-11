@@ -1,3 +1,16 @@
+File Manager Service Provider for z/OS® Connect Enterprise Edition
+File Manager Service Provider for IBM® z/OS® Connect Enterprise Edition enables client applications to access IBM® Z data sources using z/OS® Connect.
+
+Using z/OS® Connect tooling, customers can create their own RESTful APIs and access IBM® Z data sources through the service provider. Clients can read data sequentially, by relative record position, or by key.
+
+The supported data sources include:
+MVS™ data sets (including VSAM)
+UNIX System Services files
+CICS® files (including VSAM and CICS® TS and CICS® TD queues)
+Websphere MQ queues
+Db2®
+IMS™
+Installation and customization of the service provider is described in the File Manager Customization Guide.
 -------------------------------------------------------------------------
 
 C'est avec plaisir que je vous fournis un exemple complet de script Bash exécuté sous z/OS UNIX System Services (USS) pour lancer un programme COBOL résidant dans une bibliothèque de chargement MVS traditionnelle.
@@ -271,6 +284,7 @@ fi
 ```
 
 **Note sur `[[...]]` :** La syntaxe double crochet `[[ test_expr ]]` est également supportée dans le shell z/OS et permet de tester des expressions. Cependant, elle fonctionne sur le statut de sortie de l'expression interne, qui est défini par la commande `test` ou par des opérateurs internes au shell, mais elle est surtout pertinente pour les fichiers UNIX ou les comparaisons de chaînes/nombres. Pour interagir avec le système MVS, il est souvent plus simple d'utiliser `tso`/`tsocmd` et de vérifier la valeur de `$?`.
+
 
 
 
