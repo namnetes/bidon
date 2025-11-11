@@ -1,3 +1,24 @@
+CICS est un environnement d'exécution principal pour les programmes (COBOL, Java) sur z/OS, mais z/OS Connect peut accéder à d'autres environnements :1. Accès Via des Services d'Exécution :EnvironnementRôleAccès à z/OS ConnectCICSEnvironnement Transactionnel (COBOL, Java)Oui, très courant (pour VSAM, bases de données, files d'attente).IMSEnvironnement Transactionnel et Base de Données (COBOL, Java)Oui, utilisé pour accéder aux bases de données et transactions IMS.Liberty Profile (Intégré à z/OS Connect)Environnement JavaOui, les services développés directement en Java (servlets, JAX-RS) y s'exécutent.Db2Base de Données RelationnelleOui, z/OS Connect peut appeler des Procédures Stockées Db2 ou, via le File Manager Service Provider, y accéder directement via SQL.2. Accès Direct via File Manager Service ProviderComme mentionné précédemment, le File Manager Service Provider est une exception :Il permet de créer des API pour accéder à des ressources (comme VSAM ou des fichiers séquentiels) sans passer par un programme CICS ou IMS.Le Service Provider utilise directement les capacités de gestion des données de File Manager, ce qui est idéal pour de la simple consultation de données.En conclusion, que votre service soit développé en COBOL (sous CICS), en Java (sous Liberty), ou qu'il soit généré par le File Manager Service Provider, le résultat final est une API RESTful standard que tout client Open peut appeler sur le réseau, bien au-delà des limites de CICS.
+
+
+
+Ressources Accessibles via API
+Le fournisseur de services utilise les capacités avancées d'IBM File Manager for z/OS pour interpréter les structures de données (via les Copybooks) et interroger directement les types de ressources suivants :
+
+Fichiers VSAM (Virtual Storage Access Method) : La méthode courante pour exposer les données VSAM sous forme d'API.
+
+Fichiers Séquentiels MVS et PDS/PDSE : Accès aux fichiers traditionnels du système d'exploitation z/OS.
+
+Bases de données Relationnelles (Db2) : Vous pouvez exposer les données des tables Db2 via des requêtes SQL intégrées aux API.
+
+Bases de données Hiérarchiques (IMS) : Accès aux données stockées dans les bases de données IMS.
+
+Ressources CICS : Accès aux files d'attente de stockage temporaire (TS) et de données transitoires (TD) de CICS.
+
+Ressources MQ : Accès aux messages dans les files d'attente WebSphere MQ.
+
+En utilisant les modèles (templates) de File Manager, vous définissez le schéma de l'API (le format JSON/XML) et le mappage vers les données mainframe, et le Service Provider gère tout le reste : la connexion, la lecture, et la conversion des données EBCDIC vers ASCII/JSON.
+--------------------------------------
 File Manager Service Provider for z/OS® Connect Enterprise Edition
 File Manager Service Provider for IBM® z/OS® Connect Enterprise Edition enables client applications to access IBM® Z data sources using z/OS® Connect.
 
@@ -284,6 +305,7 @@ fi
 ```
 
 **Note sur `[[...]]` :** La syntaxe double crochet `[[ test_expr ]]` est également supportée dans le shell z/OS et permet de tester des expressions. Cependant, elle fonctionne sur le statut de sortie de l'expression interne, qui est défini par la commande `test` ou par des opérateurs internes au shell, mais elle est surtout pertinente pour les fichiers UNIX ou les comparaisons de chaînes/nombres. Pour interagir avec le système MVS, il est souvent plus simple d'utiliser `tso`/`tsocmd` et de vérifier la valeur de `$?`.
+
 
 
 
