@@ -1,9 +1,38 @@
 
-Absolument ! Voici un brouillon d'e-mail que vous pouvez adapter et envoyer à votre communauté, résumant le succès de l'installation et les bénéfices de la nouvelle version.
+
+Absolument. Voici le brouillon d'e-mail mis à jour avec la phrase de résumé demandée à la fin, incluant les informations sur Java et z/OS.
 Objet : 🚀 Changement de version réussi : ChangeMan ZMF 8.3.1 est désormais en production !
 Bonjour à tous,
 Nous sommes heureux de vous annoncer que la mise à jour de notre environnement de gestion des changements ChangeMan ZMF vers la version 8.3.1 a été réalisée avec succès ce week-end. Tous les services sont pleinement opérationnels.
 ✅ Ce qui a été mis à jour
+| Élément | Ancienne Version | Nouvelle Version |
+|---|---|---|
+| Serveur ChangeMan ZMF | 8.3 | 8.3.1 |
+📅 Rappel sur la 8.3.1
+Pour information, la version 8.3.1 (souvent appelée 8.3 Patch 1) a été initialement publiée par Rocket Software vers décembre 2024 / début 2025.
+🌟 Ce que vous apporte cette nouvelle version
+La version 8.3.1 est principalement axée sur la stabilité, la performance et la consolidation de la plateforme, suite aux évolutions majeures de la 8.3.
+ * Stabilité et Performance Accrues : Cette version intègre de nombreux correctifs qui résolvent des problèmes de stabilité et des optimisations de performance identifiés dans la 8.3, notamment pour la gestion des ressources et les traitements batch critiques.
+ * Fiabilité des Intégrations : Amélioration de la robustesse des services XML et des API REST. Cela renforce la fiabilité de nos outils d'intégration externes (CI/CD) qui communiquent avec ChangeMan.
+ * Amélioration de l'Expérience Utilisateur : Mise à jour des composants clients et des squelettes ISPF pour une meilleure cohérence et des corrections d'ergonomie mineures.
+ * Compatibilité Client : Elle assure la compatibilité avec les dernières versions des outils clients comme ChangeMan ZMF for Eclipse (ZMF4ECL) et ChangeMan ZDD.
+⚠️ Prochaine Étape pour les Utilisateurs
+Si vous utilisez des clients graphiques tels que ZMF for Eclipse ou si vous avez des scripts personnalisés utilisant les Services XML, veuillez vérifier que vos outils sont à jour pour garantir une compatibilité totale avec le nouveau serveur.
+Pour toute question ou en cas de problème rencontré, veuillez contacter immédiatement l'équipe support à [Adresse E-mail du Support].
+Résumé Technique : Cette version 8.3.1 est officiellement compatible avec z/OS 3.1 (la certification ayant commencé avec la 8.3). ChangeMan ZMF n'embarque pas son propre JDK et repose sur une installation Java séparée (généralement Java 8 ou Java 11 pour le serveur) ; la compatibilité avec Java 21 doit être vérifiée sur la matrice officielle de support de Rocket Software.
+Cordialement,
+L'équipe [Nom de votre équipe/Département]
+
+
+
+
+
+
+
+
+
+
+
 | Élément | Ancienne Version | Nouvelle Version |
 |---|---|---|
 | Serveur ChangeMan ZMF | 8.3 | 8.3.1 |
