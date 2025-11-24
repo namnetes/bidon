@@ -1,4 +1,33 @@
 
+Oui, la nécessité de mettre en place un système de reconstruction et de rétablissement suite à une cyberattaque réussie est au cœur des préoccupations et des actions récentes de la Banque Centrale Européenne (BCE) et de la réglementation européenne.
+🇪🇺 Cadre Réglementaire : DORA
+Le texte le plus pertinent est le règlement européen sur la résilience opérationnelle numérique du secteur financier, dit DORA (Digital Operational Resilience Act), entré en application le 17 janvier 2025.
+Ce règlement, soutenu par la BCE, impose aux entités financières de l'UE d'établir un cadre global pour gérer les risques liés aux technologies de l'information et de la communication (TIC), ce qui inclut :
+ * La gestion des risques liés aux TIC : y compris des stratégies de protection, de détection et de confinement.
+ * La gestion des incidents : avec des exigences claires de classification, de signalement et de communication.
+ * Les tests de résilience opérationnelle numérique : pour évaluer la capacité à faire face aux cybermenaces.
+L'objectif central de DORA est d'assurer que les entités financières puissent résister, réagir et se rétablir (c'est-à-dire reconstruire leurs systèmes) après des perturbations liées aux TIC, comme une cyberattaque majeure. 
+🏦 Initiatives de la BCE : Stress Tests
+La BCE a également concrétisé cette orientation par des exercices de supervision :
+ * Test de Résistance à la Cyberrésilience (2024) : En 2024, la BCE a mené un test de résistance auprès de 109 banques sous sa supervision directe.
+ * Objectif de l'exercice : L'exercice visait spécifiquement à évaluer la capacité des banques à se remettre d'une cyberattaque réussie qui perturberait leurs activités quotidiennes, et non pas seulement leur capacité à prévenir l'attaque.
+ * Exigences Clés : Pour réussir ce test, les banques devaient démontrer qu'elles pouvaient :
+   * Activer leurs plans de rétablissement et de continuité des activités.
+   * Restaurer les données sauvegardées et remettre en marche les zones affectées (c'est-à-dire la reconstruction).
+   * Mettre en œuvre les leçons tirées pour améliorer leurs plans.
+Les résultats de cet exercice alimentent l'évaluation prudentielle des banques (SREP 2024), les encourageant ainsi fortement à améliorer leurs plans de continuité et de rétablissement (ou de reconstruction) en cas d'attaque.
+En résumé, la nécessité d'un système de reconstruction est intégrée dans le cadre réglementaire DORA de l'UE et est une priorité de la supervision de la BCE, notamment à travers ses tests de résistance récents.
+Avez-vous besoin de plus de détails sur les exigences spécifiques de DORA concernant les plans de continuité et de rétablissement ?
+
+
+
+
+
+
+
+
+
+
 
 Absolument. Voici un brouillon de l'e-mail de remerciement et de félicitations pour les participants :
 Objet : Bravo et Merci : Succès éclatant de la migration ChangeMan ZMF 8.3.1 !
