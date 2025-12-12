@@ -1,4 +1,130 @@
 
+#!/bin/bash
+
+# ==============================================================================
+# Script d'installation automatique pour IBM Semeru Runtime (JDK 21 LTS) et Node.js LTS
+# Cible : macOS (Apple Silicon / M-series, i.e., aarch64)
+# ==============================================================================
+
+# --- 1. Configuration des Variables (JAVA) ---
+JAVA_VERSION="21"
+SEMERU_ARCH="aarch64_mac"
+SEMERU_TYPE="jdk"
+OUTPUT_DIR="$HOME/Downloads/semeru"
+FILENAME="semeru-jdk_${JAVA_VERSION}_macos_${SEMERU_ARCH}_openj9"
+FINAL_INSTALL_PATH="/Library/Java/JavaVirtualMachines/semeru-jdk-${JAVA_VERSION}.jdk" # Chemin d'installation recommandé sur macOS
+BASE_URL="https://developer.ibm.com/sdks/semeru/api/v3/download/latest/${JAVA_VERSION}/${SEMERU_TYPE}/${SEMERU_ARCH}"
+
+echo "--- 🛠️ Démarrage de l'installation automatique d'IBM Semeru Runtime (JDK 21 LTS) ---"
+
+# --- 2. Vérification de l'Architecture ---
+echo "Vérification de l'architecture du système..."
+if [[ "$(uname -m)" != "arm64" ]]; then
+    echo "⚠️ Avertissement : Architecture détectée : $(uname -m). Ce script est optimisé pour Apple Silicon (M-series / arm64)."
+fi
+echo "---"
+
+# --- 3. Création du Répertoire de Téléchargement ---
+echo "Création du répertoire de travail : $OUTPUT_DIR"
+mkdir -p "$OUTPUT_DIR"
+if [ ! -d "$OUTPUT_DIR" ]; then
+    echo "❌ Erreur critique : Impossible de créer le répertoire $OUTPUT_DIR. Vérifiez les permissions."
+    exit 1
+fi
+
+# --- 4. Téléchargement du Fichier (JAVA) ---
+DOWNLOAD_PATH="$OUTPUT_DIR/$FILENAME.tar.gz"
+echo "Début du téléchargement de Semeru JDK 21 LTS..."
+
+if curl -L -f -o "$DOWNLOAD_PATH" "$BASE_URL"; then
+    echo "✅ Téléchargement réussi !"
+else
+    echo "❌ Échec du téléchargement. Vérifiez la connexion Internet ou l'URL : $BASE_URL"
+    exit 1
+fi
+echo "---"
+
+# --- 5. Décompression et Déplacement (JAVA) ---
+echo "Décompression du fichier : $DOWNLOAD_PATH"
+tar -xzf "$DOWNLOAD_PATH" -C "$OUTPUT_DIR"
+
+EXTRACTED_DIR=$(find "$OUTPUT_DIR" -maxdepth 1 -type d -name "jdk-${JAVA_VERSION}*" | head -n 1)
+
+if [ -d "$EXTRACTED_DIR" ]; then
+    echo "Fichier décompressé. Déplacement vers le répertoire standard des machines virtuelles Java (nécessite le mot de passe administrateur)..."
+    
+    # Déplacement vers l'emplacement système, nécessite sudo
+    if [ -d "/Library/Java/JavaVirtualMachines" ]; then
+        if sudo mv "$EXTRACTED_DIR" "$FINAL_INSTALL_PATH"; then
+            echo "✅ Installation de Semeru JDK réussie à : $FINAL_INSTALL_PATH"
+        else
+            echo "❌ Erreur : Le déplacement avec 'sudo' a échoué. Vérifiez votre mot de passe administrateur."
+            exit 1
+        fi
+    else
+        echo "⚠️ Avertissement : Le chemin /Library/Java/JavaVirtualMachines n'existe pas. Installation dans le répertoire personnel."
+        mv "$EXTRACTED_DIR" "$OUTPUT_DIR/semeru-jdk-${JAVA_VERSION}"
+        FINAL_INSTALL_PATH="$OUTPUT_DIR/semeru-jdk-${JAVA_VERSION}"
+        echo "✅ Installation de Semeru JDK réussie dans : $FINAL_INSTALL_PATH"
+    fi
+else
+    echo "❌ Erreur : Impossible de trouver le répertoire extrait dans $OUTPUT_DIR."
+    exit 1
+fi
+echo "---"
+
+# --- 6. Installation de Node.js LTS via fmn ---
+echo "--- 🌐 Démarrage de l'installation de Node.js LTS ---"
+
+# 6.1. Vérification de la présence de 'fmn'
+echo "Vérification de la présence du gestionnaire de versions 'fmn' (Fast Node Manager)..."
+if ! command -v fmn &> /dev/null; then
+    echo "❌ Erreur critique : La commande 'fmn' n'est PAS installée ou n'est pas dans le PATH."
+    echo "Le script ne peut pas installer Node.js comme demandé. Veuillez installer 'fmn' (par exemple via Homebrew) et relancer le script."
+    echo "--- 🛑 Script arrêté ---"
+    exit 1
+fi
+echo "✅ 'fmn' est installé."
+echo "---"
+
+# 6.2. Installation de Node.js LTS
+echo "Installation de la dernière version LTS de Node.js via 'fmn install lts'..."
+
+if fmn install lts; then
+    echo "✅ Installation de Node.js LTS réussie. La version est maintenant gérée par fmn."
+    # fmn n'a pas besoin de l'option 'default' ici car 'install' définit généralement la version pour la session
+    # mais il est plus sûr d'inclure une instruction pour l'utilisateur
+else
+    echo "❌ Échec de l'installation de Node.js LTS avec 'fmn install lts'."
+    echo "Veuillez vérifier les messages d'erreur de fmn."
+    exit 1
+fi
+echo "---"
+
+# --- 7. Configuration de l'Environnement (Instructions Finales) ---
+JAVA_HOME_PATH="$FINAL_INSTALL_PATH/Contents/Home"
+
+echo "Installation des prérequis terminée. Étapes de post-configuration :"
+echo ""
+echo "1. Configurez JAVA_HOME pour IBM Z Open Editor :"
+echo "   Ajoutez la ligne suivante à votre fichier de profil shell (~/.zshrc, ~/.bash_profile, etc.) :"
+echo "   export JAVA_HOME=\"$JAVA_HOME_PATH\""
+echo ""
+echo "2. Configurez Node.js par défaut :"
+echo "   Pour vous assurer que la version LTS est utilisée par défaut, exécutez :"
+echo "   fmn default lts"
+echo ""
+echo "3. Activez les changements :"
+echo "   Exécutez 'source ~/.zshrc' ou redémarrez votre terminal."
+echo "--- 🏁 Fin du script ---"
+
+exit 0
+
+
+
+
+
+
 En résumé : Pour aborder le sujet DORA dans votre contexte, il faut démontrer une capacité de reconstruction end-to-end qui couvre à la fois vos responsabilités internes (sources, développement) et celles de votre prestataire (production, exécutables). L’approche doit être structurée autour des cinq piliers DORA : gouvernance, gestion des risques TIC, gestion des tiers, tests de résilience, et reporting.  
 
 ---
