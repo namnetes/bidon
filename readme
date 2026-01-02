@@ -1,9 +1,36 @@
-  INREC IFTHEN=(WHEN=(5,500,SS,REH,C'LEINFO=\(.*[\X00-\X3F\XFF].*\)'),
-        PARSE=(%01=(ABSPOS=5,ENDBEFR=C'LEINFO=(',FIXLEN=500),
-               %02=(STARTAFT=C'LEINFO=(',ENDBEFR=C')',FIXLEN=500),
-               %03=(STARTAFT=C')',FIXLEN=500)),
-        BUILD=(1,4,%01,C'LEINFO=()',%03),
-        SQZ=(SHIFT=LEFT,PAIR=QUOTE))
+
+### 🎙️ Script Oral (Le "Storytelling")
+
+*"Bonjour à tous. Si nous sommes réunis pour parler de z/OS Connect, ce n'est pas pour discuter d'une énième mise à jour technique. L'enjeu est bien plus stratégique : il s'agit de briser le silo qui sépare notre cœur de métier bancaire, le Mainframe, de nos ambitions digitales.*
+
+*Pendant longtemps, le Mainframe a été perçu comme un frein, une 'boîte noire' complexe. Aujourd'hui, avec z/OS Connect, nous changeons de paradigme. Le Mainframe ne subit plus l'innovation, il en devient le moteur. Pourquoi ? Parce que nous allons enfin parler le même langage que le reste du monde : le REST et le JSON.*
+
+*Pour vos projets, cela signifie deux choses concrètes : premièrement, un **Time-to-Market drastiquement réduit**. Vos développeurs mobile ou web n'ont plus besoin d'apprendre le COBOL ; ils appellent une API bancaire comme ils appelleraient celle de Google Maps. Deuxièmement, nous le faisons sans compromis sur la sécurité, en restant dans l'enclos sécurisé de RACF, tout en optimisant nos coûts grâce à l'éligibilité zIIP.*
+
+*Je sais que vos préoccupations de Directeurs de Projet sont transverses : vous pensez CI/CD, gouvernance et fiabilité. Mon objectif aujourd'hui est de vous montrer comment cette solution s'intègre dans vos chaînes de production actuelles sans déstabiliser vos transactions critiques."*
+
+---
+
+### 📝 Memento (Tes notes de poche)
+
+| Point Clé | Message à passer | Mot-clé "Sécurité" |
+| --- | --- | --- |
+| **Vision** | Ce n'est pas un outil, c'est une **stratégie d'ouverture**. | *Agilité* |
+| **Time-to-Market** | **Standardisation** : Utilisation d'OpenAPI / JSON. Pas de formation Z requise pour le Digital. | *Vitesse* |
+| **Sécurité** | Zéro compromis. On garde la main de bout en bout (Auth, Chiffrement). | *Conformité* |
+| **Coûts** | **zIIP Eligible** = Décharge du processeur central. On économise sur les MIPS. | *Budget* |
+| **Ops/DevOps** | S'intègre dans la **CI/CD** (Jenkins/GitLab). Ce n'est plus un monde à part. | *Automatisation* |
+| **Performance** | Overhead quasi nul sur CICS/IMS. Supporte la charge bancaire. | *Stabilité* |
+
+---
+
+### 💡 Conseils pour réussir ton passage sur cette slide :
+
+1. **Ne regarde pas l'écran :** Ton memento doit être sur la table ou dans ta main. Regarde tes interlocuteurs dans les yeux quand tu parles de "réduire les délais".
+2. **L'argument choc :** Si on te pose une question sur le coût, insiste sur le **zIIP**. Pour un DP, savoir que le "travail" de traduction API ne coûte presque rien en MIPS est un argument massue.
+3. **L'ouverture :** Termine cette slide en posant une question ouverte pour valider leur intérêt : *"Est-ce que certains d'entre vous ont déjà été freinés par des délais d'exposition de données venant du Mainframe ?"*
+
+**Veux-tu que nous préparions la slide suivante, par exemple sur le schéma de flux (comment la donnée circule) ?**
 
 _______________________
 C'est une situation stratégique classique où la pression du calendrier (le "Time-to-Market") entre en conflit avec la robustesse technique (la "Dette Technique").
@@ -319,6 +346,7 @@ fi
 ```
 
 **Note sur `[[...]]` :** La syntaxe double crochet `[[ test_expr ]]` est également supportée dans le shell z/OS et permet de tester des expressions. Cependant, elle fonctionne sur le statut de sortie de l'expression interne, qui est défini par la commande `test` ou par des opérateurs internes au shell, mais elle est surtout pertinente pour les fichiers UNIX ou les comparaisons de chaînes/nombres. Pour interagir avec le système MVS, il est souvent plus simple d'utiliser `tso`/`tsocmd` et de vérifier la valeur de `$?`.
+
 
 
 
