@@ -1,3 +1,46 @@
+Objet : Rafraîchissement annuel des données PREDICA – Dimanche 18 janvier
+
+Nous organisons l’actualisation annuelle des données PREDICA le dimanche 18 janvier. Cette opération, pilotée par ISO/QAT avec l’appui de CA/GIP et ISO/SAM, impactera l’environnement de développement comme suit :
+
+Indisponibilité totale : Les sous-systèmes CTG et CICS ainsi que les tables référentielles DB2 seront arrêtés toute la journée.
+
+Flux ADT : Le NAB sera neutralisé le matin et réactivé en milieu d’après-midi pour le lancement du batch.
+
+Production : Il est fortement déconseillé de prévoir des installations de packages ce jour-là.
+
+Support et continuité : Bien que ChangeMan reste disponible, tout test lié à un incident nécessitera le redémarrage manuel de l'environnement (CICS et bases DB2). Dans ce cas, merci de solliciter immédiatement l’équipe ISO/SAM via la BAL LDD.
+
+Pour garantir la réussite de l'intervention, des astreintes sont mobilisées chez SNI et CA-GIP. Nous comptons sur votre collaboration pour anticiper l'impact sur vos activités.
+
+§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
+
+Dans le cadre de l'intervention décrite dans le mail ci-joint diverses astreinte sont nécessaires pouvez-vosu s'il vosu plaît confirmer la présence de vos équipes ?
+
+CA-GIP : Hugues LE DREAU
+Stéphane DORET
+
+DBA Etudes LCL : 
+BEYSSADE Dominique
+Le cas échéant l'astreinte DBA Ca-gip Sera sollicité via le pilotage 01 42 95 94 30
+
+Mahoudeau + Emir
+Marie-Christine ACIN
+Bruno JOURDE
+Rodrigo LOPEZ EGANA
+Sophie VIXEGE KABORE
+
+§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
+
+Bonjour Stéphane,
+
+Divers travaux sont planifiés dans nos locaux cette semaine, entraînant chaque jour le blocage complet d'un espace. Cela va engendrer des mouvements de personnes nous planifiables à l'avance et nous risquons de manquer de bureaux disponibles.
+Dans ce contexte, je te propose de reporter notre rendez-vous à la semaine suivante. Qu'en penses-tu ?
+Désolé de te prévenir à la dernière minute.
+
+§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
+
+
+
 Pour organiser votre première slide de manière professionnelle (style "Executive Banking"), voici une structure visuelle qui met en valeur votre texte sans le modifier :
 
 ### 1. Le Fond (Background)
@@ -566,6 +609,7 @@ fi
 ```
 
 **Note sur `[[...]]` :** La syntaxe double crochet `[[ test_expr ]]` est également supportée dans le shell z/OS et permet de tester des expressions. Cependant, elle fonctionne sur le statut de sortie de l'expression interne, qui est défini par la commande `test` ou par des opérateurs internes au shell, mais elle est surtout pertinente pour les fichiers UNIX ou les comparaisons de chaînes/nombres. Pour interagir avec le système MVS, il est souvent plus simple d'utiliser `tso`/`tsocmd` et de vérifier la valeur de `$?`.
+
 
 
 
