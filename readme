@@ -1,44 +1,15 @@
-Objet : Rafraîchissement annuel des données PREDICA – Dimanche 18 janvier
+ 
+Dans le contexte d'IBM Enterprise COBOL 6.5, EzNoSQL (souvent associé au terme VSAMDB) désigne une nouvelle fonctionnalité majeure permettant d'utiliser VSAM comme une base de données NoSQL orientée documents directement sur z/OS.
+Voici les points clés à retenir :
+ * Stockage de documents JSON/BSON : Au lieu de stocker des enregistrements à longueur fixe ou variable classiques, EzNoSQL permet de stocker, lire, mettre à jour et supprimer des documents au format JSON ou BSON (Binary JSON) dans des fichiers VSAM.
+ * Intégration native en COBOL 6.5 : Cette version introduit des extensions de langage permettant d'accéder à ces fichiers (appelés VSAMDB) via les instructions classiques de traitement de fichiers COBOL (READ, WRITE, REWRITE, DELETE).
+ * Partage de données moderne : L'un des grands avantages est la capacité de partager la même base de données VSAMDB entre des programmes COBOL traditionnels et des applications modernes écrites en Python, Java ou C via des API spécifiques.
+ * Infrastructure sous-jacente : EzNoSQL s'appuie sur la technologie VSAM RLS (Record Level Sharing) et le Parallel Sysplex pour offrir des performances élevées, une haute disponibilité et le partage de données en temps réel sur l'ensemble du complexe z/OS.
+ * Cas d'usage : Il est particulièrement utilisé pour moderniser les applications Mainframe en leur permettant de manipuler des schémas de données flexibles sans avoir besoin d'une base de données relationnelle complexe comme DB2, tout en conservant la robustesse du système de fichiers z/OS.
+C'est donc une passerelle technologique qui permet au COBOL de traiter des données "non structurées" (NoSQL) avec la même simplicité que des fichiers séquentiels ou indexés traditionnels.
+Pour en savoir plus sur l'organisation des données sur Mainframe, vous pouvez regarder cette introduction au VSAM sur z/OS, qui explique les principes fondamentaux du système de fichiers sur lequel repose EzNoSQL.
 
-Nous organisons l’actualisation annuelle des données PREDICA le dimanche 18 janvier. Cette opération, pilotée par ISO/QAT avec l’appui de CA/GIP et ISO/SAM, impactera l’environnement de développement comme suit :
-
-Indisponibilité totale : Les sous-systèmes CTG et CICS ainsi que les tables référentielles DB2 seront arrêtés toute la journée.
-
-Flux ADT : Le NAB sera neutralisé le matin et réactivé en milieu d’après-midi pour le lancement du batch.
-
-Production : Il est fortement déconseillé de prévoir des installations de packages ce jour-là.
-
-Support et continuité : Bien que ChangeMan reste disponible, tout test lié à un incident nécessitera le redémarrage manuel de l'environnement (CICS et bases DB2). Dans ce cas, merci de solliciter immédiatement l’équipe ISO/SAM via la BAL LDD.
-
-Pour garantir la réussite de l'intervention, des astreintes sont mobilisées chez SNI et CA-GIP. Nous comptons sur votre collaboration pour anticiper l'impact sur vos activités.
-
-§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
-
-Dans le cadre de l'intervention décrite dans le mail ci-joint diverses astreinte sont nécessaires pouvez-vosu s'il vosu plaît confirmer la présence de vos équipes ?
-
-CA-GIP : Hugues LE DREAU
-Stéphane DORET
-
-DBA Etudes LCL : 
-BEYSSADE Dominique
-Le cas échéant l'astreinte DBA Ca-gip Sera sollicité via le pilotage 01 42 95 94 30
-
-Mahoudeau + Emir
-Marie-Christine ACIN
-Bruno JOURDE
-Rodrigo LOPEZ EGANA
-Sophie VIXEGE KABORE
-
-§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
-
-Bonjour Stéphane,
-
-Divers travaux sont planifiés dans nos locaux cette semaine, entraînant chaque jour le blocage complet d'un espace. Cela va engendrer des mouvements de personnes nous planifiables à l'avance et nous risquons de manquer de bureaux disponibles.
-Dans ce contexte, je te propose de reporter notre rendez-vous à la semaine suivante. Qu'en penses-tu ?
-Désolé de te prévenir à la dernière minute.
-
-§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§
-
+Les vues de vidéos YouTube seront stockées dans votre historique YouTube, et vos données seront stockées et utilisées par YouTube conformément à ses  Conditions d'utilisation
 
 
 Pour organiser votre première slide de manière professionnelle (style "Executive Banking"), voici une structure visuelle qui met en valeur votre texte sans le modifier :
