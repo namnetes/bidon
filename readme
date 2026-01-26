@@ -1,25 +1,67 @@
-C'est un défi de taille, car tu ne t'adresses pas seulement à une expertise technique, mais à une posture idéologique. Pour ces architectes, tout ce qui "modernise" le Z est perçu comme un obstacle à la cible finale (le Full Cloud/Open).
-Pour les gagner à ta cause, il faut désamorcer le conflit dès l'introduction en utilisant leur propre langage : l'agilité, le découplage et la réduction de la dette technique.
-Voici une proposition pour ton introduction, axée sur la neutralité et la métaphore du pont.
-1. L'Introduction : Ce que z/OS Connect n'est PAS
-*"Avant de commencer, je voudrais clarifier ce que z/OS Connect n'est pas. Je sais que pour beaucoup, moderniser le Mainframe peut ressembler à une tentative de 'maquillage' sur un système que l'on souhaite voir disparaître.
- * Ce n'est pas un moyen de vous forcer à écrire plus de COBOL.
- * Ce n'est pas une solution pour emprisonner nos données dans le passé.
- * Ce n'est pas un outil de 'survie' pour prolonger artificiellement la vie du Mainframe.
-C'est, au contraire, un outil de libération de la donnée."*
-2. La Métaphore : Le Bac vs Le Pont
-*"Aujourd'hui, nous construisons de nouveaux logiciels en 'Open' pour remplacer progressivement le Z. C'est la cible. Mais en attendant, nous avons un problème de friction.
-Imaginez deux villes séparées par un fleuve : la Ville Mainframe, où se trouvent encore nos données historiques critiques, et la Ville Open, où vous construisez l'avenir.
- * Avant (Le Bac) : Pour échanger, on utilisait un bac. Il passait deux fois par jour (le Batch de nuit). C’était lent, manuel, et si on ratait le départ, la donnée était périmée. Les deux villes vivaient en autarcie, avec une frustration énorme de chaque côté.
- * Aujourd'hui (Le Pont) : z/OS Connect, c’est simplement le pont que nous jetons entre ces deux rives.
-Un pont ne décide pas si une ville est meilleure que l'autre. Il permet simplement aux citoyens de la Ville Open de venir chercher ce dont ils ont besoin en Ville Mainframe, en temps réel, sans avoir à apprendre les coutumes locales ou la langue ancienne. Ce pont, c'est l'interopérabilité."*
-3. L'Argument "Architecte" (Le coup de grâce)
-*"En tant qu'architectes, votre priorité est le découplage. Sans ce pont, vos nouvelles applications Open sont obligées de s'adapter aux contraintes lourdes du Z (fichiers plats, transferts FTP, délais).
-Avec z/OS Connect, nous standardisons l'accès. Le Z devient un simple 'Fournisseur de Services' REST/JSON, comme n'importe quel microservice sur AWS ou Azure.
-Paradoxalement, ce pont est votre meilleur allié pour la migration : il vous permet de décommissionner le Z brique par brique, proprement, car vous avez enfin un contrat d'interface (API) clair entre l'ancien et le nouveau monde. On ne remplace bien que ce que l'on a d'abord réussi à isoler."*
-Pourquoi cette approche va fonctionner avec eux :
- * Tu valides leur vision : Tu ne nies pas que le Z est destiné à être remplacé. Tu te places de leur côté (le côté "Open").
- * Tu utilises des concepts d'architecture : "Contrat d'interface", "Standardisation", "Découplage".
- * Tu transformes l'outil : z/OS Connect n'est plus un outil "Mainframe", c'est un outil "d'intégration de données" pour les systèmes modernes.
- * L'argument de la migration : C'est le plus puissant. Pour migrer une application complexe, il faut d'abord l'exposer via des API. z/OS Connect facilite donc techniquement leur travail de remplacement futur.
-Veux-tu que je reformule la slide sur l'architecture (Slide 2) pour qu'elle réponde spécifiquement à cette logique de "découplage" pour les architectes ?
+import re
+import json
+
+def preprocess_vlm_output(input_file, clean_xml_file, context_file):
+    metadata = {
+        "current_dsn": "UNKNOWN",
+        "libraries": []
+    }
+    
+    # Regex pour capturer les informations clés
+    re_dsn = re.compile(r"DSNIN=([\w\.]+)")
+    re_count = re.compile(r"FMNBB437\s+(\d+)\s+member\(s\) read")
+    re_empty = re.compile(r"FMNBE329\s+The PDS contains no members")
+    re_error = re.compile(r"FMNBF427\s+(.*)")
+
+    with open(input_file, 'r') as f_in, open(clean_xml_file, 'w') as f_out:
+        f_out.write('<?xml version="1.0" encoding="UTF-8"?>\n<root>\n')
+        
+        current_lib_info = None
+
+        for line in f_in:
+            line_str = line.strip()
+            
+            # 1. Extraction des métadonnées (Metadata Scraping)
+            # Recherche du nom de la bibliothèque (DSNIN)
+            dsn_match = re_dsn.search(line_str)
+            if dsn_match:
+                metadata["current_dsn"] = dsn_match.group(1)
+                current_lib_info = {
+                    "dsn": metadata["current_dsn"],
+                    "members_read": 0,
+                    "errors": [],
+                    "status": "processed"
+                }
+                [span_0](start_span)[span_1](start_span)metadata["libraries"].append(current_lib_info)[span_0](end_span)[span_1](end_span)
+
+            # Capture des erreurs de module (Binder error)
+            error_match = re_error.search(line_str)
+            if error_match and current_lib_info:
+                [span_2](start_span)[span_3](start_span)current_lib_info["errors"].append(error_match.group(1))[span_2](end_span)[span_3](end_span)
+                # Optionnel: on peut insérer un marqueur dans le XML pour signaler l'erreur
+                f_out.write(f'\n')
+
+            # Capture du nombre de modules traités
+            count_match = re_count.search(line_str)
+            if count_match and current_lib_info:
+                [span_4](start_span)[span_5](start_span)current_lib_info["members_read"] = int(count_match.group(1))[span_4](end_span)[span_5](end_span)
+
+            # Gestion des bibliothèques vides
+            if re_empty.search(line_str) and current_lib_info:
+                [span_6](start_span)[span_7](start_span)current_lib_info["status"] = "empty"[span_6](end_span)[span_7](end_span)
+
+            # 2. Filtrage du flux XML (Sanitization)
+            # On ne garde que les lignes qui ressemblent à du XML
+            if line_str.startswith('<') and not line_str.startswith('1$$FILEM'):
+                # Nettoyage des caractères parasites en début de ligne (ex: '0' ou '1')
+                clean_line = re.sub(r'^[0-1]', '', line_str)
+                f_out.write(clean_line + '\n')
+
+        f_out.write('</root>')
+
+    # Sauvegarde des métadonnées pour la phase JQ
+    with open(context_file, 'w') as f_meta:
+        json.dump(metadata, f_meta, indent=4)
+
+# Utilisation
+preprocess_vlm_output('output_mainframe.txt', 'clean_output.xml', 'context.json')
