@@ -1,67 +1,32 @@
-import re
-import json
+[Vos prénom et nom]
+[Votre adresse]
+[Code postal – Ville]
+[Téléphone]
+[Adresse e-mail]
 
-def preprocess_vlm_output(input_file, clean_xml_file, context_file):
-    metadata = {
-        "current_dsn": "UNKNOWN",
-        "libraries": []
-    }
-    
-    # Regex pour capturer les informations clés
-    re_dsn = re.compile(r"DSNIN=([\w\.]+)")
-    re_count = re.compile(r"FMNBB437\s+(\d+)\s+member\(s\) read")
-    re_empty = re.compile(r"FMNBE329\s+The PDS contains no members")
-    re_error = re.compile(r"FMNBF427\s+(.*)")
+À l’attention de [Nom du/de la Responsable RH]
+Responsable des Ressources Humaines
+[Nom de l’entreprise]
+[Adresse de l’entreprise]
+[Adresse]
+[Code postal – Ville]
 
-    with open(input_file, 'r') as f_in, open(clean_xml_file, 'w') as f_out:
-        f_out.write('<?xml version="1.0" encoding="UTF-8"?>\n<root>\n')
-        
-        current_lib_info = None
+Lieu, le [date]
 
-        for line in f_in:
-            line_str = line.strip()
-            
-            # 1. Extraction des métadonnées (Metadata Scraping)
-            # Recherche du nom de la bibliothèque (DSNIN)
-            dsn_match = re_dsn.search(line_str)
-            if dsn_match:
-                metadata["current_dsn"] = dsn_match.group(1)
-                current_lib_info = {
-                    "dsn": metadata["current_dsn"],
-                    "members_read": 0,
-                    "errors": [],
-                    "status": "processed"
-                }
-                [span_0](start_span)[span_1](start_span)metadata["libraries"].append(current_lib_info)[span_0](end_span)[span_1](end_span)
+Objet : Demande de mise en place d’une retraite progressive à compter du 1er septembre 2026
 
-            # Capture des erreurs de module (Binder error)
-            error_match = re_error.search(line_str)
-            if error_match and current_lib_info:
-                [span_2](start_span)[span_3](start_span)current_lib_info["errors"].append(error_match.group(1))[span_2](end_span)[span_3](end_span)
-                # Optionnel: on peut insérer un marqueur dans le XML pour signaler l'erreur
-                f_out.write(f'\n')
+Madame / Monsieur,
 
-            # Capture du nombre de modules traités
-            count_match = re_count.search(line_str)
-            if count_match and current_lib_info:
-                [span_4](start_span)[span_5](start_span)current_lib_info["members_read"] = int(count_match.group(1))[span_4](end_span)[span_5](end_span)
+Par la présente, je vous informe de mon souhait de bénéficier du dispositif de retraite progressive à compter du 1er septembre 2026, conformément aux dispositions légales en vigueur.
 
-            # Gestion des bibliothèques vides
-            if re_empty.search(line_str) and current_lib_info:
-                [span_6](start_span)[span_7](start_span)current_lib_info["status"] = "empty"[span_6](end_span)[span_7](end_span)
+À ce stade de ma réflexion, je n’ai pas encore arrêté définitivement la quotité de temps de travail que je souhaiterais retenir. Celle-ci pourrait être fixée soit à 4/5ᵉ, soit à 3/5ᵉ de la durée du travail applicable dans l’entreprise. Je ne manquerai pas de revenir vers vous dans les meilleurs délais afin de vous confirmer mon choix, en tenant compte des nécessités d’organisation du service.
 
-            # 2. Filtrage du flux XML (Sanitization)
-            # On ne garde que les lignes qui ressemblent à du XML
-            if line_str.startswith('<') and not line_str.startswith('1$$FILEM'):
-                # Nettoyage des caractères parasites en début de ligne (ex: '0' ou '1')
-                clean_line = re.sub(r'^[0-1]', '', line_str)
-                f_out.write(clean_line + '\n')
+Par ailleurs, je souhaite, avec votre accord, quelle que soit la durée du temps partiel retenue, continuer à cotiser sur la base d’un taux plein pour l’ensemble des cotisations et prélèvements sociaux, conformément aux dispositions réglementaires en vigueur, afin de préserver l’intégralité de mes droits futurs à retraite.
 
-        f_out.write('</root>')
+Je vous serais reconnaissant(e) de bien vouloir me préciser les modalités administratives à accomplir au sein de l’entreprise pour la mise en œuvre de ce dispositif, ainsi que les conditions d’établissement de l’avenant à mon contrat de travail.
 
-    # Sauvegarde des métadonnées pour la phase JQ
-    with open(context_file, 'w') as f_meta:
-        json.dump(metadata, f_meta, indent=4)
+Je reste bien entendu à votre disposition pour convenir d’un entretien afin d’examiner ensemble les modalités pratiques d’organisation de mon activité dans le cadre de cette retraite progressive.
 
-# Utilisation
-preprocess_vlm_output('output_mainframe.txt', 'clean_output.xml', 'context.json')
+Dans l’attente de votre retour, je vous prie d’agréer, Madame / Monsieur, l’expression de mes salutations distinguées.
+
+[Signature]
