@@ -22,3 +22,28 @@ Contrairement à IMS ou Db2 qui peuvent être intégrés nativement comme fourni
 Même si cela concerne plus l'exécution que l'affichage du modèle dans IDz, n'oubliez pas que pour que le service fonctionne, la fonctionnalité `filemanager:fmProvider-2.0` doit être installée dans le serveur z/OS Connect et le serveur **ADFzCC (IPVSRV)** doit être configuré avec `REST=YES` [13-15].
 
 **En résumé :** Si le menu est vide, vérifiez l'installation du **plug-in Eclipse File Manager** et assurez-vous d'avoir les fichiers **.sar** disponibles sur votre disque local pour pouvoir les "appeler" depuis l'assistant z/OS Connect [2, 8].
+
+
+Pour que **IBM Developer for z/OS (IDz)** puisse trouver et utiliser vos fichiers (en particulier les archives de service **.sar** et les ressources de développement), voici les emplacements recommandés sur votre poste client selon le type de fichier :
+
+### 1. Fichiers d'archive de service (.sar)
+Pour utiliser les services File Manager (génériques ou spécifiques) dans l'éditeur d'API z/OS Connect sous IDz, les fichiers SAR ne sont pas stockés dans un répertoire système "caché", mais doivent être **accessibles depuis votre système de fichiers local** [1].
+*   **Emplacement conseillé :** Copiez-les dans un dossier dédié sur votre poste de travail (par exemple `C:\zOSConnect\Services\`) ou sur un **lecteur réseau partagé** accessible par votre environnement Eclipse [1, 2].
+*   **Utilisation :** Dans l'éditeur d'API, vous devrez cliquer sur le bouton **"Service"** et naviguer manuellement vers cet emplacement pour associer le fichier `.sar` à votre projet [3, 4].
+
+### 2. Ressources de projet (Copybooks, sources localisées)
+Si vous travaillez sur des fichiers de structure (copybooks) ou des sources que vous souhaitez gérer localement avant de les envoyer sur le mainframe :
+*   **Le Workspace (Espace de travail) :** C'est le dossier racine sur votre ordinateur où IDz stocke toutes les ressources [5]. Par défaut, IDz cherchera les projets et les fichiers de configuration ici.
+*   **Projets z/OS locaux :** Pour que les éditeurs de langage (COBOL, PL/I) trouvent vos dépendances, stockez-les dans des dossiers au sein de votre **projet z/OS** dans la vue "z/OS Projects" [5, 6]. 
+*   **Dossier Navigator :** Vous pouvez créer des dossiers (ex: `My COBOL Files`) directement dans la vue **Navigator** pour y stocker des fichiers importés depuis votre disque dur par simple glisser-déposer [7, 8].
+
+### 3. Plug-ins et outils (Build Toolkit)
+Si vous installez le plug-in de construction (**Build Toolkit**) pour générer vos propres fichiers SAR sur le client :
+*   **Dossier /plugins :** Le fichier JAR du plug-in File Manager (`com.hcl.zosconnect.buildtoolkit.filemanager.jar`) doit être copié dans le répertoire **/plugins** de l'installation de votre Build Toolkit z/OS Connect [9, 10].
+
+### 4. Fichiers temporaires et Cache
+*   **RemoteSystemTempFiles :** IDz crée automatiquement ce dossier dans votre **Workspace** pour stocker les fichiers téléchargés temporairement depuis le mainframe lors d'une session d'édition ou d'une vérification de syntaxe locale [11, 12].
+
+### Points clés à retenir :
+*   **Transférer en mode binaire :** Tous les fichiers de type archive (`.sar`, `.jar`) ou kits d'activation doivent impérativement être transférés du mainframe vers le client en **mode binaire** [2, 13].
+*   **Accessibilité :** Assurez-vous que l'utilisateur lançant IDz possède les **droits de lecture** sur les répertoires choisis, surtout s'ils sont sur un réseau [1].
