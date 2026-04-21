@@ -1,1 +1,24 @@
 
+Si vous ne voyez pas **File Manager** parmi les modèles proposés lors de la création d'un nouveau service dans la perspective z/OS Connect de votre environnement IDz, cela est généralement dû à l'absence de l'une des étapes suivantes :
+
+### 1. Installation du Plug-in File Manager pour Eclipse
+Pour que les fonctions liées à File Manager apparaissent dans votre environnement Eclipse (IDz), vous devez vous assurer que le **plug-in File Manager pour Eclipse** est bien installé [1, 2]. 
+*   Vérifiez sa présence en allant dans `Help > About IBM Developer for z/OS > Installation Details` et recherchez une entrée nommée `com.ibm.etools.fm.ui` [3, 4].
+*   Si ce n'est pas le cas, vous devez l'ajouter via le site de mise à jour (Update Site) IBM Aqua correspondant à votre version d'IDz [5, 6].
+
+### 2. Activation des "Capabilities" (Capacités)
+Parfois, les assistants (wizards) ou les entrées de menu sont masqués par les préférences de l'espace de travail.
+*   Allez dans `Window > Preferences > General > Capabilities`.
+*   Cliquez sur **Advanced** et assurez-vous que les options liées au développement z/OS et aux outils de données sont cochées.
+*   Cochez également l'option **Show All** dans la fenêtre d'ouverture de perspective ou d'assistant pour forcer l'affichage de tous les modèles disponibles [7].
+
+### 3. Importation des fichiers de service (SAR)
+Contrairement à IMS ou Db2 qui peuvent être intégrés nativement comme fournisseurs de services, File Manager utilise des fichiers d'archive de service spécifiques (**fichiers .sar**) [8, 9].
+*   Le fournisseur File Manager fournit des fichiers SAR génériques : `fmService.sar` (Base), `fmIMSService.sar` (IMS) et `fmDB2Service.sar` (Db2) [8].
+*   **Ce que vous avez peut-être oublié :** Ces fichiers résident initialement sur le mainframe (dans le répertoire USS où File Manager a été installé). Vous devez les copier en **mode binaire** sur votre poste de travail ou sur un dossier réseau accessible par IDz [10, 11].
+*   Dans l'éditeur d'API z/OS Connect, au lieu de choisir un "modèle", vous devez cliquer sur le bouton **Service** et naviguer vers le fichier `.sar` que vous avez récupéré localement pour l'associer à votre API [8, 12].
+
+### 4. Configuration côté Serveur (Mainframe)
+Même si cela concerne plus l'exécution que l'affichage du modèle dans IDz, n'oubliez pas que pour que le service fonctionne, la fonctionnalité `filemanager:fmProvider-2.0` doit être installée dans le serveur z/OS Connect et le serveur **ADFzCC (IPVSRV)** doit être configuré avec `REST=YES` [13-15].
+
+**En résumé :** Si le menu est vide, vérifiez l'installation du **plug-in Eclipse File Manager** et assurez-vous d'avoir les fichiers **.sar** disponibles sur votre disque local pour pouvoir les "appeler" depuis l'assistant z/OS Connect [2, 8].
