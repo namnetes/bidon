@@ -1,191 +1,104 @@
-Pour une API Python moderne, la communauté s'est largement standardisée autour de **FastAPI** (pour la performance et l'auto-documentation) et d'une structure de type **"Package Layout"**.
-Voici comment organiser ton dossier /api au sein de ton projet **Zdevide**.
-## 1. Structure Standard (Production Ready)
-Cette structure sépare la logique métier, les routes et la configuration.
-```text
-api/
-├── app/
-│   ├── __init__.py
-│   ├── main.py          # Point d'entrée de l'application
-│   ├── api/             # Routes (endpoints)
-│   │   ├── __init__.py
-│   │   └── v1/
-│   │       ├── __init__.py
-│   │       └── endpoints.py
-│   ├── core/            # Configuration et sécurité
-│   │   └── config.py
-│   ├── models/          # Modèles de base de données (SQLAlchemy/Beanie)
-│   └── schemas/         # Schémas de données (Pydantic)
-├── tests/               # Tests unitaires et d'intégration
-├── .env                 # Variables d'environnement (non versionné)
-├── Dockerfile
-└── requirements.txt
-
-```
-## 2. Le "Hello World" Évolué (FastAPI)
-Un Hello World évolué ne se contente pas d'afficher du texte ; il gère les types, la validation et fournit une documentation automatique.
-### A. Les dépendances (requirements.txt)
-```text
-fastapi[all]==0.110.0
-uvicorn==0.27.1
-pydantic-settings==2.2.1
-
-```
-### B. Le schéma de données (app/schemas/item.py)
-On utilise **Pydantic** pour valider ce qui entre et sort de l'API.
-```python
-from pydantic import BaseModel
-from datetime import datetime
-
-class StatusResponse(BaseModel):
-    status: str
-    timestamp: datetime
-    version: str
-    environment: str
-
-```
-### C. Le point d'entrée (app/main.py)
-Voici une implémentation propre avec gestion de la configuration.
-```python
-from fastapi import FastAPI
-from datetime import datetime
-from app.schemas.item import StatusResponse
-
-app = FastAPI(
-    title="Zdevide API",
-    description="API backend pour l'écosystème Zdevide",
-    version="1.0.0"
-)
-
-@app.get("/", response_model=StatusResponse)
-async def root():
-    """
-    Endpoint de santé pour vérifier que l'API répond.
-    """
-    return {
-        "status": "online",
-        "timestamp": datetime.now(),
-        "version": "1.0.0",
-        "environment": "development"
-    }
-
-@app.get("/hello/{name}")
-async def say_hello(name: str, uppercase: bool = False):
-    """
-    Exemple évolué avec paramètres de chemin et de requête.
-    """
-    message = f"Hello {name}"
-    if uppercase:
-        message = message.upper()
-    
-    return {"message": message, "client": name}
-
-```
-## 3. Pourquoi cette approche ?
- 1. **Auto-documentation :** Une fois lancé, accède à /docs pour voir l'interface Swagger générée automatiquement. C'est parfait pour tester tes appels depuis le terminal de ton IDE.
- 2. **Validation de type :** Si tu envoies un nombre là où l'API attend une chaîne, FastAPI renverra une erreur 422 Unprocessable Entity claire sans que tu n'aies à coder la vérification.
- 3. **Performance :** Basé sur Starlette et Pydantic, c'est l'un des frameworks Python les plus rapides du marché.
-## 4. Dockerfile pour l'API (Standard Python)
-Pour que cela tourne dans ton **Zdevide**, voici le Dockerfile à mettre dans /api :
-```dockerfile
-FROM python:3.11-slim
-
-WORKDIR /app
-
-# Empêche Python de générer des fichiers .pyc et permet l'affichage des logs en temps réel
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
-
-# Lancement avec Uvicorn (hot-reload activé pour le dev)
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5000", "--reload"]
-
-```
-Maintenant, quand tu feras un curl http://api:5000/ depuis le terminal de ton VS Code (dans le container), tu recevras un JSON structuré avec la date et le statut.
-Veux-tu que je t'explique comment configurer le fichier .env pour gérer tes secrets (clés d'API, accès DB) de manière sécurisée ?
-
-
-
-____________
-
-
-C'est une excellente idée. En automatisation, on appelle souvent cela un script de **scaffolding**. Cela permet de recréer l'environnement Zdevide en une seconde, propre et net.
-Voici un script Bash optimisé. Il va créer les dossiers, les fichiers vides (__init__.py, main.py, etc.) et injecter un contenu de base pour que tu puisses tester immédiatement.
-### Le script init_project.sh
-Crée ce fichier à la racine de ton dossier de travail :
+Excellent choix. Utiliser **uv** (pour la rapidité fulgurante) et **ruff** (pour le linting/formattage ultra-performant) montre que tu adoptes les standards les plus modernes de 2026.
+Voici le script init_project.sh mis à jour. Il intègre la configuration de l'IDE pour que **Ruff** soit actif par défaut et utilise **uv** pour gérer l'environnement de ton API.
+### Le script init_project.sh (version UV + Ruff + VSCode)
 ```bash
 #!/bin/bash
 
-# Nom du projet
 PROJECT_NAME="zdevide"
+echo "🚀 Initialisation du projet $PROJECT_NAME avec uv, ruff et vscode..."
 
-echo "🚀 Initialisation du projet $PROJECT_NAME..."
-
-# 1. Création de l'arborescence
+# 1. Structure des dossiers
 mkdir -p ide/config
 mkdir -p api/app/api/v1
 mkdir -p api/app/core
-mkdir -p api/app/models
 mkdir -p api/app/schemas
-mkdir -p api/tests
+mkdir -p .vscode
 mkdir -p workspace
 
-# 2. Création des fichiers pour l'API Python (Standard Pro)
-touch api/app/__init__.py
-touch api/app/api/__init__.py
-touch api/app/api/v1/__init__.py
-touch api/app/core/__init__.py
-touch api/app/models/__init__.py
-touch api/app/schemas/__init__.py
-
-# 3. Injection du code minimal dans main.py
-cat <<EOF > api/app/main.py
-from fastapi import FastAPI
-from datetime import datetime
-
-app = FastAPI(title="Zdevide API")
-
-@app.get("/")
-async def root():
-    return {
-        "status": "online",
-        "timestamp": datetime.now().isoformat(),
-        "project": "Zdevide"
+# 2. Configuration de VS Code pour le projet (Auto-format avec Ruff)
+cat <<EOF > .vscode/settings.json
+{
+    "python.defaultInterpreterPath": "/usr/local/bin/python",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.organizeImports": "explicit"
+    },
+    "python.analysis.autoImportCompletions": true,
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff"
     }
+}
 EOF
 
-# 4. Création du requirements.txt
-cat <<EOF > api/requirements.txt
-fastapi[all]
-uvicorn
-pydantic-settings
+# 3. Fichier de configuration Ruff
+cat <<EOF > pyproject.toml
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "I"] # Erreurs, Flake8, Isort
+
+[tool.ruff.format]
+quote-style = "double"
 EOF
 
-# 5. Création du Dockerfile API
+# 4. Initialisation de l'API avec uv
 cat <<EOF > api/Dockerfile
-FROM python:3.11-slim
+FROM ghcr.io/astral-sh/uv:python3.12-alpine
+
 WORKDIR /app
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+
+# Installation des dépendances avec uv
+COPY pyproject.toml .
+RUN uv pip install --system fastapi uvicorn ruff
+
 COPY . .
+
+# Lancement avec hot-reload
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5000", "--reload"]
 EOF
 
-# 6. Création d'un Docker Compose de base
+# 5. Code API Hello World évolué
+cat <<EOF > api/app/main.py
+from fastapi import FastAPI
+from datetime import datetime
+from pydantic import BaseModel
+
+app = FastAPI(title="Zdevide API")
+
+class Status(BaseModel):
+    status: str
+    engine: str
+    timestamp: datetime
+
+@app.get("/", response_model=Status)
+async def root():
+    return Status(
+        status="running",
+        engine="uv + ruff",
+        timestamp=datetime.now()
+    )
+EOF
+
+# 6. Docker Compose Orchestration
 cat <<EOF > docker-compose.yml
 services:
+  vscode:
+    build: ./ide
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/home/coder/project  # On monte la racine pour éditer tout le projet
+    networks:
+      - zdev-network
+
   api:
     build: ./api
     ports:
       - "5000:5000"
     volumes:
       - ./api:/app
+    environment:
+      - ENV=dev
     networks:
       - zdev-network
 
@@ -194,28 +107,26 @@ networks:
     driver: bridge
 EOF
 
-# 7. Finalisation
 chmod +x init_project.sh
-echo "✅ Arborescence terminée !"
-echo "👉 Pour lancer : docker-compose up --build"
+echo "✅ Structure Zdevide prête !"
 
 ```
-### Comment l'utiliser ?
- 1. Ouvre un terminal dans ton dossier parent.
- 2. Crée le fichier : nano init_project.sh (colle le code ci-dessus et sauvegarde).
- 3. Rends-le exécutable :
-   ```bash
-   chmod +x init_project.sh
-   
-   ```
- 4. Lance-le :
-   ```bash
-   ./init_project.sh
-   
-   ```
-### Pourquoi c'est "Pro" ?
- * **Idempotence :** Le flag -p de mkdir permet de lancer le script plusieurs fois sans erreur si les dossiers existent déjà.
- * **Heredoc (cat <<EOF) :** Cette méthode permet de pré-remplir les fichiers de configuration sans avoir à les éditer à la main.
- * **Nettoyage :** Il sépare bien la logique de l'IDE (dans ide/) de la logique métier (dans api/).
-Une fois exécuté, ton projet **Zdevide** est prêt à être poussé sur GitLab avec un git add ..
-Veux-tu que j'ajoute la partie installation automatique des plugins VS Code dans ce script pour le dossier ide/ ?
+## Pourquoi cette configuration est puissante ?
+### 1. Le duo uv + ruff
+ * **uv** : Remplace pip. Dans ton Dockerfile, il installe les paquets de manière quasi instantanée.
+ * **ruff** : Remplace flake8, isort et black. Dans le fichier .vscode/settings.json fourni, j'ai configuré l'**auto-format on save**. Dès que tu sauvegardes dans ton navigateur, ton code est nettoyé.
+### 2. Intégration VS Code
+Le dossier .vscode/ à la racine contient les réglages qui forcent l'utilisation de Ruff comme formateur par défaut. Même dans le navigateur, ton environnement se comportera comme un IDE local de haut niveau.
+### 3. Dockerfile optimisé
+J'ai utilisé l'image officielle astral-sh/uv qui est extrêmement légère et rapide pour les builds Docker.
+### Conseil pour GitLab
+Pense à ajouter un fichier .gitignore contenant :
+```text
+__pycache__/
+.venv/
+.ruff_cache/
+.env
+*.pyc
+
+```
+Est-ce que tu veux que je te génère aussi le Dockerfile pour la partie ide/ afin qu'il pré-installe l'extension Ruff de VS Code ?
